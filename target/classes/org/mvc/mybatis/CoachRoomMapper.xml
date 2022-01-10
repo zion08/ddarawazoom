@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.mvc.mybatis.CoachRoomMapper">
+
+	<resultMap type="org.mvc.bean.ScheduleDTO" id="calMap"> 
+		<result property="start" column="start_time"/> 
+		<result property="end" column="end_time"/> 
+	</resultMap>
+
+	<select id="getSchedule" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
+		select * from tbl_calendar where c_id = '김코치'
+	</select>
+
+	<insert id="insertEvent" parameterType="org.mvc.bean.ScheduleDTO">
+		insert into tbl_calendar (id, m_id, c_id, title, start_time, end_time)
+			values( 
+				seq_calendar.nextval,
+				#{m_id},
+				#{c_id},
+				#{title},
+				#{start},
+				#{end}
+			)
+	</insert>
+
+</mapper>
