@@ -12,4 +12,9 @@ public class ScheduleDTO {
 	private String title;
 	private Date start;
 	private Date end;
+	
+	private String start_date;
+	private String start_time;
+	private String end_date;
+	private String end_time;
 }

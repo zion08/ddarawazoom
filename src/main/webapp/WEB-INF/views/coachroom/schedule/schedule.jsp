@@ -16,13 +16,6 @@
 <script src="/resources/coach/custom/js/schedule.js" type="text/javascript"></script>
 
 <script>
-	var event;
-	
-	$(document).ready(function(){
-		getEvent();
-		console.log(event);
-	});
-	
 	document.addEventListener('DOMContentLoaded', function calendarEvent(eventData) {
 		var calendarEl = document.getElementById('calendar');
 		

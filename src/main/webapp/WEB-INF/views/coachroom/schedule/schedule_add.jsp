@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,30 +16,6 @@
 
 <link href="/resources/coach/custom/css/schedule.css" rel="stylesheet" />
 <script src="/resources/coach/custom/js/schedule.js" type="text/javascript"></script>	
-
-<script>
-	$(document).ready(function(){
-		$.datepicker.setDefaults({
-				dateFormat: "yy-mm-dd",
-				showOtherMonths: true,
-				showMonthAfterYear: true,
-				changeYear: true,
-				changeMonth: true,
-			yearSuffix: "년",
-			
-			monthNamesShort: ["1","2","3","4","5","6","7","8","9","10","11","12"],
-			monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
-			dayNamesMin: ["일","월","화","수","목","금","토"],
-			dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"]
-		});
-		
-		$("#startDate").datepicker();
-		$("#endDate").datepicker();
-		
-		$("#startDate").datepicker("setDate", "today");
-		$("#endDate").datepicker("setDate", "today");
-	});
-</script>
 
 </head>
 <body>
@@ -70,17 +48,19 @@
 				</div>
 				
 				<div class="domain">
-					<h3 class = "zTree-h3">시작 날짜</h3>
+					<h3 class = "zTree-h3">시작 날짜 / 시간</h3>
 				</div>
 				<div class="domain">
-					<input class="date" id="startDate" type="text" name="start" />
+					<input class="date" type="date" name="start_date" value="${parseStartDate}" />
+					<input class="date" type="time" name="start_time" value="${parseStartTime}" />
 				</div>
 				
 				<div class="domain">
-					<h3 class = "zTree-h3">종료 날짜</h3>
+					<h3 class = "zTree-h3">종료 날짜 / 시간</h3>
 				</div>
 				<div class="domain">
-					<input class="date" id="endDate" type="text" name="end" />
+					<input class="date" type="date" name="end_date" value="${parseEndData}" />
+					<input class="date" type="time" name="end_time" value="${parseEndTime}" />
 				</div>
 				
 			</form>

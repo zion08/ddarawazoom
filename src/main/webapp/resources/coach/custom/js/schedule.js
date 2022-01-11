@@ -1,5 +1,6 @@
 	
 	function getEvent(){
+	var event;
 		$.ajax({
 			type: "get",
 			url: "/coachroom/getSchedule", 
@@ -50,8 +51,10 @@
 			dataType : "json",
 			contentType : "application/json; charset=UTF-8",
 			success : function(data) {
-				opener.parent.location.reload();
-				window.close();
+				if(data == 1){
+					opener.parent.location.reload();
+					window.close();
+				}
 			}
 		});
 	};
@@ -85,8 +88,10 @@ function update_ok(){
 			dataType : "json",
 			contentType : "application/json; charset=UTF-8",
 			success : function(data) {
-				opener.parent.location.reload();
-				window.close();
+				if(data == 1){
+					opener.parent.location.reload();
+					window.close();
+				}
 			}
 		});
 }
