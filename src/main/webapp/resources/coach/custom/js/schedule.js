@@ -15,7 +15,7 @@
 	function click_add(){
 		var url = "/coachroom/add_event";
 		var name = "add_event";
-		var option = "width=600, height=600 left=100, top=50, location=no";
+		var option = "width=620, height=650 left=100, top=50, location=no";
 		window.open(url, name, option);
 	}
  
@@ -55,4 +55,38 @@
 			}
 		});
 	};
- 
+
+function deleteEvent(){
+	$.ajax({
+		type : "POST",
+		   url : "/coachroom/delete_event",
+		   dataType : "json",
+		   ontentType : "application/json; charset=UTF-8",
+		   data : { id: $("#id").val() },
+		   success : function(data) {
+		   		result = parseInt(data);
+		   	
+			   	if(result == 1){
+				   alert("일정이 삭제되었습니다.");
+				   opener.parent.location.reload();
+				   window.close();
+			   	}
+		  }
+	});
+}	
+
+function update_ok(){
+	var scheduleUpdateData = JSON.stringify($('form#scheduleUpdateData').serializeObject());
+
+	$.ajax({
+			data : scheduleUpdateData,
+			url : "/coachroom/update_schedulePro",
+			type : "POST",
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			success : function(data) {
+				opener.parent.location.reload();
+				window.close();
+			}
+		});
+}

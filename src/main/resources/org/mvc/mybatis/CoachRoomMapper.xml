@@ -10,7 +10,7 @@
 		<result property="end" column="end_time"/> 
 	</resultMap>
 
-	<select id="getSchedule" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
+	<select id="getAllSchedule" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
 		select * from tbl_calendar where c_id = '김코치'
 	</select>
 
@@ -26,8 +26,21 @@
 			)
 	</insert>
 
-	<delete id="deleteShcedule">
+	<delete id="deleteSchedule">
 		delete tbl_calendar where id = #{id}
 	</delete>
+
+	<select id="getSchedule" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
+		select * from tbl_calendar where c_id = '김코치' and id = #{id}
+	</select>
+
+	<update id="updateSchedule">
+		update tbl_calendar set
+			title = #{title},
+			m_id = #{m_id},
+			start_time = #{start},
+			end_time = #{end}
+		where id = #{id}
+	</update>
 
 </mapper>

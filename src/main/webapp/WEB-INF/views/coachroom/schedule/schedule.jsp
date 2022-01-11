@@ -13,7 +13,7 @@
 <script src='/resources/coach/lib/main.js'></script>
 
 <link href="/resources/coach/custom/css/schedule.css" rel="stylesheet" />
-<script src="/resources/coach/custom/js/schedule.js" type="text/javascript"></script>	
+<script src="/resources/coach/custom/js/schedule.js" type="text/javascript"></script>
 
 <script>
 	var event;
@@ -52,26 +52,13 @@
 	    	  console.log(arg.event.title);
 	    	  console.log(arg.event.extendedProps.c_id);
 	    	  
-	    	  if(confirm("일정"+arg.event.title+"을 삭제하시겠습니까?")){
-	    		  
-	    		  $.ajax({
-	    	    	  type : "POST",
-	    	    	  url : "/coachroom/delete_event",
-	    	    	  dataType : "json",
-	    	    	  ontentType : "application/json; charset=UTF-8",
-	    	    	  data : {
-	    	    	  		id: arg.event.id
-	    	    	  		},
-	    	    	  success : function(response) {
-	    	    	  alert("일정이 삭제되었습니다.");
-	    	    	  arg.event.remove()
-	    	    	  location.reload();
-	    	    	 }
-	    	     });
-	    		  
-	    	  } else {
-	    		  return false;
-	    	  }
+	    	  var url = "/coachroom/schedule_popup?id="+arg.event.id+"&c_id="+arg.event.extendedProps.c_id;
+	    	  var name = "schedule_popup";
+	    	  var option = "top=10, left=10, width=300, height=150, status=no, menubar=no, toolbar=no, resizable=no";
+	    		
+	    	  window.open(url, name, option);
+	    	  
+	    	  
 	      },	
 	      
 	      events: getEvent()
@@ -80,7 +67,9 @@
 
 	    calendar.render();
 	  });
-  
+	
+	
+	
 </script>
 <style>
 

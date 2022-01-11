@@ -37,7 +37,7 @@ public class CoachRoomController {
 	public @ResponseBody ArrayList<ScheduleDTO> getSchedule(Model model) {
 		log.info("	-----CT----->getSchedule");
 		
-		return service.getSchedule();
+		return service.getAllSchedule();
 	}
 	
 	@RequestMapping("/add_event")
@@ -56,23 +56,38 @@ public class CoachRoomController {
 		return map;
 	}
 	
-	@RequestMapping("/schedule_delete")
-	public String shcedule_delete() {
-		return "/coachroom/schedule/schedule_delete";
+	@RequestMapping("/schedule_popup")
+	public String sechedule_popup(ScheduleDTO dto, Model model) {
+		log.info("	-----CT----->schedule_popup");
+		log.info(""+dto);
+		model.addAttribute("dto", dto);
+		return "/coachroom/schedule/schedule_popup";
 	}
 	
 	@RequestMapping("/delete_event")
-	public @ResponseBody Map<Object, Object> delete_event(@RequestBody String id) {
-		log.info("	-----CT----->delete_event");
-		log.info(""+id);
-		
-		int num = Integer.parseInt(id.split("=")[1]);
+	public @ResponseBody int delete_event(int id) {
+		log.info("	-----CT----->delete_event // id ----->"+id);
 		
 		ScheduleDTO dto = new ScheduleDTO();
-		dto.setId(num);
-		service.deleteShcedule(dto);
-		
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		return map;
+		dto.setId(id);
+		int result = service.deleteSchedule(dto);
+		return result;
 	}
+	
+	@RequestMapping("/update_schedule")
+	public String update_schedule(ScheduleDTO dto, Model model) {
+		log.info("	-----CT----->update_schedule");
+		log.info(""+dto.getId());
+		log.info(""+service.getSchedule(dto));
+		model.addAttribute("schedule", service.getSchedule(dto));
+		return "/coachroom/schedule/schedule_update";
+	}
+	
+	@RequestMapping("/update_schedulePro")
+	public @ResponseBody int update_schedulePro(@RequestBody ScheduleDTO dto) {
+		log.info("	-----CT----->update_schedulePro");
+		log.info(""+dto);
+		int result = service.updateSchedule(dto);
+		return result;
+	} 
 }

@@ -18,8 +18,8 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	private CoachRoomMapper mapper;
 
 	@Override
-	public ArrayList<ScheduleDTO> getSchedule() {
-		return mapper.getSchedule();
+	public ArrayList<ScheduleDTO> getAllSchedule() {
+		return mapper.getAllSchedule();
 	}
 
 	@Override
@@ -28,8 +28,18 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	}
 
 	@Override
-	public void deleteShcedule(ScheduleDTO dto) {
-		mapper.deleteShcedule(dto);
+	public int deleteSchedule(ScheduleDTO dto) {
+		return mapper.deleteSchedule(dto);
+	}
+
+	@Override
+	public int updateSchedule(ScheduleDTO dto) {
+		return mapper.updateSchedule(dto);
+	}
+
+	@Override
+	public ScheduleDTO getSchedule(ScheduleDTO dto) {
+		return mapper.getSchedule(dto);
 	}
 	
 }
