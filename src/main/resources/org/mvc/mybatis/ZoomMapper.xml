@@ -18,4 +18,20 @@
 		insert into tbl_coachclass(num, title, intro, type, goal, tool, frequency, price)
 			values(seq_coachclass.nextval, #{title}, #{intro}, #{type}, #{goal}, #{tool}, #{frequency}, #{price})
 	</insert>
+	
+	<delete id="zoomDelete">
+		delete tbl_coachclass where num=#{num}
+	</delete>
+	
+	<update id="zoomUpdate">
+		update tbl_coachclass set 
+			title=#{title},
+			intro=#{intro},
+			type=#{type},
+			goal=#{goal},
+			tool=#{tool},
+			frequency=#{frequency},
+			price=#{price} 
+				where num=#{num}
+	</update>
 </mapper>  

@@ -36,6 +36,11 @@
 		<td>${ZoomDTO.count}</td> 
 	</tr>
 </c:forEach>
+	<tr>
+		<td>
+			<input type="button" value="글쓰기" onclick="window.location='/ddarawazoom/zwriteForm'">
+		</td>
+	</tr>
 </table>
 </section>
 
