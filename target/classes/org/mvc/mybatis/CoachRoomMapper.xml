@@ -14,7 +14,7 @@
 		select * from tbl_calendar where c_id = '김코치'
 	</select>
 
-	<insert id="insertEvent" parameterType="org.mvc.bean.ScheduleDTO">
+	<insert id="insertSchedule" parameterType="org.mvc.bean.ScheduleDTO">
 		insert into tbl_calendar (id, m_id, c_id, title, start_time, end_time)
 			values( 
 				seq_calendar.nextval,
@@ -25,5 +25,9 @@
 				#{end}
 			)
 	</insert>
+
+	<delete id="deleteShcedule">
+		delete tbl_calendar where id = #{id}
+	</delete>
 
 </mapper>

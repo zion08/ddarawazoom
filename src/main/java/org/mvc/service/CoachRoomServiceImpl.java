@@ -2,6 +2,7 @@ package org.mvc.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.mybatis.CoachRoomMapper;
@@ -22,8 +23,13 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	}
 
 	@Override
-	public int insertEvent(ScheduleDTO dto) {
-		return mapper.insertEvent(dto);
+	public int insertSchedule(ScheduleDTO dto) {
+		return mapper.insertSchedule(dto);
+	}
+
+	@Override
+	public void deleteShcedule(ScheduleDTO dto) {
+		mapper.deleteShcedule(dto);
 	}
 	
 }

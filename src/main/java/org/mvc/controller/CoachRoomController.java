@@ -29,12 +29,14 @@ public class CoachRoomController {
 	@RequestMapping("/schedule")
 	public String coachSchedule() {
 		log.info("	-----CT----->coachSchedule");
+		
 		return "/coachroom/schedule/schedule";
 	}
 	
 	@RequestMapping("/getSchedule")
-	public @ResponseBody ArrayList<ScheduleDTO> getSchedule() {
+	public @ResponseBody ArrayList<ScheduleDTO> getSchedule(Model model) {
 		log.info("	-----CT----->getSchedule");
+		
 		return service.getSchedule();
 	}
 	
@@ -48,7 +50,7 @@ public class CoachRoomController {
 	public @ResponseBody Map<Object, Object> add_eventPro(@RequestBody ScheduleDTO dto) {
 		log.info("	-----CT----->add_eventPro");
 		
-		service.insertEvent(dto);
+		service.insertSchedule(dto);
 		
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		return map;
@@ -60,9 +62,16 @@ public class CoachRoomController {
 	}
 	
 	@RequestMapping("/delete_event")
-	public @ResponseBody Map<Object, Object> delete_event(@RequestBody ScheduleDTO dto) {
+	public @ResponseBody Map<Object, Object> delete_event(@RequestBody String id) {
 		log.info("	-----CT----->delete_event");
-		log.info(""+dto);
+		log.info(""+id);
+		
+		int num = Integer.parseInt(id.split("=")[1]);
+		
+		ScheduleDTO dto = new ScheduleDTO();
+		dto.setId(num);
+		service.deleteShcedule(dto);
+		
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		return map;
 	}

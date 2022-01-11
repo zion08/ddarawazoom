@@ -2,6 +2,7 @@ package org.mvc.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mvc.bean.ScheduleDTO;
 
@@ -11,5 +12,8 @@ public interface CoachRoomService {
 	public ArrayList<ScheduleDTO> getSchedule();
 	
 	// 스케쥴 작성
-	public int insertEvent(ScheduleDTO dto);
+	public int insertSchedule(ScheduleDTO dto);
+	
+	// 스케쥴 삭제
+	public void deleteShcedule(ScheduleDTO dto);
 }
