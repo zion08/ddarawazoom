@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/ddarawazoom") 
+@RequestMapping("/ddarawazoom")
 public class ZoomController {
 	
 	@Autowired
@@ -48,4 +48,27 @@ public class ZoomController {
 		model.addAttribute("result" , service.zoomInsert(dto));
 		return "/zoom/class/zwritePro"; 
 	}
-}	
+	
+	@RequestMapping("/zdeleteForm")
+	public String zdeleteForm(@ModelAttribute("num") int num) {
+		return "/zoom/class/zdeleteForm";
+	}
+	
+	@RequestMapping("zdeletePro")
+	public String zdeletePro(int num , Model model) {
+		model.addAttribute("result" , service.zoomDelete(num));
+		return "/zoom/class/zdeletePro";
+	}
+	
+	@RequestMapping("zupdateForm")
+	public String zupdateForm(ZoomDTO dto , Model model) {
+		model.addAttribute("ZoomDTO" , dto);
+		return "/zoom/class/zupdateForm";
+	}
+	
+	@RequestMapping("zupdatePro")
+	public String zupdatePro(ZoomDTO dto , Model model) {
+		model.addAttribute("result" , service.zoomUpdate(dto));
+		return "/zoom/class/zupdatePro"; 
+	}
+}	 

@@ -29,4 +29,14 @@ public class ZoomServiceImpl implements ZoomService{
 	public int zoomInsert(ZoomDTO dto) {
 		return mapper.zoomInsert(dto);
 	}
+
+	@Override
+	public int zoomDelete(int num) {
+		return mapper.zoomDelete(num);
+	}
+	
+	@Override
+	public int zoomUpdate(ZoomDTO dto) {   
+		return mapper.zoomUpdate(dto);
+	}
 }

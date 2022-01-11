@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${result == 1}">
+ <c:if test="${result == 1}">
 	<script>
-		alert("수업등록이 완료되었습니다.");
+		alert("수정이 완료되었습니다.");
 		window.location="/ddarawazoom/zoom";
 	</script>
-</c:if>    
+</c:if> 

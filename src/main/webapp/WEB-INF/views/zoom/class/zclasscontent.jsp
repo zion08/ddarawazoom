@@ -17,8 +17,8 @@
 	<%-- 관리자만 수정, 삭제 나중에 처리 --%>
 	<tr>
 		<td>
-			<input type="button" value="글수정">
-			<input type="button" value="글삭제">
+			<input type="button" value="글수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${ZoomDTO.num}&title=${ZoomDTO.title}&intro=${ZoomDTO.intro}&type=${ZoomDTO.type}&goal=${ZoomDTO.goal}&tool=${ZoomDTO.tool}&frequency=${ZoomDTO.frequency}&price=${ZoomDTO.price}'">
+			<input type="button" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${ZoomDTO.num}'">
 			
 			<input type="button" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
 		</td>
