@@ -5,13 +5,14 @@
 
 <mapper namespace="org.mvc.mybatis.CoachRoomMapper">
 
+	<!-- 스케줄 관련 코드 시작 -->
 	<resultMap type="org.mvc.bean.ScheduleDTO" id="calMap"> 
 		<result property="start" column="start_time"/> 
 		<result property="end" column="end_time"/> 
 	</resultMap>
 
 	<select id="getAllSchedule" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
-		select * from tbl_calendar where c_id = '김코치'
+		select * from tbl_calendar where c_id = #{c_id}
 	</select>
 
 	<insert id="insertSchedule" parameterType="org.mvc.bean.ScheduleDTO">
@@ -31,7 +32,7 @@
 	</delete>
 
 	<select id="getSchedule" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
-		select * from tbl_calendar where c_id = '김코치' and id = #{id}
+		select * from tbl_calendar where c_id = #{c_id} and id = #{id}
 	</select>
 
 	<update id="updateSchedule">
@@ -42,5 +43,16 @@
 			end_time = #{end}
 		where id = #{id}
 	</update>
+	<!-- 스케줄 관련 코드 종료 -->
 
+	<!-- 코치정보 관련 코드 시작 -->
+	<select id="getCoachInfo" resultType="org.mvc.bean.CoachInfoDTO">
+		select * from tbl_coach where c_id = #{c_id}
+	</select>
+	
+	<select id="getCareerInfo" resultType="org.mvc.bean.CoachCareerDTO">
+		select * from tbl_coach_career where c_id = #{c_id}
+	</select>
+	<!-- 코치정보 관련 코드 시작 -->
+	
 </mapper>

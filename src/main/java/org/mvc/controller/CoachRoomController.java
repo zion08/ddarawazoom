@@ -4,8 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.service.CoachRoomService;
@@ -27,6 +27,28 @@ public class CoachRoomController {
 	@Setter(onMethod_=@Autowired)
 	private CoachRoomService service;
 	
+//  =========== 코치룸 메인화면 ===========  //	
+	@RequestMapping()
+	public String main() {
+		return "/coachroom/main";
+	}
+	
+//  =========== 코치정보 관련 코드 시작 ===========  //	
+	@RequestMapping("/info")
+	public String info(HttpSession session, Model model) {
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		
+		model.addAttribute("coachInfo", service.getCoachInfo(c_id));
+		model.addAttribute("coachCareer", service.getCareerInfo(c_id));
+		
+		return "/coachroom/coachinfo/info";
+	}
+//  =========== 코치정보 관련 코드 시작 ===========  //	
+	
+//  =========== 스케줄 관련 코드 시작 ===========  //
 	@RequestMapping("/schedule")
 	public String coachSchedule() {
 		log.info("	-----CT----->coachSchedule");
@@ -35,10 +57,13 @@ public class CoachRoomController {
 	}
 	
 	@RequestMapping("/getSchedule")
-	public @ResponseBody ArrayList<ScheduleDTO> getSchedule(Model model) {
+	public @ResponseBody ArrayList<ScheduleDTO> getSchedule(HttpSession session, Model model) {
 		log.info("	-----CT----->getSchedule");
+		String c_id = (String)session.getAttribute("c_id");
 		
-		return service.getAllSchedule();
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		return service.getAllSchedule(c_id);
 	}
 	
 	@RequestMapping("/add_event")
@@ -87,9 +112,16 @@ public class CoachRoomController {
 	}
 	
 	@RequestMapping("/update_schedule")
-	public String update_schedule(ScheduleDTO dto, Model model) {
+	public String update_schedule(HttpSession session, ScheduleDTO dto, Model model) {
 		log.info("	-----CT----->update_schedule");
 		log.info(""+dto.getId());
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		dto.setC_id(c_id);
+		
 		log.info(""+service.getSchedule(dto));
 		
 		model.addAttribute("schedule", service.getSchedule(dto));
@@ -116,5 +148,7 @@ public class CoachRoomController {
 		int result = service.updateSchedule(dto);
 		
 		return result;
-	} 
+	}
+//	=========== 스케줄 관련 코드 종료 ===========  //
+	
 }

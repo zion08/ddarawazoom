@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.mvc.bean.CoachCareerDTO;
+import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.ScheduleDTO;
 
 public interface CoachRoomService {
 
 	// 스케쥴 데이터 가져오기
-	public ArrayList<ScheduleDTO> getAllSchedule();
+	public ArrayList<ScheduleDTO> getAllSchedule(String id);
 	
 	// 스케쥴 작성
 	public int insertSchedule(ScheduleDTO dto);
@@ -22,4 +24,10 @@ public interface CoachRoomService {
 	
 	// 수정할 스케쥴 가져오기
 	public ScheduleDTO getSchedule(ScheduleDTO dto);
+	
+	// 코치 기본정보
+	public CoachInfoDTO getCoachInfo(String id);
+		
+	// 코치 경력정보
+	public CoachCareerDTO getCareerInfo(String id);
 }

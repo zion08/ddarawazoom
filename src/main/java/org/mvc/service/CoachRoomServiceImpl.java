@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.mvc.bean.CoachCareerDTO;
+import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.mybatis.CoachRoomMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,8 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	private CoachRoomMapper mapper;
 
 	@Override
-	public ArrayList<ScheduleDTO> getAllSchedule() {
-		return mapper.getAllSchedule();
+	public ArrayList<ScheduleDTO> getAllSchedule(String id) {
+		return mapper.getAllSchedule(id);
 	}
 
 	@Override
@@ -40,6 +42,16 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	@Override
 	public ScheduleDTO getSchedule(ScheduleDTO dto) {
 		return mapper.getSchedule(dto);
+	}
+
+	@Override
+	public CoachInfoDTO getCoachInfo(String id) {
+		return mapper.getCoachInfo(id);
+	}
+
+	@Override
+	public CoachCareerDTO getCareerInfo(String id) {
+		return mapper.getCareerInfo(id);
 	}
 	
 }
