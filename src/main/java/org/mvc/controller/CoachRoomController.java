@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.ScheduleDTO;
@@ -30,12 +31,14 @@ public class CoachRoomController {
 //  =========== 코치룸 메인화면 ===========  //	
 	@RequestMapping()
 	public String main() {
+		log.info("	-----CT----->coachMain");
 		return "/coachroom/main";
 	}
 	
 //  =========== 코치정보 관련 코드 시작 ===========  //	
 	@RequestMapping("/info")
 	public String info(HttpSession session, Model model) {
+		log.info("	-----CT----->coachInfo");
 		String c_id = (String)session.getAttribute("c_id");
 		
 		// 임시 코치 아이디
@@ -45,6 +48,20 @@ public class CoachRoomController {
 		model.addAttribute("coachCareer", service.getCareerInfo(c_id));
 		
 		return "/coachroom/coachinfo/info";
+	}
+
+	@RequestMapping("/infoUpdate")
+	public String infoUpdate(HttpSession session, Model model) {
+		log.info("	-----CT----->coachInfoUpdate");
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		
+		model.addAttribute("coachInfo", service.getCoachInfo(c_id));
+		
+		return "/coachroom/coachinfo/infoUpdate";
 	}
 //  =========== 코치정보 관련 코드 시작 ===========  //	
 	

@@ -50,7 +50,7 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	}
 
 	@Override
-	public CoachCareerDTO getCareerInfo(String id) {
+	public List<CoachCareerDTO> getCareerInfo(String id) {
 		return mapper.getCareerInfo(id);
 	}
 	

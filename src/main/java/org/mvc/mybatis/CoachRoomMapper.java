@@ -29,5 +29,5 @@ public interface CoachRoomMapper {
 	public CoachInfoDTO getCoachInfo(String id);
 	
 	// 코치 경력정보
-	public CoachCareerDTO getCareerInfo(String id);
+	public List<CoachCareerDTO> getCareerInfo(String id);
 }

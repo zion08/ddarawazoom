@@ -53,6 +53,6 @@
 	<select id="getCareerInfo" resultType="org.mvc.bean.CoachCareerDTO">
 		select * from tbl_coach_career where c_id = #{c_id}
 	</select>
-	<!-- 코치정보 관련 코드 시작 -->
+	<!-- 코치정보 관련 코드 종료 -->
 	
 </mapper>
