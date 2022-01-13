@@ -63,7 +63,7 @@ public class CoachRoomController {
 		
 		return "/coachroom/coachinfo/infoUpdate";
 	}
-//  =========== 코치정보 관련 코드 시작 ===========  //	
+//  =========== 코치정보 관련 코드 종료 ===========  //	
 	
 //  =========== 스케줄 관련 코드 시작 ===========  //
 	@RequestMapping("/schedule")
