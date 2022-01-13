@@ -1,4 +1,26 @@
- //add schedule
+	
+	function getEvent(){
+	var event;
+		$.ajax({
+			type: "get",
+			url: "/coachroom/getSchedule", 
+			dataType: "json",
+			async: false, // ajax는 비동기식이기 때문에 return을 하기 못함 / 따라서 해당 코드를 추가함으로서 동기식으로 변경 후 리턴
+			success: function(result){
+				event = result;
+			}
+		});
+		return event;
+	}
+	
+	function click_add(){
+		var url = "/coachroom/add_event";
+		var name = "add_event";
+		var option = "width=620, height=650 left=100, top=50, location=no";
+		window.open(url, name, option);
+	}
+ 
+ 	//add schedule
 	$.fn.serializeObject = function(){
 	    var o = {};
 	    var a = this.serializeArray();
@@ -29,9 +51,47 @@
 			dataType : "json",
 			contentType : "application/json; charset=UTF-8",
 			success : function(data) {
-				opener.parent.location.reload();
-				window.close();
+				if(data == 1){
+					opener.parent.location.reload();
+					window.close();
+				}
 			}
 		});
 	};
- 
+
+function deleteEvent(){
+	$.ajax({
+		type : "POST",
+		   url : "/coachroom/delete_event",
+		   dataType : "json",
+		   ontentType : "application/json; charset=UTF-8",
+		   data : { id: $("#id").val() },
+		   success : function(data) {
+		   		result = parseInt(data);
+		   	
+			   	if(result == 1){
+				   alert("일정이 삭제되었습니다.");
+				   opener.parent.location.reload();
+				   window.close();
+			   	}
+		  }
+	});
+}	
+
+function update_ok(){
+	var scheduleUpdateData = JSON.stringify($('form#scheduleUpdateData').serializeObject());
+
+	$.ajax({
+			data : scheduleUpdateData,
+			url : "/coachroom/update_schedulePro",
+			type : "POST",
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			success : function(data) {
+				if(data == 1){
+					opener.parent.location.reload();
+					window.close();
+				}
+			}
+		});
+}

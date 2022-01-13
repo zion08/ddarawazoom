@@ -2,7 +2,10 @@ package org.mvc.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.mvc.bean.CoachCareerDTO;
+import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.mybatis.CoachRoomMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +20,38 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	private CoachRoomMapper mapper;
 
 	@Override
-	public ArrayList<ScheduleDTO> getSchedule() {
-		return mapper.getSchedule();
+	public ArrayList<ScheduleDTO> getAllSchedule(String id) {
+		return mapper.getAllSchedule(id);
 	}
 
 	@Override
-	public int insertEvent(ScheduleDTO dto) {
-		return mapper.insertEvent(dto);
+	public int insertSchedule(ScheduleDTO dto) {
+		return mapper.insertSchedule(dto);
+	}
+
+	@Override
+	public int deleteSchedule(ScheduleDTO dto) {
+		return mapper.deleteSchedule(dto);
+	}
+
+	@Override
+	public int updateSchedule(ScheduleDTO dto) {
+		return mapper.updateSchedule(dto);
+	}
+
+	@Override
+	public ScheduleDTO getSchedule(ScheduleDTO dto) {
+		return mapper.getSchedule(dto);
+	}
+
+	@Override
+	public CoachInfoDTO getCoachInfo(String id) {
+		return mapper.getCoachInfo(id);
+	}
+
+	@Override
+	public List<CoachCareerDTO> getCareerInfo(String id) {
+		return mapper.getCareerInfo(id);
 	}
 	
 }
