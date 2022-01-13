@@ -1,0 +1,40 @@
+
+// ajax로 view -> controller로 여러개의 값 전송할 때 필요한 코드
+$.fn.serializeObject = function(){
+	    var o = {};
+	    var a = this.serializeArray();
+	    $.each(a, function() {
+	    	var name = $.trim(this.name),
+	    		value = $.trim(this.value);
+	    	
+	        if (o[name]) {
+	            if (!o[name].push) {
+	                o[name] = [o[name]];
+	            }
+	            o[name].push(value || '');
+	        } else {
+	            o[name] = value || '';
+	        }
+	    });
+	    return o;
+};
+
+function update_submit(){
+	if($("#c_name").val() == "" || $("#c_nick").val() == "" || $("#c_email").val() == "" || $("#c_birth").val() == "" || $("#c_gender").val() == ""){
+		return false;
+	}
+
+	var updateInfo = JSON.stringify($('form#updateForm').serializeObject());
+	
+	$.ajax({
+		data : updateInfo,
+		url : "/coachroom/infoUpdateData",
+		type : "POST",
+		contentType : "application/json; charset=UTF-8",
+		success : function(result){
+			if(result == 1){
+				alert("수정 완료.");
+			}
+		}
+	});
+}

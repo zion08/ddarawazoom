@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.service.CoachRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,28 @@ public class CoachRoomController {
 		model.addAttribute("coachInfo", service.getCoachInfo(c_id));
 		
 		return "/coachroom/coachinfo/infoUpdate";
+	}
+	
+	@RequestMapping("/infoUpdateData")
+	public @ResponseBody int infoUpdateData(@RequestBody CoachInfoDTO dto, HttpSession session) {
+		log.info("	-----CT----->infoUpdateData");
+		log.info(""+dto);
+		
+		if(dto.getC_gender().equals("0")) {
+			dto.setC_gender("남성");
+		} else if(dto.getC_gender().equals("1")) {
+			dto.setC_gender("여성");
+		}
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		
+		dto.setC_id(c_id);
+		int result = service.updateInfo(dto);
+		
+		return result;
 	}
 //  =========== 코치정보 관련 코드 종료 ===========  //	
 	

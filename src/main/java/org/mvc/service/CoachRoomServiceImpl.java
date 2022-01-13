@@ -53,5 +53,10 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	public List<CoachCareerDTO> getCareerInfo(String id) {
 		return mapper.getCareerInfo(id);
 	}
+
+	@Override
+	public int updateInfo(CoachInfoDTO dto) {
+		return mapper.updateInfo(dto);
+	}
 	
 }
