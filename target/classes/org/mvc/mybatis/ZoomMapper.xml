@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.mvc.mybatis.ZoomMapper">  
+	<select id="getList" resultType="org.mvc.bean.ZoomDTO">
+	<![CDATA[
+	select * from tbl_coachclass where num > 0
+	]]>
+	</select>
+	
+	<select id="getContent" resultType="org.mvc.bean.ZoomDTO">
+		select * from tbl_coachclass where num=#{num}
+	</select>
+
+	<insert id="zoomInsert" parameterType="org.mvc.bean.ZoomDTO">
+		insert into tbl_coachclass(num, title, intro, type, goal, tool, frequency, price)
+			values(seq_coachclass.nextval, #{title}, #{intro}, #{type}, #{goal}, #{tool}, #{frequency}, #{price})
+	</insert>
+	
+	<delete id="zoomDelete">
+		delete tbl_coachclass where num=#{num}
+	</delete>
+	
+	<update id="zoomUpdate">
+		update tbl_coachclass set 
+			title=#{title},
+			intro=#{intro},
+			type=#{type},
+			goal=#{goal},
+			tool=#{tool},
+			frequency=#{frequency},
+			price=#{price} 
+				where num=#{num}
+	</update>
+</mapper>  
