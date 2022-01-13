@@ -51,29 +51,29 @@ function imgUpdatePro(){
 
 	if($("#formFile") == "") {
 		return false;
-	} else {
-	
-		var form = new FormData();
-        form.append( "save", $("#formFile")[0].files[0] );
-        
-		console.log($("#formFile")[0].files[0]);
-	
-		$.ajax({
-			url : "/coachroom/imgUpdatePro",
-			type : "POST",
-			processData : false,
-			contentType : false,
-			data : form,
-			success : function(result){
-				if(result == 1){
-					alert("업로드 완료.");
-					opener.parent.location.reload();
-					window.close();
-				} else {
-					alert("이미지만 업로드 가능합니다.");
-				}
-			}
-		});
 	}
+	
+	var form = new FormData();
+    form.append( "save", $("#formFile")[0].files[0] );
+        
+	console.log($("#formFile")[0].files[0]);
+	
+	$.ajax({
+		url : "/coachroom/imgUpdatePro",
+		type : "POST",
+		processData : false,
+		contentType : false,
+		data : form,
+		success : function(data){
+			var result = parseInt(data);
+			if(result == 1){
+				alert("업로드 완료.");
+				opener.parent.location.reload();
+				window.close();
+			} else {
+				alert("이미지만 업로드 가능합니다.");
+			}
+		}
+	});
 }
 
