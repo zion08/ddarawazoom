@@ -38,3 +38,42 @@ function update_submit(){
 		}
 	});
 }
+
+function imgUpdateForm(){
+	var url = "/coachroom/imgUpdate";
+	var name = "img_update";
+	var option = "width=500, height=200 left=100, top=50, location=no";
+	
+	window.open(url, name, option);
+}
+
+function imgUpdatePro(){
+
+	if($("#formFile") == "") {
+		return false;
+	} else {
+	
+		var form = new FormData();
+        form.append( "save", $("#formFile")[0].files[0] );
+        
+		console.log($("#formFile")[0].files[0]);
+	
+		$.ajax({
+			url : "/coachroom/imgUpdatePro",
+			type : "POST",
+			processData : false,
+			contentType : false,
+			data : form,
+			success : function(result){
+				if(result == 1){
+					alert("업로드 완료.");
+					opener.parent.location.reload();
+					window.close();
+				} else {
+					alert("이미지만 업로드 가능합니다.");
+				}
+			}
+		});
+	}
+}
+

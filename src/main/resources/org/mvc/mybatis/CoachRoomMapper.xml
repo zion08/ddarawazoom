@@ -63,6 +63,12 @@
 			c_gender = #{c_gender}
 		where c_id = #{c_id}
 	</update>
+	
+	<update id="updateImg">
+		update tbl_coach set
+			c_img = #{c_img}
+		where c_id = #{c_id}
+	</update>
 	<!-- 코치정보 관련 코드 종료 -->
 	
 </mapper>

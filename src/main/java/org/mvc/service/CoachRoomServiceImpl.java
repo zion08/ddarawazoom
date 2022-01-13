@@ -58,5 +58,10 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	public int updateInfo(CoachInfoDTO dto) {
 		return mapper.updateInfo(dto);
 	}
+
+	@Override
+	public int updateImg(CoachInfoDTO dto) {
+		return mapper.updateImg(dto);
+	}
 	
 }

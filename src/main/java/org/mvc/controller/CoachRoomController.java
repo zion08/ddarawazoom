@@ -1,5 +1,6 @@
 package org.mvc.controller;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.FileInfo;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.service.CoachRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +31,9 @@ public class CoachRoomController {
 
 	@Setter(onMethod_=@Autowired)
 	private CoachRoomService service;
+	
+	@Autowired
+	private FileInfo fileInfo;
 	
 //  =========== 코치룸 메인화면 ===========  //	
 	@RequestMapping()
@@ -83,6 +89,61 @@ public class CoachRoomController {
 		
 		dto.setC_id(c_id);
 		int result = service.updateInfo(dto);
+		
+		return result;
+	}
+	
+	@RequestMapping("/imgUpdate")
+	public String imgUpdate() {
+		log.info("	-----CT----->imgUpdate");
+		
+		return "/coachroom/coachinfo/imgUpdate";
+	}
+	
+	@RequestMapping("/imgUpdatePro")
+	public @ResponseBody int imgUpdatePro(CoachInfoDTO dto, MultipartFile save, HttpServletRequest req, HttpSession session) {
+		log.info("	-----CT----->imgUpdatePro");
+		log.info(""+save.getOriginalFilename());
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		
+		dto.setC_id(c_id);
+		
+		int result = 0;
+		
+		// 1. 파일 유무 확인
+		if(save != null) {
+			// 2. 파일 확장자 확인 메소드 호출
+			if(fileInfo.fileTypeCheck(save, "image")) {
+				// 3. 파일 저장
+				// 사용자가 업로드한 파일 이름을 가져와서 확장자만 추출함
+				String orgName = save.getOriginalFilename();
+			
+				// orgName.substring() - orgName 값의 ()번째부터 마지막까지 잘라낸다 
+				// orgName.lastIndexOf(".") - orgName 값의 마지막 . 의 위치를 찾는다
+				String ext = orgName.substring(orgName.lastIndexOf(".")); 
+				
+				// 사용자의 ID + 확장자 명으로 파일 이름 변경 후 파일 저장
+				String fileName = dto.getC_id() + ext;
+				
+				// String path = req.getRealPath("/resources/member/img");
+				String path = req.getSession().getServletContext().getRealPath("/resources/coach/img");
+				
+				// 3. 파일 저장
+				File f = new File(path+"//"+fileName);
+				try {
+					save.transferTo(f);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				 // 4. DB tbl_member 에 파일 이름 저장
+				dto.setC_img(fileName);
+				result = service.updateImg(dto);
+			}
+		}
 		
 		return result;
 	}
