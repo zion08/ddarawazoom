@@ -19,7 +19,7 @@ $.fn.serializeObject = function(){
 	    return o;
 };
 
-function update_submit(){
+function infoUpdate_submit(){
 	if($("#c_name").val() == "" || $("#c_nick").val() == "" || $("#c_email").val() == "" || $("#c_birth").val() == "" || $("#c_gender").val() == ""){
 		return false;
 	}
@@ -29,6 +29,26 @@ function update_submit(){
 	$.ajax({
 		data : updateInfo,
 		url : "/coachroom/infoUpdateData",
+		type : "POST",
+		contentType : "application/json; charset=UTF-8",
+		success : function(result){
+			if(result == 1){
+				alert("수정 완료.");
+			}
+		}
+	});
+}
+
+function careerUpdate_submit(){
+	if($("#specialty").val() == "" || $("#career").val() == ""){
+		return false;
+	}
+
+	var updateCareer = JSON.stringify($('form#updateForm').serializeObject());
+	console.log(updateCareer);
+	$.ajax({
+		data : updateCareer,
+		url : "/coachroom/careerUpdatePro",
 		type : "POST",
 		contentType : "application/json; charset=UTF-8",
 		success : function(result){

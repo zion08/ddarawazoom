@@ -50,8 +50,8 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	}
 
 	@Override
-	public List<CoachCareerDTO> getCareerInfo(String id) {
-		return mapper.getCareerInfo(id);
+	public List<CoachCareerDTO> getAllCareerInfo(String id) {
+		return mapper.getAllCareerInfo(id);
 	}
 
 	@Override
@@ -62,6 +62,16 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	@Override
 	public int updateImg(CoachInfoDTO dto) {
 		return mapper.updateImg(dto);
+	}
+
+	@Override
+	public CoachCareerDTO getCareerInfo(CoachCareerDTO dto) {
+		return mapper.getCareerInfo(dto);
+	}
+
+	@Override
+	public int updateCareer(CoachCareerDTO dto) {
+		return mapper.updateCareer(dto);
 	}
 	
 }

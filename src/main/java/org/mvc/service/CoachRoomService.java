@@ -28,8 +28,14 @@ public interface CoachRoomService {
 	// 코치 기본정보
 	public CoachInfoDTO getCoachInfo(String id);
 		
-	// 코치 경력정보
-	public List<CoachCareerDTO> getCareerInfo(String id);
+	// 모든 코치 경력정보
+	public List<CoachCareerDTO> getAllCareerInfo(String id);
+	
+	// 수정할 경력 정보
+	public CoachCareerDTO getCareerInfo(CoachCareerDTO dto);
+	
+	// 경력 정보 수정
+	public int updateCareer(CoachCareerDTO dto);
 	
 	// 코치 정보수정
 	public int updateInfo(CoachInfoDTO dto);

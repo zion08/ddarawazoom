@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
 import org.mvc.bean.ScheduleDTO;
@@ -52,7 +53,7 @@ public class CoachRoomController {
 		c_id = "kimcoach";
 		
 		model.addAttribute("coachInfo", service.getCoachInfo(c_id));
-		model.addAttribute("coachCareer", service.getCareerInfo(c_id));
+		model.addAttribute("coachCareer", service.getAllCareerInfo(c_id));
 		
 		return "/coachroom/coachinfo/info";
 	}
@@ -122,17 +123,34 @@ public class CoachRoomController {
 	}
 	
 	@RequestMapping("/careerUpdate")
-	public String careerUpdate(HttpSession session, Model model) {
+	public String careerUpdate(HttpSession session, Model model, CoachCareerDTO dto) {
 		log.info("	-----CT----->careerUpdate");
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
 		// 임시 코치 아이디
 		c_id = "kimcoach";
+		dto.setC_id(c_id);
 		
-		model.addAttribute("coachInfo", service.getCoachInfo(c_id));
+		model.addAttribute("coachCareer", service.getCareerInfo(dto));
 		
 		return "/coachroom/coachinfo/careerUpdate";
+	}
+	
+	@RequestMapping("/careerUpdatePro")
+	public @ResponseBody int careerUpdatePro(HttpSession session, @RequestBody CoachCareerDTO dto) {
+		log.info("	-----CT----->careerUpdatePro");
+		
+		int result = 0;
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		dto.setC_id(c_id);
+		result = service.updateCareer(dto);
+		
+		return result;
 	}
 //  =========== 코치정보 관련 코드 종료 ===========  //	
 	

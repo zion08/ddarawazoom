@@ -50,8 +50,12 @@
 		select * from tbl_coach where c_id = #{c_id}
 	</select>
 	
-	<select id="getCareerInfo" resultType="org.mvc.bean.CoachCareerDTO">
+	<select id="getAllCareerInfo" resultType="org.mvc.bean.CoachCareerDTO">
 		select * from tbl_coach_career where c_id = #{c_id}
+	</select>
+	
+	<select id="getCareerInfo" resultType="org.mvc.bean.CoachCareerDTO">
+		select * from tbl_coach_career where c_id = #{c_id} and num = #{num}
 	</select>
 	
 	<update id="updateInfo">
@@ -68,6 +72,14 @@
 		update tbl_coach set
 			c_img = #{c_img}
 		where c_id = #{c_id}
+	</update>
+	
+	<update id="updateCareer">
+		update tbl_coach_career set
+			specialty = #{specialty},
+			career = #{career},
+			certificate = #{certificate}
+		where c_id = #{c_id} and num = #{num}
 	</update>
 	<!-- 코치정보 관련 코드 종료 -->
 	

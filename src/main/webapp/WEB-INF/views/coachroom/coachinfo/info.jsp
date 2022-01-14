@@ -12,9 +12,6 @@
 		margin-bottom: 20px;
 	}
 	
-	.coachCareer {
-		margin-top: 20px;
-	}
 	.center {
 		text-align: center;
 		margin: 0 auto;
@@ -99,65 +96,94 @@
 	          <div class="btn-group me-2">
 	            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="imgUpdateForm();">프로필 사진 변경</button>
 	            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/infoUpdate'">정보 수정</button>
-	            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/careerUpdate'">경력 수정</button>
 	          </div>
 	        </div>	
 	    
-		    <div class="center">
-				프로필 사진 : ${coachInfo.c_img} <br/>
-			</div>
-		
-			<div class="coachInfo">
-				<h2>기본 정보</h2>
-			    <div class="table-responsive">
-			      <table class="table table-striped table-sm">
-			        <thead>
-			          <tr>
-			            <th scope="col">이름</th>
-			            <th scope="col">닉네임</th>
-			            <th scope="col">성별</th>
-			            <th scope="col">생년월일</th>
-			            <th scope="col">연락처</th>
-			            <th scope="col">이메일</th>
-			            <th scope="col">소속</th>
-			          </tr>
-			       </thead>
-			        <tbody>
-			          <tr>
-			            <td>${coachInfo.c_name}</td>
-			            <td>${coachInfo.c_nick}</td>
-			            <td>${coachInfo.c_gender}</td>
-			            <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${coachInfo.c_birth}" /></td>
-			            <td>${coachInfo.c_tel}</td>
-			            <td>${coachInfo.c_email}</td>
-			            <td>${coachInfo.company}</td>
-			          </tr>
-			        </tbody>
-			      </table>
-			    </div>
-			</div>
+	    	<div class="container">
+			    <div class="center">
+					<img src="/resources/image/upload/${coachInfo.c_img}" width="100" height="100" />
+				</div>
 			
-			<div class="coachCareer">
-			  <h2>경력 정보</h2>
-			    <div class="table-responsive">
-			      <table class="table table-striped table-sm">
-			        <thead>
-			          <tr>
-			            <th scope="col">전문 분야</th>
-			            <th scope="col">경력</th>
-			            <th scope="col">자격증</th>
-			          </tr>
-			       </thead>
-			        <tbody>
-			          <c:forEach var="coachCareer" items="${coachCareer}">
-			        	<tr>
-			              <td>${coachCareer.specialty}</td>
-			              <td>${coachCareer.career}</td>
-			              <td>${coachCareer.certificate}</td>
-			            </tr>
-			          </c:forEach>
-			        </tbody>
-			      </table>
+				<div class="coachInfo">
+					<h2>기본 정보</h2>
+				    <div class="table-responsive">
+				      <table class="table table-striped table-sm">
+				        <thead>
+				          <tr>
+				            <th scope="col">이름</th>
+				            <th scope="col">닉네임</th>
+				            <th scope="col">성별</th>
+				            <th scope="col">생년월일</th>
+				            <th scope="col">연락처</th>
+				            <th scope="col">이메일</th>
+				            <th scope="col">소속</th>
+				          </tr>
+				       </thead>
+				        <tbody>
+				          <tr>
+				            <td>${coachInfo.c_name}</td>
+				            <td>${coachInfo.c_nick}</td>
+				            <td>${coachInfo.c_gender}</td>
+				            <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${coachInfo.c_birth}" /></td>
+				            <td>${coachInfo.c_tel}</td>
+				            <td>${coachInfo.c_email}</td>
+				            <td>${coachInfo.company}</td>
+				          </tr>
+				        </tbody>
+				      </table>
+				    </div>
+				</div>
+				
+				<div class="coachInfo">
+				  <h2>경력 정보</h2>
+				    <div class="table-responsive">
+				      <c:forEach var="coachCareer" items="${coachCareer}">
+				        <table class="table table-striped table-sm">
+				          <thead>
+				            <tr>
+				              <th scope="col">전문 분야</th>
+				              <th scope="col">경력</th>
+				              <th scope="col">자격증</th>
+				              <th scope="col"></th>
+				            </tr>
+				          </thead>
+				           <tbody>
+				             <tr>
+				               <td>${coachCareer.specialty}</td>
+				               <td>${coachCareer.career}</td>
+				               <td>${coachCareer.certificate}</td>
+				               <td style="text-align: right;">
+							     <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/careerUpdate?num=${coachCareer.num}'">경력 수정</button>
+							   </td>
+				             </tr>
+				           </tbody>
+				         </table>
+				       </c:forEach>
+					 </div>
+				 </div>
+				
+				<div class="coachInfo">
+				  <h2>코치 소개</h2>
+				    <div class="table-responsive">
+				      <table class="table table-striped table-sm">
+				        <thead>
+				          <tr>
+				            <th scope="col"></th>
+				          </tr>
+				       </thead>
+				        <tbody>
+				          <tr>
+				            <td>
+				              <figure class="text-center">
+							    <blockquote class="blockquote">
+								  <p>${coachInfo.introduce}</p>
+								</blockquote>
+							  </figure>
+				            </td>
+				          </tr>
+				        </tbody>
+				      </table>
+					</div>
 				</div>
 			</div>
     </main>

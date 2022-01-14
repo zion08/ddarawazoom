@@ -86,7 +86,7 @@
 	    <div class="row g-5">
 	      <div class="col-md-7 col-lg-8">
 	        <h4 class="mb-3">코치 정보 수정</h4>
-	        <form class="needs-validation" novalidate id="updateForm" action="/coachroom/info" method="post" onsubmit="update_submit();">
+	        <form class="needs-validation" novalidate id="updateForm" action="/coachroom/info" method="post" onsubmit="infoUpdate_submit();">
 	          <div class="row g-3">
 	            <div class="col-sm-6">
 	              <label for="firstName" class="form-label">이름</label>

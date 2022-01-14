@@ -17,11 +17,19 @@
 
 <script>
 
-	document.addEventListener('DOMContentLoaded', function calendarEvent(eventData) {
+	$(document).ready(function(){
+		
+		var event = getEvent();
+	
+		console.log(event);
+	
+		// calendar element 취득
 		var calendarEl = document.getElementById('calendar');
 		
+		// full-calendar 생성
 	    var calendar = new FullCalendar.Calendar(calendarEl, {
-	    	
+	      
+	      // 헤더부분에 들어갈 커스텀 버튼 생성
 	   	  customButtons: {
 	   		addEvents: {
 	   			text: '일정 추가',
@@ -29,40 +37,39 @@
 	   				click_add();
 	   			}
 	   		}  
-	   	  },	
-	    	
-	      headerToolbar: {
+	   	  },
+	      headerToolbar: { // 헤더에 들어갈 버튼
 	        left: 'prev,next today',
 	        center: 'title',
 	        right: 'addEvents,dayGridMonth,timeGridWeek,timeGridDay'
 	      },
-	      locale: 'ko',
-	      navLinks: true, // can click day/week names to navigate views
-	      editable: true,
-	      dayMaxEvents: true, // allow "more" link when too many events
-	      eventClick: function(arg) {
-	    	  console.log(arg);
-	    	  console.log(arg.event);
-	    	  console.log(arg.event.title);
-	    	  console.log(arg.event.extendedProps.c_id);
+	      locale: 'ko', // 한국어 설정
+	      navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
+	      editable: true, // 수정가능 확인 여부
+	      dayMaxEvents: true, // 이벤트의 갯수가 많을 경우 표시되는 갯수 제한
+	      eventClick: function(arg) { // 이벤트를 클릭했을 시 실행될 부분
 	    	  
+	    	  console.log(arg); // 현재 캘린더에 들어있는 모든 값
+	    	  console.log(arg.event); // 캘린더에 들어있는 event 값
+	    	  console.log(arg.event.title); // 캘린더에 들어있는 event의 title값
+	    	  console.log(arg.event.extendedProps.c_id); // 추가로 집어넣은 그 외의 데이터(코치 아이디) 값
+	    	  
+	    	  // 새 팝업창 띄우기
 	    	  var url = "/coachroom/schedule_popup?id="+arg.event.id+"&c_id="+arg.event.extendedProps.c_id;
 	    	  var name = "schedule_popup";
 	    	  var option = "top=10, left=10, width=300, height=150, status=no, menubar=no, toolbar=no, resizable=no";
 	    		
 	    	  window.open(url, name, option);
 	    	  
-	    	  
 	      },	
-	      
-	      events: getEvent()
+	      // 이벤트
+	      events: event
 	      
 	    });
-
+		// 캘린더 랜더링
 	    calendar.render();
-	  });
 	
-	
+	});
 	
 </script>
 <style>
