@@ -34,8 +34,8 @@
     <div class="col">
       <h6 class="fw-bold">맴버</h6>
       <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">마이룸</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">바디프로필</a></li>
+        <li class="nav-item mb-2"><a href="/myroom" class="nav-link p-0 text-muted">마이룸</a></li>
+        <li class="nav-item mb-2"><a href="/myroom/bodyprofile" class="nav-link p-0 text-muted">바디프로필</a></li>
       </ul>
     </div>
     

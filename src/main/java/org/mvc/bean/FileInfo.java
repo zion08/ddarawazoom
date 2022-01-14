@@ -1,5 +1,6 @@
 package org.mvc.bean;
 
+ingframework.stereotype.Component;
 import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileInfo {
-	
-	// 파일 확장자 확인 메소드
+
+  // 파일 확장자 확인 메소드
 	public boolean fileTypeCheck(MultipartFile file, String type) {
 		boolean result = false;
 		
@@ -22,6 +23,7 @@ public class FileInfo {
 		}
 		return result;
 	}
+
 	
 	// 이미지 업로드 메소드
 	public String imgUpload(MultipartFile save, String id) {

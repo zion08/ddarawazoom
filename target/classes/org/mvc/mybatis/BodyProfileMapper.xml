@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.mvc.mybatis.BodyProfileMapper">
+	
+	<!-- bodyprofile 페이지에 myprofile/ bodyprofile 결과 출력 -->
+	<select id="getMyProfile" resultType="org.mvc.bean.MyProfileDTO">
+		select * from tbl_myprofile where b_id = #{b_id}
+	</select>
+	
+	<!-- bodyprofile 최근 결과 출력 -->
+	<select id="getBodyProfile" resultType="org.mvc.bean.BodyProfileDTO">
+		select * from tbl_bodyprofile
+			where b_id = #{b_id} and b_num = (
+				select max(b_num) from tbl_bodyprofile where b_id = #{b_id}
+			)
+	</select>
+	
+	<!-- bodyprofile 페이지 bodyprofile 그래프 아래 bodyprofile 리스트 출력-->
+	<select id="bodyList" resultType="org.mvc.bean.BodyProfileDTO">
+		<![CDATA[
+		select * from(
+			select b_num, b_id, b_height, b_weight, b_muscle, b_bodyfat, b_shape, b_chest, b_waist, b_arm, b_thigh, b_hip, b_date, rownum r from( 
+			 	select * from tbl_bodyprofile order by b_date asc, rownum desc))
+		 	where b_id = #{b_id}
+		]]>
+	</select>
+	
+	<insert id="myWrite">
+		insert into tbl_myprofile(b_id, b_nick, b_name, b_gender, b_birth, b_tel, b_email, b_img)
+			values(
+				#{b_id},
+				#{b_nick},
+				#{b_name},
+				#{b_gender},
+				#{b_birth},
+				#{b_tel},
+				#{b_email},
+				#{b_img}
+			)
+	</insert>
+	
+	<update id="myUpdate" parameterType="org.mvc.bean.MyProfileDTO">
+		update tbl_myprofile set
+				b_nick = #{b_nick},
+				b_name = #{b_name},
+				b_gender = #{b_gender},
+				b_birth = #{b_birth},
+				b_tel = #{b_tel},
+				b_email = #{b_email},
+				b_img = #{b_img}
+		where b_id = #{b_id}
+	</update>
+
+	<insert id="bodyWrite" parameterType="org.mvc.bean.BodyProfileDTO">
+		insert into tbl_bodyprofile(b_num, b_id, b_height, b_weight, b_muscle, b_bodyfat, b_shape, b_chest, b_waist, b_arm, b_thigh, b_hip, b_date)
+			values(
+				tbl_bodyprofile_seq.nextval,
+				#{b_id},
+				#{b_height},
+				#{b_weight},
+				#{b_muscle},
+				#{b_bodyfat},
+				#{b_shape},
+				#{b_chest},
+				#{b_waist},
+				#{b_arm},
+				#{b_thigh},
+				#{b_hip},
+				#{b_date}
+			)
+	</insert>
+	
+	<!-- bodyprofile update를 하기 위해 num 값에 맞게 가져오는 쿼리 -->
+	<select id="bodyRead" resultType="org.mvc.bean.BodyProfileDTO">
+		<![CDATA[
+			select * from tbl_bodyprofile where b_num = #{b_num} and b_id = #{b_id}
+		]]>
+	</select>
+	
+	<update id="bodyUpdate">
+		<![CDATA[
+			update tbl_bodyprofile set
+				b_height = #{b_height},
+				b_weight = #{b_weight},
+				b_muscle = #{b_muscle},
+				b_bodyfat = #{b_bodyfat},
+				b_shape = #{b_shape},
+				b_chest = #{b_chest},
+				b_waist = #{b_waist},
+				b_arm = #{b_arm},
+				b_thigh = #{b_thigh},
+				b_hip = #{b_hip},
+				b_date = #{b_date}
+			where b_num = #{b_num}
+			]]>
+	</update>
+	
+	<delete id="bodyDelete">
+		delete tbl_bodyprofile where b_num = #{b_num}
+	</delete>
+	
+</mapper>
