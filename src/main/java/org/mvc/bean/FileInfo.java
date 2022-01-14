@@ -1,18 +1,53 @@
 package org.mvc.bean;
 
+ingframework.stereotype.Component;
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileInfo {
 
+  // 파일 확장자 확인 메소드
 	public boolean fileTypeCheck(MultipartFile file, String type) {
 		boolean result = false;
+		
 		String fileType = file.getContentType().split("/")[0];
-		// "/" 기준으로 나누어 배열에 기준으로 type를 확인
 		if(fileType.equals(type)) {
 			result = true;
 		}
 		return result;
+	}
+
+	
+	// 이미지 업로드 메소드
+	public String imgUpload(MultipartFile save, String id) {
+		// HttpServletRequest 객체를 직접적으로 생성함
+		// 파라미터를 최소한으로 받기 위함
+		HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder
+															.getRequestAttributes())
+															.getRequest();
+		
+		String fileName = null;
+		
+		if(fileTypeCheck(save, "image")) {
+			String orgName = save.getOriginalFilename();
+			String ext = orgName.substring(orgName.lastIndexOf(".")); 
+			fileName = id + ext;
+			String path = req.getSession().getServletContext().getRealPath("/resources/image/upload");
+			
+			File f = new File(path+"//"+fileName);
+			try {
+				save.transferTo(f);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return fileName;
 	}
 }

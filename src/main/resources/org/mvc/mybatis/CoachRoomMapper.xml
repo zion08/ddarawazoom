@@ -53,6 +53,22 @@
 	<select id="getCareerInfo" resultType="org.mvc.bean.CoachCareerDTO">
 		select * from tbl_coach_career where c_id = #{c_id}
 	</select>
+	
+	<update id="updateInfo">
+		update tbl_coach set
+			c_name = #{c_name},
+			c_nick = #{c_nick},
+			c_email = #{c_email},
+			c_birth = #{c_birth},
+			c_gender = #{c_gender}
+		where c_id = #{c_id}
+	</update>
+	
+	<update id="updateImg">
+		update tbl_coach set
+			c_img = #{c_img}
+		where c_id = #{c_id}
+	</update>
 	<!-- 코치정보 관련 코드 종료 -->
 	
 </mapper>

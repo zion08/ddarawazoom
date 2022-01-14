@@ -3,13 +3,9 @@
 <%@ include file="../../layout/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>따라와줌-코치정보</title>
-</head>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/resources/coach/custom/js/coach-info.js" type="text/javascript"></script>
 
 <style>
 	.coachInfo {
@@ -101,9 +97,9 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     		<div class="btn-toolbar mb-2 mb-md-0" style="float: right;">
 	          <div class="btn-group me-2">
-	            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/imgUpdate'">프로필 사진 변경</button>
+	            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="imgUpdateForm();">프로필 사진 변경</button>
 	            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/infoUpdate'">정보 수정</button>
-	            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/infoUpdate'">경력 수정</button>
+	            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/careerUpdate'">경력 수정</button>
 	          </div>
 	        </div>	
 	    
@@ -166,8 +162,6 @@
 			</div>
     </main>
 </div>
-
-	<script src="/resources/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
