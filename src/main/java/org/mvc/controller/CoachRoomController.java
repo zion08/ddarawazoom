@@ -1,5 +1,6 @@
 package org.mvc.controller;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.FileInfo;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.service.CoachRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +31,9 @@ public class CoachRoomController {
 
 	@Setter(onMethod_=@Autowired)
 	private CoachRoomService service;
+	
+	@Autowired
+	private FileInfo fileInfo;
 	
 //  =========== 코치룸 메인화면 ===========  //	
 	@RequestMapping()
@@ -62,6 +69,70 @@ public class CoachRoomController {
 		model.addAttribute("coachInfo", service.getCoachInfo(c_id));
 		
 		return "/coachroom/coachinfo/infoUpdate";
+	}
+	
+	@RequestMapping("/infoUpdateData")
+	public @ResponseBody int infoUpdateData(@RequestBody CoachInfoDTO dto, HttpSession session) {
+		log.info("	-----CT----->infoUpdateData");
+		log.info(""+dto);
+		
+		if(dto.getC_gender().equals("0")) {
+			dto.setC_gender("남성");
+		} else if(dto.getC_gender().equals("1")) {
+			dto.setC_gender("여성");
+		}
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		
+		dto.setC_id(c_id);
+		int result = service.updateInfo(dto);
+		
+		return result;
+	}
+	
+	@RequestMapping("/imgUpdate")
+	public String imgUpdate() {
+		log.info("	-----CT----->imgUpdate");
+		return "/coachroom/coachinfo/imgUpdate";
+	}
+	
+	@RequestMapping("/imgUpdatePro")
+	public @ResponseBody int imgUpdatePro(CoachInfoDTO dto, MultipartFile save, HttpSession session) {
+		log.info("	-----CT----->imgUpdatePro");
+		log.info(""+save.getOriginalFilename());
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		
+		dto.setC_id(c_id);
+		
+		int result = 0;
+		
+		String file = fileInfo.imgUpload(save, c_id);
+		if(file != null) {
+			dto.setC_img(file);
+			result = service.updateImg(dto);
+		}
+		return result;
+	}
+	
+	@RequestMapping("/careerUpdate")
+	public String careerUpdate(HttpSession session, Model model) {
+		log.info("	-----CT----->careerUpdate");
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		
+		model.addAttribute("coachInfo", service.getCoachInfo(c_id));
+		
+		return "/coachroom/coachinfo/careerUpdate";
 	}
 //  =========== 코치정보 관련 코드 종료 ===========  //	
 	

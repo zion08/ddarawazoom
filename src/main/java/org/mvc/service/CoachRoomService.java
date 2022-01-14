@@ -30,4 +30,10 @@ public interface CoachRoomService {
 		
 	// 코치 경력정보
 	public List<CoachCareerDTO> getCareerInfo(String id);
+	
+	// 코치 정보수정
+	public int updateInfo(CoachInfoDTO dto);
+	
+	// 코치 프로필사진 수정
+	public int updateImg(CoachInfoDTO dto);
 }
