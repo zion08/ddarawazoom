@@ -10,79 +10,91 @@
 <html>
 	<head>
 		<title>BodyProfile 수정 페이지</title>
-		<link href="../../resources/css/style.css" rel="stylesheet" type="text/css">
-		<script src="../../resources/myroom/js/script.js" type="text/javascript"></script>
 	</head>
 <body>
-
-	<div class="group" id="popupGroup">
-		<div class="group-head">
-			<h1 class="zTree-h1"> 일정 수정 </h1>
-		</div>
-		
-		<div class="group-body">
-			<form action="/myroom/bodyprofile/bodyUpdatePro" method="post">
-				<input type="hidden" name="b_num" value="${bodyProfileDTO.b_num}" />
-				
-				<div class="container">
-					<label for="b_date">작성 날짜</label>
-					<fmt:formatDate var="body_Date" pattern="yyyy-MM-dd" value="${bodyProfileDTO.b_date}" />
-					<input class="date" type="date" name="b_date" value="${body_Date}" />
-				</div>
-				<div class="container">
-					<label for="b_height">키</label>
-					<input type="text" name="b_height" value="${bodyProfileDTO.b_height}" /> cm
-				</div>
-				<div class="container">
-					<label for="b_weight">몸무게</label>
-					<input type="text" name="b_weight" value="${bodyProfileDTO.b_weight}"  /> cm
-				</div>
-				<div class="container">
-					<label for="b_muscle">근육 량</label>
-					<input type="text" name="b_muscle" value="${bodyProfileDTO.b_muscle}" /> kg
-				</div>
-				<div class="container">
-					<label for="b_bodyfat">체지방 량</label>
-					<input type="text" name="b_bodyfat" value="${bodyProfileDTO.b_bodyfat}" /> kg
-				</div>
-				<div class="container">
-					<label for="b_shape">체 형</label>
-					<select name="b_shape" class="form-select" aria-label="Default select example">
-						<option value="${bodyProfileDTO.b_shape}">${bodyProfileDTO.b_shape}</option>
-						<option value="마른비만형">마른비만형</option>
-						<option value="하체비만형">하체비만형</option>
-						<option value="복부비만형">복부비만형</option>
-						<option value="상체비만형">상체비만형</option>
-						<option value="전체비만형">전체비만형</option>
-						<option value="정상">정상</option>
-					</select>
-				</div>
-				<div class="container">
-					<label for="b_chest">가슴 둘레</label>
-					<input type="text" name="b_chest" value="${bodyProfileDTO.b_chest}" /> cm
-				</div>
-				<div class="container">
-					<label for="b_waist">허리 둘레</label>
-					<input type="text" name="b_waist" value="${bodyProfileDTO.b_waist}" /> cm
-				</div>
-				<div class="container">
-					<label for="b_arm">팔뚝 둘레</label>
-					<input type="text" name="b_arm" value="${bodyProfileDTO.b_arm}" /> cm
-				</div>
-				<div class="container">
-					<label for="b_thigh">허벅지 둘레</label>
-					<input type="text" name="b_thigh" value="${bodyProfileDTO.b_thigh}" /> cm
-				</div>
-				<div class="container">
-					<label for="b_hip">엉덩이 둘레</label>
-					<input type="text" name="b_hip" value="${bodyProfileDTO.b_hip}" /> cm
-				</div>
-				<input type="submit" value="수정하기" />
-				<input type="button" value="바디프로필이동" onClick="javascript:window.location='/myroom/bodyprofile'" />
-			</form>
-		</div>
-	</div>
-</body>
+	<div class="container">
+	  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+	    <div class="row g-5">
+	      <div class="col-md-7 col-lg-8">
+			<h4 class="mb-3">바디 프로필 수정</h4>
+				<form action="/myroom/bodyprofile/bodyUpdatePro" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="b_num" value="${bodyProfileDTO.b_num}" />
+						<div class="row g-3">
+							<div class="col-12">
+								<label for="b_date" class="form-label">작성 날짜</label>
+								<fmt:formatDate var="body_Date" pattern="yyyy-MM-dd" value="${bodyProfileDTO.b_date}" />
+								<input  class="form-control" type="date" id="b_date" name="b_date" value="${body_Date}" />
+							</div>
+							<div class="col-6">
+								<label for="b_height" class="form-label">키</label>
+								<input type="text" class="form-control"  id="b_height" name="b_height" value="${bodyProfileDTO.b_height}" /> cm
+							</div>
+							<div class="col-6">
+								<label for="b_weight" class="form-label">몸무게</label>
+								<input type="text" class="form-control"  id="b_weight" name="b_weight" value="${bodyProfileDTO.b_weight}"  /> cm
+							</div>
+							<div class="col-6">
+								<label for="b_muscle" class="form-label">근육 량</label>
+								<input type="text" class="form-control"  id="b_muscle" name="b_muscle" value="${bodyProfileDTO.b_muscle}" /> kg
+							</div>
+							<div class="col-6">
+								<label for="b_bodyfat" class="form-label">체지방 량</label>
+								<input type="text" class="form-control"  id="b_bodyfat" name="b_bodyfat" value="${bodyProfileDTO.b_bodyfat}" /> kg
+							</div>
+							<div class="col-6">
+								<label for="b_shape" class="form-label">체 형</label>
+								<select class="form-select" id="b_shape" name="b_shape"  aria-label="Default select example">
+									<option value="${bodyProfileDTO.b_shape}">${bodyProfileDTO.b_shape}</option>
+									<option value="마른비만형">마른비만형</option>
+									<option value="하체비만형">하체비만형</option>
+									<option value="복부비만형">복부비만형</option>
+									<option value="상체비만형">상체비만형</option>
+									<option value="전체비만형">전체비만형</option>
+									<option value="정상">정상</option>
+								</select>
+							</div>
+							<div class="col-6">
+								<label for="b_chest" class="form-label">가슴 둘레</label>
+								<input type="text" class="form-control" id="b_chest" name="b_chest" value="${bodyProfileDTO.b_chest}" /> cm
+							</div>
+							<div class="col-6">
+								<label for="b_waist" class="form-label">허리 둘레</label>
+								<input type="text" class="form-control" id="b_waist" name="b_waist" value="${bodyProfileDTO.b_waist}" /> cm
+							</div>
+							<div class="col-6">
+								<label for="b_arm" class="form-label">팔뚝 둘레</label>
+								<input type="text" class="form-control" id="b_arm" name="b_arm" value="${bodyProfileDTO.b_arm}" /> cm
+							</div>
+							<div class="col-6">
+								<label for="b_thigh" class="form-label">허벅지 둘레</label>
+								<input type="text" class="form-control" id="b_thigh" name="b_thigh" value="${bodyProfileDTO.b_thigh}" /> cm
+							</div>
+							<div class="col-6">
+								<label for="b_hip" class="form-label">엉덩이 둘레</label>
+								<input type="text" class="form-control"  name="b_hip" value="${bodyProfileDTO.b_hip}" /> cm
+							</div>
+							<div class="col-12">
+								<label for="b_img" class="form-label">바디 사진</label><br/>
+								<img id="imge_section" src="/resources/image/upload/${bodyProfileDTO.b_img}" width="70px" height="70px"/>
+								<input type="file"  class="form-control" name="save" id="b_img" multiple="multiple" class="form-control form-control-sm"  />
+							</div>
+						</div>
+						
+							<hr class="my-4">
+							
+							<div style="text-align: center;">
+								<input type="submit" class="btn btn-outline-primary" value="수정하기" />
+									&nbsp;
+								<input type="reset" class="btn btn-outline-danger" value="다시작성하기" />
+									&nbsp;
+								<input type="button" class="btn btn-outline-secondary" value="바디프로필이동" onClick="javascript:window.location='/myroom/bodyprofile'" />
+							</div>
+						</form>
+					 </div>
+			   	 </div>
+			  </main>
+			</div>
+	</body>
 </html>
 
 <%@ include file="../../layout/footer.jsp"%>

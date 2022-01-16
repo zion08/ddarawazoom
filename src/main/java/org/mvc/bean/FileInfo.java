@@ -1,6 +1,5 @@
 package org.mvc.bean;
 
-ingframework.stereotype.Component;
 import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;

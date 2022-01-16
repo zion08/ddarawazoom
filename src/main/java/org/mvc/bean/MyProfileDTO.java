@@ -16,5 +16,5 @@ public class MyProfileDTO {
 	private Date b_birth;
 	private String b_tel;
 	private String b_email;
-	private String b_img;
+	private String img;
 }

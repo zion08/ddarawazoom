@@ -1,0 +1,41 @@
+	.card{
+		width: 35rem;
+		margin: auto;
+		padding:0px;
+		overflow:hidden;
+		margin-top: 30px;
+	}
+		
+	.card-header{
+		text-align: center;
+		font-size: 15px;
+	}
+	
+	.list-group-item{
+		text-align: center;
+		padding: 20px;
+		margin: auto;
+	}
+	
+	#updateButton , #deleteButton{
+		width: 60px;
+		height: 30px;
+		font-size:12px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+	
+	
+	 #bodyprofileList {
+	 	width: 85rem;
+	 	text-align: center;
+	 	font-size: 13px;
+	    margin: auto;
+	    valign: middle;
+	    border-color: '	#E6E6FA';
+	  }
+	  
+	  tr  td{
+	  font-size: 14px;
+	  }
+	  

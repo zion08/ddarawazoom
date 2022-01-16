@@ -1,5 +1,6 @@
 package org.mvc.mybatis;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,7 @@ public interface BodyProfileMapper {
 	public List<BodyProfileDTO> getBodyProfile(String b_id);
 		
 	public List<BodyProfileDTO> bodyList(String b_id);
-	
+		
 	public int myWrite(MyProfileDTO myDTO);
 	
 	public int myUpdate(MyProfileDTO myDTO);
@@ -27,4 +28,8 @@ public interface BodyProfileMapper {
 	public int bodyUpdate(BodyProfileDTO bodyDTO);
 	
 	public int bodyDelete(int b_num);
+
+	public List<BodyProfileDTO> bodyprofielChart(
+			@Param("b_id") String b_id,
+			@Param("b_date") Date b_date);
 }

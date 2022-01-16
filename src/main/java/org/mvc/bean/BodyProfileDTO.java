@@ -23,4 +23,8 @@ public class BodyProfileDTO {
 	private float b_hip;
 	@DateTimeFormat(pattern ="yyyy-MM-dd")
 	private Date b_date;
+	private String b_img;
+	
+	// view로 보낼 날짜 데이터를 String으로 보내기 위해 변수를 하나 더 선언
+	private String parse_date;
 }
