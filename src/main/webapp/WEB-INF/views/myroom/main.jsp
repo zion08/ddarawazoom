@@ -1,118 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ include file="../layout/header.jsp"%>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>Myroom Main 페이지</title>
-	    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-	    
-	    <link href="../resources/myroom/css/simple-sidebar.css" rel="stylesheet">
-	    <link href="../resources/css/style.css" rel="stylesheet">
-	    
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-		<script src="../../resources/myroom/js/simple-sidebar.js"></script>
-		
+
 	</head>
 <body>
 
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">매출 그래프</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
 
-<!-- 사이드바 -->
-<div class="sidebar" >
-    <span class="sidebar-brand">
-        <a href="javascript:void(0)" data-toggle="sidebar">
-        	<i class="glyphicon glyphicon-arrow-left"></i>
-        	메뉴숨기기
-        </a><br/>
-        <small>Myroom Sidebar </small>
-    </span>
-    <ul class="sidebar-nav">
-        <li>
-            <a href="/myroom">
-                마 이 룸
-            </a>
-        </li>
-        <li>
-            <a href="/myroom/userinfo" data-toggle="collapse" data-target="#menu-collapse-1">
-                회 원 정 보
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0)" data-toggle="collapse" data-target="#menu-collapse-2">
-                바디프로필 ▼
-                <div class="caret"></div>
-            </a>
-            <ul id="menu-collapse-2" class="collapse in">
-            	<li>
-                    <a href="/myroom/bodyprofile">
-                      	마이 바디 프로필
-                    </a>
-                </li>
-                <li>
-                    <a href="/myroom/bodyprofile/myWrite">
-                        마이프로필 작성
-                    </a>
-                </li>
-                <li>
-                    <a href="/myroom/bodyprofile/myUpdate">
-                       	마이프로필 수정
-                    </a>
-                </li>
-                <li>
-                    <a href="/myroom/bodyprofile/bodyWrite">
-                        바디프로필 작성
-                    </a>
-                </li>
-                <li>
-                    <a href="/myroom/bodyprofile/bodyUpdate">
-                        바디프로필 수정
-                    </a>
-                </li>
-            </ul>
-          </li>
-          <li>
-            <a href="javascript:void(0)" data-toggle="collapse" data-target="#menu-collapse-3">
-                락 커 룸 ▼
-                <div class="caret"></div>
-            </a>
-            <ul id="menu-collapse-3" class="collapse in" >
-            	<li>
-                    <a href="">
-                      	락 커 룸
-                    </a>
-                </li>
-            	<li>
-                    <a href="">
-                      	관심 수업
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                       관심 VOD
-                    </a>
-            </li>
-         </ul>
-                <li>
-            		<a href="/myroom/review" data-toggle="collapse" data-target="#menu-collapse-4">
-                		리뷰 관리
-            		</a>
-        		</li>
-        		<li>
-            		<a href="/myroom/QnA" data-toggle="collapse" data-target="#menu-collapse-5">
-                		1:1 문의
-            		</a>
-        		</li> 
-     	</ul>
+      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+
+      <h2>최신 리뷰</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Header</th>
+              <th scope="col">Header</th>
+              <th scope="col">Header</th>
+              <th scope="col">Header</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1,001</td>
+              <td>random</td>
+              <td>data</td>
+              <td>placeholder</td>
+              <td>text</td>
+            </tr>
+            <tr>
+              <td>1,002</td>
+              <td>placeholder</td>
+              <td>irrelevant</td>
+              <td>visual</td>
+              <td>layout</td>
+            </tr>
+            <tr>
+              <td>1,003</td>
+              <td>data</td>
+              <td>rich</td>
+              <td>dashboard</td>
+              <td>tabular</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
 </div>
 
-<div class="container-fluid">
-    <a href="javascript:void(0)" class="btn btn-default" data-toggle="sidebar" style="margin: auto;">
-        Menu
-    </a>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    <script src="/resources/coach/custom/js/dashboard.js"></script>
 
 
 <%@ include file="../layout/footer.jsp"%>

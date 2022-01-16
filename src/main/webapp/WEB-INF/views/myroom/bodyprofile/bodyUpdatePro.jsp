@@ -5,7 +5,7 @@
     
 <c:if test="${result == 1}">
 	<script>
-		alert("바디프로필 수정작업이 완료되었습니다.");
+		alert("본 바디 프로필이 수정되었습니다.");
 		window.location="/myroom/bodyprofile";
 	</script>
 </c:if>

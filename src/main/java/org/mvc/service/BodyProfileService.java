@@ -1,11 +1,12 @@
 package org.mvc.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mvc.bean.BodyProfileDTO;
 import org.mvc.bean.MyProfileDTO;
 
-public interface BodyProfileS {
+public interface BodyProfileService {
 
 	public MyProfileDTO getMyProfile(String b_id);
 	
@@ -24,4 +25,5 @@ public interface BodyProfileS {
 	public int bodyUpdate(BodyProfileDTO bodyDTO);
 	
 	public int bodyDelete(int b_num);
+	
 }
