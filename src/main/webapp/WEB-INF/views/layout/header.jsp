@@ -7,6 +7,8 @@
 <script src="../../resources/js/header.js" type="text/javascript"></script>
 <title>DDarawaZoom</title>
 
+
+<body class="pt-5">
 <!-- navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light mb-3">
 	
@@ -102,6 +104,7 @@
     
 	</div>
 </nav>
+</body>
 
 <!-- Channel Plugin Scripts -->
 <!-- 1:1 문의 채팅 -->

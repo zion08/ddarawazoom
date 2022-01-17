@@ -11694,3 +11694,7 @@ footer a:hover, footer a:active, footer a:focus {
 .dropdown-menu:hover {
   display: block;
 }
+
+body {
+	padding-top: 70px;
+}

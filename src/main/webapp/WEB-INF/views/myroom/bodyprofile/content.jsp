@@ -150,6 +150,8 @@
 			<canvas id="bodySizeChart" style="height:30vh; width:50vw; margin: 0 auto;"></canvas>
 		</div>
 	
+		<br/><br/>
+	
 		<!-- 바디프로필 리스트 -->
 		<table class="table" id="bodyprofileList">
 			<thead>
@@ -299,8 +301,8 @@
 											backgroundColor: '#80b6f4',
 				                            borderColor: '#80b6f4',
 				                            pointBorderColor: '#80b6f4',
-				                            pointBackgroundColor: '#80b6f4',
-				                            pointHoverBackgroundColor: 'white',
+				                            pointBackgroundColor: '#80b6f4', 
+				                            pointHoverBackgroundColor: 'white', //hover시 pointBacground
 				                            pointHoverBorderColor: '#black',
 							                borderWidth: 3,
 							                fillColor: "#79D1CF",
@@ -311,6 +313,38 @@
 										}]
 									},
 								options: {
+									maintainAspectRatio: false, //차트 비율 유지하지 않음
+									randing: true,
+									tooltips: {
+										enabled:false
+									}, // hover시 보였던 툴팁 제거
+									hover: {
+										animationDuration: 0
+									}, // 차트 위에 값 나타내기
+									animation: {
+										duration: 1,
+										onComplete: function(){
+											var chartInstance = this.chart,
+					                        ctx = chartInstance.ctx;
+						                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+						        			ctx.textAlign = "center";
+						    				ctx.font = "15px Open Sans";
+						    				ctx.fillStyle = 'black';
+					    				
+					    				
+						    				Chart.helpers.each(this.data.datasets.forEach(function (dataset, i) {
+						    					var meta = chartInstance.controller.getDatasetMeta(i);
+						    					Chart.helpers.each(meta.data.forEach(function (bar, index) {
+						    						data = dataset.data[index];
+						    						if(i==0){
+						    							ctx.fillText(data, bar._model.x, bar._model.y-20); 
+						    						} else {
+						    							ctx.fillText(data, bar._model.x, bar._model.y-20);
+						    						}
+						    					}),this)
+						    				}),this);
+						    			}
+						    		},
 									responsive: true,
 									legend:{
 										display:false
@@ -325,20 +359,11 @@
 										}
 									},
 									scales: {
-										xAxes: [{
-											scaleLabel:{
-												display: true,
-												labelString: "Month",
-												fontColor: 'blue',
-												fontSize: 13
-											},
-											stacked: true
-										}],
 										yAxes: [{
 											scaleLabel:{
 												display: true,
-												labelString: 'KG',
-												fontColor:'red',
+												labelString: 'Kg',
+												fontColor:'black',
 												fontSize: 13
 											},
 											ticks:{
@@ -437,20 +462,11 @@
 											}
 										},
 										scales: {
-											xAxes: [{
-												scaleLabel:{
-													display: true,
-													labelString: "Month",
-													fontColor: 'blue',
-													fontSize: 13
-												},
-												stacked: true
-											}],
 											yAxes: [{
 												scaleLabel:{
 													display: true,
-													labelString: "KG",
-													fontColor:'red',
+													labelString: "Kg",
+													fontColor:'black',
 													fontSize: 13
 												},
 												ticks:{
@@ -524,7 +540,7 @@
 							
 							var ctx = document.getElementById('bodySizeChart').getContext('2d');
 								var chart = new Chart(ctx, { 
-									type: 'horizontalBar', 
+									type: 'bar', 
 									data: {
 										labels: date,
 										datasets: [
@@ -575,12 +591,6 @@
 											}]
 										},
 									options: {
-										tooltips: {
-											enabled:true
-										},
-										hover: {
-											animationDuration: 0
-										},
 										elements: {
 											line: {
 												fill: false
@@ -591,20 +601,11 @@
 											}
 										},
 										scales: {
-											xAxes: [{
-												scaleLabel:{
-													display: true,
-													labelString: "Month",
-													fontColor: 'blue',
-													fontSize: 13
-												},
-												stacked: true
-											}],
 											yAxes: [{
 												scaleLabel:{
 													display: true,
 													labelString: "Cm",
-													fontColor:'red',
+													fontColor:'black',
 													fontSize: 13
 												},
 												ticks:{
@@ -615,10 +616,6 @@
 												},
 												stacked: true
 											}]
-										},
-										interaction: {
-											mode: 'index',
-											intersect: false,
 										},
 										title: {
 											display: true,
