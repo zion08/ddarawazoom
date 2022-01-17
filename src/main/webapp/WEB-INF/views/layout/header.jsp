@@ -8,9 +8,9 @@
 <title>DDarawaZoom</title>
 
 
-<body class="pt-5">
+
 <!-- navigation -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light mb-3">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light mb-3">
 	
 	<!-- Side Menubar -->
 	<div class="collapse navbar-collapse" id="navbar">
@@ -29,7 +29,7 @@
               			<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="/myroom">마 이 룸</a>						
 							<li><a class="dropdown-item" href="/myroom/bodyprofile">바디 프로필</a></li>						
-							<li><a class="dropdown-item" href="/myroom/userinfo">회원 정보</a></li>					
+							<li><a class="dropdown-item" href="/myroom/info">회원 정보</a></li>					
 							<li><a class="dropdown-item" href="/myroom/class">강의관리</a></li>
 							<li><a class="dropdown-item" href="/myroom/locker">락커룸</a></li>
 							<li><a class="dropdown-item" href="/myroom/payment">결재내역</a></li>
@@ -46,7 +46,7 @@
 							<li><a class="dropdown-item" href="/coach/member">회원관리</a></li>
 							<li><a class="dropdown-item" href="/coach/payment">수입관리</a></li>
 							<li><a class="dropdown-item" href="/coach/review">리뷰관리</a></li>
-							<li><a class="dropdown-item" href="/coach/coachInfo">정보관리</a></li>
+							<li><a class="dropdown-item" href="/coachroom/info">정보관리</a></li>
 						</ul>
 					</li>
 					<li><hr class="dropdown-divider"></li>
@@ -104,7 +104,6 @@
     
 	</div>
 </nav>
-</body>
 
 <!-- Channel Plugin Scripts -->
 <!-- 1:1 문의 채팅 -->

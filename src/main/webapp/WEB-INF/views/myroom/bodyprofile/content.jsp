@@ -143,6 +143,7 @@
 		<div class="weightChart" style="position: relative; height:60vh; width:80vw; margin: 0 auto;">
 			<canvas id="weightChart" style="height:30vh; width:50vw; margin: 0 auto;"></canvas>
 		</div>
+		<br/><br/>
 		<div class="muscleBodyChart" style="position: relative; height:60vh; width:80vw; margin: 0 auto;">
 			<canvas id="muscleBodyChart" style="height:30vh; width:50vw; margin: 0 auto;"></canvas>
 		</div>
@@ -497,7 +498,7 @@
 						
 						
 						
-						$(document).ready(function(){
+$(document).ready(function(){
 							
 							var chest = new Array();
 							var waist = new Array();
@@ -540,7 +541,7 @@
 							
 							var ctx = document.getElementById('bodySizeChart').getContext('2d');
 								var chart = new Chart(ctx, { 
-									type: 'bar', 
+									type: 'horizontalBar', 
 									data: {
 										labels: date,
 										datasets: [
@@ -591,6 +592,12 @@
 											}]
 										},
 									options: {
+										tooltips: {
+											enabled:true
+										},
+										hover: {
+											animationDuration: 0
+										},
 										elements: {
 											line: {
 												fill: false
@@ -601,11 +608,20 @@
 											}
 										},
 										scales: {
+											xAxes: [{
+												scaleLabel:{
+													display: true,
+													labelString: "Month",
+													fontColor: 'blue',
+													fontSize: 13
+												},
+												stacked: true
+											}],
 											yAxes: [{
 												scaleLabel:{
 													display: true,
 													labelString: "Cm",
-													fontColor:'black',
+													fontColor:'red',
 													fontSize: 13
 												},
 												ticks:{
@@ -616,6 +632,10 @@
 												},
 												stacked: true
 											}]
+										},
+										interaction: {
+											mode: 'index',
+											intersect: false,
 										},
 										title: {
 											display: true,
