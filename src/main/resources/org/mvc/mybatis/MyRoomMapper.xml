@@ -4,8 +4,34 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.mvc.mybatis.BodyProfileMapper">
-		
+<mapper namespace="org.mvc.mybatis.MyRoomMapper">
+
+<!-- 멤버 관련 관련 코드 시작 -->
+
+	<select id="getUserInfo" resultType="org.mvc.bean.UserDTO">
+		select * from tbl_user where id = #{id}
+	</select>
+	
+	<update id="updateInfo">
+		update tbl_user set
+			pw = #{pw},
+			email = #{email},
+			nick = #{nick}
+		where id = #{id}
+	</update>
+	
+	<update id ="updateImg">
+		update tbl_user set
+			img = #{img}
+		where id = #{id}			
+	</update>
+	
+<!-- 멤버 관련 관련 코드 끝  -->
+
+
+
+<!-- 바디프로필 관련 코드 시작 -->	
+	
 	<!-- bodyprofile 페이지에 myprofile/ bodyprofile 결과 출력 -->
 	<select id="getMyProfile" resultType="org.mvc.bean.MyProfileDTO">
 		select * from tbl_myprofile where b_id = #{b_id}
@@ -103,6 +129,8 @@
 	<delete id="bodyDelete">
 		delete tbl_bodyprofile where b_num = #{b_num}
 	</delete>
+
+<!-- 바디프로필 관련 코드 끝 -->	
 	
 	
 </mapper>
