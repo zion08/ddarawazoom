@@ -2,12 +2,65 @@
     pageEncoding="UTF-8"%>
 <link href="../../resources/image/Exercise.svg" rel="shortcut icon" type="image/x-icon">
 <link href="../../resources/css/styles.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="../../resources/js/header.js" type="text/javascript"></script>
 <title>DDarawaZoom</title>
 
 <!-- navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light mb-3">
+	
+	<!-- Side Menubar -->
+	<div class="collapse navbar-collapse" id="navbar">
+		<ul class="navbar-nav me-auto mb-2 mb-lg-0 position-absolute top-50 translate-middle-y">
+			<li class="nav-item dropdown">	
+				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+					<i class="bi bi-list"></i>
+				</a> 
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
+					<li><a class="dropdown-item" href="/ddarawazoom/zoom">Zoom 강의</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="/ddarawazoom/vod">Vod 강의</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li class="dropdown-submenu">
+						<a class="dropdown-item dropdown-toggle" href="#" >멤버사진/멤버닉네임<span class="caret"></span></a>
+              			<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="/myroom">마 이 룸</a>						
+							<li><a class="dropdown-item" href="/myroom/bodyprofile">바디 프로필</a></li>						
+							<li><a class="dropdown-item" href="/myroom/userinfo">회원 정보</a></li>					
+							<li><a class="dropdown-item" href="/myroom/class">강의관리</a></li>
+							<li><a class="dropdown-item" href="/myroom/locker">락커룸</a></li>
+							<li><a class="dropdown-item" href="/myroom/payment">결재내역</a></li>
+							<li><a class="dropdown-item" href="/myroom/review">리뷰관리</a></li>
+							<li><a class="dropdown-item" href="/myroom/QnA">1:1문의</a></li>
+						</ul>
+					</li>
+					<li><hr class="dropdown-divider"></li>
+					<li class="dropdown-submenu">
+						<a class="dropdown-item dropdown-toggle" href="#">코치사진/코치닉네임<span class="caret"></span></a>
+              			<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="/coachroom">코 치 룸</a></li>					
+							<li><a class="dropdown-item" href="/coachroom/schedule">스케줄관리</a></li>
+							<li><a class="dropdown-item" href="/coach/member">회원관리</a></li>
+							<li><a class="dropdown-item" href="/coach/payment">수입관리</a></li>
+							<li><a class="dropdown-item" href="/coach/review">리뷰관리</a></li>
+							<li><a class="dropdown-item" href="/coach/coachInfo">정보관리</a></li>
+						</ul>
+					</li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="#">따라와줌 파티룸</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="/manager/notice">공지사항</a></li>
+					<li><a class="dropdown-item" href="#">DDarawaZoom소개</a></li>
+					<li><a class="dropdown-item" href="#">DDarawaZoom이용가이드</a></li>
+					<li><a class="dropdown-item" href="#">DDarawaZoom코치소개</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	
+	
+	
 	<div class="container-fluid mx-5" > 
 	    <a class="navbar-brand" href="/ddarawazoom">
 	    	<img class="bi me-2" width="40" height="32" src="../../resources/image/Exercise.svg"/>

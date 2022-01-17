@@ -5,7 +5,7 @@
     
 <c:if test="${result == 1}">
 	<script>
-				alert("본 바디프로필이 삭제되었습니다.");
+				alert("본 바디 프로필이 삭제되었습니다.");
 				opener.parent.location.reload();
 				window.close();
 	</script>

@@ -1,5 +1,6 @@
 package org.mvc.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mvc.bean.BodyProfileDTO;
@@ -9,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
-public class BodyProfileSImpl implements BodyProfileS {
+public class BodyProfileServiceImpl implements BodyProfileService {
 
 	@Setter(onMethod_=@Autowired)
 	private BodyProfileMapper mapper;
@@ -62,4 +61,5 @@ public class BodyProfileSImpl implements BodyProfileS {
 	public int bodyDelete(int b_num) {
 		return mapper.bodyDelete(b_num);
 	}
+
 }
