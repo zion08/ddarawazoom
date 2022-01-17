@@ -11695,6 +11695,6 @@ footer a:hover, footer a:active, footer a:focus {
   display: block;
 }
 
-body {
+.pt-5{
 	padding-top: 70px;
 }
