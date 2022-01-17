@@ -31,15 +31,24 @@ public interface CoachRoomMapper {
 	// 모든 코치 경력정보
 	public List<CoachCareerDTO> getAllCareerInfo(String id);
 	
+	// 경력 추가
+	public int insertCareer(CoachCareerDTO dto);
+	
 	// 수정할 경력 정보
 	public CoachCareerDTO getCareerInfo(CoachCareerDTO dto);
 	
 	// 경력 정보 수정
 	public int updateCareer(CoachCareerDTO dto);
 	
+	// 경력 삭제
+	public int deleteCareer(CoachCareerDTO dto);
+	
 	// 코치 정보수정
 	public int updateInfo(CoachInfoDTO dto);
 	
 	// 코치 프로필사진 수정
 	public int updateImg(CoachInfoDTO dto);
+	
+	// 코치소개 수정
+	public int updateItroduce(CoachInfoDTO dto);
 }

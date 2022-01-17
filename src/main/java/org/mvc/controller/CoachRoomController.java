@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -54,6 +55,8 @@ public class CoachRoomController {
 		
 		model.addAttribute("coachInfo", service.getCoachInfo(c_id));
 		model.addAttribute("coachCareer", service.getAllCareerInfo(c_id));
+		// 경력이 여러개일 경우 앞의 갯수 카운팅을 위해 1을 넘김
+		model.addAttribute("number", 1);
 		
 		return "/coachroom/coachinfo/info";
 	}
@@ -77,6 +80,8 @@ public class CoachRoomController {
 		log.info("	-----CT----->infoUpdateData");
 		log.info(""+dto);
 		
+		int result = 0;
+		
 		if(dto.getC_gender().equals("0")) {
 			dto.setC_gender("남성");
 		} else if(dto.getC_gender().equals("1")) {
@@ -89,7 +94,7 @@ public class CoachRoomController {
 		c_id = "kimcoach";
 		
 		dto.setC_id(c_id);
-		int result = service.updateInfo(dto);
+		result = service.updateInfo(dto);
 		
 		return result;
 	}
@@ -122,6 +127,28 @@ public class CoachRoomController {
 		return result;
 	}
 	
+	@RequestMapping("/careerInsert")
+	public String careerInsert() {
+		log.info("	-----CT----->careerInsert");
+		return "/coachroom/coachinfo/careerInsert";
+	}
+	
+	@RequestMapping("/careerInsertPro")
+	public @ResponseBody int careerInsertPro(HttpSession session, @RequestBody CoachCareerDTO dto) {
+		log.info("	-----CT----->careerInsertPro");
+
+		int result = 0;
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		dto.setC_id(c_id);
+		result = service.insertCareer(dto);
+		
+		return result;
+	}
+	
 	@RequestMapping("/careerUpdate")
 	public String careerUpdate(HttpSession session, Model model, CoachCareerDTO dto) {
 		log.info("	-----CT----->careerUpdate");
@@ -149,6 +176,45 @@ public class CoachRoomController {
 		c_id = "kimcoach";
 		dto.setC_id(c_id);
 		result = service.updateCareer(dto);
+		
+		return result;
+	}
+	
+	@RequestMapping("/careerDelete")
+	public @ResponseBody int careerDelete(HttpSession session, @RequestBody CoachCareerDTO dto) {
+		log.info("	-----CT----->careerDelete");
+		
+		int result = 0;
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		dto.setC_id(c_id);
+		
+		result = service.deleteCareer(dto);
+		
+		return result;
+	}
+	
+	@RequestMapping("/introduceUpdate")
+	public String introduceUpdate() {
+		log.info("	-----CT----->introduceUpdate");
+		return "/coachroom/coachinfo/introduceUpdate";
+	}
+	
+	@RequestMapping("/introduceUpdatePro")
+	public @ResponseBody int introduceUpdatePro(HttpSession session, @RequestBody CoachInfoDTO dto) {
+		log.info("	-----CT----->introduceUpdatePro");
+		log.info(""+dto);
+		int result = 0;
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		dto.setC_id(c_id);
+		result = service.updateItroduce(dto);
 		
 		return result;
 	}

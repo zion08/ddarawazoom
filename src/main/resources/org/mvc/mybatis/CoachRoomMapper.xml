@@ -10,11 +10,13 @@
 		<result property="start" column="start_time"/> 
 		<result property="end" column="end_time"/> 
 	</resultMap>
-
+	
+	<!-- 스케줄 정보 가져오기 -->
 	<select id="getAllSchedule" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
 		select * from tbl_calendar where c_id = #{c_id}
 	</select>
 
+	<!-- 스케줄 등록 -->
 	<insert id="insertSchedule" parameterType="org.mvc.bean.ScheduleDTO">
 		insert into tbl_calendar (id, m_id, c_id, title, start_time, end_time)
 			values( 
@@ -27,14 +29,17 @@
 			)
 	</insert>
 
+	<!-- 스케줄 삭제 -->
 	<delete id="deleteSchedule">
 		delete tbl_calendar where id = #{id}
 	</delete>
 
+	<!-- 해당 번호의 스케줄 정보 가져오기 -->
 	<select id="getSchedule" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
 		select * from tbl_calendar where c_id = #{c_id} and id = #{id}
 	</select>
 
+	<!-- 스케줄 수정 -->
 	<update id="updateSchedule">
 		update tbl_calendar set
 			title = #{title},
@@ -46,18 +51,22 @@
 	<!-- 스케줄 관련 코드 종료 -->
 
 	<!-- 코치정보 관련 코드 시작 -->
+	<!-- 코치 정보 가져오기 -->
 	<select id="getCoachInfo" resultType="org.mvc.bean.CoachInfoDTO">
 		select * from tbl_coach where c_id = #{c_id}
 	</select>
 	
+	<!-- 코치 경력정보 가져오기 -->
 	<select id="getAllCareerInfo" resultType="org.mvc.bean.CoachCareerDTO">
-		select * from tbl_coach_career where c_id = #{c_id}
+		select * from tbl_coach_career where c_id = #{c_id} order by num asc
 	</select>
 	
+	<!-- 해당 번호의 코치 경력 가져오기 -->
 	<select id="getCareerInfo" resultType="org.mvc.bean.CoachCareerDTO">
 		select * from tbl_coach_career where c_id = #{c_id} and num = #{num}
 	</select>
 	
+	<!-- 코치 정보 수정 -->
 	<update id="updateInfo">
 		update tbl_coach set
 			c_name = #{c_name},
@@ -68,18 +77,44 @@
 		where c_id = #{c_id}
 	</update>
 	
+	<!-- 코치 프로필 이미지 변경 -->
 	<update id="updateImg">
 		update tbl_coach set
 			c_img = #{c_img}
 		where c_id = #{c_id}
 	</update>
 	
+	<!-- 코치 경력정보 추가 등록 -->
+	<insert id="insertCareer">
+		insert into tbl_coach_career(num, c_id, specialty, career, certificate)
+			values(
+				seq_coach_career.nextval,
+				#{c_id},
+				#{specialty},
+				#{career},
+				#{certificate}
+			)
+	</insert>
+	
+	<!-- 코치 경력정보 수정 -->
 	<update id="updateCareer">
 		update tbl_coach_career set
 			specialty = #{specialty},
 			career = #{career},
 			certificate = #{certificate}
 		where c_id = #{c_id} and num = #{num}
+	</update>
+	
+	<!-- 코치 경력정보 삭제 -->
+	<delete id="deleteCareer">
+		delete tbl_coach_career where c_id = #{c_id} and num = #{num}
+	</delete>
+	
+	<!-- 코치 소개 수정 -->
+	<update id="updateItroduce">
+		update tbl_coach set
+			introduce = #{introduce}
+		where c_id = #{c_id}
 	</update>
 	<!-- 코치정보 관련 코드 종료 -->
 	

@@ -73,5 +73,20 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	public int updateCareer(CoachCareerDTO dto) {
 		return mapper.updateCareer(dto);
 	}
+
+	@Override
+	public int insertCareer(CoachCareerDTO dto) {
+		return mapper.insertCareer(dto);
+	}
+
+	@Override
+	public int updateItroduce(CoachInfoDTO dto) {
+		return mapper.updateItroduce(dto);
+	}
+
+	@Override
+	public int deleteCareer(CoachCareerDTO dto) {
+		return mapper.deleteCareer(dto);
+	}
 	
 }

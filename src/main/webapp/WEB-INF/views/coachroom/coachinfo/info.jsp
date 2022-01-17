@@ -20,78 +20,8 @@
 </style>
 
 <body>
-<div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="position-sticky pt-3">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#" onclick="window.location='/coachroom'">
-              <span data-feather="home"></span>
-              코치룸
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="window.location='/coachroom/schedule'">
-              <span data-feather="file"></span>
-              스케줄 관리
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="window.location='/coachroom/info'">
-              <span data-feather="user"></span>
-              내 정보 관리
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users"></span>
-              회원 관리
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2"></span>
-              리뷰 관리
-            </a>
-          </li>
-        </ul>
-        
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Saved reports</span>
-          <a class="link-secondary" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Current month
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Year-end sale
-            </a>
-          </li>
-        </ul>
-        
-      </div>
-    </nav>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+<div class="container-fluid">
+    <main class="col-md-9 m-sm-auto col-lg-10 px-md-4">
     		<div class="btn-toolbar mb-2 mb-md-0" style="float: right;">
 	          <div class="btn-group me-2">
 	            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="imgUpdateForm();">프로필 사진 변경</button>
@@ -137,33 +67,46 @@
 				<div class="coachInfo">
 				  <h2>경력 정보</h2>
 				    <div class="table-responsive">
-				      <c:forEach var="coachCareer" items="${coachCareer}">
 				        <table class="table table-striped table-sm">
 				          <thead>
 				            <tr>
+				              <th scope="col"></th>
 				              <th scope="col">전문 분야</th>
 				              <th scope="col">경력</th>
 				              <th scope="col">자격증</th>
-				              <th scope="col"></th>
+				              <th scope="col" style="text-align: right;">
+				              	<button type="button" class="btn btn-sm btn-secondary" onclick="window.location='/coachroom/careerInsert'">경력 추가</button>
+				              </th>
 				            </tr>
 				          </thead>
 				           <tbody>
-				             <tr>
-				               <td>${coachCareer.specialty}</td>
-				               <td>${coachCareer.career}</td>
-				               <td>${coachCareer.certificate}</td>
-				               <td style="text-align: right;">
-							     <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/careerUpdate?num=${coachCareer.num}'">경력 수정</button>
-							   </td>
-				             </tr>
+				           
+				     		 <c:forEach var="coachCareer" items="${coachCareer}">
+					             <tr>
+					               <th scope="row">
+					               	 ${number}
+					               	 <c:set var="number" value="${number + 1}"/>
+					               </th>
+					               <td>${coachCareer.specialty}</td>
+					               <td>${coachCareer.career}</td>
+					               <td>${coachCareer.certificate}</td>
+					               <td style="text-align: right;">
+								     <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/careerUpdate?num=${coachCareer.num}'">경력 수정</button>
+								     <button type="button" class="btn btn-sm btn-outline-danger" onclick="delete_alert(${coachCareer.num});">경력 삭제</button>
+								   </td>
+					             </tr>
+				      		 </c:forEach>
+				      		 
 				           </tbody>
 				         </table>
-				       </c:forEach>
 					 </div>
 				 </div>
 				
 				<div class="coachInfo">
-				  <h2>코치 소개</h2>
+				  <h2>
+				  	코치 소개
+				  	<button style="float: right;" type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/introduceUpdate'">코치소개 수정</button>
+				  </h2>
 				    <div class="table-responsive">
 				      <table class="table table-striped table-sm">
 				        <thead>
