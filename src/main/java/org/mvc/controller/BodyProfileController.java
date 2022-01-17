@@ -36,6 +36,23 @@ public class BodyProfileController {
 		return "myroom/main";
 	}
 
+
+	
+//  =========== 회원 정보 관련 코드 시작 ===========  //		
+	
+	@RequestMapping("/info")
+	public String userInfo() {
+		log.info("	-----CT----->userInfo");
+		return "myroom/userInfo/info";
+	}
+	
+	@RequestMapping("/userInfoUpdate")
+	public String userInfoUpdate() {
+		return "myroom/userInfoUpdate";
+	}
+//=========== 회원 정보 관련 코드 종료 ===========  //		
+	
+	
 	
 //  =========== 바디프로필 관련 코드 시작 ===========  //		
 	@RequestMapping("/bodyprofile")
@@ -148,21 +165,8 @@ public class BodyProfileController {
 		
 		return resultList;
 	}
+}
 //  =========== 바디프로필 관련 코드 종료 ===========  //		
 
 	
-	
-//  =========== 회원 정보 관련 코드 시작 ===========  //		
-	
-	@RequestMapping("/userInfo")
-	public String userInfo() {
-		return "myroom/userInfo";
-	}
-	
-	@RequestMapping("/userInfoUpdate")
-	public String userInfoUpdate() {
-		return "myroom/userInfoUpdate";
-	}
-}
-//=========== 회원 정보 관련 코드 종료 ===========  //		
 
