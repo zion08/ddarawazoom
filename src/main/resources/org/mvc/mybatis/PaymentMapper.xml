@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.mvc.mybatis.PaymentMapper">
+	
+	<insert id="paymentInsert">
+		insert into tbl_payment 
+			values(#{impUid}, #{merchantUid}, #{name}, #{amount}, 
+			#{buyerName}, #{buyerTel}, #{buyerEmail}, #{paidAt})
+	</insert>
+	
+	<select id="getPaymentList" resultType="org.mvc.bean.PaymentDTO">
+		select * from tbl_payment order by paidat desc
+	</select>
+</mapper>  
