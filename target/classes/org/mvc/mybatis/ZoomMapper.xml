@@ -34,4 +34,5 @@
 			price=#{price} 
 				where num=#{num}
 	</update>
+	
 </mapper>  

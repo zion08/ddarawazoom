@@ -9,5 +9,5 @@ public interface ZoomService {
 	public ZoomDTO getContent(int num);
 	public int zoomInsert(ZoomDTO dto); 
 	public int zoomDelete(int num);
-	public int zoomUpdate(ZoomDTO dto); 
+	public int zoomUpdate(ZoomDTO dto);
 }
