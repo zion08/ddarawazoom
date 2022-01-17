@@ -86,12 +86,14 @@
 					<a class="nav-link" href="/ddarawazoom/login">로그인</a>
 		        </li>
 		        <li class="nav-item dropdown ">
-		          	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-		            	회원 가입
+		          	<a class="nav-link dropdown-toggle" href="#" 
+		          	id="navbarDropdown" role="button" 
+		          	data-bs-toggle="dropdown" aria-expanded="false">
+		            회원 가입
 		          	</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			            <li><a class="dropdown-item" href="#">멤버 가입</a></li>
-			            <li><a class="dropdown-item" href="#">코치 지원</a></li>
+			            <li><a class="dropdown-item" href="#" onclick="window.location='/ddarawazoom/signup'">멤버 가입</a></li>
+			            <li><a class="dropdown-item" href="#" onclick="window.location='/ddarawazoom/coachsignup'">코치 가입</a></li>
 			            <li><hr class="dropdown-divider"></li>
 			            <li><a class="dropdown-item" href="#">Something else here</a></li>
 		          	</ul>
