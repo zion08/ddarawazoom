@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class ZoomDTO {
 	private Long num;
+	private String c_id;
 	private	String title;
 	private String intro;
 	private String type;

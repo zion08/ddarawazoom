@@ -49,4 +49,32 @@ public class FileInfo {
 		}
 		return fileName;
 	}
-}
+	
+	
+	// 이미지 업로드 메소드
+		public String classImgUpload(MultipartFile save, String intro) {
+			// HttpServletRequest 객체를 직접적으로 생성함
+			// 파라미터를 최소한으로 받기 위함
+			HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder
+																.getRequestAttributes())
+																.getRequest();
+			
+			String fileName = null;
+			
+			if(fileTypeCheck(save, "image")) {
+				String orgName = save.getOriginalFilename();
+				String ext = orgName.substring(orgName.lastIndexOf(".")); 
+				fileName = intro + ext;
+				String path = req.getSession().getServletContext().getRealPath("/resources/coach/img"); 
+				
+				File f = new File(path+"//"+fileName);
+				try {
+					save.transferTo(f);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return fileName; 
+		}
+	}
+
