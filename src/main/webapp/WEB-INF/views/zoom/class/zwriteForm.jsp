@@ -3,7 +3,7 @@
 <%@ include file="../../layout/header.jsp"%>    
 
 <form action="/ddarawazoom/zwritePro" method="post" enctype="multipart/form-data">
-	<%-- 작성자 : 관리자만 --%>
+	강사명 : <input type="text" name="c_id"><br />  
 	수업 이름 : <input type="text" name="title"><br />
 	수업 소개 : <input type="text" name="intro"><br /> 
 	운동 종류 : <select name="type">
@@ -27,11 +27,10 @@
 	운동 기구 : <input type="text" name="tool"><br />
 	운동 횟수 : <input type="text" name="frequency"><br />
 	가격 : <input type="text" name="price"><br />
-	<%-- 
-	사진 : <input type="file" name="img"><br />
-	--%>
+	
 	<input type="reset" value="초기화" />
 	<input type="submit" value="등록" />
 </form>
+
 
 <%@ include file="../../layout/footer.jsp"%>

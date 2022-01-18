@@ -4,7 +4,7 @@
  
 <c:if test="${result == 1}">
 	<script>
-		alert("수업등록이 완료되었습니다.");
-		window.location="/ddarawazoom/zoom"; 
+	   	alert("이미지 수정 완료");
+	   	window.location="/ddarawazoom/zclasscontent?num=${num}";
 	</script>
-</c:if>    
+</c:if>

@@ -3,8 +3,9 @@
 <%@ include file="../../layout/header.jsp"%>    
 
 <form action="/ddarawazoom/zupdatePro" method="post" enctype="multipart/form-data">
-	<%-- 작성자 : 관리자만 --%>
 			 <input type="hidden" name="num" value="${ZoomDTO.num}">
+			 <input type="hidden" name="c_id" value="${ZoomDTO.c_id}">
+ 	강사명 : ${ZoomDTO.c_id} <br/>
 	수업 이름 : <input type="text" name="title" value="${ZoomDTO.title}"><br />
 	수업 소개 : <input type="text" name="intro" value="${ZoomDTO.intro}"><br /> 
 	운동 종류 : <select name="type">
@@ -28,9 +29,7 @@
 	운동 기구 : <input type="text" name="tool" value="${ZoomDTO.tool}"><br />
 	운동 횟수 : <input type="text" name="frequency" value="${ZoomDTO.frequency}"><br />
 	가격 : <input type="text" name="price" value="${ZoomDTO.price}"><br />
-	<%-- 
-	사진 : <input type="file" name="img"><br />
-	--%>
+	
 	<input type="reset" value="초기화" />
 	<input type="submit" value="수정" />
 	<input type="button" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
