@@ -8,7 +8,6 @@
 <title>DDarawaZoom</title>
 
 
-
 <!-- navigation -->
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light mb-3">
 	
@@ -43,9 +42,9 @@
               			<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="/coachroom">코 치 룸</a></li>					
 							<li><a class="dropdown-item" href="/coachroom/schedule">스케줄관리</a></li>
-							<li><a class="dropdown-item" href="/coach/member">회원관리</a></li>
-							<li><a class="dropdown-item" href="/coach/payment">수입관리</a></li>
-							<li><a class="dropdown-item" href="/coach/review">리뷰관리</a></li>
+							<li><a class="dropdown-item" href="/coachroom/class">강의관리</a></li>
+							<li><a class="dropdown-item" href="/coachroom/payment">수입관리</a></li>
+
 							<li><a class="dropdown-item" href="/coachroom/info">정보관리</a></li>
 						</ul>
 					</li>

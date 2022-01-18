@@ -149,12 +149,13 @@ public class BodyProfileController {
 		for(BodyProfileDTO dto : list) { // DB에서 가져온 값을 하나씩 꺼내옴
 			String date = sdf.format(dto.getB_date()); // dto안의 b_date의 포맷 변경 후 String 변수에 대입
 			
-			if(date.startsWith("0")) { // date문자열이(만약 날짜의 월)이 0으로 시작한다면
-				date = date.substring(1); // 문자열 0을 제거 (1번째 index부터 문자열을 잘라냄)
+			if(date.substring(4, 5).equals("0")) { // date문자열이(만약 날짜의 월)이 0으로 시작한다면
+				StringBuffer dateDelete = new StringBuffer(date);
+				date = dateDelete.deleteCharAt(4).toString(); // 문자열 0을 제거 (1번째 index부터 문자열을 잘라냄)
 				
-				if(date.substring(3, 4).equals("0")) { // 만약 날짜의 일이 0으로 시작한다면 (문자열의 3번째 index가 0이라면)
-					StringBuffer dateDelete = new StringBuffer(date); // 문자열을 삭제하는 함수를 사용하기 위해 StringBuffer 클래스 생성
-					date = dateDelete.deleteCharAt(3).toString(); // 문자열 0을 제거 (3번째 index를 제거) 후 date 변수에 대입
+				if(date.substring(7, 8).equals("0")) { // 만약 날짜의 일이 0으로 시작한다면 (문자열의 3번째 index가 0이라면)
+					 // 문자열을 삭제하는 함수를 사용하기 위해 StringBuffer 클래스 생성
+					date = dateDelete.deleteCharAt(7).toString(); // 문자열 0을 제거 (3번째 index를 제거) 후 date 변수에 대입
 				}
 			}
 			dto.setParse_date(date); // 위에서 변환한 날짜를 dto안에 대입
