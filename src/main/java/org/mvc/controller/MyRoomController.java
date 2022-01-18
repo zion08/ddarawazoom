@@ -28,11 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MyRoomController {
 	
 	@Autowired
-<<<<<<< Updated upstream:src/main/java/org/mvc/controller/BodyProfileController.java
-	private BodyProfileService service; 
-=======
 	private MyRoomService service;
->>>>>>> Stashed changes:src/main/java/org/mvc/controller/MyRoomController.java
 	
 	@Autowired
 	private FileInfo fileInfo;
