@@ -45,6 +45,7 @@
 							<li><a class="dropdown-item" href="/coachroom/member">회원관리</a></li>
 							<li><a class="dropdown-item" href="/coachroom/payment">수입관리</a></li>
 							<li><a class="dropdown-item" href="/coachroom/review">리뷰관리</a></li>
+
 							<li><a class="dropdown-item" href="/coachroom/info">정보관리</a></li>
 						</ul>
 					</li>
