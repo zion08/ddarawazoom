@@ -119,7 +119,6 @@
 	<!-- 코치정보 관련 코드 종료 -->
 	
 	<!-- 리뷰관리 관련 코드 시작 -->
-	
 	<!-- 해당 코치가 등록한 수업 정보 -->
 	<select id="getAllClass" resultType="org.mvc.bean.ZoomDTO">
 		<![CDATA[
@@ -147,5 +146,17 @@
 		select count(*) from tbl_review where class_num = #{class_num}
 	</select>
 	<!-- 리뷰관리 관련 코드 종료 -->
+	
+	<!-- 회원관리 관련 코드 시작 -->
+	<!-- 해당 수업에 신청한 모든회원 목록 -->
+	<select id="getApplyMember" resultType="org.mvc.bean.ClassApplyDTO">
+		select * from tbl_classApply where num = #{num}
+	</select>
+	
+	<!-- 해당 수업에 신청한 회원 수 -->
+	<select id="applyMemberCount" resultType="Integer">
+		select count(*) from tbl_classApply where num = #{num}
+	</select>
+	<!-- 회원관리 관련 코드 종료 -->
 	
 </mapper>

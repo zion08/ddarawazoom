@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.mvc.bean.ClassApplyDTO;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
@@ -327,9 +328,9 @@ public class CoachRoomController {
 //	=========== 리뷰관리 관련 코드 시작 ===========  //
 	
 	// 코치가 등록한 수업 목록
-	@RequestMapping("/review")
+	@RequestMapping("/class")
 	public String review(HttpSession session, Model model, String pageNum) {
-		log.info("	-----CT----->review");
+		log.info("	-----CT----->class");
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
@@ -361,13 +362,13 @@ public class CoachRoomController {
 		model.addAttribute("endRow", endRow);
 		model.addAttribute("count", count);
 		
-		return "/coachroom/review/list";
+		return "/coachroom/list";
 	}
 	
 	// 해당 수업의 리뷰 목록
 	@RequestMapping("/content")
 	public String content(ZoomDTO dto, String pageNum, Model model, HttpSession session) {
-		log.info("	-----CT----->content");
+		log.info("	-----CT-----> review/content");
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
@@ -391,7 +392,7 @@ public class CoachRoomController {
 		if(count > 0) {
 			reviewList = service.getReview(dto.getNum());
 		}
-		log.info(""+reviewList);
+		
 		model.addAttribute("classContent", service.getClass(c_id, dto.getNum()));
 		model.addAttribute("review", reviewList);
 		model.addAttribute("pageNum", pageNum);
@@ -403,5 +404,25 @@ public class CoachRoomController {
 		return "/coachroom/review/content";
 	}
 //	=========== 리뷰관리 관련 코드 종료 ===========  //	
+	
+//	=========== 회원관리 관련 코드 시작 ===========  //	
+	@RequestMapping("/member")
+	public String member(ClassApplyDTO dto, Model model, HttpSession session) {
+		log.info("	-----CT-----> member/content");
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		
+		Long num = Long.valueOf(dto.getNum());
+		
+		model.addAttribute("classContent", service.getClass(c_id, num));
+		model.addAttribute("member", service.getApplyMember(dto));
+		model.addAttribute("count", service.applyMemberCount(dto.getNum()));
+		
+		return "/coachroom/member/content";
+	}
+//	=========== 회원관리 관련 코드 종료 ===========  //	
 	
 }

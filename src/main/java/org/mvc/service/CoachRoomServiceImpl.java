@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.mvc.bean.ClassApplyDTO;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.ReviewDTO;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 public class CoachRoomServiceImpl implements CoachRoomService{
@@ -114,6 +116,16 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	@Override
 	public int reviewCount(Long num) {
 		return mapper.reviewCount(num);
+	}
+
+	@Override
+	public List<ClassApplyDTO> getApplyMember(ClassApplyDTO dto) {
+		return mapper.getApplyMember(dto);
+	}
+
+	@Override
+	public int applyMemberCount(int num) {
+		return mapper.applyMemberCount(num);
 	}
 	
 }

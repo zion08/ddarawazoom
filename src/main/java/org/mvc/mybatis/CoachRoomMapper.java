@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.mvc.bean.ClassApplyDTO;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.ReviewDTO;
@@ -71,4 +72,10 @@ public interface CoachRoomMapper {
 	
 	// 해당 수업의 모든 리뷰 갯수
 	public int reviewCount(Long num);
+	
+	// 해당 수업에 신청한 모든회원 목록
+	public List<ClassApplyDTO> getApplyMember(ClassApplyDTO dto);
+	
+	// 해당 수업에 신청한 회원 수
+	public int applyMemberCount(int num);
 }

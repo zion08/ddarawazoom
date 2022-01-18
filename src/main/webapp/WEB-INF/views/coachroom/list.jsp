@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../layout/header.jsp"%>   
+<%@ include file="../layout/header.jsp"%>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -9,7 +9,7 @@
 <div class="container-fluid">
   
   <div class="album py-2 bg-light">
-    <h1 style="text-align: center;"> 리뷰 관리 </h1>
+    <h1 style="text-align: center;"> 리뷰/회원 관리 </h1>
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 g-3">
@@ -40,6 +40,8 @@
 	              <div class="btn-group">
 	                <button type="button" class="btn btn-sm btn-outline-secondary"
 	                	onclick="window.location='/coachroom/content?num=${list.num}'">리뷰 보기</button>
+	                <button type="button" class="btn btn-sm btn-outline-secondary"
+	                	onclick="window.location='/coachroom/member?num=${list.num}'">등록한 회원 보기</button>	
 	              </div>
 	              <small class="text-muted">9 mins</small>
 	            </div>
@@ -63,4 +65,4 @@
     <script src="/resources/coach/custom/js/dashboard.js"></script>
 
 
-<%@ include file="../../layout/footer.jsp"%>
+<%@ include file="../layout/footer.jsp"%>
