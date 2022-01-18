@@ -37,7 +37,7 @@
 				<div class="coachInfo">
 					<h2>기본 정보</h2>
 				    <div class="table-responsive">
-				      <table class="table table-striped table-sm">
+				      <table class="table table-striped table-sm table-bordered">
 				        <thead>
 				          <tr>
 				            <th scope="col">이름</th>
@@ -67,7 +67,7 @@
 				<div class="coachInfo">
 				  <h2>경력 정보</h2>
 				    <div class="table-responsive">
-				        <table class="table table-striped table-sm">
+				        <table class="table table-striped table-sm table-bordered">
 				          <thead>
 				            <tr>
 				              <th scope="col"></th>

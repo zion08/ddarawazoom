@@ -14,6 +14,7 @@ import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
 import org.mvc.bean.ScheduleDTO;
+import org.mvc.bean.ZoomDTO;
 import org.mvc.service.CoachRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -322,5 +323,85 @@ public class CoachRoomController {
 		return result;
 	}
 //	=========== 스케줄 관련 코드 종료 ===========  //
+	
+//	=========== 리뷰관리 관련 코드 시작 ===========  //
+	
+	// 코치가 등록한 수업 목록
+	@RequestMapping("/review")
+	public String review(HttpSession session, Model model, String pageNum) {
+		log.info("	-----CT----->review");
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		
+		int pageSize = 10;
+		
+		if (pageNum == null) {
+		       pageNum = "1";
+		}
+
+	    int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = currentPage * pageSize;
+		int count = 0;
+		
+		count = service.getClassCount(c_id);
+		List classList = null;
+		if(count > 0) {
+			classList = service.getAllClass(c_id, startRow, endRow);
+		}
+		
+		model.addAttribute("classList", classList);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startRow", startRow);
+		model.addAttribute("endRow", endRow);
+		model.addAttribute("count", count);
+		
+		return "/coachroom/review/list";
+	}
+	
+	// 해당 수업의 리뷰 목록
+	@RequestMapping("/content")
+	public String content(ZoomDTO dto, String pageNum, Model model, HttpSession session) {
+		log.info("	-----CT----->content");
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		dto.setC_id(c_id);
+		
+		int pageSize = 10;
+		
+		if (pageNum == null) {
+		       pageNum = "1";
+		}
+
+	    int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = currentPage * pageSize;
+		int count = 0;
+		
+		count = service.reviewCount(dto.getNum());
+		List reviewList = null;
+		if(count > 0) {
+			reviewList = service.getReview(dto.getNum());
+		}
+		log.info(""+reviewList);
+		model.addAttribute("classContent", service.getClass(c_id, dto.getNum()));
+		model.addAttribute("review", reviewList);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startRow", startRow);
+		model.addAttribute("endRow", endRow);
+		model.addAttribute("count", count);
+		
+		return "/coachroom/review/content";
+	}
+//	=========== 리뷰관리 관련 코드 종료 ===========  //	
 	
 }

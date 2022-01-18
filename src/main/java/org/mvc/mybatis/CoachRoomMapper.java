@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
+import org.mvc.bean.ZoomDTO;
 
 public interface CoachRoomMapper {
 
@@ -51,4 +54,21 @@ public interface CoachRoomMapper {
 	
 	// 코치소개 수정
 	public int updateItroduce(CoachInfoDTO dto);
+	
+	// 해당 코치가 등록한 모든 수업 정보
+	public List<ZoomDTO> getAllClass(@Param("c_id") String id,
+								  @Param("startRow") int startRow,
+								  @Param("endRow") int endRow);
+	
+	// 코치 수업 갯수
+	public int getClassCount(String id);
+	
+	// 리뷰보기 버튼을 누른 수업 정보
+	public ZoomDTO getClass(@Param("c_id") String c_id, @Param("num") Long num);
+	
+	// 수업에 작성된 리뷰
+	public List<ReviewDTO> getReview(Long num);
+	
+	// 해당 수업의 모든 리뷰 갯수
+	public int reviewCount(Long num);
 }

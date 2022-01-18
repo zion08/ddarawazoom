@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
+import org.mvc.bean.ZoomDTO;
 
 public interface CoachRoomService {
 
@@ -51,4 +53,19 @@ public interface CoachRoomService {
 	
 	// 코치소개 수정
 	public int updateItroduce(CoachInfoDTO dto);
+	
+	// 코치 수업 정보
+	public List<ZoomDTO> getAllClass(String id, int startRow, int endRow);
+		
+	// 코치 수업 갯수
+	public int getClassCount(String id);
+	
+	// 리뷰보기 버튼을 누른 수업 정보
+	public ZoomDTO getClass(String c_id, Long num);
+	
+	// 수업에 작성된 리뷰
+	public List<ReviewDTO> getReview(Long num);
+	
+	// 해당 수업의 모든 리뷰 갯수
+	public int reviewCount(Long num);
 }

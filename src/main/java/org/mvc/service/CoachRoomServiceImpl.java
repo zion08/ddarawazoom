@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
+import org.mvc.bean.ZoomDTO;
 import org.mvc.mybatis.CoachRoomMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,6 +89,31 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	@Override
 	public int deleteCareer(CoachCareerDTO dto) {
 		return mapper.deleteCareer(dto);
+	}
+
+	@Override
+	public List<ZoomDTO> getAllClass(String id, int startRow, int endRow) {
+		return mapper.getAllClass(id, startRow, endRow);
+	}
+
+	@Override
+	public int getClassCount(String id) {
+		return mapper.getClassCount(id);
+	}
+
+	@Override
+	public ZoomDTO getClass(String c_id, Long num) {
+		return mapper.getClass(c_id, num);
+	}
+
+	@Override
+	public List<ReviewDTO> getReview(Long num) {
+		return mapper.getReview(num);
+	}
+
+	@Override
+	public int reviewCount(Long num) {
+		return mapper.reviewCount(num);
 	}
 	
 }

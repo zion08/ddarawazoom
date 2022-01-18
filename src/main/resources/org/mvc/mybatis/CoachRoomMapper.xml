@@ -118,4 +118,34 @@
 	</update>
 	<!-- 코치정보 관련 코드 종료 -->
 	
+	<!-- 리뷰관리 관련 코드 시작 -->
+	
+	<!-- 해당 코치가 등록한 수업 정보 -->
+	<select id="getAllClass" resultType="org.mvc.bean.ZoomDTO">
+		<![CDATA[
+			select * from tbl_coachClass where c_id = #{c_id} order by num desc
+		]]>
+	</select>
+	
+	<!-- 해당 코치가 등록한 수업 갯수 -->
+	<select id="getClassCount" resultType="Integer">
+		select count(*) from tbl_coachClass where c_id = #{c_id}
+	</select>
+	
+	<!-- 리뷰보기 버튼을 누른 수업 정보 -->
+	<select id="getClass" resultType="org.mvc.bean.ZoomDTO">
+		select * from tbl_coachClass where c_id = #{c_id} and num = #{num}
+	</select>
+	
+	<!-- 해당 수업에 작성된 리뷰 목록 -->
+	<select id="getReview" resultType="org.mvc.bean.ReviewDTO">
+		select * from tbl_review where class_num = #{class_num} order by review_num desc
+	</select>
+	
+	<!-- 해당 수업의 모든 리뷰의 갯수 -->
+	<select id="reviewCount" resultType="Integer">
+		select count(*) from tbl_review where class_num = #{class_num}
+	</select>
+	<!-- 리뷰관리 관련 코드 종료 -->
+	
 </mapper>
