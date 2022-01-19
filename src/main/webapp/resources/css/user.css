@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+body{
+	margin: 0 auto;
+	text-align: center;
+}
+
+#table{
+	text-align: center;
+}
+
+.userImg input {
+	width: 150px;
+	height: 35px;
+	font-size: 12px;
+	text-align: center;
+}
+
+
+.table-responsive{
+	  margin-right: auto;
+	  margin-left: auto;
+	  width: 800px;
+	  height: 200px;
+	  margin-top: 50px;
+}
+
+.userInfoUpdateButton{
+	margin: auto;
+}
+
+#updateButton{
+	text-align: center;
+}
+
+#formFileMultiple{
+	width:350px;
+	margin: auto;
+	font-size: 15px;
+}
+
+h3{
+	padding: 10px;
+}

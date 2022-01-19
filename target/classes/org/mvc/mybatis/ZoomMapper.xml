@@ -59,7 +59,7 @@
 			price=#{price}
 				where num=#{num}
 	</update>
-	
+  
 	<update id="zoomReadcount">
 		update tbl_coachclass set
 			count = count+1

@@ -10,11 +10,13 @@
 		<result property="start" column="start_time"/> 
 		<result property="end" column="end_time"/> 
 	</resultMap>
-
+	
+	<!-- 스케줄 정보 가져오기 -->
 	<select id="getAllSchedule" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
 		select * from tbl_calendar where c_id = #{c_id}
 	</select>
 
+	<!-- 스케줄 등록 -->
 	<insert id="insertSchedule" parameterType="org.mvc.bean.ScheduleDTO">
 		insert into tbl_calendar (id, m_id, c_id, title, start_time, end_time)
 			values( 
@@ -27,14 +29,17 @@
 			)
 	</insert>
 
+	<!-- 스케줄 삭제 -->
 	<delete id="deleteSchedule">
 		delete tbl_calendar where id = #{id}
 	</delete>
 
+	<!-- 해당 번호의 스케줄 정보 가져오기 -->
 	<select id="getSchedule" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
 		select * from tbl_calendar where c_id = #{c_id} and id = #{id}
 	</select>
 
+	<!-- 스케줄 수정 -->
 	<update id="updateSchedule">
 		update tbl_calendar set
 			title = #{title},
@@ -46,14 +51,22 @@
 	<!-- 스케줄 관련 코드 종료 -->
 
 	<!-- 코치정보 관련 코드 시작 -->
+	<!-- 코치 정보 가져오기 -->
 	<select id="getCoachInfo" resultType="org.mvc.bean.CoachInfoDTO">
 		select * from tbl_coach where c_id = #{c_id}
 	</select>
 	
-	<select id="getCareerInfo" resultType="org.mvc.bean.CoachCareerDTO">
-		select * from tbl_coach_career where c_id = #{c_id}
+	<!-- 코치 경력정보 가져오기 -->
+	<select id="getAllCareerInfo" resultType="org.mvc.bean.CoachCareerDTO">
+		select * from tbl_coach_career where c_id = #{c_id} order by num asc
 	</select>
 	
+	<!-- 해당 번호의 코치 경력 가져오기 -->
+	<select id="getCareerInfo" resultType="org.mvc.bean.CoachCareerDTO">
+		select * from tbl_coach_career where c_id = #{c_id} and num = #{num}
+	</select>
+	
+	<!-- 코치 정보 수정 -->
 	<update id="updateInfo">
 		update tbl_coach set
 			c_name = #{c_name},
@@ -64,11 +77,86 @@
 		where c_id = #{c_id}
 	</update>
 	
+	<!-- 코치 프로필 이미지 변경 -->
 	<update id="updateImg">
 		update tbl_coach set
 			c_img = #{c_img}
 		where c_id = #{c_id}
 	</update>
+	
+	<!-- 코치 경력정보 추가 등록 -->
+	<insert id="insertCareer">
+		insert into tbl_coach_career(num, c_id, specialty, career, certificate)
+			values(
+				seq_coach_career.nextval,
+				#{c_id},
+				#{specialty},
+				#{career},
+				#{certificate}
+			)
+	</insert>
+	
+	<!-- 코치 경력정보 수정 -->
+	<update id="updateCareer">
+		update tbl_coach_career set
+			specialty = #{specialty},
+			career = #{career},
+			certificate = #{certificate}
+		where c_id = #{c_id} and num = #{num}
+	</update>
+	
+	<!-- 코치 경력정보 삭제 -->
+	<delete id="deleteCareer">
+		delete tbl_coach_career where c_id = #{c_id} and num = #{num}
+	</delete>
+	
+	<!-- 코치 소개 수정 -->
+	<update id="updateItroduce">
+		update tbl_coach set
+			introduce = #{introduce}
+		where c_id = #{c_id}
+	</update>
 	<!-- 코치정보 관련 코드 종료 -->
+	
+	<!-- 리뷰관리 관련 코드 시작 -->
+	<!-- 해당 코치가 등록한 수업 정보 -->
+	<select id="getAllClass" resultType="org.mvc.bean.ZoomDTO">
+		<![CDATA[
+			select * from tbl_coachClass where c_id = #{c_id} order by num desc
+		]]>
+	</select>
+	
+	<!-- 해당 코치가 등록한 수업 갯수 -->
+	<select id="getClassCount" resultType="Integer">
+		select count(*) from tbl_coachClass where c_id = #{c_id}
+	</select>
+	
+	<!-- 리뷰보기 버튼을 누른 수업 정보 -->
+	<select id="getClass" resultType="org.mvc.bean.ZoomDTO">
+		select * from tbl_coachClass where c_id = #{c_id} and num = #{num}
+	</select>
+	
+	<!-- 해당 수업에 작성된 리뷰 목록 -->
+	<select id="getReview" resultType="org.mvc.bean.ReviewDTO">
+		select * from tbl_review where class_num = #{class_num} order by review_num desc
+	</select>
+	
+	<!-- 해당 수업의 모든 리뷰의 갯수 -->
+	<select id="reviewCount" resultType="Integer">
+		select count(*) from tbl_review where class_num = #{class_num}
+	</select>
+	<!-- 리뷰관리 관련 코드 종료 -->
+	
+	<!-- 회원관리 관련 코드 시작 -->
+	<!-- 해당 수업에 신청한 모든회원 목록 -->
+	<select id="getApplyMember" resultType="org.mvc.bean.ClassApplyDTO">
+		select * from tbl_classApply where num = #{num}
+	</select>
+	
+	<!-- 해당 수업에 신청한 회원 수 -->
+	<select id="applyMemberCount" resultType="Integer">
+		select count(*) from tbl_classApply where num = #{num}
+	</select>
+	<!-- 회원관리 관련 코드 종료 -->
 	
 </mapper>

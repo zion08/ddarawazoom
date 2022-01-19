@@ -10,43 +10,28 @@
 <script src="/resources/coach/custom/js/coach-info.js" type="text/javascript"></script>
 
 <div class="container-fluid">
-    
+
     <div class="container">
 	  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 	    <div class="row g-5">
 	      <div class="col-md-7 col-lg-8">
-	        <h4 class="mb-3">경력 수정</h4>
-	        <form class="needs-validation" novalidate id="updateForm" action="/coachroom/info" method="post" onsubmit="update_submit();">
-	          <input type="hidden" name="num" value="${coachCareer.num}" />
+	        <h4 class="mb-3">코치소개 수정</h4>
+	        <form class="needs-validation" novalidate id="itdUpdateForm" action="/coachroom/info" method="post" onsubmit="itdUpdate_submit();">
 	          <div class="row g-3">
 	            <div class="col-12">
-	              <label for="text" class="form-label">전문 분야</label>
-	              <input type="text" class="form-control" id="specialty" name="specialty" value="${coachCareer.specialty}" required>
-	              <div class="invalid-feedback">
-	                전문 분야는 필수항목입니다.
-	              </div>
-	            </div>
-	
-	            <div class="col-12">
-	              <label for="text" class="form-label">경력</label>
-	              <div class="input-group has-validation">
-	                <input type="text" class="form-control" id="career" name="career" value="${coachCareer.career}" required>
-	              <div class="invalid-feedback">
-	                  경력은 필수항목입니다.
+	              <div class="mb-3">
+				    <textarea class="form-control" id="introduce" rows="5" name="introduce" placeholder="소개를 입력해주세요." required></textarea>
+	                <div class="invalid-feedback">
+	                  소개를 입력해주세요.
 	                </div>
-	              </div>
-	            </div>
-	
-	            <div class="col-12">
-	              <label for="text" class="form-label">자격증</label>
-	              <input type="text" class="form-control" id="certificate" name="certificate" value="${coachCareer.certificate}">
+				  </div>
 	            </div>
 	          </div>
 	
 	          <hr class="my-4">
 	          
 	          <button class="w-40 btn btn-primary btn-lg" type="submit">
-	          	정보 수정
+	          	코치소개 수정
 	          </button>
 	          
 	          <button class="w-40 btn btn-danger btn-lg" onclick="window.location='/coachroom/info'">
