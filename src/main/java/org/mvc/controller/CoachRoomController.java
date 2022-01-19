@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/coachroom")
 public class CoachRoomController {
-
+   
 	@Setter(onMethod_=@Autowired)
 	private CoachRoomService service;
 	

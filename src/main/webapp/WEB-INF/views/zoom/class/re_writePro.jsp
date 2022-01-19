@@ -5,6 +5,6 @@
 <c:if test="${result == 1}">
 	<script>
 		alert("후기작성이 완료되었습니다.");
-		window.location="/ddarawazoom/zoom"; 
+		window.location="/ddarawazoom/zclasscontent?num=${num}"; 
 	</script>
 </c:if>    
