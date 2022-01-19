@@ -224,10 +224,10 @@ public class ZoomController {
 	
 	// ===== zoom강의 수정 ===== //
 	@RequestMapping("zupdateForm")
-	public String zupdateForm(ZoomDTO dto , Model model) {
+	public String zupdateForm(int num , ZoomDTO dto , Model model) {
 		log.info(" -----CT-----> UpdateForm ");
 		log.info("dto" + dto);
-		model.addAttribute("ZoomDTO" , dto);
+		model.addAttribute("ZoomDTO" , service.zoomContent(num));
 		return "/zoom/class/zupdateForm"; 
 	}
 	
