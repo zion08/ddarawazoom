@@ -8,7 +8,7 @@
 	<insert id="paymentInsert">
 		insert into tbl_payment 
 			values(#{impUid}, #{merchantUid}, #{name}, #{amount}, 
-			#{buyerName}, #{buyerTel}, #{buyerEmail}, #{paidAt})
+			#{buyerName}, #{buyerTel}, #{buyerEmail}, #{paidAt}, #{status})
 	</insert>
 	
 	<select id="getPaymentList" resultType="org.mvc.bean.PaymentDTO">

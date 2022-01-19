@@ -4,6 +4,12 @@
 <%@ include file="../../layout/iamport.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
 <script type="text/javascript">	
 	
 		//01. 결제 준비
@@ -78,18 +84,29 @@
 		
 		
 		//03. 환물 하기
+		$("#refundBtn").click(function(){
+			$("#refundInfo").modal('hide');
+			
+		});
+		
+		$("#refundCancel").click(function(){
+			$("#refundInfo").modal('hide');
+		});
+		
 		$('#payCancelBtn').click(function () {
-			var imp_uid = $("#impUid").val();
 			var merchant_uid = $("#merchantUid").val();
+			var merchant_uid = $("#refund_resean").val();
+			var merchant_uid = $("#refund_amount").val();
 			console.log(imp_uid);
-			console.log(merchant_uid)
+			console.log(merchant_uid);
 			
 			$.ajax({
                 type: "post", 
-                url: "/ddarawazoom/paycancelPro", // data 보낼 주소
+                url: "/ddarawazoom/payRefund", // data 보낼 주소
                 data: {
-                	"imp_uid": imp_uid,
-					"merchant_uid": merchant_uid
+                	"merchant_uid": merchant_uid,
+					"refund_resean":refund_resean,
+					"refund_amount":refund_amount
 					},	                    	
                 success: function(result){	// data 전송 성공 했을때
                 	confirm = parseInt(result);	// 문자>순자 변환	                    	
@@ -149,9 +166,8 @@
 		              	<td>
 		              		${paymentDTO.status}
 		              		<c:if test="${paymentDTO.status == 'paid'}">
-		              			<input type="hidden" id="impUid" value="${paymentDTO.impUid}" />
 		              			<input type="hidden" id="merchantUid" value="${paymentDTO.merchantUid}" />
-		              			<button id="payCancelBtn" onclick="run(param1)">
+		              			<button id="refundBtn" >
 		              				취소하기		              				
 	              				</button>
 		              		</c:if>		              		
@@ -164,6 +180,25 @@
 	
 </section>
 
+
+<!-- Modal -->
+<div class="modal modal-sheet position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="refundInfo">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-6 shadow">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body py-0">
+        <p>This is a modal sheet, a variation of the modal that docs itself to the bottom of the viewport like the newer share sheets in iOS.</p>
+      </div>
+      <div class="modal-footer flex-column border-top-0">
+        <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2">위와 같이 결제 취소를 진행합니다.</button>
+        <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal" id="refundCancel">아니요, 그냥 두겠습니다.</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <%@ include file="../../layout/footer.jsp"%>

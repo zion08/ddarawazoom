@@ -49,7 +49,7 @@ public class PayController {
 	
 	@RequestMapping("/pay")
 	public String zcalsscontent(Model model) {
-		int num = 11;
+		int num = 2;
 		model.addAttribute("ZoomDTO" , serviceZoom.zoomContent(num));
 		
 		// 결제 내역 출력
@@ -106,13 +106,13 @@ public class PayController {
 	}
 	
 	
-	@RequestMapping("/paycancelPro")
-	public @ResponseBody int paycancelPro(String imp_uid, String merchant_uid) throws IamportResponseException, IOException {
-		int result = 1;
+	@RequestMapping("/refund")
+	public String refund(String imp_uid, String merchant_uid) throws IamportResponseException, IOException {
+		
 		log.info("	------>imp_uid: " + imp_uid);
 		log.info("	------>imp_uid: " + merchant_uid);
 		
-		return result; 
+		return "/zoom/pay/refund"; 
 	}
 
 	
