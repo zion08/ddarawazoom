@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.mvc.bean.ClassApplyDTO;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
+import org.mvc.bean.ZoomDTO;
 import org.mvc.mybatis.CoachRoomMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.Setter;
- 
+
+
 @Service
 public class CoachRoomServiceImpl implements CoachRoomService{
 
@@ -50,8 +54,8 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	}
 
 	@Override
-	public List<CoachCareerDTO> getCareerInfo(String id) {
-		return mapper.getCareerInfo(id);
+	public List<CoachCareerDTO> getAllCareerInfo(String id) {
+		return mapper.getAllCareerInfo(id);
 	}
 
 	@Override
@@ -62,6 +66,66 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	@Override
 	public int updateImg(CoachInfoDTO dto) {
 		return mapper.updateImg(dto);
+	}
+
+	@Override
+	public CoachCareerDTO getCareerInfo(CoachCareerDTO dto) {
+		return mapper.getCareerInfo(dto);
+	}
+
+	@Override
+	public int updateCareer(CoachCareerDTO dto) {
+		return mapper.updateCareer(dto);
+	}
+
+	@Override
+	public int insertCareer(CoachCareerDTO dto) {
+		return mapper.insertCareer(dto);
+	}
+
+	@Override
+	public int updateItroduce(CoachInfoDTO dto) {
+		return mapper.updateItroduce(dto);
+	}
+
+	@Override
+	public int deleteCareer(CoachCareerDTO dto) {
+		return mapper.deleteCareer(dto);
+	}
+
+	@Override
+	public List<ZoomDTO> getAllClass(String id, int startRow, int endRow) {
+		return mapper.getAllClass(id, startRow, endRow);
+	}
+
+	@Override
+	public int getClassCount(String id) {
+		return mapper.getClassCount(id);
+	}
+
+	@Override
+	public ZoomDTO getClass(String c_id, Long num) {
+		return mapper.getClass(c_id, num);
+	}
+
+	@Override
+	public List<ReviewDTO> getReview(Long num) {
+		return mapper.getReview(num);
+	}
+
+	@Override
+	public int reviewCount(Long num) {
+		return mapper.reviewCount(num);
+	}
+
+	@Override
+	public List<ClassApplyDTO> getApplyMember(ClassApplyDTO dto) {
+		return mapper.getApplyMember(dto);
+	}
+
+	@Override
+	public int applyMemberCount(int num) {
+		return mapper.applyMemberCount(num);
 	}
 	
 }

@@ -1,6 +1,6 @@
 	
 	function getEvent(){
-	var event;
+		var event;
 		$.ajax({
 			type: "get",
 			url: "/coachroom/getSchedule", 

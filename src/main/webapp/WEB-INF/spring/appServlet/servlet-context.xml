@@ -40,7 +40,7 @@
 	<context:component-scan base-package="org.mvc.controller" />
 	
 	<!-- 객체 생성, <jsp:useBean>과 같음 -->
-	<!-- <beans:bean></beans:bean> -->
+	<beans:bean id="paymentDTO" class="org.mvc.bean.PaymentDTO"></beans:bean>
 	
 		
 	

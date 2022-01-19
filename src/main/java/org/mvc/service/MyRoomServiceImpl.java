@@ -1,21 +1,24 @@
 package org.mvc.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.mvc.bean.BodyProfileDTO;
 import org.mvc.bean.MyProfileDTO;
-import org.mvc.mybatis.BodyProfileMapper;
+import org.mvc.bean.UserDTO;
+import org.mvc.mybatis.MyRoomMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.Setter;
 
+
 @Service
-public class BodyProfileServiceImpl implements BodyProfileService {
+public class MyRoomServiceImpl implements MyRoomService {
+
+// 바디프로필 관련
 
 	@Setter(onMethod_=@Autowired)
-	private BodyProfileMapper mapper;
+	private MyRoomMapper mapper;
 
 	@Override
 	public MyProfileDTO getMyProfile(String b_id) {
@@ -60,6 +63,24 @@ public class BodyProfileServiceImpl implements BodyProfileService {
 	@Override
 	public int bodyDelete(int b_num) {
 		return mapper.bodyDelete(b_num);
+	}
+
+	
+// 회원정보 관련
+	
+	@Override
+	public UserDTO getUserInfo(String id) {
+		return mapper.getUserInfo(id);
+	}
+
+	@Override
+	public int updateInfo(UserDTO userDTO) {
+		return mapper.updateInfo(userDTO);
+	}
+
+	@Override
+	public int updateImg(UserDTO userDTO) {
+		return mapper.updateImg(userDTO);
 	}
 
 }

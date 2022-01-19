@@ -5,19 +5,15 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
-<!DOCTYPE html>
-<html>
-	<head>
+
 		<title>Profile Page</title>
 		<link href="/resources/css/bodyprofile.css" rel="stylesheet" >
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-	</head>
-<body>		
-	
+		<script src="../../resources/js/bodyprofile.js" ></script>
+
 	<!-- 마이 프로필 출력 -->
 	<c:if test="${myProfileDTO == null}" >
 	
@@ -143,12 +139,15 @@
 		<div class="weightChart" style="position: relative; height:60vh; width:80vw; margin: 0 auto;">
 			<canvas id="weightChart" style="height:30vh; width:50vw; margin: 0 auto;"></canvas>
 		</div>
+		<br/><br/>
 		<div class="muscleBodyChart" style="position: relative; height:60vh; width:80vw; margin: 0 auto;">
 			<canvas id="muscleBodyChart" style="height:30vh; width:50vw; margin: 0 auto;"></canvas>
 		</div>
 		<div class="bodySizeChart" style="position: relative; height:60vh; width:80vw; margin: 0 auto;">
 			<canvas id="bodySizeChart" style="height:30vh; width:50vw; margin: 0 auto;"></canvas>
 		</div>
+	
+		<br/><br/>
 	
 		<!-- 바디프로필 리스트 -->
 		<table class="table" id="bodyprofileList">
@@ -243,7 +242,7 @@
 						<td style="width: 10px; font-size:10px;">
 							<input type="button"  value="수 정"  id="updateButton" class="btn btn-outline-primary"
 								onclick="document.location.href='/myroom/bodyprofile/bodyUpdate?b_num=${bodyProfileDTO.b_num}'"/>
-					
+								&nbsp;&nbsp;
 							<input type="button" value="삭 제" id="deleteButton" class="btn btn-outline-danger"
 								onclick="window.open('/myroom/bodyprofile/bodyDelete?b_num=${bodyProfileDTO.b_num}','delete','width=600,height=200');" />
 						</td>
@@ -251,385 +250,6 @@
 				</tbody>
 			</c:forEach>
 		</table>
-			
-				
-				
-				<script>
-					$(document).ready(function(){
-	
-						var weight = new Array();
-						
-						// 날짜 정보를 저장할 리스트 선언
-						var date = new Array();
-						
-						$.ajax({
-							type: "post",
-							url: "/myroom/getBodyList", 
-							dataType: "json",
-							async: false,
-							success: function(result){
-								var bodyList = JSON.stringify(result);
-								var jsonList = JSON.parse(bodyList);
-								
-								console.log(jsonList);
-								
-								for(var i = 0; i < jsonList.length; i++){
-									
-									var b_list = jsonList[i];
-									
-									weight.push(jsonList[i].b_weight);
-									
-									// 날짜 리스트 안에 가져온 날짜 정보를 주입
-									date.push(b_list.parse_date);
-								}
-							}
-						});
-						
-						console.log(weight);
-						console.log(date);
-						
-						var ctx = document.getElementById('weightChart').getContext('2d');
-							var chart = new Chart(ctx, { 
-								type: 'line', 
-								data: {
-									labels: date,
-									datasets: [
-										{
-											label: '몸무게',
-											backgroundColor: '#80b6f4',
-				                            borderColor: '#80b6f4',
-				                            pointBorderColor: '#80b6f4',
-				                            pointBackgroundColor: '#80b6f4',
-				                            pointHoverBackgroundColor: 'white',
-				                            pointHoverBorderColor: '#black',
-							                borderWidth: 3,
-							                fillColor: "#79D1CF",
-							                strokeColor: "#79D1CF",
-							                display : true,
-							                fill: false,
-											data: weight
-										}]
-									},
-								options: {
-									responsive: true,
-									legend:{
-										display:false
-									},
-									elements: {
-										line: {
-											fill: false
-										},
-										point: {
-											hoverRadiuse: 7,
-											radius: 5
-										}
-									},
-									scales: {
-										xAxes: [{
-											scaleLabel:{
-												display: true,
-												labelString: "Month",
-												fontColor: 'blue',
-												fontSize: 13
-											},
-											stacked: true
-										}],
-										yAxes: [{
-											scaleLabel:{
-												display: true,
-												labelString: 'KG',
-												fontColor:'red',
-												fontSize: 13
-											},
-											ticks:{
-												max:150,
-												min: 0,
-												stepSize: 10,
-												autoSkip: false
-											},
-											stacked: true
-										}]
-									},
-									interaction: {
-										mode: 'index',
-										intersect: false,
-									},
-										title: {
-											display: true,
-											text: '몸무게 변화',
-											fontSize: 23
-										}
-									}
-								});
-							});
-						
-					
-					
-					
-					
-						$(document).ready(function(){
-							
-							var muscle = new Array();
-							var bodyfat = new Array();
-							var date = new Array();
-							
-							$.ajax({
-								type: "post",
-								url: "/myroom/getBodyList", 
-								dataType: "json",
-								async: false,
-								success: function(result){
-									var bodyList = JSON.stringify(result);
-									var jsonList = JSON.parse(bodyList);
-									
-									for(var i = 0; i < jsonList.length; i++){
-										
-										var b_list = jsonList[i];
-										
-										muscle.push(jsonList[i].b_muscle);
-										bodyfat.push(jsonList[i].b_bodyfat);
-										date.push(b_list.parse_date);
-									}
-								}
-							});
-							
-							console.log(muscle);
-							console.log(bodyfat);
-							
-							var ctx = document.getElementById('muscleBodyChart').getContext('2d');
-								var chart = new Chart(ctx, { 
-									type: 'bar', 
-									data: {
-										labels: date,
-										datasets: [
-											{
-												label: '근육량',
-												backgroundColor: '#0066ff',
-											    borderColor: '#0066ff',
-											    pointHoverBackgroundColor: 'white',
-					                            pointHoverBorderColor: '#black',
-								                borderWidth: 3,
-								                display : true,
-								                fill: false,
-								                stack: 'combined',
-								                type: 'line',
-												data: muscle
-											},
-											{
-												label: '체지방량',
-												backgroundColor: '#ff91c2',
-								                borderColor: '#ff91c2',
-								                display : true,
-								                fill: false,
-								                stack: 'combined',
-								                type:'bar',
-												data: bodyfat
-											}]
-										},
-									options: {
-										elements: {
-											line: {
-												fill: false
-											},
-											point: {
-												hoverRadiuse: 7,
-												radius: 5
-											}
-										},
-										scales: {
-											xAxes: [{
-												scaleLabel:{
-													display: true,
-													labelString: "Month",
-													fontColor: 'blue',
-													fontSize: 13
-												},
-												stacked: true
-											}],
-											yAxes: [{
-												scaleLabel:{
-													display: true,
-													labelString: "KG",
-													fontColor:'red',
-													fontSize: 13
-												},
-												ticks:{
-													max:50,
-													min: 0,
-													stepSize:10,
-													autoSkip: false
-												},
-												stacked: true
-											}]
-										},
-										interaction: {
-											mode: 'index',
-											intersect: false,
-										},
-										title: {
-											display: true,
-											text: '근육량 / 체지방량 변화',
-											fontSize:23
-										}
-									},
-								});
-							});
-						
-						
-						
-						
-						
-						
-						
-						$(document).ready(function(){
-							
-							var chest = new Array();
-							var waist = new Array();
-							var arm = new Array();
-							var thigh = new Array();
-							var hip = new Array();
-							var date = new Array();
-
-							$.ajax({
-								type: "post",
-								url: "/myroom/getBodyList", 
-								dataType: "json",
-								async: false,
-								success: function(result){
-									var bodyList = JSON.stringify(result);
-									var jsonList = JSON.parse(bodyList);
-									
-									console.log(jsonList.length);
-									
-									for(var i = 0; i < jsonList.length; i++){
-										
-										var b_list = jsonList[i];
-										
-										chest.push(jsonList[i].b_chest);
-										waist.push(jsonList[i].b_waist);
-										arm.push(jsonList[i].b_arm);
-										thigh.push(jsonList[i].b_thigh);
-										hip.push(jsonList[i].b_hip);
-										date.push(b_list.parse_date);
-									}
-								}
-							});
-							
-							console.log(chest);
-							console.log(waist);
-							console.log(arm);
-							console.log(thigh);
-							console.log(hip);
-							console.log(date);
-							
-							var ctx = document.getElementById('bodySizeChart').getContext('2d');
-								var chart = new Chart(ctx, { 
-									type: 'horizontalBar', 
-									data: {
-										labels: date,
-										datasets: [
-											{
-												label: '가슴 둘레',
-												backgroundColor: '#ff91c2',
-								                borderColor: '#ff91c2',
-								                borderWidth: 2,
-								                display : true,
-								                fill: false,
-												data: chest
-											},
-											{
-												label: '허리 둘레',
-												backgroundColor: '#FFE4B5',
-								                borderColor: '#FFE4B5',
-								                borderWidth: 2,
-								                display : true,
-								                fill: false,
-												data: waist
-											},
-											{
-												label: '팔뚝 둘레',
-												backgroundColor: '#FFB6C1',
-								                borderColor: '#FFB6C1',
-								                borderWidth: 2,
-								                display : true,
-								                fill: false,
-												data: arm
-											},
-											{
-												label: '허벅지 둘레',
-												backgroundColor: '#66CDAA',
-								                borderColor: '#66CDAA',
-								                borderWidth: 2,
-								                display : true,
-								                fill: false,
-												data: thigh
-											},
-											{
-												label: '엉덩이 둘레',
-												backgroundColor: '#9370DB',
-								                borderColor: '#9370DB',
-								                borderWidth: 2,
-								                display : true,
-								                fill: false,
-												data: hip
-											}]
-										},
-									options: {
-										tooltips: {
-											enabled:true
-										},
-										hover: {
-											animationDuration: 0
-										},
-										elements: {
-											line: {
-												fill: false
-											},
-											point: {
-												hoverRadius: 7,
-												radius: 5
-											}
-										},
-										scales: {
-											xAxes: [{
-												scaleLabel:{
-													display: true,
-													labelString: "Month",
-													fontColor: 'blue',
-													fontSize: 13
-												},
-												stacked: true
-											}],
-											yAxes: [{
-												scaleLabel:{
-													display: true,
-													labelString: "Cm",
-													fontColor:'red',
-													fontSize: 13
-												},
-												ticks:{
-													max:400,
-													min: 0,
-													stepSize:100,
-													autoSkip: false
-												},
-												stacked: true
-											}]
-										},
-										interaction: {
-											mode: 'index',
-											intersect: false,
-										},
-										title: {
-											display: true,
-											text: '바디 사이즈 변화',
-											fontSize: 25
-										}
-									},
-								});
-							});
-				</script>
-</body>
-</html>
+		
 
 <%@ include file="../../layout/footer.jsp"%>
