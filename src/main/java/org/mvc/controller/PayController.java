@@ -50,7 +50,7 @@ public class PayController {
 	@RequestMapping("/pay")
 	public String zcalsscontent(Model model) {
 		int num = 11;
-		model.addAttribute("ZoomDTO" , serviceZoom.getContent(num));
+		model.addAttribute("ZoomDTO" , serviceZoom.zoomContent(num));
 		
 		// 결제 내역 출력
 		List<PaymentDTO> paymentList = servicePayment.getPaymentList();

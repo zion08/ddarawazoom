@@ -20,4 +20,5 @@ public class CoachInfoDTO {
 	private Date c_time;
 	private String c_status;
 	private Date c_regdate;
+	private String introduce;
 }
