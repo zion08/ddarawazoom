@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.mvc.mybatis.UserInfoMapper">
+	
+	<insert id="insertUserInfo" >
+		insert into tbl_user(id, pw, email, nick)
+			values(#{id} , #{pw} , #{email}, #{nick})
+	</insert>
+	
+	<select id="getUserInfo" resultType="int">
+		select count(*) from tbl_user where id=#{id} and pw=#{pw}
+	</select>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
