@@ -7,12 +7,12 @@
 	<tr>
 		<td>글번호 ${ZoomDTO.num}</td>
 		<td>강사명 ${ZoomDTO.c_id}</td>
-		<td>조회수 ${ZoomDTO.count}</td>
+		<td>조회수 ${ZoomDTO.count}</td> 
 	</tr>
 	<tr>
 		<td>
 			소개사진 <img src="/resources/coach/img/${ZoomDTO.img}" width="100" > 
-			<input type="button" value="사진변경" onclick="window.location='/ddarawazoom/imgUpdate?img=${ZoomDTO.img}&num=${ZoomDTO.num}&intro=${ZoomDTO.intro}'" />
+			<input type="button" value="사진변경" onclick="window.location='/ddarawazoom/imgUpdate?img=${ZoomDTO.img}&num=${ZoomDTO.num}'" />    
 		</td>
 	</tr>
 	<tr>
@@ -24,8 +24,8 @@
 	<%-- 관리자만 수정, 삭제 나중에 처리 --%>
 	<tr>
 		<td>
-			<input type="button" value="글수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${ZoomDTO.num}&c_id=${ZoomDTO.c_id}&title=${ZoomDTO.title}&intro=${ZoomDTO.intro}&type=${ZoomDTO.type}&goal=${ZoomDTO.goal}&tool=${ZoomDTO.tool}&frequency=${ZoomDTO.frequency}&price=${ZoomDTO.price}'">
-			<input type="button" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${ZoomDTO.num}'">
+			<input type="button" value="글수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${ZoomDTO.num}&c_id=${ZoomDTO.c_id}&title=${ZoomDTO.title}&intro=${intro}&type=${ZoomDTO.type}&goal=${ZoomDTO.goal}&tool=${ZoomDTO.tool}&frequency=${ZoomDTO.frequency}&price=${ZoomDTO.price}'">
+			<input type="button" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${ZoomDTO.num}'"> 
 			
 			<input type="button" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
 		</td>
@@ -73,7 +73,10 @@
 		</tr>
 	<c:forEach var="ReviewDTO" items="${reList}">
 		<tr>
-			<td>${ReviewDTO.review_num}</td>
+			<td>
+				${number}
+				<c:set var="number" value="${number - 1}"/>
+			</td>
 			<td>${ReviewDTO.id}</td>
 			<td>${ReviewDTO.nick}</td>
 			<td>${ReviewDTO.title}</td>
@@ -81,28 +84,27 @@
 			<td>${ReviewDTO.grade}</td> 
 		</tr>
 	</c:forEach>
-	</c:if>
+	</c:if>  
 	
 	<tr>
 		<td>
 			<div id="page">
 				<c:if test="${startPage > pageBlock}">
-					<a href="/ddarawazoom/zclasscontent?pageNum=${startPage}-${pageBlock}"> [이전] </a>
+					<a href="/ddarawazoom/zclasscontent?num=${ZoomDTO.num}&pageNum=${startPage}-${pageBlock}"> [이전] </a>
 				</c:if>
 				
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<a href="/ddarawazoom/zclasscontent?pageNum=${i}">${i}</a>
+					<a href="/ddarawazoom/zclasscontent?num=${ZoomDTO.num}&pageNum=${i}">${i}</a>
 				</c:forEach>
 				
 				<c:if test="${endPage < totalPage}">
-					<a href="/ddarawazoom/zclasscontent?pageNum=${startPage}+${pageBlock}"> [다음] </a>
+					<a href="/ddarawazoom/zclasscontent?num=${ZoomDTO.num}&pageNum=${startPage}+${pageBlock}"> [다음] </a>
 				</c:if>
 			</div>
 		</td>
-	</tr>
+	</tr> 
 </table>
 
 <br />
 
 <%@ include file="../../layout/footer.jsp"%>  
-	 	
