@@ -51,6 +51,7 @@
 	    	  
 	    	  console.log(arg); // 현재 캘린더에 들어있는 모든 값
 	    	  console.log(arg.event); // 캘린더에 들어있는 event 값
+	    	  console.log(arg.event.backgroundColor);
 	    	  console.log(arg.event.title); // 캘린더에 들어있는 event의 title값
 	    	  console.log(arg.event.extendedProps.c_id); // 추가로 집어넣은 그 외의 데이터(코치 아이디) 값
 	    	  

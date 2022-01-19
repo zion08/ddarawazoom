@@ -18,14 +18,15 @@
 
 	<!-- 스케줄 등록 -->
 	<insert id="insertSchedule" parameterType="org.mvc.bean.ScheduleDTO">
-		insert into tbl_calendar (id, m_id, c_id, title, start_time, end_time)
+		insert into tbl_calendar (id, m_id, c_id, title, start_time, end_time, color)
 			values( 
 				seq_calendar.nextval,
 				#{m_id},
 				#{c_id},
 				#{title},
 				#{start},
-				#{end}
+				#{end},
+				#{color}
 			)
 	</insert>
 

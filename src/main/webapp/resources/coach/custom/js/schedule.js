@@ -52,6 +52,7 @@
 			contentType : "application/json; charset=UTF-8",
 			success : function(data) {
 				if(data == 1){
+					alert("일정 추가 완료.");
 					opener.parent.location.reload();
 					window.close();
 				}
@@ -70,7 +71,6 @@ function deleteEvent(){
 		   		result = parseInt(data);
 		   	
 			   	if(result == 1){
-				   alert("일정이 삭제되었습니다.");
 				   opener.parent.location.reload();
 				   window.close();
 			   	}
@@ -89,6 +89,7 @@ function update_ok(){
 			contentType : "application/json; charset=UTF-8",
 			success : function(data) {
 				if(data == 1){
+					alert("일정 수정 완료.");
 					opener.parent.location.reload();
 					window.close();
 				}

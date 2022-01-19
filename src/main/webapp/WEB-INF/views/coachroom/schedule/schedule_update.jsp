@@ -42,17 +42,25 @@
 				</div>
 				
 				<div class="domain">
-					<h3 class = "zTree-h3"> 수강생 이름 </h3>
+					<h3 class = "zTree-h3"> 수강생 ID </h3>
 				</div>
 				<div class="domain">
 					<input class="date" type="text" name="m_id" value="${schedule.m_id}" />
 				</div>
 				
 				<div class="domain">
-					<h3 class = "zTree-h3"> 코치 이름 </h3>
+					<h3 class = "zTree-h3"> 코치 ID </h3>
 				</div>
 				<div class="domain">
 					<input class="date" type="text" name="c_id" value="${schedule.c_id}" />
+				</div>
+				
+				<div class="domain">
+					<h3 class = "zTree-h3"> 색상선택 </h3>
+				</div>
+				
+				<div class="domain">
+					<input type="color" class="form-control form-control-color" name="color" value="${schedule.color}">
 				</div>
 				
 				<div class="domain">

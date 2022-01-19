@@ -21,13 +21,7 @@
 
 <body>
 <div class="container-fluid">
-    <main class="col-md-9 m-sm-auto col-lg-10 px-md-4">
-    		<div class="btn-toolbar mb-2 mb-md-0" style="float: right;">
-	          <div class="btn-group me-2">
-	            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="imgUpdateForm();">프로필 사진 변경</button>
-	            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/infoUpdate'">정보 수정</button>
-	          </div>
-	        </div>	
+    <main class="col-md-9 m-sm-auto col-lg-10 px-md-4">	
 	    
 	    	<div class="container">
 			    <div class="center">
@@ -35,7 +29,13 @@
 				</div>
 			
 				<div class="coachInfo">
-					<h2>기본 정보</h2>
+					<h2>
+						기본 정보
+						<button style="float: right;" type="button" class="btn btn-sm btn-outline-secondary"
+							onclick="window.location='/coachroom/infoUpdate'">정보 수정</button>
+						<button style="float: right;" type="button" class="btn btn-sm btn-outline-secondary"
+							onclick="imgUpdateForm();">프로필 사진 변경</button>
+					</h2>
 				    <div class="table-responsive">
 				      <table class="table table-striped table-sm table-bordered">
 				        <thead>
@@ -91,8 +91,10 @@
 					               <td>${coachCareer.career}</td>
 					               <td>${coachCareer.certificate}</td>
 					               <td style="text-align: right;">
-								     <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/careerUpdate?num=${coachCareer.num}'">경력 수정</button>
-								     <button type="button" class="btn btn-sm btn-outline-danger" onclick="delete_alert(${coachCareer.num});">경력 삭제</button>
+								     <button type="button" class="btn btn-sm btn-outline-secondary"
+								     	onclick="window.location='/coachroom/careerUpdate?num=${coachCareer.num}'">경력 수정</button>
+								     <button type="button" class="btn btn-sm btn-outline-danger"
+								     	onclick="delete_alert(${coachCareer.num});">경력 삭제</button>
 								   </td>
 					             </tr>
 				      		 </c:forEach>
@@ -105,7 +107,8 @@
 				<div class="coachInfo">
 				  <h2>
 				  	코치 소개
-				  	<button style="float: right;" type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='/coachroom/introduceUpdate'">코치소개 수정</button>
+				  	<button style="float: right;" type="button" class="btn btn-sm btn-outline-secondary"
+				  		onclick="window.location='/coachroom/introduceUpdate'">코치소개 수정</button>
 				  </h2>
 				    <div class="table-responsive">
 				      <table class="table table-striped table-sm">

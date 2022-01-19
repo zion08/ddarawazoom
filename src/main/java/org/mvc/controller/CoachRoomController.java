@@ -48,7 +48,7 @@ public class CoachRoomController {
 		
 		// 임시 코치 아이디
 		c_id = "kimcoach";
-		log.info(""+service.getAllReview(c_id));
+
 		model.addAttribute("reviewList", service.getAllReview(c_id));
 		
 		return "/coachroom/main";
