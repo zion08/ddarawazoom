@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../layout/header.jsp"%>
-<div class="wrap">
 
+<div class="wrapper">
 	<div class="signupTitle">회원가입 페이지</div>
 
 		<form action="/ddarawazoom/signupPro" method="post">
@@ -24,7 +24,6 @@
 			<input type="submit" value="회원가입" />
 	
 		</form>
-		
 </div>
 
 

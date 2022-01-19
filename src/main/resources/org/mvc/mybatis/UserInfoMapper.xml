@@ -5,10 +5,22 @@
     
 <mapper namespace="org.mvc.mybatis.UserInfoMapper">
 	
-	<insert id="insertUserInfo" parameterType="org.mvc.bean.UserInfoDTO">
+	<insert id="insertUserInfo" >
 		insert into tbl_user(id, pw, email, nick)
 			values(#{id} , #{pw} , #{email}, #{nick})
 	</insert>
-
-
+	
+	<select id="getUserInfo" resultType="int">
+		select count(*) from tbl_user where id=#{id} and pw=#{pw}
+	</select>
+	
+	
+	
 </mapper>
+
+
+
+
+
+
+

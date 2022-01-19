@@ -1,19 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../layout/header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 
 <div class="form-sigminbox text-center">
 	<main class="form-signin">
-		<form>
+	
+		<form name="loginForm" action="/ddarawazoom/loginPro" method="post">
 			<img class="mb-4" width="72" height="57" src="../../resources/image/Exercise.svg"/>
 		    <h1 class="h3 mb-3 fw-normal">따라와Zoom과 운동해요</h1>
 		
 		    <div class="form-floating">
-		    	<input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+		    	<input type="text" class="form-control" 
+		    	id="floatingInput" placeholder="name@example.com"
+		    	name="id">
 		    	<label for="floatingInput">ID</label>
+		   
+		     
 		    </div>
 		    <div class="form-floating">
-		    	<input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+		    	<input type="password" class="form-control" 
+		    	id="floatingPassword" placeholder="Password"
+		    	name="pw">
 		    	<label for="floatingPassword">Password</label>
 		    </div>
 		
@@ -23,12 +33,18 @@
 		    	</label>
 		    </div>
 		    
+		    
+		   <div class="findidpw">
+		   		<label>
+		   			<input type="button" value="아이디 찾기" onclick="window.location='/ddarawazoom/findid'">
+		   			<input type="button" value="비밀번호 찾기" onclick="window.location='/ddarawazoom/findpw';">
+		   		</label>
+		   </div>
+		    
 		    <!-- 보라색 로그인 버튼 -->
-		    <input type="button"
+		    <input type="submit"
 		    class="w-100 btn btn-lg btn-secondary mb-3"
-		    type="submit"
-		    value="Login"
-		    onclick="window.location='loginPro'"/>
+		    value="Login"/>
 		    
 		    <!-- 카카오톡 로그인 버튼 -->
 		    <input type="button"  
@@ -44,7 +60,7 @@
 		    value="NAVER"
 		    onclick="naverLogin();"/>
 
-
+	</form>
        
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -60,7 +76,6 @@ function kakaoLogin() {
         Kakao.API.request({
           url: '/v2/user/me',
           success: function (response) {
-        	  alert('왜 안되는 거야!!!')
              console.log(response)
           },
           fail: function (error) { 
@@ -93,8 +108,7 @@ function kakaoLogout() {
   }  
 </script>
 	    	
-		    
-		</form>
+		
 	</main>
 </div>
 
@@ -150,6 +164,8 @@ function naverLogout() {
 	
 }
 </script>
+
+
 
 
 

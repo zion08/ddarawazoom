@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+	
 <link href="../../resources/image/Exercise.svg" rel="shortcut icon" type="image/x-icon">
-<link href="../../resources/css/styles.css" rel="stylesheet">
+<link href="../../resources/css/styles.css?after" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="../../resources/js/header.js" type="text/javascript"></script>
@@ -80,12 +83,28 @@
 		        <li class="nav-item px-4">
 					<a class="nav-link active" href="/ddarawazoom/vod">Vod 강의</a>
 		        </li>
+		        
+		        <c:if test="${not empty sessionScope.id}">
+					<li class="nav-item px-4">
+						<a class="nav-link active" href="/ddarawazoom/myroom">마이페이지</a>
+		        	</li>
+				</c:if>
+		        
 		     </ul>
 		        
 	        <ul class="navbar-nav me-auto mb-2 mb-lg-0 position-absolute top-50 translate-middle-y">
 	        	<li class="nav-item">
-					<a class="nav-link" href="/ddarawazoom/login">로그인</a>
+				
+					<c:if test="${empty sessionScope.id}">
+						<a class="nav-link" href="/ddarawazoom/login">로그인</a>
+					</c:if>
+					
+					<c:if test="${not empty sessionScope.id}">
+						<a class="nav-link" href="/ddarawazoom/logout">로그아웃</a>
+					</c:if>
+					
 		        </li>
+		        
 		        <li class="nav-item dropdown ">
 		          	<a class="nav-link dropdown-toggle" href="#" 
 		          	id="navbarDropdown" role="button" 

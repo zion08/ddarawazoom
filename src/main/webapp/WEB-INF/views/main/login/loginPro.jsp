@@ -1,15 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h1>loginPro.jsp ~~~~~!!! </h1>
-<form action="/ddarawazoom/loginPro" method="post">
+<%-- 회원가입을 눌렀을 경우 db에 값이 저장된다 --%>
+<c:if test="${result == 1 }">
+	<script>
+		alert('로그인 성공')
+		window.location="/ddarawazoom"
+	</script>
+</c:if>
 
-<h1>id = ${UserInfoDTO.id} </h1>
-<h1>pw = ${UserInfoDTO.pw} </h1>
-<h1>email = ${UserInfoDTO.email} </h1>
-<h1>birth = ${UserInfoDTO.birth} </h1>
-<h1>name = ${name} </h1>
+
+<c:if test="${result != 1 }">
+	<script>
+		alert('로그인 실패')
+		window.location="/ddarawazoom/login"
+	</script>
+</c:if>
 
 
-</form>
+
+<script>
+	function findid();
+	window.location="/main/findidpw/findid"
+	
+	
+</script>
+
+
+<script>
+	function findpw();
+	window.location="/main/findidpw/findpw"
+</script>
+
+
+
+
+
+세션을 가지고 있는 jsp 페이지를 만든다...??
    

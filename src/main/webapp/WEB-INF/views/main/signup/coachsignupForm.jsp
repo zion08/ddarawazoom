@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../layout/header.jsp"%>
 
-<div class="wrap">
+<div class="wrapper">
 	<div class="signupTitle">코치 회원가입 페이지를 구현~~~!!</div>
 
 		<form action="/coachsignupPro" method="post">
 
-		<div class="coachinfo">
+		
 			아이디 : <input type="text" name="c_id"/>
 			    	<input type="button" name="re-c_id" value="아이디 중복확인"/><br/>
 		
@@ -27,7 +27,7 @@
 			이메일 : <input type="text" name="c_email"/><br/>
 			프로필 사진 : <input type="image" name="c_image" src=""><br/>
 			관련 소속 : <input type="text" name="company"/><br/>
-		</div>
+		
 	
 		수업 가능 시간대 : <input type="text" name="c_time"/><br/>
 		상태 : <input type="text" name="c_status"/><br/>

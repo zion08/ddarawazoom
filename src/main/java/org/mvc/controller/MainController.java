@@ -1,5 +1,9 @@
 package org.mvc.controller;
  
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +34,41 @@ public class MainController {
 		return "/main/login/login";
 	}
 	
+	
 	@RequestMapping("/loginPro")
-	public String loginPro() {
+	public String loginPro(UserInfoDTO dto, HttpSession session, Model model) {
+		if(service.getUserInfo(dto) == 1){
+			session.setAttribute("id", dto.getId());
+		}
+		System.out.println(dto);
+		model.addAttribute("result", service.getUserInfo(dto));
 		log.info("	-----CT----->loginPro Page");
 		return "/main/login/loginPro";
 	}
-
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		//로그아웃은 세션에 저장된 것을 지우면 된다.
+		session.removeAttribute("id");
+		//세선에 저장된 모든 것을 지우고 세션을 초기화
+		session.invalidate();
+		log.info("	-----CT----->logout Page");
+		return "/main/logout/logout";
+	}
+	
+	@RequestMapping("/findid")
+	public String findid() {
+		log.info("	-----CT----->findid Page");
+		return "/main/findidpw/findid";
+	}
+	
+	@RequestMapping("/findpw")
+	public String findpw() {
+		log.info("	-----CT----->findpw Page");
+		return "/main/findidpw/findpw";
+	}
+	
+	
 	@RequestMapping("/signup")
 	public String signup(UserInfoDTO dto) {
 		
