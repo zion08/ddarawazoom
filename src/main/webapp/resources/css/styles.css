@@ -10,7 +10,16 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
- 
+
+.wrapper{
+	width: 50%; margin: 0 auto; background: ivory; margin-top: 100px;
+}
+
+.signupTitle{
+	width: 100%; background: lightblue;
+}
+
+
 :root {
   --bs-blue: #2937f0;
   --bs-indigo: #6610f2;
@@ -3156,11 +3165,25 @@ textarea.form-control-lg {
   background-color: #ffc107;
   border-color: #ffc107;
 }
+
+.btn-warning2 {
+  color: #000;
+  background-color: #2DB400;
+  border-color: #2DB400;
+}
+
 .btn-warning:hover {
   color: #000;
   background-color: #ffca2c;
   border-color: #ffc720;
 }
+
+.btn-warning2:hover {
+  color: #000;
+  background-color: #37db00;
+  border-color: #37db00;
+}
+
 .btn-check:focus + .btn-warning, .btn-warning:focus {
   color: #000;
   background-color: #ffca2c;

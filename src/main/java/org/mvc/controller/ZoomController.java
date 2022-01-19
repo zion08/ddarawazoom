@@ -3,7 +3,9 @@ package org.mvc.controller;
 import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ZoomDTO;
@@ -17,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.slf4j.Slf4j;
-
+ 
 @Slf4j
 @Controller
 @RequestMapping("/ddarawazoom") 
@@ -27,7 +29,7 @@ public class ZoomController {
 	private ZoomService service;
 	
 	@Autowired
-	private FileInfo fileInfo; 
+	private FileInfo fileInfo;   
 	
 	// ===== zoom강의 메인(리스트) ===== //
 	@RequestMapping("zoom")
@@ -38,7 +40,7 @@ public class ZoomController {
 			pageNum = "1";		
 		}
 		
-		int pageSize = 10;		
+		int pageSize = 9; 		
 		int currentPage = Integer.parseInt(pageNum); 
 		int firstRownum = (currentPage-1)*pageSize + 1;	
 		int lastRownum = currentPage*pageSize;		
@@ -85,7 +87,7 @@ public class ZoomController {
 	
 	// ===== zoom강의별 내용화면 ===== //
 	@RequestMapping("/zclasscontent")
-	public String zclasscontent(int num , Model model , HttpServletRequest request) { 
+	public String zclasscontent(ZoomDTO dto , int num , Model model , HttpServletRequest request) { 
 		log.info(" -----CT-----> zoomClassContent ");
 		model.addAttribute("ZoomDTO" , service.zoomContent(num)); 
 		
@@ -124,16 +126,22 @@ public class ZoomController {
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("number", number);
 			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("intro" , dto.getIntro());
 		} else {
 			model.addAttribute("contentCount", 0);
 		}
 		return "/zoom/class/zclasscontent";   
 	}
 	
-	// ===== zoom강의 등록 ===== //
+	// ===== zoom 강의등록 ===== //
 	@RequestMapping("/zwriteForm")
-	public String zwriteForm() {
-		log.info(" -----CT-----> writeForm ");
+	public String zwriteForm(HttpSession session , CoachInfoDTO dto , Model model) {
+		log.info(" -----CT-----> writeForm ");	
+		
+		String c_id = (String)session.getAttribute("c_id");
+		c_id = "kimcoach";
+		model.addAttribute("c_id" , c_id);
+		
 		return "/zoom/class/zwriteForm"; 
 	}
 	
@@ -141,6 +149,7 @@ public class ZoomController {
 	public String zwritePro(ZoomDTO dto , Model model) {
 		log.info(" -----CT-----> writePro ");
 		log.info("dto=" + dto);
+		
 		model.addAttribute("result" , service.zoomInsert(dto));
 		return "/zoom/class/zwritePro"; 
 	}
@@ -160,6 +169,7 @@ public class ZoomController {
 	
 	@RequestMapping("re_writePro")
 	public String re_writePro(ReviewDTO dto , Model model) {
+		model.addAttribute("num" , dto.getClass_num());
 		model.addAttribute("result" , service.reInsert(dto));
 		return "/zoom/class/re_writePro";
 	}
@@ -187,12 +197,12 @@ public class ZoomController {
 		log.info("intro=" + dto.getIntro());
 		log.info("num=" + dto.getNum());
 		
-		String fileName = fileInfo.classImgUpload(save, dto.getIntro());	
+		String fileName = fileInfo.classImgUpload(save, dto.getNum()); 	
 		
 		log.info("fileName=" , fileName);
 		if(fileName != null) {
 			dto.setImg(fileName);
-			model.addAttribute("result" , service.imgUpdate(dto));
+			model.addAttribute("result" , service.imgUpdate(dto)); 
 		}
 		model.addAttribute("num" , dto.getNum());
 		return "/zoom/class/imgUpdatePro";   
@@ -214,10 +224,10 @@ public class ZoomController {
 	
 	// ===== zoom강의 수정 ===== //
 	@RequestMapping("zupdateForm")
-	public String zupdateForm(ZoomDTO dto , Model model) {
+	public String zupdateForm(int num , ZoomDTO dto , Model model) {
 		log.info(" -----CT-----> UpdateForm ");
 		log.info("dto" + dto);
-		model.addAttribute("ZoomDTO" , dto);
+		model.addAttribute("ZoomDTO" , service.zoomContent(num));
 		return "/zoom/class/zupdateForm"; 
 	}
 	
