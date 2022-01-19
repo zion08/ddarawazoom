@@ -5,13 +5,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.mvc.bean.BodyProfileDTO;
 import org.mvc.bean.FileInfo;
 import org.mvc.bean.MyProfileDTO;
-import org.mvc.service.BodyProfileService;
+import org.mvc.bean.UserDTO;
+import org.mvc.service.MyRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,10 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/myroom")
-public class BodyProfileController {
+public class MyRoomController {
 	
 	@Autowired
-	private BodyProfileService service; 
+	private MyRoomService service;
 	
 	@Autowired
 	private FileInfo fileInfo;
@@ -33,24 +37,80 @@ public class BodyProfileController {
 	@RequestMapping()
 	public String list() {
 		log.info("	-----CT----->myroomMain");
-		return "myroom/main";
+		
+		return "/myroom/main";
 	}
 
 
 	
-//  =========== 회원 정보 관련 코드 시작 ===========  //		
-	
+//  =========== 멤버 정보 관련 코드 시작 ===========  //		
 	@RequestMapping("/info")
-	public String userInfo() {
+	public String userInfo(HttpSession session, Model model) {
 		log.info("	-----CT----->userInfo");
-		return "myroom/userInfo/info";
+		String id = (String)session.getAttribute("id");
+		
+		//임시 멤버 아이디
+		id = "dam";
+		model.addAttribute("userInfo", service.getUserInfo(id));
+		
+		return "/myroom/userinfo/info";
 	}
 	
-	@RequestMapping("/userInfoUpdate")
-	public String userInfoUpdate() {
-		return "myroom/userInfoUpdate";
+	@RequestMapping("/infoUpdate")
+	public String userInfoUpdate(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("id");
+		
+		//임시 멤버 아이디
+		id = "dam";
+		model.addAttribute("userInfo", service.getUserInfo(id));
+		
+		return "/myroom/userinfo/infoUpdate";
 	}
-//=========== 회원 정보 관련 코드 종료 ===========  //		
+	
+	@RequestMapping("/infoUpdateData")
+	public @ResponseBody int infoUpdateData(@RequestBody UserDTO userDTO, HttpSession session) {
+		log.info("	-----CT----->infoUpdateData");
+		log.info("=="+userDTO);
+		
+		String id = (String)session.getAttribute("id");
+		
+		// 임시 멤버 아이디
+		id = "dam";
+		
+		userDTO.setId(id);
+		int result = service.updateInfo(userDTO);
+		
+		return result;
+	}
+	
+	@RequestMapping("/imgUpdate")
+	public String imgUpdate() {
+		log.info("	-----CT----->imgUpdate");
+		return "/myroom/userinfo/imgUpdate";
+	}
+	
+	@RequestMapping("/imgUpdatePro")
+	public @ResponseBody int imgUpdatePro(UserDTO userDTO, MultipartFile save, HttpSession session) {
+		log.info("	-----CT----->imgUpdatePro");
+		log.info(""+save.getOriginalFilename());
+		
+		String id = (String)session.getAttribute("id");
+		
+		// 임시 멤버 아이디
+		id = "dam";
+		
+		userDTO.setId(id);
+		
+		int result = 0;
+		
+		String file = fileInfo.imgUpload(save, id);
+		if(file != null) {
+			userDTO.setImg(file);
+			result = service.updateImg(userDTO);
+		}
+		return result;
+	}
+//=========== 멤버 정보 관련 코드 종료 ===========  //		
 	
 	
 	
@@ -62,38 +122,42 @@ public class BodyProfileController {
 		model.addAttribute("bodyProfileDTO", service.getBodyProfile("dam"));
 		log.info(""+service.bodyList("dam"));
 		model.addAttribute("bodyList", service.bodyList("dam"));
-		return "myroom/bodyprofile/content";
+		
+		return "/myroom/bodyprofile/content";
 	}
 	
 	
-
-	// session id(로그인/회원가입) 이후, 변경할 곳
 	@RequestMapping("/bodyprofile/myWrite")
 	public String myWrite() {
-		return "myroom/bodyprofile/myWrite";
+		
+		return "/myroom/bodyprofile/myWrite";
 	}
 	
 	@RequestMapping("/bodyprofile/myWritePro")
 	public String myWritePro(MyProfileDTO myDTO, Model model) {
 		model.addAttribute("result", service.myWrite(myDTO));
-		return "myroom/bodyprofile/myWritePro";
+		
+		return "/myroom/bodyprofile/myWritePro";
 	}
 	
 	@RequestMapping("/bodyprofile/myUpdate")
 	public String myUpdate(String b_id, Model model) {
 		model.addAttribute("myProfileDTO", service.getMyProfile("dam"));
-		return "myroom/bodyprofile/myUpdate";
+		
+		return "/myroom/bodyprofile/myUpdate";
 	}
 	
 	@RequestMapping("/bodyprofile/myUpdatePro")
 	public String myUpdatePro(String b_id, MyProfileDTO myDTO, MultipartFile save, Model model) {		
 		model.addAttribute("result", service.myUpdate(myDTO));
-		return "myroom/bodyprofile/myUpdatePro";
+		
+		return "/myroom/bodyprofile/myUpdatePro";
 	}
 	
 	@RequestMapping("/bodyprofile/bodyWrite")
 	public String bodyWrite() {
-		return "myroom/bodyprofile/bodyWrite";
+		
+		return "/myroom/bodyprofile/bodyWrite";
 	}
 	
 	@RequestMapping("/bodyprofile/bodyWritePro")
@@ -104,13 +168,14 @@ public class BodyProfileController {
 			bodyDTO.setB_img(file);
 			model.addAttribute("result",service.bodyWrite(bodyDTO));
 		}
-		return "myroom/bodyprofile/bodyWritePro";
+		return "/myroom/bodyprofile/bodyWritePro";
 	}
 	
 	@RequestMapping("/bodyprofile/bodyUpdate")
 	public String bodyUpdate(int b_num, String b_id, Model model) {
 		model.addAttribute("bodyProfileDTO", service.bodyRead(b_num, "dam"));
-		return "myroom/bodyprofile/bodyUpdate";
+		
+		return "/myroom/bodyprofile/bodyUpdate";
 	}
 	
 	@RequestMapping("/bodyprofile/bodyUpdatePro")
@@ -120,22 +185,24 @@ public class BodyProfileController {
 			bodyDTO.setB_img(file);
 			model.addAttribute("result", service.bodyUpdate(bodyDTO));
 		}
-		return "myroom/bodyprofile/bodyUpdatePro";
+		
+		return "/myroom/bodyprofile/bodyUpdatePro";
 	}
 	
 	@RequestMapping("/bodyprofile/bodyDelete")
 	public String bodyDelete(int b_num, Model model) {
 		model.addAttribute("b_num",b_num);
-		return "myroom/bodyprofile/bodyDelete";
+		return "/myroom/bodyprofile/bodyDelete";
 	}
 	
 	@RequestMapping("/bodyprofile/bodyDeletePro")
 	public String bodyDeletePro(int b_num, Model model) {
 		model.addAttribute("result",service.bodyDelete(b_num));
-		return "myroom/bodyprofile/bodyDeletePro";
+		
+		return "/myroom/bodyprofile/bodyDeletePro";
 	}
 
-	//  =========== 바디프로필 그래프  ===========  //		
+//  =========== 바디프로필 그래프  ===========  //		
 	@RequestMapping("/getBodyList")
 	public @ResponseBody List<BodyProfileDTO> getBodyList(Model model){
 		log.info(""+service.bodyList("dam"));
@@ -171,3 +238,5 @@ public class BodyProfileController {
 
 	
 
+//===========  관련 코드 시작 ===========  //		
+	
