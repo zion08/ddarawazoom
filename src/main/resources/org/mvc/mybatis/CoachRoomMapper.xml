@@ -145,6 +145,15 @@
 	<select id="reviewCount" resultType="Integer">
 		select count(*) from tbl_review where class_num = #{class_num}
 	</select>
+	
+	<!-- 코치룸 메인에 표기할 모든 수업에 달린 최신 리뷰 -->
+	<select id="getAllReview" resultType="org.mvc.bean.ReviewDTO">
+		<![CDATA[
+			select c.c_id, c.num, r.class_num, r.nick, r.title, r.content
+	    		from tbl_coachClass c, tbl_review r
+	        		where c.c_id = #{c_id} and c.num = r.class_num and rownum <= 10 order by r.review_num desc
+        ]]>
+	</select>
 	<!-- 리뷰관리 관련 코드 종료 -->
 	
 	<!-- 회원관리 관련 코드 시작 -->

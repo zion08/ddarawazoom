@@ -78,4 +78,8 @@ public interface CoachRoomMapper {
 	
 	// 해당 수업에 신청한 회원 수
 	public int applyMemberCount(int num);
+	
+	// 최신 리뷰목록
+	public List<ReviewDTO> getAllReview(String id);
+	
 }

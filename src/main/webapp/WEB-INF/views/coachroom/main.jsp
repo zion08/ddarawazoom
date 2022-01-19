@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="container-fluid">
 
@@ -23,40 +24,39 @@
 
       <h2>최신 리뷰</h2>
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
-            </tr>
-            <tr>
-              <td>1,002</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-          </tbody>
-        </table>
+      	<c:if test="${reviewList == null}">
+      		<hr class="featurette-divider">
+		
+		   <div class="featurette">
+		     <div class="col-md-12">
+		       <h2 class="featurette-heading" style="text-align: center;">아직 작성된 리뷰가 없습니다.</h2>
+	 	     </div>
+		   </div>
+      	</c:if>
+      	
+      	<c:if test="${reviewList != null}"> 
+      		
+	        <table class="table table-striped table-sm table-bordered">
+	          <thead>
+	            <tr>
+	              <th scope="col" style="width: 30%">강의 제목</th>
+	              <th scope="col" style="width: 20%">회원 닉네임</th>
+	              <th scope="col">후기</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+	          	<c:forEach var="list" items="${reviewList}">
+	              <tr>
+	                <td>${list.title}</td>
+	                <td>${list.nick}</td>
+	                <td>${list.content}</td>
+	              </tr>
+	            </c:forEach>
+	          </tbody>
+	        </table>
+        
+        </c:if>
+        
       </div>
     </main>
     

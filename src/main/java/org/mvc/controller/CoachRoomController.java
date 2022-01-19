@@ -41,8 +41,16 @@ public class CoachRoomController {
 	
 //  =========== 코치룸 메인화면 ===========  //	
 	@RequestMapping()
-	public String main() {
+	public String main(HttpSession session, Model model) {
 		log.info("	-----CT----->coachMain");
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		log.info(""+service.getAllReview(c_id));
+		model.addAttribute("reviewList", service.getAllReview(c_id));
+		
 		return "/coachroom/main";
 	}
 	
@@ -401,7 +409,7 @@ public class CoachRoomController {
 		model.addAttribute("endRow", endRow);
 		model.addAttribute("count", count);
 		
-		return "/coachroom/review/content";
+		return "/coachroom/review/reviewPage";
 	}
 //	=========== 리뷰관리 관련 코드 종료 ===========  //	
 	
@@ -421,7 +429,7 @@ public class CoachRoomController {
 		model.addAttribute("member", service.getApplyMember(dto));
 		model.addAttribute("count", service.applyMemberCount(dto.getNum()));
 		
-		return "/coachroom/member/content";
+		return "/coachroom/member/memberPage";
 	}
 //	=========== 회원관리 관련 코드 종료 ===========  //	
 	

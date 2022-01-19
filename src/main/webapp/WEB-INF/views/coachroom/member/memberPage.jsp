@@ -11,12 +11,13 @@
 <div class="container marketing">
 
   <!-- 해당 수업 간략하게 표시 -->
-  <div class="row">
+  <div class="row-cols-auto">
     <div class="col-lg-12">
-      <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-		
-      <h2>${classContent.title}</h2>
-	  <p>${classContent.intro}</p>
+      <div class="card shadow-sm">
+        <img src="/resources/coach/img/${classContent.img}" style="margin: 0 auto;" width="40%" height="40%">
+	  </div>
+      <h2 style="text-align: center;">${classContent.title}</h2>
+	  <p style="text-align: center;">${classContent.intro}</p>
 	</div><!-- /.col-lg-4 -->
   </div><!-- /.row -->
 		
@@ -26,42 +27,42 @@
 		
 	  <div class="row featurette">
 	    <div class="col-md-12">
-	      <h2 class="featurette-heading" style="text-align: center;">아직 작성된 리뷰가 없습니다.</h2>
+	      <h2 class="featurette-heading" style="text-align: center;">아직 등록한 회원이 없습니다.</h2>
 	    </div>
 	  </div>
   </c:if>
   
+  <hr class="featurette-divider">
+  
   <c:if test="${count > 0}">
-    <c:forEach var="reviewList" items="${review}">	
-	  <hr class="featurette-divider">
-			
+  
 	  <div class="row featurette">
 	    <div class="col-md-12">
 	    
 	      <table class="table table-bordered">
   		    <thead>
 		      <tr>
-		        <th scope="col" style="width: 100px;"></th>
-		        <th scope="col" style="width: 30%;">닉네임</th>
-		        <th scope="col">평점</th>
+		        <th scope="col"></th>
+		        <th scope="col" style="width: 80%;">등록한 회원 목록</th>
+		        <th scope="col" style="width: 10%;"></th>
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr>
-		        <th scope="row"></th>
-		        <td>${reviewList.nick}</td>
-		        <td>${reviewList.grade}</td>
-		      </tr>
-		      <tr>
-		        <th scope="row"> 후기 </th>
-		        <td colspan="2">${reviewList.content}</td>
-		      </tr>
+		      <c:forEach var="member" items="${member}">
+		        <tr>
+		          <th scope="row">회원 ID</th>
+		          <td>${member.id}</td>
+		          <td style="text-align: center;">
+		          	 <button type="button" class="btn btn-sm btn-outline-secondary"
+	                	onclick="window.location='/myroom/info?id=${member.id}'">회원 정보</button>
+		          </td>
+		        </tr>
+		      </c:forEach>
   		    </tbody>
 		  </table>
-		  
 	    </div>
 	  </div>
-	</c:forEach>
+	  
   </c:if>
   	     
 </div>
