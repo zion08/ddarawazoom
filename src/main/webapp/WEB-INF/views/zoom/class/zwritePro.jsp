@@ -4,7 +4,7 @@
  
 <c:if test="${result == 1}">
 	<script>
-		alert("수업등록이 완료되었습니다.");
+		alert("강의등록이 완료되었습니다.");
 		window.location="/ddarawazoom/zoom"; 
 	</script>
-</c:if>    
+</c:if>
