@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
 <%@ include file="../../layout/header.jsp"%>    
 
+<script src ="resources/js/like/like.js" type="text/javascript"></script>
+
 <table align="center">
 	<tr>
 		<td>글번호 ${ZoomDTO.num}</td>
@@ -32,7 +34,16 @@
 	</tr>
 	<tr>
 		<td>
-			<input type="button" value="관심목록 담기">
+			<c:if test="${result == true}">
+				<a href="/myroom/likeZoom_out?zoom_num=${ZoomDTO.num}&pageNum=${pageNum}">
+					<img src="/resources/image/like/heart_fill.png" width="30px" height="30px" onclick="zoomLikeWrite()"><br/>
+				</a>
+			</c:if>
+			<c:if test="${result != true}">
+				<a href="/myroom/likeZoom_in?zoom_num=${ZoomDTO.num}&pageNum=${pageNum}">
+					<img src="/resources/image/like/heart_empty.png" width="30px" height="30px" onclick="zoomLikeDelete(${ZoomDTO.num})"><br/>
+				</a>
+			</c:if>
 			<input type="button" value="장바구니 담기">
 			<input type="button" value="바로 결제하기">
 		</td>

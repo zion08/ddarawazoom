@@ -10,18 +10,16 @@
 		<link href="../../resources/css/user.css" rel="stylesheet">
 		
 		<script src="../../resources/js/user.js" type="text/javascript"></script>
-		<script src="../../resources/js/user.js" type="text/javascript"></script>
 	</head>
 	
 	<body>
+		<div class="mb-3">
 			<h2>${userInfo.nick}님의 정보</h2>
-			<div class="userImg">
-				<img src="../../resources/image/upload/${userInfo.img}" name="img" width="150px" height="150px"/>
-					<br/><br/>
-				<input type="button" class="btn btn-outline-dark" value="프로필사진 변경" onclick="imgUpdateForm();">
-				<input type="button" class="btn btn-outline-dark" value="정보수정 하러가기" onclick="window.location='/myroom/infoUpdate'"><br/>
-			</div>	
-			
+			<img src="../../resources/image/upload/${userInfo.img}" name="img" width="150px" height="150px"/>
+				<br/>
+			<input type="button" class="btn btn-outline-dark" value="프로필사진 변경" onclick="imgUpdateForm();">
+			<input type="button" class="btn btn-outline-dark" value="정보수정 하러가기" onclick="window.location='/myroom/infoUpdate'">
+		</div>	
 			<div class="userInfo">
 				<div class="table-responsive">
 					<table class="table" id="table">

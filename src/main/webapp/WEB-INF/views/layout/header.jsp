@@ -25,7 +25,7 @@
 		<ul class="navbar-nav me-auto mb-2 mb-lg-0 position-absolute top-50 translate-middle-y">
 			<li class="nav-item dropdown">	
 				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-					<i class="bi bi-list"></i>
+					<i class="bisbi-list"></i>
 				</a> 
 				<ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
 					<li><a class="dropdown-item" href="/ddarawazoom/zoom">Zoom 강의</a></li>
@@ -33,13 +33,19 @@
 					<li><a class="dropdown-item" href="/ddarawazoom/vod">Vod 강의</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li class="dropdown-submenu">
-						<a class="dropdown-item dropdown-toggle" href="#" >멤버사진/멤버닉네임<span class="caret"></span></a>
+						<a class="dropdown-item dropdown-toggle" href="#" >멤버 전용공간<span class="caret"></span></a>
               			<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="/myroom">마 이 룸</a>						
 							<li><a class="dropdown-item" href="/myroom/bodyprofile">바디 프로필</a></li>						
-							<li><a class="dropdown-item" href="/myroom/info">회원 정보</a></li>					
+							<li><a class="dropdown-item" href="/myroom/userInfo">회원 정보</a></li>					
 							<li><a class="dropdown-item" href="/myroom/class">강의관리</a></li>
-							<li><a class="dropdown-item" href="/myroom/locker">락커룸</a></li>
+							<li class="dropdown-submenu">
+								<a  class="dropdown-item dropdown-toggle" href="/myroom/locker">락커룸</a>
+									<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/myroom/likeZoom">관심Zoom</a>
+									<li><a class="dropdown-item" href="/myroom/likeVod">관심Vod</a>
+								</ul>
+							</li>
 							<li><a class="dropdown-item" href="/myroom/payment">결재내역</a></li>
 							<li><a class="dropdown-item" href="/myroom/review">리뷰관리</a></li>
 							<li><a class="dropdown-item" href="/myroom/QnA">1:1문의</a></li>
@@ -47,7 +53,7 @@
 					</li>
 					<li><hr class="dropdown-divider"></li>
 					<li class="dropdown-submenu">
-						<a class="dropdown-item dropdown-toggle" href="#">코치사진/코치닉네임<span class="caret"></span></a>
+						<a class="dropdown-item dropdown-toggle" href="#">코치 전용공간<span class="caret"></span></a>
               			<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="/coachroom">코 치 룸</a></li>					
 							<li><a class="dropdown-item" href="/coachroom/schedule">스케줄관리</a></li>
@@ -92,7 +98,7 @@
 		        
 		        <c:if test="${not empty sessionScope.id}">
 					<li class="nav-item px-4">
-						<a class="nav-link active" href="/ddarawazoom/myroom">마이페이지</a>
+						<a class="nav-link active" href="/myroom">마이룸</a>
 		        	</li>
 				</c:if>
 		        

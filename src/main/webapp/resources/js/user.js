@@ -18,7 +18,9 @@ $.fn.serializeObject = function(){
 	    return o;
 };
 
-function update_submit(){
+
+// 회원 정보 수정
+function infoUpdate_submit(){
 	if($("#pw").val() == "" || $("#email").val() == "" || $("#nick").val() == ""){
 		return false;
 	}
@@ -30,23 +32,24 @@ function update_submit(){
 		url : "/myroom/infoUpdateData",
 		type : "POST",
 		contentType : "application/json; charset=UTF-8",
-		success : function(result){
-			if(result == 1){
-				alert("수정 완료.");
+		success : function(data){
+			if(data == 1){
+				alert("수정 되었습니다.");
 			}
 		}
 	});
 }
 
-
+// 프로필 수정 팝업창
 function imgUpdateForm(){
 	var url = "/myroom/imgUpdate";
 	var name = "img_update";
-	var option = "width=500, height=200 left=100, top=50, location=no";
+	var option = "width=500, height=300 left=100, top=50, location=no";
 	
 	window.open(url, name, option);
 }
 
+// 프로필 사진 변경
 function imgUpdatePro(){
 
 	if($("#formFile") == "") {
@@ -64,10 +67,11 @@ function imgUpdatePro(){
 		processData : false,
 		contentType : false,
 		data : form,
+		async: false,
 		success : function(data){
 			var result = parseInt(data);
 			if(result == 1){
-				alert("업로드 완료.");
+				alert("업로드 완료되었습니다.");
 				opener.parent.location.reload();
 				window.close();
 			} else {

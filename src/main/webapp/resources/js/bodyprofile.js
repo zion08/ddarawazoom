@@ -1,3 +1,25 @@
+// ajax로 view -> controller로 여러개의 값 전송할 때 필요한 코드
+$.fn.serializeObject = function(){
+	var o = {};
+	var a = this.serializeArray();
+	$.each(a, function() {
+		var name = $.trim(this.name),
+			value = $.trim(this.value);
+		
+		if (o[name]) {
+			if (!o[name].push) {
+				o[name] = [o[name]];
+			}
+			o[name].push(value || '');
+		} else {
+			o[name] = value || '';
+		}
+	});
+	return o;
+};
+
+
+// 몸무게 그래프
 $(document).ready(function(){
 	var weight = new Array();
 		var date = new Array();
@@ -65,7 +87,7 @@ $(document).ready(function(){
 	                        ctx = chartInstance.ctx;
 		                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
 		        			ctx.textAlign = "center";
-		    				ctx.font = "15px Open Sans";
+		    				ctx.font = "22px Open Sans";
 		    				ctx.fillStyle = 'black';
 	    				
 	    				
@@ -74,9 +96,9 @@ $(document).ready(function(){
 		    					Chart.helpers.each(meta.data.forEach(function (bar, index) {
 		    						data = dataset.data[index];
 		    						if(i==0){
-		    							ctx.fillText(data, bar._model.x, bar._model.y-20); 
+		    							ctx.fillText(data, bar._model.x+18, bar._model.y-15); 
 		    						} else {
-		    							ctx.fillText(data, bar._model.x, bar._model.y-20);
+		    							ctx.fillText(data, bar._model.x+18, bar._model.y-15);
 		    						}
 		    					}),this)
 		    				}),this);
@@ -96,18 +118,20 @@ $(document).ready(function(){
 						}
 					},
 					scales: {
+						xAxes: [{
+							ticks:{
+								fontColor : 'rgba(12, 13, 13, 1)',
+								fontSize : 14
+							}
+						}],
 						yAxes: [{
-							scaleLabel:{
-								display: true,
-								labelString: 'Kg',
-								fontColor:'black',
-								fontSize: 13
-							},
 							ticks:{
 								max:150,
 								min: 0,
 								stepSize: 10,
-								autoSkip: false
+								autoSkip: false,
+								fontColor : 'rgba(12, 13, 13, 1)',
+								fontSize : 13
 							},
 							stacked: true
 						}]
@@ -126,7 +150,8 @@ $(document).ready(function(){
 			});
 		
 		
-		
+
+// 근육량 체지방량 그래프		
 $(document).ready(function(){
 	
 	var muscle = new Array();
@@ -197,18 +222,20 @@ $(document).ready(function(){
 					}
 				},
 				scales: {
+					xAxes: [{
+						ticks: {
+							fontColor : 'rgba(12, 13, 13, 1)',
+							fontSize : 15
+							}
+						}],
 					yAxes: [{
-						scaleLabel:{
-							display: true,
-							labelString: "Kg",
-							fontColor:'black',
-							fontSize: 13
-						},
 						ticks:{
 							max:50,
 							min: 0,
 							stepSize:10,
-							autoSkip: false
+							autoSkip: false,
+							fontColor : 'rgba(12, 13, 13, 1)',
+							fontSize : 14
 						},
 						stacked: true
 					}]
@@ -227,7 +254,7 @@ $(document).ready(function(){
 	});
 				
 				
-				
+// 바디 사이즈 그래프				
 $(document).ready(function(){
 		var chest = new Array();
 		var waist = new Array();
@@ -335,13 +362,9 @@ $(document).ready(function(){
 					scales: {
 						xAxes: [{
 							ticks: {
-							display: false
-							},
-							scaleLabel:{
-								display: true,
-								labelString: "Cm",
-								fontColor:'black',
-								fontSize: 13
+							display: false,
+							fontColor : 'rgba(12, 13, 13, 1)',
+							fontSize : 15
 							},
 							gridLines: {
 								display:false,
@@ -354,7 +377,9 @@ $(document).ready(function(){
 								max:400,
 								min: 0,
 								stepSize:100,
-								autoSkip: false
+								autoSkip: false,
+								fontColor : 'rgba(12, 13, 13, 1)',
+								fontSize : 15
 							},
 							stacked: true
 						}]
