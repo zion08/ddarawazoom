@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
-import org.mvc.bean.LikeDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.MyRoomService;
