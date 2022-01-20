@@ -7,11 +7,30 @@
 	
 	<insert id="paymentInsert">
 		insert into tbl_payment 
+			(impUid, merchantUid, name, amount, 
+			buyerName, buyerTel, buyerEmail, paidAt, status)
 			values(#{impUid}, #{merchantUid}, #{name}, #{amount}, 
-			#{buyerName}, #{buyerTel}, #{buyerEmail}, #{paidAt})
+			#{buyerName}, #{buyerTel}, #{buyerEmail}, #{paidAt}, #{status})
 	</insert>
 	
 	<select id="getPaymentList" resultType="org.mvc.bean.PaymentDTO">
 		select * from tbl_payment order by paidat desc
 	</select>
+	
+	<select id="getOerderCount" resultType="int">
+		select count(*) from tbl_payment
+	</select>
+	
+	<select id="getMerchantUidInfo" resultType="org.mvc.bean.PaymentDTO">		
+		select * from tbl_payment where merchantuid = #{merchant_uid}		
+	</select>
+	
+	<update id="paymentCancelUpdate">
+		update tbl_payment set
+			status = #{status},
+			cancelAmount = #{cancelAmount},
+			cancelReason = #{cancelReason},
+			cancelledAt = #{cancelledAt}
+		where impUid = #{impUid}
+	</update>
 </mapper>  

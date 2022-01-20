@@ -2,6 +2,7 @@ package org.mvc.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.http.HttpClient;
 import java.util.Date;
 import java.util.List;
 
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
+import com.siot.IamportRestClient.response.PaymentCancelDetail;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,15 +44,18 @@ public class PayController {
 	@Autowired
 	private DateFormatChange dateFormat;
 	
+	private String impKey = "3390529037918084";
+	private String impSecret = "0374ed2bfae3f054f7ff51e2c27c9503a06cb4099a069d85607c8888899772c8883878e2404ec8b7";
 	private IamportClient api;
 	public PayController() {
     	// REST API 키와 REST API secret
-		this.api = new IamportClient("3390529037918084","0374ed2bfae3f054f7ff51e2c27c9503a06cb4099a069d85607c8888899772c8883878e2404ec8b7");
+		this.api = new IamportClient(impKey, impSecret);
 	}
 	
+		
 	@RequestMapping("/pay")
 	public String zcalsscontent(Model model) {
-		int num = 11;
+		int num = 2;
 		model.addAttribute("ZoomDTO" , serviceZoom.zoomContent(num));
 		
 		// 결제 내역 출력
@@ -57,6 +63,7 @@ public class PayController {
 		model.addAttribute("payment", paymentList);
 		return "/zoom/pay/pay";  
 	}
+	
 	
 	@RequestMapping("/payPro")
 	public @ResponseBody int payPro(String imp_uid, String merchant_uid) throws IamportResponseException, IOException {
@@ -67,7 +74,7 @@ public class PayController {
 		int result = 0;
 		IamportResponse<Payment> verify = api.paymentByImpUid(imp_uid);	// 결제 번호(imp_uid)와 금액(amount)으로 결제 검증	
 		if(verify.getResponse().getAmount().compareTo(BigDecimal.valueOf(amountToBePaid)) == 0) {
-			log.info("	------>verify: " + "검증 성공");
+			log.info("	------>payment verify: " + "검증 성공");
 			
 			Payment payment = verify.getResponse();	// api로 결제 정보 조회 (iamport 서버)			 
 			
@@ -82,6 +89,7 @@ public class PayController {
 			String paidAtStr = dateFormat.dateTimeFull(paidAt);
 			String status = payment.getStatus();
 			
+			int orderCount = servicePayment.getOerderCount();
 			paymentDTO.setImpUid(impUid);		// DTO 변수 저장
 			paymentDTO.setMerchantUid(merchantUid);
 			paymentDTO.setName(name);
@@ -94,24 +102,71 @@ public class PayController {
 			
 			result = servicePayment.paymentInsert(paymentDTO);
 			if(result==1) {
-				log.info("	------>save: " + "저장 성공");
+				log.info("	------>payment save: " + "저장 성공");
 			} else {
-				log.info("	------>save: " + "저장 실패");
+				log.info("	------>payment save: " + "저장 실패");
 			}
 			
 		} else {
-			log.info("	------>verify: " + "검증 실패");
+			log.info("	------>payment verify: " + "검증 실패");
 		}
 		return result;  
 	}
 	
 	
-	@RequestMapping("/paycancelPro")
-	public @ResponseBody int paycancelPro(String imp_uid, String merchant_uid) throws IamportResponseException, IOException {
-		int result = 1;
-		log.info("	------>imp_uid: " + imp_uid);
-		log.info("	------>imp_uid: " + merchant_uid);
+	@RequestMapping("/payRefund")
+	public @ResponseBody int refund(String merchant_uid, String refund_reason, int refund_req_amount) throws IamportResponseException, IOException {
+		int result = 0;
 		
+		// 주문번호에 대한 결제 내역 조회 (DB)
+		paymentDTO = servicePayment.getMerchantUidInfo(merchant_uid);		
+		String imp_uid = paymentDTO.getImpUid();			// 주문번호
+		int amount = paymentDTO.getAmount();				// 결제된 금액
+		int cancelAmount = paymentDTO.getCancelAmount();	// 환불된 금액
+		
+		// 결제 취소 가능 확인
+		int cancelAbleAmount = amount - cancelAmount;
+		if(cancelAbleAmount <= 0) {		// 이미 전액 환불 된 경우
+			result = -1;
+			return result;
+		}
+		
+		// 결제 취소 데이터 생성
+		CancelData cancelData = new CancelData(imp_uid, true, BigDecimal.valueOf(refund_req_amount));
+		cancelData.setChecksum(BigDecimal.valueOf(cancelAbleAmount));
+		cancelData.setReason(refund_reason);
+	
+		// 결제 취소 요청
+		IamportResponse<Payment> cancel = api.cancelPaymentByImpUid(cancelData);
+		int cancelCode = cancel.getCode();	// 성공=0, 실패=1
+		log.info("	------>cancel code: " + cancel.getCode());
+		log.info("	------>cancel message: " + cancel.getMessage());
+		
+		// 취소 내역 DB 저장
+		if(cancelCode == 0) {
+			IamportResponse<Payment> verify = api.paymentByImpUid(imp_uid);	// 결제 번호(imp_uid)로 결제 검증				
+			
+			Payment payment = verify.getResponse();	// api로 결제 정보 조회 (iamport 서버)			
+			
+			int cancelAmountInt = payment.getCancelAmount().intValue();	
+			String status = payment.getStatus();
+			String cancelReason = payment.getCancelReason();
+			Date cancelledAt = payment.getCancelledAt();
+			String cancelledAtStr = dateFormat.dateTimeFull(cancelledAt);
+			
+			paymentDTO.setImpUid(imp_uid);			//취소 관련 DTO 변수 저장 
+			paymentDTO.setStatus(status);
+			paymentDTO.setCancelAmount(cancelAmountInt);				
+			paymentDTO.setCancelReason(cancelReason);
+			paymentDTO.setCancelledAt(cancelledAtStr);			
+						
+			result = servicePayment.paymentCancelUpdate(paymentDTO);	// 성공=1, 실패=0
+			if(result==1) {
+				log.info("	------>cancel save: " + "저장 성공");
+			} else {
+				log.info("	------>cancel save: " + "저장 실패");
+			}
+		}
 		return result; 
 	}
 
@@ -144,7 +199,15 @@ public class PayController {
 		return "ok";  
 	}
 	
-	
+	@RequestMapping("/payRefundtest")
+	public @ResponseBody String Refundtest(String merchant_uid, String refund_reason, int refund_req_amount) throws IamportResponseException, IOException {
+
+		log.info("	------>merchant_uid: " + merchant_uid);
+		log.info("	------>refund_reason: " + refund_reason);
+		log.info("	------>refund_req_amount: " + refund_req_amount);
+		
+		return "ok";  
+	}
 	
 
 }
