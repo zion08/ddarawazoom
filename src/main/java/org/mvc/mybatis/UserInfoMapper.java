@@ -2,6 +2,7 @@ package org.mvc.mybatis;
 
 import java.util.List;
 
+import org.mvc.bean.UserDTO;
 import org.mvc.bean.UserInfoDTO;
 
 public interface UserInfoMapper {
@@ -18,4 +19,9 @@ public interface UserInfoMapper {
 	//회원 로그인 하기. 그러려면 id 와 pw 를 데이터와 비교해야 한다
 	public int getUserInfo(UserInfoDTO dto);
 	
+	// 카카오 로그인(카카오에서 가져온 정보 DB에 저장)
+	public int kakaoInsert(UserDTO dto);
+	
+	// 카카오로 로그인한 사용자의 정보가 DB에 저장돼있는지 확인
+	public int kakaoCheck(UserDTO dto);
 }

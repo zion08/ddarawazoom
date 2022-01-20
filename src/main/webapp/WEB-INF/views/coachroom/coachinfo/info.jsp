@@ -107,11 +107,13 @@
 				<div class="coachInfo">
 				  <h2>
 				  	코치 소개
-				  	<button style="float: right;" type="button" class="btn btn-sm btn-outline-secondary"
+				  	<c:if test="${coachInfo.introduce != null}">
+					  <button style="float: right;" type="button" class="btn btn-sm btn-outline-secondary"
 				  		onclick="window.location='/coachroom/introduceUpdate'">코치소개 수정</button>
+					</c:if>
 				  </h2>
 				    <div class="table-responsive">
-				      <table class="table table-striped table-sm">
+				      <table class="table">
 				        <thead>
 				          <tr>
 				            <th scope="col"></th>
@@ -122,7 +124,18 @@
 				            <td>
 				              <figure class="text-center">
 							    <blockquote class="blockquote">
-								  <p>${coachInfo.introduce}</p>
+							    
+							      <c:if test="${coachInfo.introduce != null}">
+							      	<p>${coachInfo.introduce}</p>
+							      </c:if>
+								  
+								  <c:if test="${coachInfo.introduce == null}">
+							      	<p>아직 소개를 작성하지 않으셨습니다.</p>
+							      	<p>코치님만의 장점을 작성해주세요!</p>
+							      	<button type="button" class="btn btn-sm btn-outline-secondary"
+				  						onclick="window.location='/coachroom/introduceUpdate'">코치소개 작성하기</button>
+							      </c:if>
+							      
 								</blockquote>
 							  </figure>
 				            </td>

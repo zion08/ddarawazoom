@@ -2,14 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- session의 문자열을 비교하기 위한 tablib -->
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	
 <link href="../../resources/image/Exercise.svg" rel="shortcut icon" type="image/x-icon">
 <link href="../../resources/css/styles.css?after" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="../../resources/js/header.js" type="text/javascript"></script>
-<title>DDarawaZoom</title>
 
+<!-- 카카오 로그아웃 관련 스크립트 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="/resources/user/custom/js/kakao.js" type="text/javascript"></script>
+
+<title>DDarawaZoom</title>
 
 <!-- navigation -->
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light mb-3">
@@ -100,24 +106,38 @@
 					</c:if>
 					
 					<c:if test="${not empty sessionScope.id}">
-						<a class="nav-link" href="/ddarawazoom/logout">로그아웃</a>
+					
+						<c:set var="session" value="${sessionScope.id}" />
+						
+						<!-- 문자열 안에 kakaoLogin이 포함되어있는지 확인 -->
+						<c:if test="${fn:contains(session, 'kakaoLogin')}">
+							<a class="nav-link" href="#" onclick="kakaoLogout();">로그아웃</a>
+						</c:if>
+						
+						<c:if test="${!fn:contains(session, 'kakaoLogin')}">
+							<a class="nav-link" href="/ddarawazoom/logout">로그아웃</a>
+						</c:if>
+						
 					</c:if>
 					
 		        </li>
 		        
-		        <li class="nav-item dropdown ">
-		          	<a class="nav-link dropdown-toggle" href="#" 
-		          	id="navbarDropdown" role="button" 
-		          	data-bs-toggle="dropdown" aria-expanded="false">
-		            회원 가입
-		          	</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			            <li><a class="dropdown-item" href="#" onclick="window.location='/ddarawazoom/signup'">멤버 가입</a></li>
-			            <li><a class="dropdown-item" href="#" onclick="window.location='/ddarawazoom/coachsignup'">코치 가입</a></li>
-			            <li><hr class="dropdown-divider"></li>
-			            <li><a class="dropdown-item" href="#">Something else here</a></li>
-		          	</ul>
-		        </li>        
+		        <c:if test="${empty sessionScope.id}">
+			        <li class="nav-item dropdown ">
+			          	<a class="nav-link dropdown-toggle" href="#" 
+			          	id="navbarDropdown" role="button" 
+			          	data-bs-toggle="dropdown" aria-expanded="false">
+			            회원 가입
+			          	</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+				            <li><a class="dropdown-item" href="#" onclick="window.location='/ddarawazoom/signup'">멤버 가입</a></li>
+				            <li><a class="dropdown-item" href="#" onclick="window.location='/ddarawazoom/coachsignup'">코치 가입</a></li>
+				            <li><hr class="dropdown-divider"></li>
+				            <li><a class="dropdown-item" href="#">Something else here</a></li>
+			          	</ul>
+			        </li>
+		        </c:if>     
+		           
 		   	</ul>
 
     	</div>
