@@ -38,6 +38,16 @@ public class UserInfoServiceImpl implements UserInfoService{
 		return mapper.kakaoCheck(dto);
 	}
 
+	@Override
+	public int naverInsert(UserInfoDTO dto) {
+		return mapper.naverInsert(dto);
+	}
+
+	@Override
+	public int naverCheck(UserInfoDTO dto) {
+		return mapper.naverCheck(dto);
+	}
+
 	
 	
 	

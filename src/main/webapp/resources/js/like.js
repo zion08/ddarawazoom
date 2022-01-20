@@ -36,9 +36,9 @@ function zoomLikeWrite(){
 			}
 		});
 	}
-
+}
 	
-fuction zoomLikeDelete(number){
+function zoomLikeDelete(number){
 	if(window.confirm('관심Zoom에서 등록해제 하시겠습니까?')){
 	
 		console.log(number);

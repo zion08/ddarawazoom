@@ -104,7 +104,7 @@ public class MainController {
 	@RequestMapping("/kakaoLogin")
 	public @ResponseBody int kakaoLogin(@RequestBody UserInfoDTO dto, HttpSession session) {
 		log.info("------CT----->kakaoLogin");
-		log.info(""+dto);
+		log.info("======== kakao login data => "+dto);
 		int result = 0;
 		
 		if(service.kakaoCheck(dto) == 1) {
@@ -113,6 +113,29 @@ public class MainController {
 		} else {
 			session.setAttribute("id", dto.getId());
 			result = service.kakaoInsert(dto);
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping("/naverLogin")
+	public String naverLogin() {
+		log.info("------CT----->kakaoLogin");
+		return "/main/login/naverLogin";
+	}
+	
+	@RequestMapping("/naverLoginPro")
+	public @ResponseBody int naverLoginPro(@RequestBody UserInfoDTO dto, HttpSession session) {
+		log.info("------CT----->kakaoLoginPro");
+		log.info("======== naver login data => "+dto);
+		int result = 0;
+		
+		if(service.naverCheck(dto) == 1) {
+			session.setAttribute("id", dto.getId());
+			result = 1;
+		} else {
+			session.setAttribute("id", dto.getId());
+			result = service.naverInsert(dto);
 		}
 		
 		return result;
