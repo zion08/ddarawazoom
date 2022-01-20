@@ -255,8 +255,14 @@ public class CoachRoomController {
 	}
 	
 	@RequestMapping("/add_eventPro")
-	public @ResponseBody int add_eventPro(@RequestBody ScheduleDTO dto) throws ParseException {
+	public @ResponseBody int add_eventPro(@RequestBody ScheduleDTO dto, HttpSession session) throws ParseException {
 		log.info("	-----CT----->add_eventPro");
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		dto.setC_id(c_id);
 		
 		// 날짜와 시간정보를 각각 String 값으로 받은 후 두개를 합쳐서 Date 타입으로 변환 후 데이터 삽입
 		String startStr = dto.getStart_date() +" "+ dto.getStart_time();
@@ -311,9 +317,15 @@ public class CoachRoomController {
 	}
 	
 	@RequestMapping("/update_schedulePro")
-	public @ResponseBody int update_schedulePro(@RequestBody ScheduleDTO dto) throws ParseException {
+	public @ResponseBody int update_schedulePro(@RequestBody ScheduleDTO dto, HttpSession session) throws ParseException {
 		log.info("	-----CT----->update_schedulePro");
 		log.info(""+dto);
+		
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 임시 코치 아이디
+		c_id = "kimcoach";
+		dto.setC_id(c_id);
 		
 		// 날짜와 시간정보를 각각 String 값으로 받은 후 두개를 합쳐서 Date 타입으로 변환 후 데이터 삽입
 		String startStr = dto.getStart_date() +" "+ dto.getStart_time();

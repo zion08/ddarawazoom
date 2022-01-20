@@ -18,7 +18,7 @@
 
 	<!-- 스케줄 등록 -->
 	<insert id="insertSchedule" parameterType="org.mvc.bean.ScheduleDTO">
-		insert into tbl_calendar (id, m_id, c_id, title, start_time, end_time, color)
+		insert into tbl_calendar (id, m_id, c_id, title, start_time, end_time, color, c_nick)
 			values( 
 				seq_calendar.nextval,
 				#{m_id},
@@ -26,7 +26,8 @@
 				#{title},
 				#{start},
 				#{end},
-				#{color}
+				#{color},
+				#{c_nick}
 			)
 	</insert>
 
@@ -46,8 +47,10 @@
 			title = #{title},
 			m_id = #{m_id},
 			start_time = #{start},
-			end_time = #{end}
-		where id = #{id}
+			end_time = #{end},
+			color = #{color},
+			c_nick = #{c_nick}
+		where id = #{id} and c_id = #{c_id}
 	</update>
 	<!-- 스케줄 관련 코드 종료 -->
 

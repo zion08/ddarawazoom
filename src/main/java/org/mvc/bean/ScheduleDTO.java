@@ -13,6 +13,7 @@ public class ScheduleDTO {
 	private Date start;
 	private Date end;
 	private String color;
+	private String c_nick;
 	
 	private String start_date;
 	private String start_time;

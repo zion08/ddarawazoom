@@ -39,19 +39,21 @@
 	        <table class="table table-striped table-sm table-bordered">
 	          <thead>
 	            <tr>
-	              <th scope="col" style="width: 25%">강의 제목</th>
+	              <th scope="col" style="width: 30%">강의 제목</th>
 	              <th scope="col" style="width: 15%">회원 닉네임</th>
 	              <th scope="col">후기</th>
 	            </tr>
 	          </thead>
 	          <tbody>
-	          	<c:forEach var="list" items="${reviewList}">
-	              <tr>
-	                <td>${list.title}</td>
-	                <td>${list.nick}</td>
-	                <td>${list.content}</td>
-	              </tr>
-	            </c:forEach>
+	          
+	          <c:forEach var="list" items="${reviewList}">
+	            <tr>
+	              <td>${list.title}</td>
+	              <td>${list.nick}</td>
+	              <td>${list.content}</td>
+	            </tr>
+	          </c:forEach>
+	          
 	          </tbody>
 	        </table>
         
