@@ -22,4 +22,21 @@ public class PaymentServiceImpl implements PaymentService {
 	public List<PaymentDTO> getPaymentList() {
 		return mapper.getPaymentList();
 	}
+	
+	@Override
+	public int getOerderCount() {
+		return mapper.getOerderCount();
+	}
+
+	@Override
+	public PaymentDTO getMerchantUidInfo(String merchant_uid) {
+		return mapper.getMerchantUidInfo(merchant_uid);
+	}
+
+	@Override
+	public int paymentCancelUpdate(PaymentDTO dto) {
+		return mapper.paymentCancelUpdate(dto);
+	}
+
+	
 }

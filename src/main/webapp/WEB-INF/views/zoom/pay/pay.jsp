@@ -5,8 +5,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script type="text/javascript">	
-	
-		//01. 결제 준비
+   
+    $(document).ready(function(){
+    	//01. 결제 준비
 		var IMP = window.IMP;
 		IMP.init("imp37432029");  //가맹점 식별 코드
 		
@@ -24,8 +25,7 @@
 	    seconds = seconds < 10 ? '0' + seconds.toString() : seconds.toString();
 
 	    var paystart = year + month + day + hour + minites + seconds;
-    
-    $(document).ready(function(){
+	    
 		//02. 결제 하기
 		$('#payBtn').click(function() {	// IMP.request_pay(param, callback) 결제창 호출      
 			var merchant_uid = "ddz"+${ZoomDTO.num}+"C"+paystart;
@@ -58,10 +58,10 @@
 		                    	confirm = parseInt(result);	// 문자>순자 변환	                    	
 		                    	console.log(result);
 		                    	if(confirm == 1){
-		                    		console.log("payment All Success");
+		                    		console.log("Payment All Success");
 		        	            	msg += '(' + rsp.name +')';	        	            	
 		                    	} else {
-		                    		console.log("payment Warn");
+		                    		console.log("Payment Warn");
 		                    	}
 		                    	alert(msg);
 		                    }
@@ -78,35 +78,48 @@
 		
 		
 		//03. 환물 하기
-		$('#payCancelBtn').click(function () {
-			var imp_uid = $("#impUid").val();
+		$("#refundBtn").click(function(){
+			$("#refundModal").modal('show');			
+
 			var merchant_uid = $("#merchantUid").val();
-			console.log(imp_uid);
-			console.log(merchant_uid)
+			var refund_req_amount = $("#refundReqAmount").val();
 			
-			$.ajax({
-                type: "post", 
-                url: "/ddarawazoom/paycancelPro", // data 보낼 주소
-                data: {
-                	"imp_uid": imp_uid,
-					"merchant_uid": merchant_uid
-					},	                    	
-                success: function(result){	// data 전송 성공 했을때
-                	confirm = parseInt(result);	// 문자>순자 변환	                    	
-                	console.log(result);
-                	if(confirm == 1){
-                		console.log("payment Cancle All Success");
-                		var msg = '결제 취소 완료';
-                		        	            	
-                	} else {
-                		
-                	}
-                	alert(msg);
-                }
-            });	
-		});
-		
-		
+			$('#refundCheckBtn').click(function () {
+				var refund_reason = $("#refundReason").val();
+				var refund_partail = $("#refundPartial").val();
+				if (refund_partail > 0){
+					refund_req_amount = refund_req_amount - refund_partail;
+				}
+				console.log(merchant_uid);
+				console.log(refund_req_amount);
+				console.log(refund_reason);
+			
+				$.ajax({
+	                type: "post", 
+	                url: "/ddarawazoom/payRefund", // data 보낼 주소
+	                data: {
+	                	"merchant_uid": merchant_uid,
+						"refund_reason": refund_reason,
+						"refund_req_amount": refund_req_amount
+						},	                    	
+	                success: function(result){	// data 전송 성공 했을때	                		                    	
+	                	console.log(result);
+	                	if(result == 1){
+	                		console.log("Payment Cancle All Success");
+	                		var msg = '결제 취소를 완료하였습니다.';	                		        	            	
+	                	} else if (result == -1) {
+	                		console.log("Alredy All Canclled");
+	                		var msg = '이미 전액 최소된 주문입니다.';
+	                	} else {
+	                		console.log("Payment Cancle Failed");
+	                		var msg = '결제 최소에 실패하였습니다.';
+	                	}
+	                	alert(msg);
+	                }
+	            });
+
+			});
+		});		
 	});
 	
 </script>
@@ -128,6 +141,7 @@
 	              	<th scope="col">상품번호</th>
 	              	<th scope="col">강의명</th>
 	              	<th scope="col">결제금액</th>
+	              	<th scope="col">환불금액</th>
 	              	<th scope="col">구매자</th>
 	              	<th scope="col">결제시각</th>
 	              	<th scope="col">상태</th>
@@ -140,6 +154,7 @@
 		              	<td>${paymentDTO.merchantUid}</td>
 		              	<td>${paymentDTO.name}</td>
 		              	<td>${paymentDTO.amount}</td>
+		              	<td>${paymentDTO.cancelAmount}</td>
 		              	<td>
 		              		${paymentDTO.buyerName}</br>
 		              		${paymentDTO.buyerTel}</br>
@@ -147,23 +162,68 @@
 		              	</td>
 		              	<td>${paymentDTO.paidAt}</td>
 		              	<td>
-		              		${paymentDTO.status}
+		              		${paymentDTO.status}</br>
 		              		<c:if test="${paymentDTO.status == 'paid'}">
-		              			<input type="hidden" id="impUid" value="${paymentDTO.impUid}" />
-		              			<input type="hidden" id="merchantUid" value="${paymentDTO.merchantUid}" />
-		              			<button id="payCancelBtn" onclick="run(param1)">
+		              			<input type="hidden"  id="merchantUid" value="${paymentDTO.merchantUid}"/>
+		              			<input type="hidden"  id="refundReqAmount" value="${paymentDTO.amount}"/>
+		              			<button id="refundBtn" data-toggle="modal" data-target="#exampleModal">
 		              				취소하기		              				
 	              				</button>
+		              		</c:if>
+		              		<c:if test="${paymentDTO.status == 'cancelled'}">
+		              			${paymentDTO.cancelledAt}
+		              			(${paymentDTO.cancelReason})</br>
 		              		</c:if>		              		
 		              	</td>
             		</tr>
 				</c:forEach>        
-          </tbody>
-        </table>
-      </div>
+			</tbody>
+		</table>
+	</div>
 	
 </section>
 
 
+<!-- Modal -->
+<div class="modal fade" id="refundModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-6 shadow">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title">결제 취소</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body px-5 py-2">
+      	<div class="form-floating mb-2">
+	        <input type="text" class="form-control rounded-4" id="refundReason" placeholder="환불 사유가 무엇인가요?">
+	        <label for="refundReason" >환불 사유가 무엇인가요?</label>
+        </div>
+      </div>
+      
+      <div class="d-flex gap-5 justify-content-center">
+  		<div class="list-group mx-0">
+  			<label class="list-group-item d-flex gap-2">
+      			<input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios" checked>
+      			<span>
+       				전액 환물
+				</span>
+    		</label>
+    		<label class="list-group-item d-flex gap-2">
+      			<input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios" value="" >
+      			<span>
+       				일부 환불 <input type="text" id="refundPartial"></input>
+      			</span>
+    		</label> 	
+		</div>
+      </div>
+      
+      <div class="modal-footer flex-column border-top-0">
+        <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" id="refundCheckBtn">Save changes</button>
+        <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <%@ include file="../../layout/footer.jsp"%>
