@@ -10,7 +10,7 @@
 		<title>userInfo 수정페이지</title>
 		<link href="../../resources/css/user.css" rel="stylesheet">
 		
-		<script src="/resources/js/user.js" type="text/javascript"></script>
+		<script src="../../resources/js/user.js" type="text/javascript"></script>
 	</head>
 	<body>
 
@@ -19,7 +19,7 @@
 	    <div class="row g-5">
 	      <div class="col-md-7 col-lg-8">
 	        <h4 class="mb-3">멤버 정보 수정</h4>
-	        <form class="needs-validation" novalidate id="updateForm" action="/myroom/info" method="post" onsubmit="update_submit();">
+	        <form class="needs-validation" novalidate id="updateForm" action="/myroom/userInfo" method="post" onsubmit="infoUpdate_submit();">
 	          <div class="row g-3">
 					<div class="col-6">
 						<label for="id" class="form-label">아이디</label>
@@ -32,18 +32,27 @@
 						<div class="input-group has validation">
 							<input type="text" name="pw" class="form-control" value="${userInfo.pw}" required/>
 						</div>
+						<div class="invalid-feedback">
+	               		 	닉네임은 필수항목입니다.
+	              		</div>
 					</div>
 		            <div class="col-6">
 						<label for="email" class="form-label">이메일</label>
 						<div class="input-group has validation">
 							<input type="text" name="email" class="form-control" value="${userInfo.email}" required/>
 						</div>
+						<div class="invalid-feedback">
+		                	이메일은 필수항목입니다.
+		              	</div>
 					</div>
 		            <div class="col-6">
 						<label for="nick" class="form-label">닉네임</label>
 						<div class="input-group has validation">
 							<input type="text" name="nick" class="form-control" value="${userInfo.nick}" required/>
 						</div>
+						<div class="invalid-feedback">
+	                		닉네임은 필수항목입니다.
+	              		</div>
 					</div>
 	          </div>
 	          

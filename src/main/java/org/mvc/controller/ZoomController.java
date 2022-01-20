@@ -1,14 +1,14 @@
 package org.mvc.controller;
 
-import java.io.File;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
+import org.mvc.bean.LikeDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ZoomDTO;
+import org.mvc.service.MyRoomService;
 import org.mvc.service.ZoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +27,9 @@ public class ZoomController {
 	
 	@Autowired
 	private ZoomService service;
+	
+	@Autowired
+	private MyRoomService myService;
 	
 	@Autowired
 	private FileInfo fileInfo;   
@@ -87,8 +90,19 @@ public class ZoomController {
 	
 	// ===== zoom강의별 내용화면 ===== //
 	@RequestMapping("/zclasscontent")
-	public String zclasscontent(ZoomDTO dto , int num , Model model , HttpServletRequest request) { 
+	public String zclasscontent(ZoomDTO dto , int num , Model model , HttpSession session , HttpServletRequest request) { 
 		log.info(" -----CT-----> zoomClassContent ");
+		
+		String id = (String)session.getAttribute("id");
+		
+		// 임시 멤버 아이디
+		id = "kimcoach";
+			
+		model.addAttribute("result" , myService.likeCheck(id, num));
+		
+		log.info("=====log=="+ myService.likeCheck(id, num));
+
+		
 		model.addAttribute("ZoomDTO" , service.zoomContent(num)); 
 		
 		String pageNum= request.getParameter("pageNum");	
