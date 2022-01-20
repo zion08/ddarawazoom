@@ -2,7 +2,6 @@ package org.mvc.service;
 
 import java.util.List;
 
-import org.mvc.bean.UserDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.controller.MainController;
 import org.springframework.stereotype.Service;
@@ -18,8 +17,8 @@ public interface UserInfoService {
 	public int getUserInfo(UserInfoDTO dto);
 	
 	// 카카오 로그인(카카오에서 가져온 정보 DB에 저장)
-	public int kakaoInsert(UserDTO dto);
+	public int kakaoInsert(UserInfoDTO dto);
 	
 	// 카카오로 로그인한 사용자의 정보가 DB에 저장돼있는지 확인
-	public int kakaoCheck(UserDTO dto);
+	public int kakaoCheck(UserInfoDTO dto);
 }

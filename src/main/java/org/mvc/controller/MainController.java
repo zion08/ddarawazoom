@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.mvc.bean.UserDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,7 +102,7 @@ public class MainController {
 	
 	// ========= 카카오 로그인 ========= //
 	@RequestMapping("/kakaoLogin")
-	public @ResponseBody int kakaoLogin(@RequestBody UserDTO dto, HttpSession session) {
+	public @ResponseBody int kakaoLogin(@RequestBody UserInfoDTO dto, HttpSession session) {
 		log.info("------CT----->kakaoLogin");
 		log.info(""+dto);
 		int result = 0;

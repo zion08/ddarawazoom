@@ -2,7 +2,6 @@ package org.mvc.service;
 
 import java.util.List;
 
-import org.mvc.bean.UserDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.mybatis.UserInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +29,12 @@ public class UserInfoServiceImpl implements UserInfoService{
 	}
 
 	@Override
-	public int kakaoInsert(UserDTO dto) {
+	public int kakaoInsert(UserInfoDTO dto) {
 		return mapper.kakaoInsert(dto);
 	}
 
 	@Override
-	public int kakaoCheck(UserDTO dto) {
+	public int kakaoCheck(UserInfoDTO dto) {
 		return mapper.kakaoCheck(dto);
 	}
 
