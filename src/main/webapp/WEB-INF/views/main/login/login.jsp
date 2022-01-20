@@ -55,7 +55,7 @@
 		    style="margin-top: 20px;"/>
 		    
 		    <!-- 카카오톡 로그인 버튼 -->
-		    <img src="/resources/user/custom/img/kakao_login_large_narrow.png" width="98%" onclick="kakaoLogin();" />
+		    <img src="/resources/user/custom/img/kakao_login_large_narrow.png" width="320px" onclick="kakaoLogin();" />
             <!-- onclick="document.location.href='/ddarawazoom/kakaologin'" -->
             <!-- name="kakaoLogin()" -->
             

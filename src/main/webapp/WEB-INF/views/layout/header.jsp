@@ -31,6 +31,8 @@
 					<li><a class="dropdown-item" href="/ddarawazoom/zoom">Zoom 강의</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/ddarawazoom/vod">Vod 강의</a></li>
+					
+					<c:if test="${sessionScope.id != null}">
 					<li><hr class="dropdown-divider"></li>
 					<li class="dropdown-submenu">
 						<a class="dropdown-item dropdown-toggle" href="#" >멤버 전용공간<span class="caret"></span></a>
@@ -51,6 +53,9 @@
 							<li><a class="dropdown-item" href="/myroom/QnA">1:1문의</a></li>
 						</ul>
 					</li>
+					</c:if>
+					
+					<c:if test="${sessionScope.c_id != null}">
 					<li><hr class="dropdown-divider"></li>
 					<li class="dropdown-submenu">
 						<a class="dropdown-item dropdown-toggle" href="#">코치 전용공간<span class="caret"></span></a>
@@ -63,6 +68,8 @@
 							<li><a class="dropdown-item" href="/coachroom/info">정보관리</a></li>
 						</ul>
 					</li>
+					</c:if>
+					
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="#">따라와줌 파티룸</a></li>
 					<li><hr class="dropdown-divider"></li>

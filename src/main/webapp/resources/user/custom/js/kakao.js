@@ -33,7 +33,6 @@ function kakaoLogin() {
 				contentType : "application/json; charset=UTF-8",
 				success : function(data) {
 					if(data == 1){
-						alert("로그인 되었습니다.");
 						window.location="/ddarawazoom";
 					}
 				}
