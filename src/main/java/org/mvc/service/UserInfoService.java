@@ -16,4 +16,9 @@ public interface UserInfoService {
 	//회원 로그인 데이터 가져오기
 	public int getUserInfo(UserInfoDTO dto);
 	
+	// 카카오 로그인(카카오에서 가져온 정보 DB에 저장)
+	public int kakaoInsert(UserInfoDTO dto);
+	
+	// 카카오로 로그인한 사용자의 정보가 DB에 저장돼있는지 확인
+	public int kakaoCheck(UserInfoDTO dto);
 }

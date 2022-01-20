@@ -30,6 +30,7 @@
 			<form id="scheduleUpdateData">
 			
 				<input type="hidden" value="${schedule.id}" name="id" />
+				<input type="hidden" value="${schedule.c_id}" name="c_id" />
 				
 				<fmt:formatDate var="parseStartDate" pattern='yyyy-MM-dd' value='${schedule.start}' />
 				<fmt:formatDate var="parseStartTime" pattern='hh:mm' value='${schedule.start}' />
@@ -38,21 +39,29 @@
 				<fmt:formatDate var="parseEndTime" pattern='hh:mm' value='${schedule.end}' />
 			
 				<div class = "top">
-					<input class = "subject" type="text" name="title" value="${schedule.title}" />
+					<input class = "subject" type="text" name="title" value="${schedule.title}" placeholder="강의 제목을 입력해주세요." />
 				</div>
 				
 				<div class="domain">
-					<h3 class = "zTree-h3"> 수강생 이름 </h3>
+					<h3 class = "zTree-h3"> 수강생 ID </h3>
 				</div>
 				<div class="domain">
-					<input class="date" type="text" name="m_id" value="${schedule.m_id}" />
+					<input class="date" type="text" name="m_id" value="${schedule.m_id}" placeholder="수강생의 ID를 입력해주세요." />
 				</div>
 				
 				<div class="domain">
-					<h3 class = "zTree-h3"> 코치 이름 </h3>
+					<h3 class = "zTree-h3"> 코치 닉네임 </h3>
 				</div>
 				<div class="domain">
-					<input class="date" type="text" name="c_id" value="${schedule.c_id}" />
+					<input class="date" type="text" name="c_nick" value="${schedule.c_nick}" placeholder="코치님의 닉네임을 입력해주세요." />
+				</div>
+				
+				<div class="domain">
+					<h3 class = "zTree-h3"> 색상선택 </h3>
+				</div>
+				
+				<div class="domain">
+					<input type="color" class="form-control form-control-color" name="color" value="${schedule.color}">
 				</div>
 				
 				<div class="domain">

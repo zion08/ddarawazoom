@@ -127,5 +127,10 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	public int applyMemberCount(int num) {
 		return mapper.applyMemberCount(num);
 	}
+
+	@Override
+	public List<ReviewDTO> getAllReview(String id) {
+		return mapper.getAllReview(id);
+	}
 	
 }

@@ -12,6 +12,8 @@ public class ScheduleDTO {
 	private String title;
 	private Date start;
 	private Date end;
+	private String color;
+	private String c_nick;
 	
 	private String start_date;
 	private String start_time;

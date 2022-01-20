@@ -28,6 +28,16 @@ public class UserInfoServiceImpl implements UserInfoService{
 		return mapper.getUserInfo(dto);
 	}
 
+	@Override
+	public int kakaoInsert(UserInfoDTO dto) {
+		return mapper.kakaoInsert(dto);
+	}
+
+	@Override
+	public int kakaoCheck(UserInfoDTO dto) {
+		return mapper.kakaoCheck(dto);
+	}
+
 	
 	
 	

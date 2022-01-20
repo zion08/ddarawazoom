@@ -14,7 +14,20 @@
 		select count(*) from tbl_user where id=#{id} and pw=#{pw}
 	</select>
 	
+	<insert id="kakaoInsert">
+		insert into tbl_user(id, email, nick, img)
+			values(
+				#{id},
+				#{email},
+				#{nick},
+				#{img}
+			)
+	</insert>
 	
+	<select id="kakaoCheck" resultType="Integer"> 
+		select count(*) from tbl_user
+			where id = #{id}
+	</select>
 	
 </mapper>
 

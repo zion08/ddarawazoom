@@ -18,14 +18,16 @@
 
 	<!-- 스케줄 등록 -->
 	<insert id="insertSchedule" parameterType="org.mvc.bean.ScheduleDTO">
-		insert into tbl_calendar (id, m_id, c_id, title, start_time, end_time)
+		insert into tbl_calendar (id, m_id, c_id, title, start_time, end_time, color, c_nick)
 			values( 
 				seq_calendar.nextval,
 				#{m_id},
 				#{c_id},
 				#{title},
 				#{start},
-				#{end}
+				#{end},
+				#{color},
+				#{c_nick}
 			)
 	</insert>
 
@@ -45,8 +47,10 @@
 			title = #{title},
 			m_id = #{m_id},
 			start_time = #{start},
-			end_time = #{end}
-		where id = #{id}
+			end_time = #{end},
+			color = #{color},
+			c_nick = #{c_nick}
+		where id = #{id} and c_id = #{c_id}
 	</update>
 	<!-- 스케줄 관련 코드 종료 -->
 
@@ -144,6 +148,15 @@
 	<!-- 해당 수업의 모든 리뷰의 갯수 -->
 	<select id="reviewCount" resultType="Integer">
 		select count(*) from tbl_review where class_num = #{class_num}
+	</select>
+	
+	<!-- 코치룸 메인에 표기할 모든 수업에 달린 최신 리뷰 -->
+	<select id="getAllReview" resultType="org.mvc.bean.ReviewDTO">
+		<![CDATA[
+			select c.c_id, c.num, r.class_num, r.nick, r.title, r.content
+	    		from tbl_coachClass c, tbl_review r
+	        		where c.c_id = #{c_id} and c.num = r.class_num and rownum <= 10 order by r.review_num desc
+        ]]>
 	</select>
 	<!-- 리뷰관리 관련 코드 종료 -->
 	
