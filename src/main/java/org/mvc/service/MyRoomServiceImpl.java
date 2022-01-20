@@ -1,10 +1,14 @@
 package org.mvc.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mvc.bean.BodyProfileDTO;
+import org.mvc.bean.LikeDTO;
 import org.mvc.bean.MyProfileDTO;
-import org.mvc.bean.UserDTO;
+import org.mvc.bean.ScheduleDTO;
+import org.mvc.bean.UserInfoDTO;
+import org.mvc.bean.ZoomDTO;
 import org.mvc.mybatis.MyRoomMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,23 +20,22 @@ import lombok.Setter;
 public class MyRoomServiceImpl implements MyRoomService {
 
 // 바디프로필 관련
-
 	@Setter(onMethod_=@Autowired)
 	private MyRoomMapper mapper;
 
 	@Override
-	public MyProfileDTO getMyProfile(String b_id) {
-		return mapper.getMyProfile(b_id);
+	public MyProfileDTO getMyProfile(String id) {
+		return mapper.getMyProfile(id);
 	}
 	
 	@Override
-	public List<BodyProfileDTO> getBodyProfile(String b_id) {
-		return mapper.getBodyProfile(b_id);
+	public List<BodyProfileDTO> getBodyProfile(String id) {
+		return mapper.getBodyProfile(id);
 	}
 
 	@Override
-	public List<BodyProfileDTO> bodyList(String b_id){
-		return mapper.bodyList(b_id);
+	public List<BodyProfileDTO> bodyList(String id){
+		return mapper.bodyList(id);
 	}
 	
 	@Override
@@ -51,8 +54,8 @@ public class MyRoomServiceImpl implements MyRoomService {
 	}
 
 	@Override
-	public BodyProfileDTO bodyRead(int b_num, String b_id) {
-		return mapper.bodyRead(b_num, b_id);
+	public BodyProfileDTO getBodyInfo(BodyProfileDTO bodyDTO) {
+		return mapper.getBodyInfo(bodyDTO);
 	}
 	
 	@Override
@@ -66,21 +69,48 @@ public class MyRoomServiceImpl implements MyRoomService {
 	}
 
 	
-// 회원정보 관련
-	
+//  멤버 정보 관련
 	@Override
-	public UserDTO getUserInfo(String id) {
+	public UserInfoDTO getUserInfo(String id) {
 		return mapper.getUserInfo(id);
 	}
 
 	@Override
-	public int updateInfo(UserDTO userDTO) {
+	public int updateInfo(UserInfoDTO userDTO) {
 		return mapper.updateInfo(userDTO);
 	}
 
 	@Override
-	public int updateImg(UserDTO userDTO) {
+	public int updateImg(UserInfoDTO userDTO) {
 		return mapper.updateImg(userDTO);
 	}
 
+	
+// 멤버 일정 관련
+	@Override
+	public ArrayList<ScheduleDTO> getAllClass(String id) {
+		return mapper.getAllClass(id);
+	}
+
+	
+// 관심 등록 관련
+	@Override
+	public ArrayList<ZoomDTO> likeZoomList(int num) {
+		return mapper.likeZoomList(num);
+	}
+
+	@Override
+	public Boolean likeCheck(String id, int num) {
+		return mapper.likeCheck(id, num);
+	}
+
+	@Override
+	public int zoomLikeWrite(LikeDTO likeDTO) {
+		return mapper.zoomLikeWrite(likeDTO);
+	}
+
+	@Override
+	public int zoomLikeDelete(LikeDTO likeDTO) {
+		return mapper.zoomLikeDelete(likeDTO);
+	}
 }

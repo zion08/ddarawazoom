@@ -17,7 +17,7 @@
 	    <div class="row g-5">
 	      <div class="col-md-7 col-lg-8">
 			<h4 class="mb-3">바디 프로필 수정</h4>
-				<form action="/myroom/bodyprofile/bodyUpdatePro" method="post" enctype="multipart/form-data">
+				<form action="/myroom/bodyprofile/bodyUpdatePro" id="updateForm" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="b_num" value="${bodyProfileDTO.b_num}" />
 						<div class="row g-3">
 							<div class="col-12">

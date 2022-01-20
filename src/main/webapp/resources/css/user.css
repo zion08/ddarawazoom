@@ -1,44 +1,78 @@
 @charset "UTF-8";
 
-body{
-	margin: 0 auto;
+
+table{
+	margin-top: 80px;
 	text-align: center;
 }
 
-#table{
-	text-align: center;
+.mb-3{
+	text-align: center; 
 }
 
-.userImg input {
+.mb-3 img{
+	margin-top: 20px;
+}
+
+.mb-3 input{
 	width: 150px;
 	height: 35px;
 	font-size: 12px;
+	margin: 0 auto;	
 	text-align: center;
+	margin-top:20px;
 }
-
 
 .table-responsive{
 	  margin-right: auto;
 	  margin-left: auto;
 	  width: 800px;
 	  height: 200px;
-	  margin-top: 50px;
 }
 
-.userInfoUpdateButton{
-	margin: auto;
-}
 
-#updateButton{
-	text-align: center;
-}
-
-#formFileMultiple{
+.mb-3 .form-control{
 	width:350px;
 	margin: auto;
 	font-size: 15px;
 }
 
-h3{
-	padding: 10px;
+#likeZoom{
+	float: left;
+}
+
+#likeVod{
+	float: right;
+}
+
+.list-group-item{
+	width: 120px;
+}
+
+.card-body{
+	text-align: center;
+	padding: 30px;
+}
+
+
+
+.card-text{
+	margin: 25px;
+}
+
+.userInfoUpdateButton{
+	text-align: center;
+}
+
+.row .g-3{
+	margin-top:30px;
+}
+
+.mb-3 h3{
+	margin: 10px;
+}
+
+.title{
+	text-align: center;
+	margin: auto;
 }

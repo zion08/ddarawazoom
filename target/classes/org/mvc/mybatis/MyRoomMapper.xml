@@ -7,8 +7,7 @@
 <mapper namespace="org.mvc.mybatis.MyRoomMapper">
 
 <!-- 멤버 관련 관련 코드 시작 -->
-
-	<select id="getUserInfo" resultType="org.mvc.bean.UserDTO">
+	<select id="getUserInfo" resultType="org.mvc.bean.UserInfoDTO">
 		select * from tbl_user where id = #{id}
 	</select>
 	
@@ -25,19 +24,27 @@
 			img = #{img}
 		where id = #{id}			
 	</update>
-	
 <!-- 멤버 관련 관련 코드 끝  -->
+
+
+<!-- 멤버 일정 관련 코드 시작 -->	
+	<resultMap type="org.mvc.bean.ScheduleDTO" id="calMap"> 
+		<result property="start" column="start_time"/> 
+		<result property="end" column="end_time"/> 
+	</resultMap>
+	
+	<select id="getAllClass" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
+		select * from tbl_calendar where m_id = #{m_id}
+	</select>
+<!-- 멤버 일정 관련 코드 끝 -->	
 
 
 
 <!-- 바디프로필 관련 코드 시작 -->	
-	
-	<!-- bodyprofile 페이지에 myprofile/ bodyprofile 결과 출력 -->
 	<select id="getMyProfile" resultType="org.mvc.bean.MyProfileDTO">
 		select * from tbl_myprofile where b_id = #{b_id}
 	</select>
 	
-	<!-- bodyprofile 최근 결과 출력 -->
 	<select id="getBodyProfile" resultType="org.mvc.bean.BodyProfileDTO">
 		select * from tbl_bodyprofile
 			where b_id = #{b_id} and b_num = (
@@ -45,7 +52,6 @@
 			)
 	</select>
 	
-	<!-- bodyprofile 페이지 bodyprofile 그래프 아래 bodyprofile 리스트 출력-->
 	<select id="bodyList" resultType="org.mvc.bean.BodyProfileDTO">
 		<![CDATA[
 		select * from(
@@ -79,8 +85,6 @@
 		where b_id = #{b_id}
 	</update>
 
-
-
 	<insert id="bodyWrite" parameterType="org.mvc.bean.BodyProfileDTO">
 		insert into tbl_bodyprofile(b_num, b_id, b_height, b_weight, b_muscle, b_bodyfat, b_shape, b_chest, b_waist, b_arm, b_thigh, b_hip, b_date, b_img)
 			values(
@@ -101,13 +105,13 @@
 			)
 	</insert>
 	
-	<select id="bodyRead" resultType="org.mvc.bean.BodyProfileDTO">
+	<select id="getBodyInfo" resultType="org.mvc.bean.BodyProfileDTO">
 		<![CDATA[
 			select * from tbl_bodyprofile where b_num = #{b_num} and b_id = #{b_id}
 		]]>
 	</select>
 	
-	<update id="bodyUpdate">
+	<update id="bodyUpdate" parameterType="org.mvc.bean.BodyProfileDTO">
 		<![CDATA[
 			update tbl_bodyprofile set
 				b_height = #{b_height},
@@ -122,15 +126,69 @@
 				b_hip = #{b_hip},
 				b_date = #{b_date},
 				b_img = #{b_img}
-			where b_num = #{b_num}
+			where  b_num = #{b_num} and b_id = #{b_id}
 			]]>
 	</update>
 	
 	<delete id="bodyDelete">
 		delete tbl_bodyprofile where b_num = #{b_num}
 	</delete>
-
 <!-- 바디프로필 관련 코드 끝 -->	
+	
+
+<!-- 관심 등록 관련 코드 시작 -->
+	
+	<!-- 멤버 관심등록 리스트 -->
+	<select id="likeZoomList" resultType="org.mvc.bean.ZoomDTO">
+		<![CDATA[
+			select * from (
+	    		select
+	    			tbl_like.zoom_num,
+	    			tbl_coachclass.num,
+	    			tbl_coachclass.img,
+	    			tbl_coachclass.c_id,
+	    			tbl_coachclass.title,
+	    			tbl_coachclass.intro,
+	    			tbl_coachclass.type,
+	    			tbl_coachclass.goal,
+	    			tbl_coachclass.tool,
+	    			tbl_coachclass.frequency,
+	    			tbl_coachclass.price
+	    		from tbl_coachclass, tbl_like
+			where tbl_coachclass.num = tbl_like.zoom_num) where num = #{num}
+		]]>
+	</select>
+	
+	<!-- 관심 등록 실행 -->
+	<insert id="zoomLikeWrite">
+		insert into tbl_like(id,zoom_num)
+			values(#{id},#{zoom_num})
+	</insert> 
+	
+	<!-- 관심 등록 -->
+	<select id="getLikeZoom" resultType="org.mvc.bean.LikeDTO">
+		<![CDATA[
+			select * from tbl_like where id = #{id} and zoom_num = #{zoom_num}
+		]]>
+	</select>
+	
+	<!-- 관심 등록 해제 -->
+	<delete id="zoomLikeDelete">
+		delete from tbl_like where zoom_num = #{zoom_num} and id = #{id}
+	</delete>
+	
+	<!-- zoom_num 갯수 확인 -->
+	<select id="getLikeCount" resultType="org.mvc.bean.LikeDTO">
+		select count(zoom_num) from tbl_like where id = #{id}
+	</select>
+	
+	<!-- 관심 체크 확인 -->
+	<select id="likeCheck" resultType="boolean">
+		select id , zoom_num from tbl_like where id = #{id} and zoom_num = #{zoom_num} 
+	</select>
+	
+	
+<!-- 관심 등록 관련 코드 끝 -->	
 	
 	
 </mapper>
