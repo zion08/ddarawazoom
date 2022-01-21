@@ -1,0 +1,50 @@
+.col-6{
+	width:110px;
+}
+.card{
+	width: 35rem;
+	margin: auto;
+	padding:0px;
+	overflow:hidden;
+	margin-top: 30px;
+}
+	
+.card-header{
+	text-align: center;
+	font-size: 15px;
+}
+
+.list-group-item{
+	text-align: center;
+	padding: 20px;
+	margin: auto;
+}
+
+#updateButton , #deleteButton{
+	width: 60px;
+	height: 30px;
+	font-size:12px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+table{
+	height: 130px;
+	vertical-align: middle;
+	font-size: 16px;
+}
+
+#bodyprofileList {
+ 	width: 90rem;
+ 	text-align: center;
+    margin: auto;
+    valign: middle;
+    margin-top:100px;
+}
+
+h2{
+	text-align: center;
+	margin-align: auto;
+	margin-top:40px;
+	margin-bottom: 20px;
+}

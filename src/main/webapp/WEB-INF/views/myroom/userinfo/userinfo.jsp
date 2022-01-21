@@ -7,9 +7,9 @@
 <html>
 	<head>
 		<title>userInfo 페이지</title>
-		<link href="../../resources/css/user.css" rel="stylesheet">
+		<link href="../../resources/css/myroom/user.css" rel="stylesheet">
 		
-		<script src="../../resources/js/user.js" type="text/javascript"></script>
+		<script src="../../resources/js/myroom/user.js" type="text/javascript"></script>
 	</head>
 	
 	<body>
