@@ -208,7 +208,7 @@ public class ZoomController {
 	
 	// ===== zoom강의별 내용화면 ===== //
 	@RequestMapping("/zclasscontent")
-	public String zclasscontent(ZoomDTO dto , int num , ReviewDTO dtot , Model model , HttpSession session , HttpServletRequest request) { 
+	public String zclasscontent(ZoomDTO dto , int num  , Model model , HttpSession session , HttpServletRequest request) { 
 		log.info(" -----CT-----> zoomClassContent ");
 		
 		String id = (String)session.getAttribute("id");  
