@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function calendarEvent(eventData) 
 	      headerToolbar: {
 	        left: 'prev,next today',
 	        center: 'title',
-	        right: 'addEvents,dayGridMonth,timeGridWeek,timeGridDay'
+	        right: 'dayGridMonth,timeGridWeek,timeGridDay'
 	      },
 	      locale: 'ko',
 	      navLinks: true, // can click day/week names to navigate views

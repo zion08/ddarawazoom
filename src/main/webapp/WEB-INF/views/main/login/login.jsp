@@ -44,7 +44,7 @@
 		   <div class="findidpw">
 		   		<label>
 		   			<input type="button" value="아이디 찾기" onclick="window.location='/ddarawazoom/findid'">
-		   			<input type="button" value="비밀번호 찾기" onclick="window.location='/ddarawazoom/findpw';">
+		   			<input type="button" value="비밀번호 찾기" onclick="window.location='/ddarawazoom/findpw'">
 		   		</label>
 		   </div>
 		    

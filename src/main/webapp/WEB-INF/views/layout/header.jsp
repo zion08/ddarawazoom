@@ -114,11 +114,11 @@
 	        <ul class="navbar-nav me-auto mb-2 mb-lg-0 position-absolute top-50 translate-middle-y">
 	        	<li class="nav-item">
 				
-					<c:if test="${empty sessionScope.id}">
+					<c:if test="${empty sessionScope.id && empty sessionScope.c_id}">
 						<a class="nav-link" href="/ddarawazoom/login">로그인</a>
 					</c:if>
 					
-					<c:if test="${not empty sessionScope.id}">
+					<c:if test="${not empty sessionScope.id || not empty sessionScope.c_id}">
 					
 						<c:set var="session" value="${sessionScope.id}" />
 						
@@ -135,7 +135,7 @@
 					
 		        </li>
 		        
-		        <c:if test="${empty sessionScope.id}">
+		        <c:if test="${empty sessionScope.id && empty sessionScope.c_id}">
 			        <li class="nav-item dropdown ">
 			          	<a class="nav-link dropdown-toggle" href="#" 
 			          	id="navbarDropdown" role="button" 
