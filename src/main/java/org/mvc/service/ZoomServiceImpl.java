@@ -19,14 +19,10 @@ public class ZoomServiceImpl implements ZoomService{
 	@Setter(onMethod_=@Autowired)
 	private ZoomMapper mapper;
 	
+	// 코치강의관련
 	@Override
-	public List<ZoomDTO> zoomList(int firstRownum, int lastRownum) {
+	public List<ZoomDTO> zoomList(int firstRownum, int lastRownum) { 
 		return mapper.zoomList(firstRownum, lastRownum); 
-	}
-	
-	@Override
-	public ZoomDTO zoomContent(int num) { 
-		return mapper.zoomContent(num); 
 	}
 	
 	@Override
@@ -59,20 +55,31 @@ public class ZoomServiceImpl implements ZoomService{
 	public int imgUpdate(ZoomDTO dto) {
 		return mapper.imgUpdate(dto);
 	}
+	
+	@Override
+	public ZoomDTO zoomContent(int num) { 
+		return mapper.zoomContent(num); 
+	}
+	
+	// 후기관련
+	@Override
+	public List<ReviewDTO> reList(int firstRownum, int lastRownum) { 
+		return mapper.reList(firstRownum, lastRownum);
+	}
 
 	@Override
 	public int reInsert(ReviewDTO dto) {
 		return mapper.reInsert(dto);
 	}
 
+
 	@Override
-	public List<ReviewDTO> reList(int firstRownum, int lastRownum) {
-		return mapper.reList(firstRownum, lastRownum);
+	public int reCount(Long num) {
+		return mapper.reCount(num);  
 	}
 
 	@Override
-	public int reCount() {
-		return mapper.reCount();
+	public List<ReviewDTO> reContent(Long class_num) {
+		return mapper.reContent(class_num);
 	}
-
 }
