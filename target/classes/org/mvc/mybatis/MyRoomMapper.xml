@@ -172,7 +172,7 @@
 	</select>
 	
 	<!-- Zoom 관심 체크 여부 확인 -->
-	<select id="zoomlikeCheck" resultType="Integer">
+	<select id="zoomLikeCheck" resultType="Integer">
 		select count(*) from tbl_like where id = #{id} and zoom_num = #{zoom_num} 
 	</select>
 	
