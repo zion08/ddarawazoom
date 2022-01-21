@@ -21,11 +21,15 @@
 	window.addEventListener('load', function(){
 		naverLogin.getLoginStatus(function (status){
 			if(status){
+				
 				// 필수로 받아야하는 항목 체크
 				var email = naverLogin.user.getEmail(); // 사용자 이메일 정보
 				var name = naverLogin.user.getName(); // 사용자 이름
-				
+				var img = naverLogin.user.profile_image; // 사용자 프로필 사진
 				console.log(naverLogin.user); // 사용자 정보
+				
+				console.log(naverLogin.accessToken);
+				
 				if(email == undefined || email == null){
 					alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
 					// 사용자정보 재동의를 위해 동의 페이지로 다시 이동
@@ -35,10 +39,13 @@
 					alert("사용자 이름은 필수정보입니다. 정보제공을 동의해주세요.");
 					// 사용자정보 재동의를 위해 동의 페이지로 다시 이동
 					naverLogin.reprompt();
+				} else if(img == undefined || img == null){
+					alert("프로필 사진은 필수정보입니다. 정보제공을 동의해주세요.");
+					// 사용자정보 재동의를 위해 동의 페이지로 다시 이동
+					naverLogin.reprompt();
 				}
 				
 				var id = naverLogin.user.getId() + "naverLogin"; // 사용자 고유 ID
-				var img = naverLogin.user.profile_image; // 사용자 프로필 사진
 				
 				var naverData = JSON.stringify({
 					'id' : id,
@@ -56,9 +63,9 @@
 				});
 				
 				window.location.replace('http://'
-										+ window.location.hostname
-										+ (location.port == '' || location.port == undefined ? '' : ':' + location.port)
-										+ '/ddarawazoom');
+						+ window.location.hostname
+						+ (location.port == '' || location.port == undefined ? '' : ':' + location.port)
+						+ '/ddarawazoom');
 			}
 		});
 	});
