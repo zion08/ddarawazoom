@@ -12,7 +12,7 @@
     <h1 style="text-align: center;"> 리뷰/회원 관리 </h1>
     <div class="container">
 
-      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 g-3">
+      <div class="row row-cols-1 row-cols-sm-1 g-3">
       <c:if test="${count == 0}">
 	      <section class="py-5 text-center container">
 		    <div class="row py-lg-5">
@@ -21,7 +21,8 @@
 		        <hr class="my-4">
 		        <p class="lead text-muted">코치님만의 개성있고 파워풀한 수업을 등록해보세요!</p>
 		        <p>
-		          <a href="#" class="btn btn-primary my-2">수업 등록하러가기 ☞</a>
+		          <button type="button" class="btn btn-primary my-2"
+		          	onclick="window.location='/ddarawazoom/zwriteForm?c_id=${sessionScope.c_id}'">수업 등록하러가기 ☞</button>
 		        </p>
 		      </div>
 		    </div>
