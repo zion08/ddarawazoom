@@ -45,9 +45,6 @@ public class CoachRoomController {
 		log.info("	-----CT----->coachMain");
 		
 		String c_id = (String)session.getAttribute("c_id");
-		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 
 		model.addAttribute("reviewList", service.getAllReview(c_id));
 		
@@ -59,9 +56,6 @@ public class CoachRoomController {
 	public String info(HttpSession session, Model model) {
 		log.info("	-----CT----->coachInfo");
 		String c_id = (String)session.getAttribute("c_id");
-		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		
 		model.addAttribute("coachInfo", service.getCoachInfo(c_id));
 		model.addAttribute("coachCareer", service.getAllCareerInfo(c_id));
@@ -76,9 +70,6 @@ public class CoachRoomController {
 		log.info("	-----CT----->coachInfoUpdate");
 		
 		String c_id = (String)session.getAttribute("c_id");
-		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		
 		model.addAttribute("coachInfo", service.getCoachInfo(c_id));
 		
@@ -100,9 +91,6 @@ public class CoachRoomController {
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
-		
 		dto.setC_id(c_id);
 		result = service.updateInfo(dto);
 		
@@ -121,9 +109,6 @@ public class CoachRoomController {
 		log.info(""+save.getOriginalFilename());
 		
 		String c_id = (String)session.getAttribute("c_id");
-		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		
 		dto.setC_id(c_id);
 		
@@ -151,8 +136,6 @@ public class CoachRoomController {
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		dto.setC_id(c_id);
 		result = service.insertCareer(dto);
 		
@@ -165,8 +148,6 @@ public class CoachRoomController {
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		dto.setC_id(c_id);
 		
 		model.addAttribute("coachCareer", service.getCareerInfo(dto));
@@ -182,8 +163,6 @@ public class CoachRoomController {
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		dto.setC_id(c_id);
 		result = service.updateCareer(dto);
 		
@@ -198,8 +177,6 @@ public class CoachRoomController {
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		dto.setC_id(c_id);
 		
 		result = service.deleteCareer(dto);
@@ -221,8 +198,6 @@ public class CoachRoomController {
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		dto.setC_id(c_id);
 		result = service.updateItroduce(dto);
 		
@@ -243,8 +218,6 @@ public class CoachRoomController {
 		log.info("	-----CT----->getSchedule");
 		String c_id = (String)session.getAttribute("c_id");
 		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		return service.getAllSchedule(c_id);
 	}
 	
@@ -260,8 +233,6 @@ public class CoachRoomController {
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		dto.setC_id(c_id);
 		
 		// 날짜와 시간정보를 각각 String 값으로 받은 후 두개를 합쳐서 Date 타입으로 변환 후 데이터 삽입
@@ -306,8 +277,6 @@ public class CoachRoomController {
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		dto.setC_id(c_id);
 		
 		log.info(""+service.getSchedule(dto));
@@ -323,8 +292,6 @@ public class CoachRoomController {
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		dto.setC_id(c_id);
 		
 		// 날짜와 시간정보를 각각 String 값으로 받은 후 두개를 합쳐서 Date 타입으로 변환 후 데이터 삽입
@@ -353,9 +320,6 @@ public class CoachRoomController {
 		log.info("	-----CT----->class");
 		
 		String c_id = (String)session.getAttribute("c_id");
-		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		
 		int pageSize = 10;
 		
@@ -392,8 +356,6 @@ public class CoachRoomController {
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		dto.setC_id(c_id);
 		
 		int pageSize = 10;
@@ -431,9 +393,6 @@ public class CoachRoomController {
 		log.info("	-----CT-----> member/content");
 		
 		String c_id = (String)session.getAttribute("c_id");
-		
-		// 임시 코치 아이디
-		c_id = "kimcoach";
 		
 		Long num = Long.valueOf(dto.getNum());
 		

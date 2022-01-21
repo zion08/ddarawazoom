@@ -18,12 +18,16 @@ function kakaoLogin() {
 			var email = response.kakao_account.email; // 카카오 이메일
 			var kakaoImg = response.properties.profile_image; // 카카오 프로필 사진
 			
+			if(email == undefined || email == null){
+				email = '이메일을 등록해주세요';
+			}
+			
 			var kakaoData = JSON.stringify({
-				'id' : id,
-				'nick' : nick,
-				'email' : email,
-				'img' : kakaoImg
-			})
+					'id' : id,
+					'nick' : nick,
+					'email' : email,
+					'img' : kakaoImg
+				})
 			
         	$.ajax({
 				data : kakaoData,
@@ -33,7 +37,6 @@ function kakaoLogin() {
 				contentType : "application/json; charset=UTF-8",
 				success : function(data) {
 					if(data == 1){
-						alert("로그인 되었습니다.");
 						window.location="/ddarawazoom";
 					}
 				}
