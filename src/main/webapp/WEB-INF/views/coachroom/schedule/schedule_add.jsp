@@ -43,7 +43,7 @@
 				</div>
 				
 				<div class="domain">
-					<h3 class = "zTree-h3"> 코치 ID </h3>
+					<h3 class = "zTree-h3"> 코치 닉네임 </h3>
 				</div>
 				<div class="domain">
 					<input class="date" type="text" name="c_nick" placeholder="코치님의 닉네임을 입력해주세요." />
