@@ -23,6 +23,7 @@
 			if(status){
 				// 필수로 받아야하는 항목 체크
 				var email = naverLogin.user.getEmail(); // 사용자 이메일 정보
+				var name = naverLogin.user.getName(); // 사용자 이름
 				
 				console.log(naverLogin.user); // 사용자 정보
 				if(email == undefined || email == null){
@@ -30,10 +31,13 @@
 					// 사용자정보 재동의를 위해 동의 페이지로 다시 이동
 					naverLogin.reprompt();
 					return;
+				} else if(name == undefined || name == null){
+					alert("사용자 이름은 필수정보입니다. 정보제공을 동의해주세요.");
+					// 사용자정보 재동의를 위해 동의 페이지로 다시 이동
+					naverLogin.reprompt();
 				}
 				
 				var id = naverLogin.user.getId() + "naverLogin"; // 사용자 고유 ID
-				var name = naverLogin.user.getName(); // 사용자 이름
 				var img = naverLogin.user.profile_image; // 사용자 프로필 사진
 				
 				var naverData = JSON.stringify({
