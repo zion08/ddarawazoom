@@ -9,10 +9,10 @@
   		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
    	 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
-		<script src="../../resources/js/user.js" type="text/javascript"></script>
+		<script src="../../resources/js/myroom/user.js" type="text/javascript"></script>
 		
 		<link href="../../resources/css/styles.css" rel="stylesheet">
-		<link href="../../resources/css/user.css" rel="stylesheet">
+		<link href="../../resources/css/myroom/user.css" rel="stylesheet">
 		
 	</head>
 	<body>

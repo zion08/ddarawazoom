@@ -8,9 +8,10 @@
 <html>
 	<head>
 		<title>userInfo 수정페이지</title>
-		<link href="../../resources/css/user.css" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="../../resources/js/myroom/user.js" type="text/javascript"></script>
 		
-		<script src="../../resources/js/user.js" type="text/javascript"></script>
+		<link href="../../resources/css/myroom/user.css" rel="stylesheet">
 	</head>
 	<body>
 
