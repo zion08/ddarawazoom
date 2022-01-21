@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.review_title{
+	text-align: center;
+	margin: 50px;
+}
+
+.table{
+	width: 1300px;
+	text-align: center;
+	margin: auto;
+	vertical-align: middle;
+	margin-bottom: 100px;
+}
+
+.table th{
+	font-size: 15px;
+}

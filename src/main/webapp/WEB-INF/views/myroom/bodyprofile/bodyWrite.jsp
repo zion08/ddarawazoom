@@ -9,8 +9,6 @@
 <html>
 	<head>
 		<title>BodyProfile 작성 페이지</title>
-		<script src="../../resources/js/script.js"></script>
-		
 	</head>
 <body>
 	

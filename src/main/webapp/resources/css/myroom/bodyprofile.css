@@ -1,5 +1,6 @@
 .card{
-	width: 35rem;
+	width: 40rem;
+	height: 50rem;
 	margin: auto;
 	padding:0px;
 	overflow:hidden;
@@ -15,6 +16,13 @@
 	text-align: center;
 	padding: 20px;
 	margin: auto;
+}
+
+.list_button{
+	padding: 30px;
+	margin:auto;
+	text-align: center;
+	margin-top:10px;
 }
 
 #updateButton , #deleteButton{
@@ -44,4 +52,9 @@ h2{
 	margin-align: auto;
 	margin-top:40px;
 	margin-bottom: 20px;
+}
+
+.profile_title{
+	margin-top: 80px;
+	margin-bottom: 30px;
 }

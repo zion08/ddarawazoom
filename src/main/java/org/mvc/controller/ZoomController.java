@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
+import org.mvc.bean.LikeDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.MyRoomService;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -89,18 +91,16 @@ public class ZoomController {
 	
 	// ===== zoom강의별 내용화면 ===== //
 	@RequestMapping("/zclasscontent")
-	public String zclasscontent(ZoomDTO dto , int num , Model model , HttpSession session , HttpServletRequest request) { 
+	public String zclasscontent(LikeDTO likeDTO ,ZoomDTO dto , int num , Model model , HttpSession session , HttpServletRequest request) { 
 		log.info(" -----CT-----> zoomClassContent ");
 		
 		String id = (String)session.getAttribute("id");
 		
 		// 임시 멤버 아이디
-		id = "kimcoach";
+		id = "dam";
 			
-		model.addAttribute("result" , myService.likeCheck(id, num));
+		model.addAttribute("result" , myService.zoomLikeCheck(id, dto.getNum()));
 		
-		log.info("=====log=="+ myService.likeCheck(id, num));
-
 		
 		model.addAttribute("ZoomDTO" , service.zoomContent(num)); 
 		
