@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +40,27 @@ public class MainController {
 	
 	
 	@RequestMapping("/loginPro")
-	public String loginPro(UserInfoDTO dto, HttpSession session, Model model) {
-		if(service.getUserInfo(dto) == 1){
-			session.setAttribute("id", dto.getId());
-		}
-		System.out.println(dto);
-		model.addAttribute("result", service.getUserInfo(dto));
+	public String loginPro(UserInfoDTO userDTO, CoachInfoDTO coachDTO, HttpSession session, Model model) {
 		log.info("	-----CT----->loginPro Page");
+		System.out.println(userDTO);
+		System.out.println(coachDTO);
+		
+		int result = 0;
+		
+		if(service.getUserInfo(userDTO) == 1){
+			result = 1;
+			session.setAttribute("id", userDTO.getId());
+			model.addAttribute("result", result);
+		} else {
+			coachDTO.setC_id(userDTO.getId());
+			coachDTO.setC_pw(userDTO.getPw());
+			if(service.coachCheck(coachDTO) == 1) {
+				result = 1;
+				session.setAttribute("c_id", coachDTO.getC_id());
+				model.addAttribute("result", result);
+			}
+		}
+		
 		return "/main/login/loginPro";
 	}
 	
@@ -53,6 +68,7 @@ public class MainController {
 	public String logout(HttpSession session) {
 		//로그아웃은 세션에 저장된 것을 지우면 된다.
 		session.removeAttribute("id");
+		session.removeAttribute("c_id");
 		//세선에 저장된 모든 것을 지우고 세션을 초기화
 		session.invalidate();
 		log.info("	-----CT----->logout Page");
@@ -104,7 +120,7 @@ public class MainController {
 	@RequestMapping("/kakaoLogin")
 	public @ResponseBody int kakaoLogin(@RequestBody UserInfoDTO dto, HttpSession session) {
 		log.info("------CT----->kakaoLogin");
-		log.info(""+dto);
+		log.info("======== kakao login data => "+dto);
 		int result = 0;
 		
 		if(service.kakaoCheck(dto) == 1) {
@@ -113,6 +129,29 @@ public class MainController {
 		} else {
 			session.setAttribute("id", dto.getId());
 			result = service.kakaoInsert(dto);
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping("/naverLogin")
+	public String naverLogin() {
+		log.info("------CT----->kakaoLogin");
+		return "/main/login/naverLogin";
+	}
+	
+	@RequestMapping("/naverLoginPro")
+	public @ResponseBody int naverLoginPro(@RequestBody UserInfoDTO dto, HttpSession session) {
+		log.info("------CT----->kakaoLoginPro");
+		log.info("======== naver login data => "+dto);
+		int result = 0;
+		
+		if(service.naverCheck(dto) == 1) {
+			session.setAttribute("id", dto.getId());
+			result = 1;
+		} else {
+			session.setAttribute("id", dto.getId());
+			result = service.naverInsert(dto);
 		}
 		
 		return result;

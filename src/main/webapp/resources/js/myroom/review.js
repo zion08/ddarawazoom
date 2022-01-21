@@ -18,6 +18,7 @@ $.fn.serializeObject = function(){
 };
 
 
+// 리뷰 수정
 function reviewUpdate_submit(){
 	if($("#content").val() == "" || $("#grade").val() == ""){
 		return false;
@@ -38,11 +39,9 @@ function reviewUpdate_submit(){
 		});
 	}
 
-
+	
+// 리뷰 삭제	
 function delete_review(number){
-	
-	console.log(number);
-	
 	if(window.confirm('작성하신 댓글 삭제를 원하십니까?') == true){
 		
 		$.ajax({

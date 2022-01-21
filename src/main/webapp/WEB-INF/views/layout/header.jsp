@@ -31,6 +31,8 @@
 					<li><a class="dropdown-item" href="/ddarawazoom/zoom">Zoom 강의</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/ddarawazoom/vod">Vod 강의</a></li>
+					
+					<c:if test="${sessionScope.id != null}">
 					<li><hr class="dropdown-divider"></li>
 					<li class="dropdown-submenu">
 						<a class="dropdown-item dropdown-toggle" href="#" >멤버 전용공간<span class="caret"></span></a>
@@ -50,6 +52,9 @@
 							<li><a class="dropdown-item" href="/myroom/review">리뷰관리</a></li>
 						</ul>
 					</li>
+					</c:if>
+					
+					<c:if test="${sessionScope.c_id != null}">
 					<li><hr class="dropdown-divider"></li>
 					<li class="dropdown-submenu">
 						<a class="dropdown-item dropdown-toggle" href="#">코치 전용공간<span class="caret"></span></a>
@@ -62,6 +67,8 @@
 							<li><a class="dropdown-item" href="/coachroom/info">정보관리</a></li>
 						</ul>
 					</li>
+					</c:if>
+					
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="#">따라와줌 파티룸</a></li>
 					<li><hr class="dropdown-divider"></li>
@@ -106,11 +113,11 @@
 	        <ul class="navbar-nav me-auto mb-2 mb-lg-0 position-absolute top-50 translate-middle-y">
 	        	<li class="nav-item">
 				
-					<c:if test="${empty sessionScope.id}">
+					<c:if test="${empty sessionScope.id && empty sessionScope.c_id}">
 						<a class="nav-link" href="/ddarawazoom/login">로그인</a>
 					</c:if>
 					
-					<c:if test="${not empty sessionScope.id}">
+					<c:if test="${not empty sessionScope.id || not empty sessionScope.c_id}">
 					
 						<c:set var="session" value="${sessionScope.id}" />
 						
@@ -127,7 +134,7 @@
 					
 		        </li>
 		        
-		        <c:if test="${empty sessionScope.id}">
+		        <c:if test="${empty sessionScope.id && empty sessionScope.c_id}">
 			        <li class="nav-item dropdown ">
 			          	<a class="nav-link dropdown-toggle" href="#" 
 			          	id="navbarDropdown" role="button" 
