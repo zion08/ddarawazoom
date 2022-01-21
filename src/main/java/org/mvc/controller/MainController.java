@@ -68,6 +68,7 @@ public class MainController {
 	public String logout(HttpSession session) {
 		//로그아웃은 세션에 저장된 것을 지우면 된다.
 		session.removeAttribute("id");
+		session.removeAttribute("c_id");
 		//세선에 저장된 모든 것을 지우고 세션을 초기화
 		session.invalidate();
 		log.info("	-----CT----->logout Page");
