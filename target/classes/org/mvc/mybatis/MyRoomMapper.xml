@@ -6,45 +6,13 @@
 
 <mapper namespace="org.mvc.mybatis.MyRoomMapper">
 
-<!-- 멤버 관련 관련 코드 시작 -->
-	<select id="getUserInfo" resultType="org.mvc.bean.UserInfoDTO">
-		select * from tbl_user where id = #{id}
-	</select>
-	
-	<update id="updateInfo">
-		update tbl_user set
-			pw = #{pw},
-			email = #{email},
-			nick = #{nick}
-		where id = #{id}
-	</update>
-	
-	<update id ="updateImg">
-		update tbl_user set
-			img = #{img}
-		where id = #{id}			
-	</update>
-<!-- 멤버 관련 관련 코드 끝  -->
-
-
-<!-- 멤버 일정 관련 코드 시작 -->	
-	<resultMap type="org.mvc.bean.ScheduleDTO" id="calMap"> 
-		<result property="start" column="start_time"/> 
-		<result property="end" column="end_time"/> 
-	</resultMap>
-	
-	<select id="getAllClass" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
-		select * from tbl_calendar where m_id = #{m_id}
-	</select>
-<!-- 멤버 일정 관련 코드 끝 -->	
-
-
-
-<!-- 바디프로필 관련 코드 시작 -->	
+<!-- 바디 프로필 관련 코드 시작 -->	
+	<!-- 마이 프로필 데이터 가져오기 -->
 	<select id="getMyProfile" resultType="org.mvc.bean.MyProfileDTO">
 		select * from tbl_myprofile where b_id = #{b_id}
 	</select>
 	
+	<!-- 최신 바디 프로필 데이터 가져오기 -->
 	<select id="getBodyProfile" resultType="org.mvc.bean.BodyProfileDTO">
 		select * from tbl_bodyprofile
 			where b_id = #{b_id} and b_num = (
@@ -52,6 +20,7 @@
 			)
 	</select>
 	
+	<!-- 바디 프로필 리스트 데이터 가져오기 -->
 	<select id="bodyList" resultType="org.mvc.bean.BodyProfileDTO">
 		<![CDATA[
 		select * from(
@@ -61,6 +30,7 @@
 		]]>
 	</select>
 	
+	<!-- 마이 프로필 작성 -->
 	<insert id="myWrite">
 		insert into tbl_myprofile(b_id, b_nick, b_name, b_gender, b_birth, b_tel, b_email)
 			values(
@@ -74,6 +44,7 @@
 			)
 	</insert>
 	
+	<!--  마이 프로필 수정 -->
 	<update id="myUpdate" parameterType="org.mvc.bean.MyProfileDTO">
 		update tbl_myprofile set
 				b_nick = #{b_nick},
@@ -85,6 +56,7 @@
 		where b_id = #{b_id}
 	</update>
 
+	<!-- 바디 프로필 작성 -->
 	<insert id="bodyWrite" parameterType="org.mvc.bean.BodyProfileDTO">
 		insert into tbl_bodyprofile(b_num, b_id, b_height, b_weight, b_muscle, b_bodyfat, b_shape, b_chest, b_waist, b_arm, b_thigh, b_hip, b_date, b_img)
 			values(
@@ -105,12 +77,14 @@
 			)
 	</insert>
 	
+	<!-- 수정에 필요한 바디 프로필 데이터 가져오기 -->
 	<select id="getBodyInfo" resultType="org.mvc.bean.BodyProfileDTO">
 		<![CDATA[
 			select * from tbl_bodyprofile where b_num = #{b_num} and b_id = #{b_id}
 		]]>
 	</select>
 	
+	<!-- 바디 프로필 수정 -->
 	<update id="bodyUpdate" parameterType="org.mvc.bean.BodyProfileDTO">
 		<![CDATA[
 			update tbl_bodyprofile set
@@ -130,20 +104,58 @@
 			]]>
 	</update>
 	
+	<!-- 바디 프로필 삭제 -->
 	<delete id="bodyDelete">
 		delete tbl_bodyprofile where b_num = #{b_num}
 	</delete>
-<!-- 바디프로필 관련 코드 끝 -->	
+<!-- 바디 프로필 관련 코드 종료 -->
+
 	
+<!-- 멤버 정보 관련 코드 시작 -->	
+	<!-- 멤버 정보 데이터 가져오기 -->
+	<select id="getUserInfo" resultType="org.mvc.bean.UserInfoDTO">
+		select * from tbl_user where id = #{id}
+	</select>
+	
+	<!-- 멤버 정보 수정 -->
+	<update id="updateInfo">
+		update tbl_user set
+			pw = #{pw},
+			email = #{email},
+			nick = #{nick}
+		where id = #{id}
+	</update>
+	
+	<!-- 멤버 프로필 이미지 수정 -->
+	<update id ="updateImg">
+		update tbl_user set
+			img = #{img}
+		where id = #{id}			
+	</update>
+<!-- 멤버 관련 코드 종료 -->
+
+
+<!-- 일정 관련 코드 시작 -->
+	<resultMap type="org.mvc.bean.ScheduleDTO" id="calMap"> 
+		<result property="start" column="start_time"/> 
+		<result property="end" column="end_time"/> 
+	</resultMap>
+	
+	<!-- 일정 정보 가져오기 -->
+	<select id="getAllClass" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
+		select * from tbl_calendar where m_id = #{m_id}
+	</select>
+<!-- 일정 관련 코드 끝 -->	
+
 
 <!-- 관심 등록 관련 코드 시작 -->
-	
-	<!-- 멤버 관심등록 리스트 -->
+	<!-- Zoom 관심등록 데이터 가져오기 -->
 	<select id="likeZoomList" resultType="org.mvc.bean.ZoomDTO">
 		<![CDATA[
 			select * from (
 	    		select
 	    			tbl_like.zoom_num,
+	    			tbl_like.id,
 	    			tbl_coachclass.num,
 	    			tbl_coachclass.img,
 	    			tbl_coachclass.c_id,
@@ -155,40 +167,97 @@
 	    			tbl_coachclass.frequency,
 	    			tbl_coachclass.price
 	    		from tbl_coachclass, tbl_like
-			where tbl_coachclass.num = tbl_like.zoom_num) where num = #{num}
+			where tbl_coachclass.num = tbl_like.zoom_num) where id = #{id}
 		]]>
 	</select>
 	
-	<!-- 관심 등록 실행 -->
-	<insert id="zoomLikeWrite">
+	<!-- Zoom 관심 체크 여부 확인 -->
+	<select id="zoomlikeCheck" resultType="Integer">
+		select count(*) from tbl_like where id = #{id} and zoom_num = #{zoom_num} 
+	</select>
+	
+	<!-- Zoom 관심 등록 -->
+	<insert id="zoomLikeWrite" parameterType="org.mvc.bean.LikeDTO">
 		insert into tbl_like(id,zoom_num)
 			values(#{id},#{zoom_num})
 	</insert> 
 	
-	<!-- 관심 등록 -->
-	<select id="getLikeZoom" resultType="org.mvc.bean.LikeDTO">
+	<!-- Zoom 관심 등록 해제 -->
+	<delete id="zoomLikeDelete">
+		delete from tbl_like where id = #{id} and zoom_num = #{zoom_num}
+	</delete>
+
+
+	<!-- Vod 관심등록 데이터 가져오기 -->
+	<select id="likeVodList" resultType="org.mvc.bean.VodDTO">
 		<![CDATA[
-			select * from tbl_like where id = #{id} and zoom_num = #{zoom_num}
+			select * from (
+	    		select
+	    			tbl_like.vod_num,
+	    			tbl_like.id,
+	    			tbl_vod.num,
+	    			tbl_vod.url,
+	    			tbl_vod.category,
+	    			tbl_vod.title,
+	    			tbl_vod.time,
+	    			tbl_vod.difficulty,
+	    			tbl_vod.info,
+	    			tbl_vod.count
+	    		from tbl_vod, tbl_like
+			where tbl_vod.num = tbl_like.vod_num) where id = #{id}
 		]]>
 	</select>
 	
-	<!-- 관심 등록 해제 -->
-	<delete id="zoomLikeDelete">
-		delete from tbl_like where zoom_num = #{zoom_num} and id = #{id}
+	<!-- Vod 관심 체크 여부 확인 -->
+	<select id="vodLikeCheck" resultType="Integer">
+		select count(*) from tbl_like where id = #{id} and vod_num = #{vod_num} 
+	</select>
+	
+	<!-- Vod 관심 등록 -->
+	<insert id="vodLikeWrite" parameterType="org.mvc.bean.LikeDTO">
+		insert into tbl_like(id,vodm_num)
+			values(#{id},#{vodm_num})
+	</insert> 
+	
+	<!-- Vod 관심 등록 해제 -->
+	<delete id="vodLikeDelete">
+		delete from tbl_like where id = #{id} and vod_num = #{vodm_num}
 	</delete>
-	
-	<!-- zoom_num 갯수 확인 -->
-	<select id="getLikeCount" resultType="org.mvc.bean.LikeDTO">
-		select count(zoom_num) from tbl_like where id = #{id}
-	</select>
-	
-	<!-- 관심 체크 확인 -->
-	<select id="likeCheck" resultType="boolean">
-		select id , zoom_num from tbl_like where id = #{id} and zoom_num = #{zoom_num} 
-	</select>
-	
-	
 <!-- 관심 등록 관련 코드 끝 -->	
+
+
+<!-- 리뷰 관련 코드 시작 -->
+	<!-- 작성한 리뷰 가져오기 -->
+	<select id="getReview" resultType="org.mvc.bean.ReviewDTO">
+		<![CDATA[
+			select * from(
+			    select class_num, review_num, id, nick, title, content, grade, rownum r from(
+			    select * from tbl_review order by review_num desc))
+			where id = #{id}
+		]]>	
+	</select>	
 	
+	<!-- 작성한 리뷰 갯수 -->
+	<select id="reviewCount" resultType="Integer">
+		select count(*) from tbl_review where id = #{id}
+	</select>
 	
+	<!-- 수정에 필요한 리뷰 데이터 가져오기 -->
+	<select id="getMyReview" resultType="org.mvc.bean.ReviewDTO">
+		select * from tbl_review where id = #{id} and review_num = #{review_num}	
+	</select>
+	
+	<!-- 리뷰 수정 -->
+	<update id="updateReview">
+		update tbl_review set
+			content = #{content},
+			grade = #{grade}
+		where id = #{id} and review_num = #{review_num}
+	</update>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteReview">
+		delete tbl_review where id = #{id} and review_num = #{review_num}
+	</delete>
+<!-- 리뷰 관련 코드 종료 -->	
 </mapper>

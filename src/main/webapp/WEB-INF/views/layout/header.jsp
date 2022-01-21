@@ -48,7 +48,6 @@
 							</li>
 							<li><a class="dropdown-item" href="/myroom/payment">결재내역</a></li>
 							<li><a class="dropdown-item" href="/myroom/review">리뷰관리</a></li>
-							<li><a class="dropdown-item" href="/myroom/QnA">1:1문의</a></li>
 						</ul>
 					</li>
 					<li><hr class="dropdown-divider"></li>

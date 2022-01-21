@@ -11,9 +11,9 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-		<script src="../../resources/js/bodyprofile.js" ></script>
+		<script src="../../resources/js/myroom/bodyprofile.js" ></script>
 		
-		<link href="../../resources/css/bodyprofile.css" rel="stylesheet" >
+		<link href="../../resources/css/myroom/bodyprofile.css" rel="stylesheet" >
 		
 
 	<div class="profile_title">
@@ -74,18 +74,18 @@
 						    <li class="list-group-item">
 						    	이메일 : ${myProfileDTO.b_email}
 						    </li>
-						    <li class="list-group-item">
+				  		</ul>
+				  		   <div class="list_button">
 						    	<input type="button" value="수정하러가기"  class="btn btn-outline-dark"
 									onclick="document.location.href='/myroom/bodyprofile/myUpdate'"/>
 									&nbsp;&nbsp;
 								<input type="button"  value="오늘하루 기록하기"  class="btn btn-outline-dark"
 									onclick="document.location.href='/myroom/bodyprofile/bodyWrite'"/>
-							</li>
-				  		</ul>
-		            </div>
-		         </div>
-		     </div>
-	     </c:if>
+							</div>
+			            </div>
+			         </div>
+			     </div>
+		     </c:if>
         <div class="col-6">
         	<c:if test="${bodyProfileDTO == null}" >
 				<div class="card">

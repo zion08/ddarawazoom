@@ -1,4 +1,3 @@
-// ajax로 view -> controller로 여러개의 값 전송할 때 필요한 코드
 $.fn.serializeObject = function(){
 	var o = {};
 	var a = this.serializeArray();
@@ -19,46 +18,49 @@ $.fn.serializeObject = function(){
 };
 
 
-// 관심 등록 추가
-function zoomLikeWrite(){
-	if(window.confirm('소중한 내 관심Zoom에 담으시겠습니까?')){
+function reviewUpdate_submit(){
+	if($("#content").val() == "" || $("#grade").val() == ""){
+		return false;
+	}
+	
+	var updateReview = JSON.stringify($('form#updateForm').serializeObject());
 	
 		$.ajax({
-			data : JSON.stringify({ num : number }),
-			url : "/myroom/likeZoom_in",
+			data : updateReview,
+			url : "/myroom/reviewUpdateData",
 			type : "POST",
 			contentType : "application/json; charset=UTF-8",
-			async: false,
 			success : function(data){
 				if(data == 1){
-					alert('소중한 내 관심 Zoom에 담겼습니다.');
+					alert("작성하신 댓글이 수정되었습니다.");
 				}
 			}
 		});
 	}
 
+
+function delete_review(number){
 	
-fuction zoomLikeDelete(number){
-	if(window.confirm('관심Zoom에서 등록해제 하시겠습니까?')){
+	console.log(number);
 	
-		console.log(number);
-	
+	if(window.confirm('작성하신 댓글 삭제를 원하십니까?') == true){
 		
 		$.ajax({
-			data : JSON.stringify({ num : number }),
-			url : "/myroom/likeZoom_out",
-			type= "POST",
+			data : JSON.stringify({ review_num : number }),
+			url : "/myroom/reviewDelete",
+			type : "POST",
 			contentType : "application/json; charset=UTF-8",
 			async: false,
 			success : function(data){
 				if(data == 1){
-					alert('관심Zoom에서 등록해제 되었습니다.');
+					alert("본 댓글은 삭제 되었습니다.");
 					window.location.reload();
 				}
 			}
 		});
 	}
 	else{
-		// They clicked no
+		//Tyey clicked no
 	}
 }
+	

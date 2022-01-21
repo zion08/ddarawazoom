@@ -5,12 +5,12 @@
     
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>MyProfile 수정 페이지</title>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	</head>
 <body>
 
