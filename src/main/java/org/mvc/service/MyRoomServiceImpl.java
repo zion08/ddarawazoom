@@ -33,7 +33,7 @@ public class MyRoomServiceImpl implements MyRoomService {
 	public List<BodyProfileDTO> getBodyProfile(String id) {
 		return mapper.getBodyProfile(id);
 	}
-
+	
 	@Override
 	public List<BodyProfileDTO> bodyList(String id){
 		return mapper.bodyList(id);
@@ -114,7 +114,12 @@ public class MyRoomServiceImpl implements MyRoomService {
 	public int zoomLikeDelete(String id, int num) {
 		return mapper.zoomLikeDelete(id, num);
 	}
-
+	
+	@Override
+	public int zoomLikeCount(String id) {
+		return mapper.zoomLikeCount(id);
+	}
+	
 	@Override
 	public ArrayList<VodDTO> likeVodList(String id){
 		return mapper.likeVodList(id);

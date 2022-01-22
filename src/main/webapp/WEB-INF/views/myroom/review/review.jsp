@@ -23,11 +23,6 @@
 			<table class="table" id="review_list">
 				<tr>
 					<th>
-						내 용
-					</th>
-				</tr>
-				<tr>
-					<th>
 						<h3 style="text-align:center">
 							아직 작성된 리뷰가 없습니다.
 						</h3>
@@ -58,7 +53,7 @@
 					<tbody>
 						<tr>
 							<td>
-								${reviewList.title}
+								<a href="/ddarawazoom/zclasscontent?num=${reviewList.review_num}">${reviewList.title}</a>
 							</td>
 							<td>
 								${reviewList.content}

@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<c:if test="${result ==1}">
+<c:if test="${result == 1}">
 	<script>
 		alert("프로필 작성이 완료되었습니다.");
 		window.location="/myroom/bodyprofile";
