@@ -16,15 +16,11 @@
 		<link href="../../resources/css/myroom/bodyprofile.css" rel="stylesheet" >
 		<link href="../../resources/css/myroom/myprofile.css" rel="stylesheet">
 		
-	<div class="profile_title">
-		<h2>${sessionScope.id}님의 소중한 공간</h2>
-	</div>
-	
 	
 	<c:if test="${myProfileDTO == null}" >
 		<ul class="list-group list-group-flush">
 		    <li class="list-group-item">
-		    	<h5>작성 된 마이 프로필이 없습니다.</h5>
+		    	<h5>작성 된 바디 프로필이 없습니다.</h5>
 			    <p>
 			    	"작성하러가기" 버튼을 클릭한 후, <b>${sessionScope.id}</b>님 의 프로필을 작성해주세요.<br/><br/>
 					[프로필 작성이 완료되면, 바디프로필 이용이 가능합니다.]
@@ -43,7 +39,7 @@
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-lg-6">
                         <div class="about-text go-to">
-                            <h3 class="dark-color">${myProfileDTO.b_id}님의 마이 프로필</h3>
+                            <h3 class="dark-color">${myProfileDTO.b_id}님의 바디 프로필</h3>
                             <p>
                             	DDrawaZoom의 소중한 <mark>${myProfileDTO.b_id}</mark> 멤버 님만의 공간입니다.
                             </p>
