@@ -20,4 +20,19 @@ public interface PaymentService {
 	
 	//결제 취소 내역 업데이트
 	public int paymentCancelUpdate(PaymentDTO dto);
+	
+	//결제 취소 내역 입력
+	public int paymentCancelInsert(PaymentDTO dto);
+	
+	//결제 취소 상사 내역 출력
+	public List<PaymentDTO> getCancelList(String imp_Uid);
+	
+	//내 결제 내역
+	public List<PaymentDTO> getPaymentMyList(String id);
+	
+	//코치별 결제 내역
+	public List<PaymentDTO> getPaymentCoachList(String c_id);
+	
+	//강의별 결제 내역
+	public List<PaymentDTO> getPaymentClassList(String c_num);
 }

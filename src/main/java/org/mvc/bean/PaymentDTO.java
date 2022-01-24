@@ -15,7 +15,13 @@ public class PaymentDTO {
 	private String buyerEmail;
 	private String paidAt;
 	private String status;
+	private String c_id;
+	private String c_num;
+	
 	private int cancelAmount;
+	private int cancelpAmount;
 	private String cancelReason;
 	private String cancelledAt;
+	
+	private int cancelReqAmount;
 }

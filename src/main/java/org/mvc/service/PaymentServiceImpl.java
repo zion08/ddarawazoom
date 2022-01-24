@@ -38,5 +38,30 @@ public class PaymentServiceImpl implements PaymentService {
 		return mapper.paymentCancelUpdate(dto);
 	}
 
+	@Override
+	public int paymentCancelInsert(PaymentDTO dto) {
+		return mapper.paymentCancelInsert(dto);
+	}
+
+	@Override
+	public List<PaymentDTO> getCancelList(String imp_Uid) {
+		return mapper.getCancelList(imp_Uid);
+	}
+
+	@Override
+	public List<PaymentDTO> getPaymentMyList(String id) {
+		return mapper.getPaymentMyList(id);
+	}
+
+	@Override
+	public List<PaymentDTO> getPaymentCoachList(String c_id) {
+		return mapper.getPaymentCoachList(c_id);
+	}
+
+	@Override
+	public List<PaymentDTO> getPaymentClassList(String c_num) {
+		return mapper.getPaymentClassList(c_num);
+	}
+
 	
 }

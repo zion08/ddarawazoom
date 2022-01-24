@@ -16,5 +16,14 @@ public interface PaymentMapper {
 	
 	public int paymentCancelUpdate(PaymentDTO dto);
 
+	public int paymentCancelInsert(PaymentDTO dto);
+	
+	public List<PaymentDTO> getCancelList(String imp_Uid);
+	
+	public List<PaymentDTO> getPaymentMyList(String id);
+	
+	public List<PaymentDTO> getPaymentCoachList(String c_id);
+	
+	public List<PaymentDTO> getPaymentClassList(String c_num);
 
 }

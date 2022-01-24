@@ -1,10 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="../../layout/iamport.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<script type="text/javascript">	  
-   $(document).ready(function(){
+$(document).ready(function(){
    	
    	//01. 결제 준비
 	var IMP = window.IMP;
@@ -15,8 +9,8 @@
 
 		var paymentData = new Object();	// json 데이터 생성
 		paymentData.merchantUid = "${ZoomDTO.merchant_uid}"+"-ORD"+"${cnt}";
-		paymentData.c_id = "kimcoach";
-		paymentData.c_num = ${ZoomDTO.num};
+		paymentData.c_id = "${ZoomDTO.c_id}";
+		paymentData.c_num = "${ZoomDTO.num}"; 
 		console.log(paymentData);
 		
 		IMP.request_pay({		// iamport 결제 요청
@@ -142,112 +136,3 @@
 	});
 			
 });
-</script>
-
-<%-- <section class="masthead">
-	<div class="d-flex justify-content-center">
-		<p>${ZoomDTO.num}번   |</p>
-		<p>${ZoomDTO.title}   |</p>
-		<p>${ZoomDTO.price}원   |</p>
-		<button id="payBtn" >결제하기</button>		
-		<label id="result"></label><br/>
-	</div>
-	
-	<div class="table-responsive">
-		<table id="paymentList" class="table table-striped table-sm">
-			<thead>
-	            <tr>
-					<th scope="col">결제번호</th>
-	              	<th scope="col">상품번호</th>
-	              	<th scope="col">강의</th>
-	              	<th scope="col">결제금액</th>
-	              	<th scope="col">환불금액</th>
-	              	<th scope="col">구매자</th>
-	              	<th scope="col">결제시각</th>
-	              	<th scope="col">상태</th>
-	            </tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${payment}" var="paymentDTO">
-            		<tr>
-		              	<td>${paymentDTO.impUid}</td>
-		              	<td>${paymentDTO.merchantUid}</td>
-		              	<td>
-		              		${paymentDTO.c_num}) ${paymentDTO.name}</br>
-		              		${paymentDTO.c_id}</br>		              		
-		              	</td>
-		              	<td>${paymentDTO.amount}</td>
-		              	<td>${paymentDTO.cancelAmount}</td>
-		              	<td>
-		              		${paymentDTO.buyerName}</br>
-		              		${paymentDTO.buyerTel}</br>
-		              		${paymentDTO.buyerEmail}</br>
-		              	</td>
-		              	<td>${paymentDTO.paidAt}</td>
-		              	<td>		              		
-		              		<c:if test="${paymentDTO.status == 'paid'}">		              				 	 
-	               				<button class="btn btn-sm btn-success" disabled>결제완료</button></br>
-		              			<button class="refundBtn btn btn-sm btn-secondary" data-toggle="modal" data-target="#refundModal">
-	              					취소하기
-	              				</button> 
-              				</c:if>		              				
-		              		<c:if test="${paymentDTO.status == 'cancelled'}">
-		              			<button class="refundDone btn btn-sm btn btn-danger" id="">취소완료</button></br>		              				              			
-		              			<div id="c-detail" style="display: none;"></div>ㄴ
-		              		</c:if>							
-		              		<c:if test="${paymentDTO.amount - paymentDTO.cancelAmount > 0}">		              			
-		              			<button class="refundBtn btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#refundModal">
-		              				잔여금액 취소하기          				
-	              				</button>		              			
-		              		</c:if>		              			              		
-		              	</td>
-            		</tr>
-				</c:forEach>        
-			</tbody>
-		</table>
-	</div>
-	
-</section> --%>
-
-
-<!-- Modal -->
-<div class="modal fade" id="refundModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content rounded-6 shadow">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title">결제 취소</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      
-      <div class="modal-body px-5 py-2">
-      	<div class="form-floating mb-2">
-	        <input type="text" class="form-control rounded-4" id="refundReason" placeholder="환불 사유가 무엇인가요?">
-	        <label for="refundReason" >환불 사유가 무엇인가요?</label>
-        </div>
-      </div>
-      
-      <div class="d-flex gap-5 justify-content-center">
-  		<div class="list-group mx-0">
-  			<label class="list-group-item d-flex gap-2">
-      			<input class="form-check-input flex-shrink-0" type="radio" name="refundType" id="refundAll" value="all" checked>     			
-      			<span>
-       				전액 환물
-				</span>
-    		</label>
-    		<label class="list-group-item d-flex gap-2">
-      			<input class="form-check-input flex-shrink-0" type="radio" name="refundType" id="refundPartial" value="partial">
-      			<span>
-       				일부 환불 <input type="number" name="partailAmount" id="partialAmount" value=""></input>
-      			</span>
-    		</label> 	
-		</div>
-      </div>
-      
-      <div class="modal-footer flex-column border-top-0">
-        <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" id="refundCheckBtn">Save changes</button>
-        <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>

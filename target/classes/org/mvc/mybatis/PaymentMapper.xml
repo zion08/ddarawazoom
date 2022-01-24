@@ -8,13 +8,25 @@
 	<insert id="paymentInsert">
 		insert into tbl_payment 
 			(impUid, merchantUid, name, amount, 
-			buyerName, buyerTel, buyerEmail, paidAt, status)
+			buyerName, buyerTel, buyerEmail, paidAt, status, c_id, c_num)
 			values(#{impUid}, #{merchantUid}, #{name}, #{amount}, 
-			#{buyerName}, #{buyerTel}, #{buyerEmail}, #{paidAt}, #{status})
+			#{buyerName}, #{buyerTel}, #{buyerEmail}, #{paidAt}, #{status}, #{c_id}, #{c_num})
 	</insert>
 	
 	<select id="getPaymentList" resultType="org.mvc.bean.PaymentDTO">
 		select * from tbl_payment order by paidat desc
+	</select>
+	
+	<select id="getPaymentMyList" resultType="org.mvc.bean.PaymentDTO">
+		select * from tbl_payment where buyerName = #{id} order by paidat desc 
+	</select>
+	
+	<select id="getPaymentCoachList" resultType="org.mvc.bean.PaymentDTO">
+		select * from tbl_payment where c_id = #{c_id} order by paidat desc 
+	</select>
+	
+	<select id="getPaymentClassList" resultType="org.mvc.bean.PaymentDTO">
+		select * from tbl_payment where c_num = #{c_num} order by paidat desc 
 	</select>
 	
 	<select id="getOerderCount" resultType="int">
@@ -28,9 +40,17 @@
 	<update id="paymentCancelUpdate">
 		update tbl_payment set
 			status = #{status},
-			cancelAmount = #{cancelAmount},
-			cancelReason = #{cancelReason},
-			cancelledAt = #{cancelledAt}
+			cancelAmount = #{cancelAmount}
 		where impUid = #{impUid}
 	</update>
+	
+	<update id="paymentCancelInsert">
+		insert into tbl_cancel
+			values(seq_cancel.nextval, #{impUid}, #{cancelAmount}, #{cancelpAmount}, 
+			#{cancelReason}, #{cancelledAt})
+	</update>
+	
+	<select id="getCancelList" resultType="org.mvc.bean.PaymentDTO">
+		select * from tbl_cancel where impuid = #{imp_Uid}
+	</select>
 </mapper>  
