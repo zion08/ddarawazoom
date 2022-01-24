@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
 <%@ include file="../../layout/header.jsp"%>    
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src ="../../resources/js/myroom/like.js" type="text/javascript"></script>
+
 <div class="container-fluid"> 
 	<div class="album py-2 bg-light">
     	<h2 style="text-align: center;"> 따라와 줌 </h2>
@@ -12,32 +15,42 @@
 	<div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-3">
 		<div class="col">
 		<div class="card shadow-sm">  
-			<img src="/resources/coach/img/${ZoomDTO.img}" class="card-img-top" width="100" height="625">
-			<c:if test="${id == null && c_id != null}">	
-				<input type="button" value="사진변경" class="btn btn-outline-danger" onclick="window.location='/ddarawazoom/imgUpdate?img=${ZoomDTO.img}&num=${ZoomDTO.num}'" />
+			<img src="/resources/coach/img/${zoomContent.img}" class="card-img-top" width="100" height="625">
+			<c:if test="${sessionScope.c_id != null}">	
+				<input type="button" value="사진변경" class="btn btn-outline-danger" onclick="window.location='/ddarawazoom/imgUpdate?img=${zoomContent.img}&num=${zoomContent.num}'" />
 			</c:if>	
 		<div class="btn-group">	
-           	<c:if test="${id == null && c_id != null}">
-				<input type="button" class="btn btn-outline-danger" value="글수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${ZoomDTO.num}'">
-				<input type="button" class="btn btn-outline-danger" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${ZoomDTO.num}'"> 
-			</c:if>	
+           	<c:if test="${sessionScope.c_id != null}">
+				<input type="button" class="btn btn-outline-danger" value="글수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${zoomContent.num}'">
+				<input type="button" class="btn btn-outline-danger" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${zoomContent.num}'"> 
+			</c:if>	 
 				<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
-				<input type="button" class="btn btn-outline-primary" value="관심목록 담기">
 				<input type="button" class="btn btn-outline-primary" value="장바구니 담기">
 				<input type="button" class="btn btn-outline-primary" value="바로 결제하기">
 			</div>
 			<div>
 				<br />
-				&nbsp;&nbsp;<button type="button" class="btn btn-m btn-danger" disabled>${ZoomDTO.type}</button>	 	 
-             	&nbsp;&nbsp;<button type="button" class="btn btn-m btn-success" disabled>${ZoomDTO.goal}</button>
-             	&nbsp;&nbsp;<button type="button" class="btn btn-m btn-warning" disabled>${ZoomDTO.tool}</button>
-             	&nbsp;&nbsp;<button type="button" class="btn btn-m btn-primary" disabled>${ZoomDTO.frequency}</button> 
+				&nbsp;&nbsp;<button type="button" class="btn btn-m btn-danger" disabled>${zoomContent.type}</button>	 	 
+             	&nbsp;&nbsp;<button type="button" class="btn btn-m btn-success" disabled>${zoomContent.goal}</button>
+             	&nbsp;&nbsp;<button type="button" class="btn btn-m btn-warning" disabled>${zoomContent.tool}</button>
+             	&nbsp;&nbsp;<button type="button" class="btn btn-m btn-primary" disabled>${zoomContent.frequency}</button> 
 			</div>
 			<div class="card-body">
-				<h4 align="left">No.${ZoomDTO.num}</h4><h5 align="left">${ZoomDTO.count}회 조회</h5>
-				<h2>${ZoomDTO.title}</h2>
-				<h5>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">${ZoomDTO.c_id}</font> 강사님</h5><br />
-				<h5>&nbsp;&nbsp;${ZoomDTO.intro}</h5>
+				<h4 align="left">No.${zoomContent.num}</h4><h5 align="left">${zoomContent.count}회 조회</h5>
+				<h2>${zoomContent.title}
+				
+ 				 <c:if test="${sessionScope.c_id == null}">   
+					<c:if test="${result == 1}">   
+						<img src="/resources/image/like/heart_fill.png" width="40px" height="40px" onclick="zoomLikeDelete(${zoomContent.num})"><font color="red">&nbsp;Like!</font><br/>
+					</c:if>
+					<c:if test="${result == 0}">
+						<img src="/resources/image/like/heart_empty.png"  width="40px" height="40px" onclick="zoomLikeWrite(${zoomContent.num})"><font color="black">&nbsp;Like!</font><br/>
+					</c:if>				
+			 	 </c:if> 
+				
+				</h2>
+				<h5>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">${zoomContent.c_id}</font> 강사님</h5><br />
+				<h5>&nbsp;&nbsp;${zoomContent.intro}</h5>
 			</div>
 		</div>	
 		</div>
@@ -45,6 +58,7 @@
 	
 	<br >
 	
+	<c:if test="${sessionScope.id != null}">
 	<div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-3">
 		<div class="col">
 			<h2>후기</h2> 
@@ -67,8 +81,8 @@
 	  			<div class="row featurette">
   			 	<div class="col-md-12">
   			 		<form action="re_writePro" method="post" name="numbercheck">
-	  			 		<input type="hidden" name="class_num" value="${ZoomDTO.num}">
-	  			 		<input type="hidden" name="title" value="${ZoomDTO.title}">
+	  			 		<input type="hidden" name="class_num" value="${zoomContent.num}">
+	  			 		<input type="hidden" name="title" value="${zoomContent.title}">
 	     	 	  	<table class="table table-bordered">
 	  		    		<thead>
 					 		<tr>
@@ -81,13 +95,13 @@
 						<tbody>
 		      		 		<tr>
 				        	    <th scope="row"></th>
-				        	    <td><input type="text" name="id"></td>
-				                <td><input type="text" name="nick"></td>
+				        	    <td><input type="hidden" name="id" value="${sessionScope.id}">${sessionScope.id}</td>
+				                <td><input type="hidden" name="nick" value="${userInfo.nick}">${userInfo.nick}</td> 
 				                <td><input type="text" name="grade" size="3">&nbsp;<input type="button" value="확인" onclick='return validate(this.form);'></td>  
 				            </tr>
 				            <tr>
 				                <th scope="row"> 강의명 </th>
-				                <td colspan="3">${ZoomDTO.title}</td>
+				                <td colspan="3">${zoomContent.title}</td>
 				            </tr>
 				      		<tr>
 				                <th scope="row"> 후기 </th>
@@ -104,9 +118,14 @@
 		           </form>			
 		       </div>
 			   </div>
-					   
-		   <c:if test="${contentCount > 0}">
-		   <c:forEach var="reContent" items="${reContent}"> 
+			   </c:if>
+			   
+			<c:if test="${count == 0}" >
+	    		<h5 align="center">작성된 후기가 없습니다.</h5> 
+			</c:if>	
+				   
+		   <c:if test="${count > 0}">
+		   <c:forEach var="reviewList" items="${reviewList}"> 
 		   <hr class="featurette-divider">
   				<div class="row featurette">
   			 	<div class="col-md-12">
@@ -121,43 +140,44 @@
 						<tbody>
 				      		 <tr>
 				        	    <th scope="row"></th>
-				                <td>${reContent.nick}</td>
-				                <td>${reContent.grade}/10</td>
+				                <td>${reviewList.nick}</td>
+				                <td>${reviewList.grade}/10</td>
 				            </tr>
 				            <tr>
 				                <th scope="row"> 강의명 </th>
-				                <td colspan="2">${reContent.title}</td>
+				                <td colspan="2">${reviewList.title}</td>
 				            </tr>
 				      		<tr>
 				                <th scope="row"> 후기 </th>
-				                <td colspan="2">${reContent.content}</td> 
+				                <td colspan="2">${reviewList.content}</td> 
 				            </tr>
 	  		           </tbody>
 			         </table>				      			
 			     </div>
 				 </div>
 			</c:forEach>
-			</c:if>
+			</c:if>	
+			
 		
 			<div id="page">페이지&nbsp;  
-				<c:if test="${startPage > pageBlock}">
-					<a href="/ddarawazoom/zclasscontent?num=${num}&pageNum=${startPage}-${pageBlock}"> [이전] </a>
+				<c:if test="${startPage > 10}">
+					<a href="/ddarawazoom/zclasscontent?num=${zoomContent.num}&pageNum=${startPage - 10}"> [이전] </a>
 				</c:if>
 				
-				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<a href="/ddarawazoom/zclasscontent?num=${num}&pageNum=${i}">${i}</a>
+				<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+					<a href="/ddarawazoom/zclasscontent?num=${zoomContent.num}&pageNum=${i}">${i}</a>
 				</c:forEach>
 				
-				<c:if test="${endPage < totalPage}">
-					<a href="/ddarawazoom/zclasscontent?num=${num}&pageNum=${startPage}+${pageBlock}"> [다음] </a>
+				<c:if test="${endPage < pageCount}">
+					<a href="/ddarawazoom/zclasscontent?num=${zoomContent.num}&pageNum=${startPage + 10}"> [다음] </a>   
 				</c:if>
-			</div>	
-				
+			</div>
+		
 		</div>
 	</div>		
 	</div>
   	</div>
 </div> 
 
-<%@ include file="../../layout/footer.jsp"%>  
+<%@ include file="../../layout/footer.jsp"%>   
 
