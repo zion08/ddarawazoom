@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mvc.bean.LikeDTO;
 import org.mvc.bean.ReviewDTO;
+import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.mybatis.ZoomMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,10 @@ public class ZoomServiceImpl implements ZoomService{
 	@Setter(onMethod_=@Autowired)
 	private ZoomMapper mapper;
 	
+	// 코치강의관련
 	@Override
-	public List<ZoomDTO> zoomList(int firstRownum, int lastRownum) {
-		return mapper.zoomList(firstRownum, lastRownum); 
-	}
-	
-	@Override
-	public ZoomDTO zoomContent(int num) { 
-		return mapper.zoomContent(num); 
+	public List<ZoomDTO> zoomList(int startRow, int endRow) { 
+		return mapper.zoomList(startRow, endRow);  
 	}
 	
 	@Override
@@ -59,20 +56,32 @@ public class ZoomServiceImpl implements ZoomService{
 	public int imgUpdate(ZoomDTO dto) {
 		return mapper.imgUpdate(dto);
 	}
+	
+	@Override
+	public ZoomDTO zoomContent(int num) { 
+		return mapper.zoomContent(num); 
+	}
+	
+	// 후기관련
+	@Override
+	public List<ReviewDTO> reviewList(int startRow, int endRow) { 
+		return mapper.reviewList(startRow, endRow);  
+	}
 
 	@Override
 	public int reInsert(ReviewDTO dto) {
 		return mapper.reInsert(dto);
 	}
 
+
 	@Override
-	public List<ReviewDTO> reList(int firstRownum, int lastRownum) {
-		return mapper.reList(firstRownum, lastRownum);
+	public int reCount(int num) {
+		return mapper.reCount(num);  
 	}
 
 	@Override
-	public int reCount() {
-		return mapper.reCount();
+	public UserInfoDTO getUserInfo(String id) {
+		return mapper.getUserInfo(id); 
 	}
 	
 	@Override
