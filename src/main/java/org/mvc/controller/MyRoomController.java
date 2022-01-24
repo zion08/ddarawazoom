@@ -53,9 +53,7 @@ public class MyRoomController {
 		log.info("	-----CT----->userInfo");
 		
 		String id = (String)session.getAttribute("id");
-		
-		//임시 멤버 아이디
-		id = "dam";
+
 		model.addAttribute("userInfo", service.getUserInfo(id));
 		
 		return "/myroom/userinfo/userinfo";
@@ -67,8 +65,6 @@ public class MyRoomController {
 
 		String id = (String)session.getAttribute("id");
 		
-		//임시 멤버 아이디
-		id = "dam";
 		model.addAttribute("userInfo", service.getUserInfo(id));
 		
 		return "/myroom/userinfo/infoUpdate";
@@ -79,9 +75,6 @@ public class MyRoomController {
 		log.info("	-----CT----->infoUpdateData");
 		
 		String id = (String)session.getAttribute("id");
-		
-		// 임시 멤버 아이디
-		id = "dam";
 		
 		userDTO.setId(id);
 		int result = service.updateInfo(userDTO);
@@ -101,9 +94,6 @@ public class MyRoomController {
 		log.info("	-----CT----->imgUpdatePro");
 		
 		String id = (String)session.getAttribute("id");
-		
-		// 임시 멤버 아이디
-		id = "dam";
 		
 		userDTO.setId(id);
 		
@@ -132,12 +122,9 @@ public class MyRoomController {
 	public @ResponseBody ArrayList<ScheduleDTO> getClass(HttpSession session, Model model){
 		log.info("	-----CT----->getClass");
 
-		String m_id = (String)session.getAttribute("m_id");
+		String id = (String)session.getAttribute("id");
 		
-		//  임시 멤버 아이디
-		m_id = "dam";
-		
-		return service.getAllClass(m_id);
+		return service.getAllClass(id);
 	}
 //===========  멤버 일정 관련 코드 끝 ===========  //	
 		
@@ -148,15 +135,13 @@ public class MyRoomController {
 	public String bodyprofile(UserInfoDTO userDTO, HttpSession session, Model model) { 
 		log.info("	-----CT----->/bodypfile/bodyprofile");
 
-		String b_id = (String)session.getAttribute("b_id");
-		
-		// 임시 멤버 아이디
-		b_id = "dam";
-		
-		model.addAttribute("myProfileDTO", service.getMyProfile(b_id));
-		model.addAttribute("bodyProfileDTO", service.getBodyProfile(b_id));
-		model.addAttribute("bodyList", service.bodyList(b_id));
+		String id = (String)session.getAttribute("id");
+
+		model.addAttribute("myProfileDTO", service.getMyProfile(id));
+		model.addAttribute("bodyProfileDTO", service.getBodyProfile(id));
+		model.addAttribute("bodyList", service.bodyList(id));
 		model.addAttribute("number", 1);
+		
 		return "/myroom/bodyprofile/content";
 	}
 	
@@ -164,15 +149,24 @@ public class MyRoomController {
 	@RequestMapping("/bodyprofile/myWrite")
 	public String myWrite() {
 		log.info("	-----CT----->/bodypfile/myWrite");
-
+		
 		return "/myroom/bodyprofile/myWrite";
 	}
 	
 	@RequestMapping("/bodyprofile/myWritePro")
-	public String myWritePro(MyProfileDTO myDTO, Model model) {
+	public String myWritePro(HttpSession session, MyProfileDTO myDTO,  MultipartFile save, Model model) {
 		log.info("	-----CT----->/bodypfile/myWritePro");
-
-		model.addAttribute("result", service.myWrite(myDTO));
+		
+		String id = (String)session.getAttribute("id");
+		
+		myDTO.setB_id(id);
+		
+		String  file = fileInfo.imgUpload(save, id);
+		
+		if(file != null) {
+			myDTO.setImg(file);
+			model.addAttribute("result", service.myWrite(myDTO));
+		}
 		
 		return "/myroom/bodyprofile/myWritePro";
 	}
@@ -181,12 +175,9 @@ public class MyRoomController {
 	public String myUpdate(HttpSession session, Model model) {
 		log.info("	-----CT----->/bodypfile/myUpdate");
 
-		String b_id = (String)session.getAttribute("b_id");
+		String id = (String)session.getAttribute("id");
 		
-		// 임시 멤버 아이디
-		b_id = "dam";
-		
-		model.addAttribute("myProfileDTO", service.getMyProfile(b_id));
+		model.addAttribute("myProfileDTO", service.getMyProfile(id));
 		
 		return "/myroom/bodyprofile/myUpdate";
 	}
@@ -195,16 +186,15 @@ public class MyRoomController {
 	public String myUpdatePro(HttpSession session, MyProfileDTO myDTO, MultipartFile save, Model model) {		
 		log.info("	-----CT----->/bodypfile/bodyUpdatePro");
 
-		String b_id = (String)session.getAttribute("b_id");
+		String id = (String)session.getAttribute("id");
 		
-		log.info("=====save"+save);
-		
-		// 임시 멤버 아이디
-		b_id = "dam";
-		
-		myDTO.setB_id(b_id);
-		
-		model.addAttribute("result", service.myUpdate(myDTO));
+		myDTO.setB_id(id);
+	
+		String  file = fileInfo.imgUpload(save, id);
+		if(file != null) {
+			myDTO.setImg(file);
+			model.addAttribute("result", service.myUpdate(myDTO));
+		}
 		
 		return "/myroom/bodyprofile/myUpdatePro";
 	}
@@ -220,18 +210,16 @@ public class MyRoomController {
 	public String bodyWritePro(BodyProfileDTO bodyDTO, MultipartFile save, HttpSession session, Model model) {
 		log.info("	-----CT----->/bodypfile/bodyWritePro");
 
-		String b_id = (String)session.getAttribute("b_id");
+		String id = (String)session.getAttribute("id");
 		
-		// 임시 멤버 아이디
-		b_id = "dam";
+		bodyDTO.setB_id(id);
 		
-		bodyDTO.setB_id(b_id);
-		
-		String  file = fileInfo.imgUpload(save, b_id);
+		String  file = fileInfo.imgUpload(save, id);
 		if(file != null) {
 			bodyDTO.setB_img(file);
 			model.addAttribute("result",service.bodyWrite(bodyDTO));
 		}
+		
 		return "/myroom/bodyprofile/bodyWritePro";
 	}
 	
@@ -239,12 +227,9 @@ public class MyRoomController {
 	public String bodyUpdate(BodyProfileDTO bodyDTO, HttpSession session, Model model) {
 		log.info("	-----CT----->/bodypfile/bodyUpdate");
 
-		String b_id = (String)session.getAttribute("b_id");
+		String id = (String)session.getAttribute("id");
 		
-		// 임시 멤버 아이디
-		b_id = "dam";
-		
-		bodyDTO.setB_id(b_id);
+		bodyDTO.setB_id(id);
 		
 		model.addAttribute("bodyProfileDTO", service.getBodyInfo(bodyDTO));
 		
@@ -255,16 +240,13 @@ public class MyRoomController {
 	public String bodyUpdatePro(BodyProfileDTO bodyDTO,  MultipartFile save, HttpSession session, Model model) {
 		log.info("	-----CT----->/bodypfile/bodyUpdatePro");
 
-		String b_id = (String)session.getAttribute("b_id");
+		String id = (String)session.getAttribute("id");
 		
-		// 임시 멤버 아이디
-		b_id = "dam";
+		bodyDTO.setB_id(id);
 		
-		bodyDTO.setB_id(b_id);
-		
-		String b_num = Integer.toString(bodyDTO.getB_num()); // num  String 형변환 
-		
-		String  file = fileInfo.imgUpload(save, b_num);
+		String num = Integer.toString(bodyDTO.getB_num()); // num  String 형변환 
+	
+		String  file = fileInfo.imgUpload(save, num);
 		if(file != null) {
 			bodyDTO.setB_img(file);
 			model.addAttribute("result", service.bodyUpdate(bodyDTO));
@@ -293,12 +275,14 @@ public class MyRoomController {
 
 //  =========== 바디프로필 그래프  ===========  //		
 	@RequestMapping("/getBodyList")
-	public @ResponseBody List<BodyProfileDTO> getBodyList(Model model){
+	public @ResponseBody List<BodyProfileDTO> getBodyList(Model model, HttpSession session){
 		log.info("	-----CT----->getBodyList");
-
+		
+		String id = (String)session.getAttribute("id");
+		
 		//		=========== 날짜 포맷을 mm월 dd일로 바꾼 후 view로 보내는 코드 ===========		//
 		
-		List<BodyProfileDTO> list = service.bodyList("dam"); // list 변수에 DB에서 가져온 값을 대입
+		List<BodyProfileDTO> list = service.bodyList(id); // list 변수에 DB에서 가져온 값을 대입
 		List<BodyProfileDTO> resultList = new ArrayList<BodyProfileDTO>(); // view로 보낼 리스트 선언
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일"); // 변경할 날짜 포맷 선언 후 생성
@@ -339,10 +323,11 @@ public class MyRoomController {
 
 		String id = (String)session.getAttribute("id");
 		
-		// 임시 멤버 아이디
-		id = "dam";
+		int count = 0;
+		count = service.zoomLikeCount(id);
 		
-		model.addAttribute("ZoomDTO", service.likeZoomList(id));
+		model.addAttribute("zoomList", service.likeZoomList(id));
+		model.addAttribute("count" , count);
 		
 		return "/myroom/locker/likeZoom";
 	}
@@ -355,12 +340,7 @@ public class MyRoomController {
 		
 		String id = (String)session.getAttribute("id");
 		
-		// 임시 멤버 아이디
-		id = "dam";
 		likeDTO.setId(id);
-		
-	
-		log.info(""+likeDTO.getZoom_num());
 		result = service.zoomLikeWrite(id, likeDTO.getZoom_num());
 		
 		return result;
@@ -374,8 +354,6 @@ public class MyRoomController {
 		
 		String id = (String)session.getAttribute("id");
 		
-		// 임시 멤버 아이디
-		id = "dam";
 		likeDTO.setId(id);
 		result = service.zoomLikeDelete(id, likeDTO.getZoom_num());
 		
@@ -387,9 +365,6 @@ public class MyRoomController {
 		log.info("	-----CT----->likeVod");
 		
 		String id = (String)session.getAttribute("id");
-		
-		// 임시 멤버 아이디
-		id = "dam";
 		
 		model.addAttribute("VodDTO", service.likeVodList(id));
 		
@@ -404,10 +379,7 @@ public class MyRoomController {
 		
 		String id = (String)session.getAttribute("id");
 		
-		id ="dam";
-		
 		likeDTO.setId(id);
-		
 		result = service.vodLikeWrite(id, likeDTO.getVod_num());
 		
 		return result;
@@ -421,8 +393,6 @@ public class MyRoomController {
 		
 		String id = (String)session.getAttribute("id");
 		
-		// 임시 멤버 아이디
-		id = "dam";
 		likeDTO.setId(id);
 		result = service.vodLikeDelete(id, likeDTO.getZoom_num());
 		
@@ -437,9 +407,6 @@ public class MyRoomController {
 		log.info("	-----CT----->review");
 		
 		String id = (String)session.getAttribute("id");
-		
-		// 임시 멤버 아이디
-		id = "dam";
 		
 		int pageSize = 10;
 		
@@ -473,10 +440,7 @@ public class MyRoomController {
 		
 		String id = (String)session.getAttribute("id");
 		
-		// 임시 멤버 아이디
-		id = "dam";
 		reviewDTO.setId(id);
-		
 		model.addAttribute("review" , service.getMyReview(reviewDTO));
 		
 		return "/myroom/review/reviewUpdate";
@@ -490,10 +454,7 @@ public class MyRoomController {
 		
 		String id = (String)session.getAttribute("id");
 		
-		// 임시 멤버 아이디
-		id = "dam";
 		reviewDTO.setId(id);
-		
 		result = service.updateReview(reviewDTO);
 		
 		return result;
@@ -507,10 +468,7 @@ public class MyRoomController {
 		
 		String id = (String)session.getAttribute("id");
 		
-		//임시 멤버 아이디
-		id = "dam";
 		reviewDTO.setId(id);
-
 		result = service.deleteReview(reviewDTO);
 		
 		return result;

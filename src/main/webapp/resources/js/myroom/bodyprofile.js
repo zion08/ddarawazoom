@@ -57,21 +57,58 @@ $(document).ready(function(){
 					datasets: [
 						{
 							label: '몸무게',
-							backgroundColor: '#80b6f4',
-                            borderColor: '#80b6f4',
+							backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
                             pointBorderColor: '#80b6f4',
-                            pointBackgroundColor: '#80b6f4', 
-                            pointHoverBackgroundColor: 'white', //hover시 pointBacground
-                            pointHoverBorderColor: '#black',
+                            pointHoverBackgroundColor: 'white',
 			                borderWidth: 3,
-			                fillColor: "#79D1CF",
-			                strokeColor: "#79D1CF",
 			                display : true,
-			                fill: false,
+			                fill: true,
 							data: weight
 						}]
 					},
 				options: {
+					scales: {
+						xAxes: [{
+							ticks:{
+								fontColor : 'rgba(12, 13, 13, 1)',
+								fontSize : 14
+								
+							}
+						}],
+						yAxes: [{
+							ticks:{
+								max:140,
+								min: 0,
+								stepSize: 5,
+								fontColor : 'rgba(12, 13, 13, 1)',
+								fontSize : 13
+							},
+							stacked: true
+						}],
+					},
+					responsive: true,
+					legend:{
+						display:true
+					},
+					elements: {
+						line: {
+							fill: false
+						},
+						point: {
+							hoverRadiuse: 7,
+							radius: 5
+						}
+					},
+					interaction: {
+						mode: 'index',
+						intersect: false,
+					},
+					title: {
+						display: true,
+						text: '몸무게 변화',
+						fontSize: 23
+					},
 					maintainAspectRatio: false, //차트 비율 유지하지 않음
 					randing: true,
 					tooltips: {
@@ -103,51 +140,10 @@ $(document).ready(function(){
 		    					}),this)
 		    				}),this);
 		    			}
-		    		},
-					responsive: true,
-					legend:{
-						display:false
-					},
-					elements: {
-						line: {
-							fill: false
-						},
-						point: {
-							hoverRadiuse: 7,
-							radius: 5
-						}
-					},
-					scales: {
-						xAxes: [{
-							ticks:{
-								fontColor : 'rgba(12, 13, 13, 1)',
-								fontSize : 14
-							}
-						}],
-						yAxes: [{
-							ticks:{
-								max:150,
-								min: 0,
-								stepSize: 10,
-								autoSkip: false,
-								fontColor : 'rgba(12, 13, 13, 1)',
-								fontSize : 13
-							},
-							stacked: true
-						}]
-					},
-					interaction: {
-						mode: 'index',
-						intersect: false,
-					},
-						title: {
-							display: true,
-							text: '몸무게 변화',
-							fontSize: 23
-						}
 					}
-				});
+				}
 			});
+		});
 		
 		
 
@@ -178,8 +174,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	console.log(muscle);
-	console.log(bodyfat);
 	
 	var ctx = document.getElementById('muscleBodyChart').getContext('2d');
 		var chart = new Chart(ctx, { 
@@ -202,8 +196,9 @@ $(document).ready(function(){
 					},
 					{
 						label: '체지방량',
-						backgroundColor: '#ff91c2',
-		                borderColor: '#ff91c2',
+						backgroundColor: 'rgba(255, 99, 132, 0.2)',
+		                borderColor: 'rgba(255, 99, 132, 1)',
+		                borderWidth: 1,
 		                display : true,
 		                fill: false,
 		                stack: 'combined',
@@ -232,7 +227,7 @@ $(document).ready(function(){
 						ticks:{
 							max:50,
 							min: 0,
-							stepSize:10,
+							stepSize:5,
 							autoSkip: false,
 							fontColor : 'rgba(12, 13, 13, 1)',
 							fontSize : 14
@@ -288,29 +283,29 @@ $(document).ready(function(){
 			}
 		});
 		
-		console.log(chest);
-		console.log(waist);
-		console.log(arm);
-		console.log(thigh);
-		console.log(hip);
-		console.log(date);
 		
 		var ctx = document.getElementById('bodySizeChart').getContext('2d');
 			var chart = new Chart(ctx, { 
-				type: 'horizontalBar', 
+				type: 'bar', 
 				data: {
 					labels: date,
 					datasets: [
 						{
 							label: '가슴 둘레',
+							fill: false,
+							lineTension: 0.3,
 							backgroundColor: '#ff91c2',
 			                borderColor: '#ff91c2',
 			                borderWidth: 2,
 			                display : true,
+			                stack: 'combined',
+		               		type:'bar',
 							data: chest
 						},
 						{
 							label: '허리 둘레',
+							fill: false,
+							lineTension: 0.3,
 							backgroundColor: '#FFE4B5',
 			                borderColor: '#FFE4B5',
 			                borderWidth: 2,
@@ -319,22 +314,30 @@ $(document).ready(function(){
 						},
 						{
 							label: '팔뚝 둘레',
+							fill: false,
+							lineTension: 0.3,
 							backgroundColor: '#FFB6C1',
 			                borderColor: '#FFB6C1',
 			                borderWidth: 2,
 			                display : true,
+			                type:'bar',
 							data: arm
 						},
 						{
 							label: '허벅지 둘레',
+							fill: false,
+							lineTension: 0.3,
 							backgroundColor: '#66CDAA',
 			                borderColor: '#66CDAA',
 			                borderWidth: 2,
 			                display : true,
+			                type:'bar',
 							data: thigh
 						},
 						{
 							label: '엉덩이 둘레',
+							fill: false,
+							lineTension: 0.3,
 							backgroundColor: '#9370DB',
 			                borderColor: '#9370DB',
 			                borderWidth: 2,
@@ -344,31 +347,12 @@ $(document).ready(function(){
 					},
 				options: {
 					responsive: true,
-					tooltips: {
-						enabled:true
-					},
-					hover: {
-						animationDuration: 0
-					},
-					elements: {
-						line: {
-							fill: false
-						},
-						point: {
-							hoverRadius: 7,
-							radius: 5
-						}
-					},
 					scales: {
 						xAxes: [{
 							ticks: {
-							display: false,
+							display: true,
 							fontColor : 'rgba(12, 13, 13, 1)',
 							fontSize : 15
-							},
-							gridLines: {
-								display:false,
-								drawBorder: false
 							},
 							stacked: true
 						}],
@@ -376,17 +360,18 @@ $(document).ready(function(){
 							ticks:{
 								max:400,
 								min: 0,
-								stepSize:100,
+								stepSize:5,
 								autoSkip: false,
 								fontColor : 'rgba(12, 13, 13, 1)',
-								fontSize : 15
+								fontSize : 15,
+								display:false
+							},
+							gridLines: {
+								display:false,
+								drawBorder: false
 							},
 							stacked: true
 						}]
-					},
-					interaction: {
-						mode: 'index',
-						intersect: false,
 					},
 					title: {
 						display: true,

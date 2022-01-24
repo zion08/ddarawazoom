@@ -20,8 +20,8 @@
 				<form method="post" action="/myroom/bodyprofile/bodyWritePro" enctype="multipart/form-data">
 					<div class="row g-3">
 						<div class="col-12">
-							<label for="b_id" class="form-label">* 아이디</label>
-							<input type="text" class="form-control" id="b_id" name="b_id" /> <!-- session id 담을 곳 -->
+							<label for="b_id" class="form-label">* 아이디</label><br/>
+								${sessionScope.id} 님
 						</div>	
 						<div class="col-12">
 							<label for="b_date" class="form-label">* 작성 날짜</label>
