@@ -17,7 +17,7 @@
 		<link href="../../resources/css/myroom/myprofile.css" rel="stylesheet">
 		
 	
-	<c:if test="${myProfileDTO == null}" >
+	<c:if test="${userInfo == null}" >
 		<ul class="list-group list-group-flush">
 		    <li class="list-group-item">
 		    	<h5>작성 된 바디 프로필이 없습니다.</h5>
@@ -27,49 +27,49 @@
 				</p>
 			</li>
 			<li class="list-group-item">
-				<input type="button" value="작성하러가기" class="btn btn-outline-dark"
+				<input type="button" value="${userInfo.nick}님의 추가정보 작성하러가기" class="btn btn-outline-dark"
 					onclick="document.location.href='/myroom/bodyprofile/myWrite'" />
 			</li>
 		</ul>
 	</c:if>
 	
-	<c:if test="${myProfileDTO != null}" >
+	<c:if test="${userInfo != null}" >
 		<section class="section about-section gray-bg" id="about">
             <div class="container">
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-lg-6">
                         <div class="about-text go-to">
-                            <h3 class="dark-color">${myProfileDTO.b_id}님의 바디 프로필</h3>
+                            <h3 class="dark-color">${userInfo.nick}님의 바디 프로필</h3>
                             <p>
-                            	DDrawaZoom의 소중한 <mark>${myProfileDTO.b_id}</mark> 멤버 님만의 공간입니다.
+                            	DDrawaZoom의 소중한 <mark>${userInfo.nick}</mark> 멤버 님만의 공간입니다.
                             </p>
                             <div class="row about-list">
                                 <div class="col-md-6">
                                     <div class="media">
                                         <label>I D</label>
-                                        <p>${myProfileDTO.b_id}</p>
+                                        <p>${userInfo.id}</p>
                                     </div>
                                     <div class="media">
                                         <label>Nick</label>
-                                        <p>${myProfileDTO.b_nick}</p>
+                                        <p>${userInfo.nick}</p>
                                     </div>
                                     <div class="media">
                                         <label>Name</label>
-                                        <p>${myProfileDTO.b_name}</p>
+                                        <p>${userInfo.name}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="media">
                                         <label>Birth</label>
-                                        <p><fmt:formatDate pattern="yyyy-MM-dd" value="${myProfileDTO.b_birth}" type="date" dateStyle="long"/></p>
+                                        <p><fmt:formatDate pattern="yyyy-MM-dd" value="${userInfo.birth}" type="date" dateStyle="long"/></p>
                                     </div>
                                     <div class="media">
                                         <label>Phone</label>
-                                        <p>${myProfileDTO.b_tel}</p>
+                                        <p>${userInfo.tel}</p>
                                     </div>
                                     <div class="media">
                                         <label>Email</label>
-                                        <p>${myProfileDTO.b_email}</p>
+                                        <p>${userInfo.email}</p>
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                     </div>
 	                    <div class="col-lg-6">
 	                        <div class="about-avatar">
-	                            <img src="../../resources/image/upload/${myProfileDTO.img}" width="500px" height="500px" alt="img">
+	                            <img src="../../resources/image/upload/${userInfo.img}" width="500px" height="500px" alt="img">
 	                        </div>
 	                    </div>
 	                </div>
@@ -144,16 +144,16 @@
 	            		</div>
 	        	</section>
 	         <div class="list_button">
-			    	<input type="button" value="수정하러가기"  class="btn btn-outline-dark"
+			    	<input type="button" value="${userInfo.nick}님의 추가정보 수정하러가기"  class="btn btn-outline-dark"
 						onclick="document.location.href='/myroom/bodyprofile/myUpdate'"/>
 						&nbsp;&nbsp;
-					<input type="button"  value="오늘하루 기록하기"  class="btn btn-outline-dark"
+					<input type="button"  value="${userInfo.nick}님의 오늘하루 바디 기록하기"  class="btn btn-outline-dark"
 						onclick="document.location.href='/myroom/bodyprofile/bodyWrite'"/>
 			</div>
 	  </c:if>
    
    
-   
+   <c:if test="${bodyProfileDTO != null && bodyList != null}">
 	<!-- 바디프로필 리스트 -->
 		<table class="table" id="bodyprofileList" style="height: 130px ; vertical-align: middle;">
 			<thead>
@@ -256,7 +256,7 @@
 				</tbody>
 			</c:forEach>
 		</table>
-		
+		</c:if>
 		<!-- 바디 프로필 차트 -->
 		<div class="weightChart" style="position: relative; height:60vh; width:80vw; margin: 0 auto; margin-top: 100px;">
 			<canvas id="weightChart" style="height:30vh; width:50vw; margin: 0 auto;"></canvas>

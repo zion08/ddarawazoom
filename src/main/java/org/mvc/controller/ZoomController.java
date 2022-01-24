@@ -95,9 +95,6 @@ public class ZoomController {
 		log.info(" -----CT-----> zoomClassContent ");
 		
 		String id = (String)session.getAttribute("id");
-		
-		// 임시 멤버 아이디
-		id = "dam";
 			
 		model.addAttribute("result" , myService.zoomLikeCheck(id, dto.getNum()));
 		

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.mvc.bean.BodyProfileDTO;
-import org.mvc.bean.MyProfileDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.bean.UserInfoDTO;
@@ -15,7 +14,7 @@ import org.mvc.bean.ZoomDTO;
 public interface MyRoomMapper {
 
 	// 마이 프로필 데이터 가져오기
-	public MyProfileDTO getMyProfile(String id);
+	public UserInfoDTO getMyProfile(String id);
 	
 	// 최근 바디 프로필 데이터 가져오기
 	public List<BodyProfileDTO> getBodyProfile(String id);
@@ -24,10 +23,10 @@ public interface MyRoomMapper {
 	public List<BodyProfileDTO> bodyList(String id);
 	
 	// 마이 프로필 작성
-	public int myWrite(MyProfileDTO myDTO);
+	public int myWrite(UserInfoDTO userDTO);
 	
 	// 마이 프로필 수정
-	public int myUpdate(MyProfileDTO myDTO);
+	public int myUpdate(UserInfoDTO userDTO);
 	
 	// 바디 프로필 작성
 	public int bodyWrite(BodyProfileDTO bodyDTO);

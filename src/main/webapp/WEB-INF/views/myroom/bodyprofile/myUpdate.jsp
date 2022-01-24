@@ -21,41 +21,42 @@
 					<form method="post" action="/myroom/bodyprofile/myUpdatePro" enctype="multipart/form-data">	
 						<div class="row g-3">
 							<div class="col-6">
-								<label for="b_id" class="form-label">* 아이디</label><br/>
+								<label for="id" class="form-label"><b>* 아이디</b></label><br/>
 									${sessionScope.id} 님
 							</div>
 							<div class="col-6">
-								<label for="b_nick" class="form-label">* 닉네임</label>
-								<input type="text" class="form-control" id="b_id" name="b_nick" value="${myProfileDTO.b_nick}" />
+								<label for="nick" class="form-label"><b>* 닉네임</b></label>
+								<input type="text" class="form-control" id="nick" name="nick" value="${userInfo.nick}" />
 							</div>
 							<div class="col-6">
-								<label for="b_name" class="form-label">* 이 름</label>
-								<input type="text" class="form-control" id="b_name" name="b_name" value="${myProfileDTO.b_name}" />
+								<label for="name" class="form-label"><b>* 이 름</b></label>
+								<input type="text" class="form-control" id="name" name="name" value="${userInfo.name}" />
 							</div>
 							<div class="col-6">
-								<label for="b_birth" class="form-label">* 생년월일</label>
-								<fmt:formatDate var="my_Birth" pattern="yyyy-MM-dd" value="${myProfileDTO.b_birth}" />
-								<input class="form-control" type="date" id="b_birth" name="b_birth" value="${my_Birth}" />
+								<label for="birth" class="form-label"><b>* 생년월일</b></label>
+								<fmt:formatDate var="my_Birth" pattern="yyyy-MM-dd" value="${userInfo.birth}" />
+								<input class="form-control" type="date" id="birth" name="birth" value="${userInfo.birth}" />
 							</div>
 							<div class="col-12">
-								<label for="b_gender" class="form-label">* 성 별</label>
-								<select class="form-select" id="b_gender" name="b_gender" required>
-									<option value="${myProfileDTO.b_gender}">${myProfileDTO.b_gender}</option>
+								<label for="gender" class="form-label"><b>* 성 별</b></label>
+								<select class="form-select" id="gender" name="gender" required>
+									<option value="${userInfo.gender}">성별 선택</option>
 									<option value="남성">남성</option>
 									<option value="여성">여성</option>
 								</select>
 							</div>
 							<div class="col-12">
-								<label for="b_tel" class="form-label">* 연락처</label>
-								<input type="text" class="form-control"id="b_tel" name="b_tel" value="${myProfileDTO.b_tel}" />
+								<label for="tel" class="form-label"><b>* 연락처</b></label>
+								<input type="text" class="form-control"id="tel" name="tel" value="${userInfo.tel}" />
 							</div>
 							<div class="col-12">
-								<label for="b_email" class="form-label">* 이메일</label>
-								<input type="email" class="form-control" id="b_email" name="b_email" value="${myProfileDTO.b_email}"/>	
+								<label for="email" class="form-label"><b>* 이메일</b></label>
+								<input type="email" class="form-control" id="email" name="email" value="${userInfo.email}"/>	
 							</div>
 							<div class="col-12">
-								<label for="b_img" class="form-label">* 프로필 사진</label>
-								<input type="file" class="form-control" id="save" name="save" value="${myProfileDTO.img}"/>	
+								<label for="img" class="form-label"><b>* 프로필 사진</b></label><br/>
+								<img src="../../resources/image/upload/${userInfo.img}" width="100px" height="100px" alt="img">
+								<input type="file" class="form-control" id="save" name="save" value="${userInfo.img}"/>	
 							</div>
 							
 						</div>

@@ -6,15 +6,8 @@ table{
 	text-align: center;
 }
 
-.mb-3{
-	text-align: center; 
-}
 
-.mb-3 img{
-	margin-top: 20px;
-}
-
-.mb-3 input{
+.btn .btn-outline-dark{
 	width: 150px;
 	height: 35px;
 	font-size: 12px;
@@ -30,11 +23,20 @@ table{
 	  height: 200px;
 }
 
+.form-label{
+	text-align: center;
+	margin: auto;
+}
 
-.mb-3 .form-control{
+.form-control{
 	width:350px;
 	margin: auto;
 	font-size: 15px;
+}
+
+#updateButton{
+	text-aling:center;
+	margin: 0 auto;
 }
 
 #likeZoom{
@@ -49,29 +51,23 @@ table{
 	width: 120px;
 }
 
-.card-body{
-	text-align: center;
-	padding: 30px;
-}
-
-
-.card-text{
-	margin: 25px;
-}
 
 .userInfoUpdateButton{
 	text-align: center;
+	margin: auto;
 }
 
 .row .g-3{
 	margin-top:30px;
 }
 
-.mb-3 h3{
-	margin: 10px;
-}
-
 .title{
 	text-align: center;
 	margin: auto;
 }
+
+.userUpdateTitle{
+	text-align: center;
+	margin: auto;
+}
+
