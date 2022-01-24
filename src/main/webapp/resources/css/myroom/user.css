@@ -23,51 +23,32 @@ table{
 	  height: 200px;
 }
 
-.form-label{
+
+.userInfo_title{
 	text-align: center;
-	margin: auto;
+	font-size: 27px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-weight: bold;
 }
 
-.form-control{
-	width:350px;
-	margin: auto;
-	font-size: 15px;
-}
-
-#updateButton{
-	text-aling:center;
+.card {
 	margin: 0 auto;
-}
-
-#likeZoom{
-	float: left;
-}
-
-#likeVod{
-	float: right;
-}
-
-.list-group-item{
-	width: 120px;
-}
-
-
-.userInfoUpdateButton{
 	text-align: center;
-	margin: auto;
+	margin-top: 30px;
 }
 
-.row .g-3{
+.btn-group , .userInfoUpdateButton , .imgUpdate{
+	margin: 0 auto;
+	text-align:center;
+}
+
+
+.imgUpdate , .imgUpdateButton{
+	margin: 0 auto;
+	text-align:center;
 	margin-top:30px;
+	margin-bottom: 30px;
 }
 
-.title{
-	text-align: center;
-	margin: auto;
-}
-
-.userUpdateTitle{
-	text-align: center;
-	margin: auto;
-}
 

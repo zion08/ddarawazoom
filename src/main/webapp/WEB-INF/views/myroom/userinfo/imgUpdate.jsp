@@ -17,18 +17,20 @@
 	</head>
 	<body>
 		<form class="needs-validation" novalidate id="updateForm" action="/myroom/userInfo" method="post" onsubmit="imgUpdatePro();" enctype="multipart/form-data">
-			<div class="mb-3">
+			<div class="imgUpdate">
 			 	<h3>
 			 		<label for="formFile" class="form-label">
 			 			프로필 사진 변경
 			 		</label>
 			 	</h3>
-				 <input class="form-control" type="file"  id="formFile" required>
+				 	<input class="form-control" type="file"  id="formFile" required>
 				 <div class="invalid-feedback">
 	     			사진을 선택해주세요.
 	     		</div>
 			     	<hr class="my-4">
-			     <input type="submit" id="updateButton" class="btn btn-outline-dark" value="사진 업로드">
+			     	<div class="imgUpdateButton">
+			     		<input type="submit" id="updateButton" class="btn btn-outline-dark" value="사진 업로드">
+			     	</div>
 			</div>
 		</form>
 			<script src="../../resources/js/form-validation.js"></script>
