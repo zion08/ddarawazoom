@@ -4,7 +4,7 @@
 
 <c:if test="${result == 1}">
 	<script>
-		alert("글을 삭제했습니다.");
+		alert("강의를 삭제했습니다.");
 		window.location="/ddarawazoom/zoom"; 
 	</script>
 </c:if>
