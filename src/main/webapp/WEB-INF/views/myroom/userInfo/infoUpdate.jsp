@@ -25,7 +25,7 @@
 					<div class="col-6">
 						<label for="id" class="form-label">아이디</label>
 						<div class="input-group has validation">
-							${userInfo.id}
+							${sessionScope.id}
 						</div>
 					</div>
 		            <div class="col-6">
