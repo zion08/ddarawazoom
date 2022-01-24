@@ -22,5 +22,11 @@ public class UserInfoDTO {
 	private String img;
 	private String status;
 	
+	private String name;
+	private String gender;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date birth;
+	private String tel;
 	
 }

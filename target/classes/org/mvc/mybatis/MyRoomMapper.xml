@@ -8,8 +8,8 @@
 
 <!-- 바디 프로필 관련 코드 시작 -->	
 	<!-- 마이 프로필 데이터 가져오기 -->
-	<select id="getMyProfile" resultType="org.mvc.bean.MyProfileDTO">
-		select * from tbl_myprofile where b_id = #{b_id}
+	<select id="getMyProfile" resultType="org.mvc.bean.UserInfoDTO">
+		select * from tbl_user where id = #{id}
 	</select>
 	
 	<!-- 최근 바디 프로필 데이터 가져오기 -->
@@ -32,31 +32,31 @@
 	
 	<!-- 마이 프로필 작성 -->
 	<insert id="myWrite">
-			insert into tbl_myprofile(b_id, b_nick, b_name, b_gender, b_birth, b_tel, b_email, img)
+			insert into tbl_user(id, nick, name, birth, gender, tel, email, img)
 				values(
-					#{b_id},
-					#{b_nick},
-					#{b_name},
-					#{b_gender},
-					#{b_birth},
-					#{b_tel},
-					#{b_email},
+					#{id},
+					#{nick},
+					#{name},
+					#{birth},
+					#{gender},
+					#{tel},
+					#{email},
 					#{img}
 				)
 	</insert>
 	
 	<!--  마이 프로필 수정 -->
-	<update id="myUpdate" parameterType="org.mvc.bean.MyProfileDTO">
+	<update id="myUpdate" parameterType="org.mvc.bean.UserInfoDTO">
 		<![CDATA[
-			update tbl_myprofile set
-					b_nick = #{b_nick},
-					b_name = #{b_name},
-					b_gender = #{b_gender},
-					b_birth = #{b_birth},
-					b_tel = #{b_tel},
-					b_email = #{b_email},
+			update tbl_user set
+					nick = #{nick},
+					name = #{name},
+					gender = #{gender},
+					birth = #{birth},
+					tel = #{tel},
+					email = #{email},
 					img = #{img}
-			where b_id = #{b_id}
+			where id = #{id}
 		]]>
 	</update>
 

@@ -6,15 +6,8 @@ table{
 	text-align: center;
 }
 
-.mb-3{
-	text-align: center; 
-}
 
-.mb-3 img{
-	margin-top: 20px;
-}
-
-.mb-3 input{
+.btn .btn-outline-dark{
 	width: 150px;
 	height: 35px;
 	font-size: 12px;
@@ -31,47 +24,31 @@ table{
 }
 
 
-.mb-3 .form-control{
-	width:350px;
-	margin: auto;
-	font-size: 15px;
-}
-
-#likeZoom{
-	float: left;
-}
-
-#likeVod{
-	float: right;
-}
-
-.list-group-item{
-	width: 120px;
-}
-
-.card-body{
+.userInfo_title{
 	text-align: center;
-	padding: 30px;
+	font-size: 27px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-weight: bold;
 }
 
-
-.card-text{
-	margin: 25px;
-}
-
-.userInfoUpdateButton{
+.card {
+	margin: 0 auto;
 	text-align: center;
+	margin-top: 30px;
 }
 
-.row .g-3{
+.btn-group , .userInfoUpdateButton , .imgUpdate{
+	margin: 0 auto;
+	text-align:center;
+}
+
+
+.imgUpdate , .imgUpdateButton{
+	margin: 0 auto;
+	text-align:center;
 	margin-top:30px;
+	margin-bottom: 30px;
 }
 
-.mb-3 h3{
-	margin: 10px;
-}
 
-.title{
-	text-align: center;
-	margin: auto;
-}
