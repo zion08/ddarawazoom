@@ -16,7 +16,7 @@ public interface MyRoomService {
 	// 마이 프로필 데이터 가져오기
 	public MyProfileDTO getMyProfile(String id);
 	
-	// 최신 바디 프로필 데이터 가져오기
+	// 최근 바디 프로필 데이터 가져오기
 	public List<BodyProfileDTO> getBodyProfile(String id);
 	
 	// 바디 프로필 리스트 데이터 가져오기
@@ -53,7 +53,7 @@ public interface MyRoomService {
 	public ArrayList<ScheduleDTO> getAllClass(String id);	
 	
 	// Zoom 관심등록 데이터 가져오기
-	public ArrayList<ZoomDTO> likeZoomList(String id); // Zoom 관심등록 리스트
+	public ArrayList<ZoomDTO> likeZoomList(String id);
 
 	// Zoom 관심 체크 여부 확인
 	public int zoomLikeCheck(String id, Long num);
@@ -63,6 +63,9 @@ public interface MyRoomService {
 	
 	// Zoom 관심 등록 해제
 	public int zoomLikeDelete(String id, int num);
+	
+	// Zoom 관심 등록 갯수
+	public int zoomLikeCount(String id);
 	
 	// Vod 관심등록 데이터 가져오기
 	public ArrayList<VodDTO> likeVodList(String id);

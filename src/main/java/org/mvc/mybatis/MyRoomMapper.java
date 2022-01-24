@@ -17,7 +17,7 @@ public interface MyRoomMapper {
 	// 마이 프로필 데이터 가져오기
 	public MyProfileDTO getMyProfile(String id);
 	
-	// 최신 바디 프로필 데이터 가져오기
+	// 최근 바디 프로필 데이터 가져오기
 	public List<BodyProfileDTO> getBodyProfile(String id);
 	
 	// 바디 프로필 리스트 데이터 가져오기
@@ -70,6 +70,9 @@ public interface MyRoomMapper {
 	public int zoomLikeDelete(
 			@Param("id") String id,
 			@Param("zoom_num") int num);
+	
+	// Zoom 관신 등록 갯수
+	public int zoomLikeCount(String id);
 	
 	// Vod 관심등록 데이터 가져오기
 	public ArrayList<VodDTO> likeVodList(String id);
