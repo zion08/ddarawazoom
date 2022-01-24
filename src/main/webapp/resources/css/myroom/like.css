@@ -21,3 +21,8 @@
 .intro{
 	width: 500px;
 }
+
+#page a{
+	text-align: center;
+	margin: auto;
+}

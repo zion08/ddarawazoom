@@ -12,7 +12,7 @@
 		select * from tbl_myprofile where b_id = #{b_id}
 	</select>
 	
-	<!-- 최신 바디 프로필 데이터 가져오기 -->
+	<!-- 최근 바디 프로필 데이터 가져오기 -->
 	<select id="getBodyProfile" resultType="org.mvc.bean.BodyProfileDTO">
 		select * from tbl_bodyprofile
 			where b_id = #{b_id} and b_num = (
@@ -32,28 +32,32 @@
 	
 	<!-- 마이 프로필 작성 -->
 	<insert id="myWrite">
-		insert into tbl_myprofile(b_id, b_nick, b_name, b_gender, b_birth, b_tel, b_email)
-			values(
-				#{b_id},
-				#{b_nick},
-				#{b_name},
-				#{b_gender},
-				#{b_birth},
-				#{b_tel},
-				#{b_email}
-			)
+			insert into tbl_myprofile(b_id, b_nick, b_name, b_gender, b_birth, b_tel, b_email, img)
+				values(
+					#{b_id},
+					#{b_nick},
+					#{b_name},
+					#{b_gender},
+					#{b_birth},
+					#{b_tel},
+					#{b_email},
+					#{img}
+				)
 	</insert>
 	
 	<!--  마이 프로필 수정 -->
 	<update id="myUpdate" parameterType="org.mvc.bean.MyProfileDTO">
-		update tbl_myprofile set
-				b_nick = #{b_nick},
-				b_name = #{b_name},
-				b_gender = #{b_gender},
-				b_birth = #{b_birth},
-				b_tel = #{b_tel},
-				b_email = #{b_email}
-		where b_id = #{b_id}
+		<![CDATA[
+			update tbl_myprofile set
+					b_nick = #{b_nick},
+					b_name = #{b_name},
+					b_gender = #{b_gender},
+					b_birth = #{b_birth},
+					b_tel = #{b_tel},
+					b_email = #{b_email},
+					img = #{img}
+			where b_id = #{b_id}
+		]]>
 	</update>
 
 	<!-- 바디 프로필 작성 -->
@@ -119,18 +123,22 @@
 	
 	<!-- 멤버 정보 수정 -->
 	<update id="updateInfo">
-		update tbl_user set
-			pw = #{pw},
-			email = #{email},
-			nick = #{nick}
-		where id = #{id}
+		<![CDATA[
+			update tbl_user set
+				pw = #{pw},
+				email = #{email},
+				nick = #{nick}
+			where id = #{id}
+		]]>
 	</update>
 	
 	<!-- 멤버 프로필 이미지 수정 -->
 	<update id ="updateImg">
-		update tbl_user set
-			img = #{img}
-		where id = #{id}			
+		<![CDATA[
+			update tbl_user set
+				img = #{img}
+			where id = #{id}			
+		]]>
 	</update>
 <!-- 멤버 관련 코드 종료 -->
 
@@ -167,7 +175,7 @@
 	    			tbl_coachclass.frequency,
 	    			tbl_coachclass.price
 	    		from tbl_coachclass, tbl_like
-			where tbl_coachclass.num = tbl_like.zoom_num) where id = #{id}
+			where tbl_coachclass.num = tbl_like.zoom_num) where id = #{id} order by num desc
 		]]>
 	</select>
 	
@@ -187,7 +195,11 @@
 		delete from tbl_like where id = #{id} and zoom_num = #{zoom_num}
 	</delete>
 
-
+	<!-- Zoom 등록 갯수 -->
+	<select id="zoomLikeCount" resultType="int">
+		select count(zoom_num) from tbl_like where id = #{id}
+	</select>
+	
 	<!-- Vod 관심등록 데이터 가져오기 -->
 	<select id="likeVodList" resultType="org.mvc.bean.VodDTO">
 		<![CDATA[
