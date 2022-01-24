@@ -56,7 +56,7 @@ public class PayController {
 		
 	@RequestMapping("/pay")
 	public String pay(Model model) {
-		int num_test = 2;
+		int num_test = 6;
 		model.addAttribute("ZoomDTO" , serviceZoom.zoomContent(num_test));
 		
 		// 총 결제 갯수
@@ -82,15 +82,15 @@ public class PayController {
 	
 	@RequestMapping("/payPro")
 	public @ResponseBody int payPro(@RequestBody PaymentDTO dto) throws IamportResponseException, IOException {
-		log.info("	------>payment start: "+"결제 시작");
+		log.info("	------>payment verify: "+"검증 시작");
 		
-		// DB에서 결제 정보 조회
-		String merchantUid = dto.getMerchantUid();
-		int amountToBePaid = serviceZoom.getPrice(merchantUid);
-		//int amountToBePaid = 2000; // test용
+		// 상품 번호(merchant_Uid)로 DB에서 상품 가격 조회
+		String merchant_Uid = dto.getMerchantUid();
+		int amountToBePaid = serviceZoom.getPrice(merchant_Uid);
 		
+		// 결제 번호(imp_uid)와 금액(amountToBePaid)으로 결제 검증
 		int result = 0;
-		IamportResponse<Payment> verify = api.paymentByImpUid(dto.getImpUid());	// 결제 번호(imp_uid)와 금액(amount)으로 결제 검증	
+		IamportResponse<Payment> verify = api.paymentByImpUid(dto.getImpUid());		
 		if(verify.getResponse().getAmount().compareTo(BigDecimal.valueOf(amountToBePaid)) == 0) {
 			log.info("	------>payment verify: " + "검증 성공");
 			

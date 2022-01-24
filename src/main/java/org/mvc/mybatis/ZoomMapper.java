@@ -17,5 +17,6 @@ public interface ZoomMapper {
 	public int zoomCount();
 	public int reCount();
 	public int zoomReadcount(int num);
-	public int imgUpdate(ZoomDTO dto); 
+	public int imgUpdate(ZoomDTO dto);
+	public int getPrice(String merchant_Uid); 
 }

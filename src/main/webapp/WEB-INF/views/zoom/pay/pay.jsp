@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../layout/iamport.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../../layout/header.jsp"%> 
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+
+<!-- payment cancel -->
+<script 
+	src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous">
+</script>
 
 <script type="text/javascript">	  
    $(document).ready(function(){
@@ -14,8 +25,8 @@
 	$('#payBtn').click(function() {	// 결제하기 버튼 클릭      
 
 		var paymentData = new Object();	// json 데이터 생성
-		paymentData.merchantUid = "${ZoomDTO.merchant_uid}"+"-ORD"+"${cnt}";
-		paymentData.c_id = "kimcoach";
+		paymentData.merchantUid = "${ZoomDTO.merchant_uid}";
+		paymentData.c_id = "${ZoomDTO.c_id}";
 		paymentData.c_num = ${ZoomDTO.num};
 		console.log(paymentData);
 		
@@ -24,7 +35,7 @@
 	        pay_method: "card",				// 지불 수단
 	        merchant_uid: paymentData.merchantUid,		// 제품 주문번호
 	        name: "${ZoomDTO.title}",		// 강의명
-	        amount: 2000,					// 강의(제품) 가격
+	        amount: ${ZoomDTO.price},		// 강의(제품) 가격
 	        buyer_name: "buyer_id",			// 구매자 id
 	        buyer_email: "test@test.com",	// 구매자 email
 	        buyer_tel: "010-4242-4242"		// 구매자 전화번호
@@ -144,7 +155,7 @@
 });
 </script>
 
-<%-- <section class="masthead">
+<section class="masthead">
 	<div class="d-flex justify-content-center">
 		<p>${ZoomDTO.num}번   |</p>
 		<p>${ZoomDTO.title}   |</p>
@@ -193,7 +204,7 @@
               				</c:if>		              				
 		              		<c:if test="${paymentDTO.status == 'cancelled'}">
 		              			<button class="refundDone btn btn-sm btn btn-danger" id="">취소완료</button></br>		              				              			
-		              			<div id="c-detail" style="display: none;"></div>ㄴ
+		              			<div id="c-detail" style="display: none;"></div>
 		              		</c:if>							
 		              		<c:if test="${paymentDTO.amount - paymentDTO.cancelAmount > 0}">		              			
 		              			<button class="refundBtn btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#refundModal">
@@ -207,10 +218,11 @@
 		</table>
 	</div>
 	
-</section> --%>
+</section>
 
 
 <!-- Modal -->
+<!-- 
 <div class="modal fade" id="refundModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content rounded-6 shadow">
@@ -250,4 +262,4 @@
 
     </div>
   </div>
-</div>
+</div> -->

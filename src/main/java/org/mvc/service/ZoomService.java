@@ -17,5 +17,5 @@ public interface ZoomService {
 	public int reCount();
 	public int zoomReadcount(int num);  
 	public int imgUpdate(ZoomDTO dto);
-	public String getPrice(String merchantUid);
+	public int getPrice(String merchant_Uid);
 }

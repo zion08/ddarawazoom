@@ -74,5 +74,10 @@ public class ZoomServiceImpl implements ZoomService{
 	public int reCount() {
 		return mapper.reCount();
 	}
+	
+	@Override
+	public int getPrice(String merchant_Uid) {
+		return mapper.getPrice(merchant_Uid);
+	}
 
 }

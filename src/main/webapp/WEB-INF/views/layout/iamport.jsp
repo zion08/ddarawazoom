@@ -17,7 +17,7 @@
    $(document).ready(function(){
    	
    	//01. 결제 준비
-	var IMP = window.IMP;s
+	var IMP = window.IMP;
 	IMP.init("imp37432029");  //가맹점 식별 코드
 
 	//02. 결제 하기
