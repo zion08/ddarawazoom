@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.mvc.bean.BodyProfileDTO;
 import org.mvc.bean.FileInfo;
 import org.mvc.bean.LikeDTO;
-import org.mvc.bean.MyProfileDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.bean.UserInfoDTO;
@@ -132,12 +131,12 @@ public class MyRoomController {
 	
 //  =========== 바디프로필 관련 코드 시작 ===========  //		
 	@RequestMapping("/bodyprofile")
-	public String bodyprofile(UserInfoDTO userDTO, HttpSession session, Model model) { 
+	public String bodyprofile(HttpSession session, Model model) { 
 		log.info("	-----CT----->/bodypfile/bodyprofile");
 
 		String id = (String)session.getAttribute("id");
 
-		model.addAttribute("myProfileDTO", service.getMyProfile(id));
+		model.addAttribute("userInfo", service.getMyProfile(id));
 		model.addAttribute("bodyProfileDTO", service.getBodyProfile(id));
 		model.addAttribute("bodyList", service.bodyList(id));
 		model.addAttribute("number", 1);
@@ -154,18 +153,18 @@ public class MyRoomController {
 	}
 	
 	@RequestMapping("/bodyprofile/myWritePro")
-	public String myWritePro(HttpSession session, MyProfileDTO myDTO,  MultipartFile save, Model model) {
+	public String myWritePro(HttpSession session, UserInfoDTO userDTO,  MultipartFile save, Model model) {
 		log.info("	-----CT----->/bodypfile/myWritePro");
 		
 		String id = (String)session.getAttribute("id");
 		
-		myDTO.setB_id(id);
+		userDTO.setId(id);
 		
 		String  file = fileInfo.imgUpload(save, id);
 		
 		if(file != null) {
-			myDTO.setImg(file);
-			model.addAttribute("result", service.myWrite(myDTO));
+			userDTO.setImg(file);
+			model.addAttribute("result", service.myWrite(userDTO));
 		}
 		
 		return "/myroom/bodyprofile/myWritePro";
@@ -177,23 +176,23 @@ public class MyRoomController {
 
 		String id = (String)session.getAttribute("id");
 		
-		model.addAttribute("myProfileDTO", service.getMyProfile(id));
+		model.addAttribute("userInfo", service.getMyProfile(id));
 		
 		return "/myroom/bodyprofile/myUpdate";
 	}
 	
 	@RequestMapping("/bodyprofile/myUpdatePro")
-	public String myUpdatePro(HttpSession session, MyProfileDTO myDTO, MultipartFile save, Model model) {		
+	public String myUpdatePro(HttpSession session, UserInfoDTO userDTO, MultipartFile save, Model model) {		
 		log.info("	-----CT----->/bodypfile/bodyUpdatePro");
 
 		String id = (String)session.getAttribute("id");
 		
-		myDTO.setB_id(id);
+		userDTO.setId(id);
 	
 		String  file = fileInfo.imgUpload(save, id);
 		if(file != null) {
-			myDTO.setImg(file);
-			model.addAttribute("result", service.myUpdate(myDTO));
+			userDTO.setImg(file);
+			model.addAttribute("result", service.myUpdate(userDTO));
 		}
 		
 		return "/myroom/bodyprofile/myUpdatePro";

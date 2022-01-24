@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mvc.bean.BodyProfileDTO;
-import org.mvc.bean.MyProfileDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.bean.UserInfoDTO;
@@ -25,7 +24,7 @@ public class MyRoomServiceImpl implements MyRoomService {
 	private MyRoomMapper mapper;
 
 	@Override
-	public MyProfileDTO getMyProfile(String id) {
+	public UserInfoDTO getMyProfile(String id) {
 		return mapper.getMyProfile(id);
 	}
 	
@@ -40,13 +39,13 @@ public class MyRoomServiceImpl implements MyRoomService {
 	}
 	
 	@Override
-	public int myWrite(MyProfileDTO myDTO) {
-		return mapper.myWrite(myDTO);
+	public int myWrite(UserInfoDTO userDTO) {
+		return mapper.myWrite(userDTO);
 	}
 	
 	@Override
-	public int myUpdate(MyProfileDTO myDTO) {
-		return mapper.myUpdate(myDTO);
+	public int myUpdate(UserInfoDTO userDTO) {
+		return mapper.myUpdate(userDTO);
 	}
 
 	@Override
