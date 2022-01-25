@@ -12,10 +12,19 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 		<script src="../../resources/js/myroom/bodyprofile.js" ></script>
+		<script src="../../resources/js/myroom/talk.js"></script>
+		<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>		
 		
 		<link href="../../resources/css/myroom/bodyprofile.css" rel="stylesheet" >
 		<link href="../../resources/css/myroom/myprofile.css" rel="stylesheet">
 		
+
+	<c:if test="${sessionScope.id == null}">
+		<script>
+			alert('바디프로필 페이지를 이용하기 위해서는 로그인이 필요합니다.\n로그인 페이지로 이동합니다.');
+			location.href="/ddarawazoom/login"
+		</script>
+	</c:if>
 	
 	<c:if test="${userInfo == null}" >
 		<ul class="list-group list-group-flush">
@@ -143,12 +152,17 @@
 	                		</div>
 	            		</div>
 	        	</section>
+	        	
 	         <div class="list_button">
 			    	<input type="button" value="${userInfo.nick}님의 추가정보 수정하러가기"  class="btn btn-outline-dark"
-						onclick="document.location.href='/myroom/bodyprofile/myUpdate'"/>
-						&nbsp;&nbsp;
+						onclick="document.location.href='/myroom/bodyprofile/myUpdate'"/>&nbsp;&nbsp;
 					<input type="button"  value="${userInfo.nick}님의 오늘하루 바디 기록하기"  class="btn btn-outline-dark"
-						onclick="document.location.href='/myroom/bodyprofile/bodyWrite'"/>
+						onclick="document.location.href='/myroom/bodyprofile/bodyWrite'"/>&nbsp;&nbsp;
+					<input type="button" onClick="sendLinkCustom();" class="btn btn-outline-dark"
+	         			value="DDarawaZoom 알리기"/>&nbsp;&nbsp;
+	         		<a id="channel-chat-button" href="#" onclick="void chatChannel();">
+	  					<img src="/resources/image/upload/talk.png"/>
+					</a>
 			</div>
 	  </c:if>
    
@@ -258,15 +272,15 @@
 		</table>
 		</c:if>
 		<!-- 바디 프로필 차트 -->
-		<div class="weightChart" style="position: relative; height:60vh; width:80vw; margin: 0 auto; margin-top: 100px;">
-			<canvas id="weightChart" style="height:30vh; width:50vw; margin: 0 auto;"></canvas>
+		<div class="weightChart" style="position: relative; height:80vh; width:80vw; margin: 0 auto; margin-top: 100px;">
+			<canvas id="weightChart" style="height:40vh; width:50vw; margin: 0 auto;"></canvas>
 		</div>
 		<br/><br/>
-		<div class="muscleBodyChart" style="position: relative; height:60vh; width:80vw; margin: 0 auto; margin-top: 100px;">
-			<canvas id="muscleBodyChart" style="height:30vh; width:50vw; margin: 0 auto;"></canvas>
+		<div class="muscleBodyChart" style="position: relative; height:80vh; width:80vw; margin: 0 auto; margin-top: 100px;">
+			<canvas id="muscleBodyChart" style="height:40vh; width:50vw; margin: 0 auto;"></canvas>
 		</div>
-		<div class="bodySizeChart" style="position: relative; height:60vh; width:80vw; margin: 0 auto; margin-top: 100px;">
-			<canvas id="bodySizeChart" style="height:30vh; width:50vw; margin: 0 auto;"></canvas>
+		<div class="bodySizeChart" style="position: relative; height:80vh; width:80vw; margin: 0 auto; margin-top: 100px;">
+			<canvas id="bodySizeChart" style="height:40vh; width:50vw; margin: 0 auto;"></canvas>
 		</div>
 		
 

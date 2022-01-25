@@ -34,13 +34,13 @@
 							</div>
 							<div class="col-6">
 								<label for="birth" class="form-label"><b>* 생년월일</b></label>
-								<fmt:formatDate var="my_Birth" pattern="yyyy-MM-dd" value="${userInfo.birth}" />
-								<input class="form-control" type="date" id="birth" name="birth" value="${userInfo.birth}" />
+								<fmt:formatDate var="Birth" pattern="yyyy-MM-dd" value="${userInfo.birth}" />
+								<input class="form-control" type="date" id="birth" name="birth" value="${Birth}" />
 							</div>
 							<div class="col-12">
 								<label for="gender" class="form-label"><b>* 성 별</b></label>
 								<select class="form-select" id="gender" name="gender" required>
-									<option value="${userInfo.gender}">성별 선택</option>
+									<option value="${userInfo.gender}">${userInfo.gender}</option>
 									<option value="남성">남성</option>
 									<option value="여성">여성</option>
 								</select>

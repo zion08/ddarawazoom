@@ -20,7 +20,6 @@
 			<h3>소중한 관심Zoom 공간</h3>
 		</div>
 		
-		
 		<div class="row row-cols-1 row-cols-sm-1 g-3">
 	      	<c:if test="${count == 0}">
 		      <section class="py-5 text-center container">
