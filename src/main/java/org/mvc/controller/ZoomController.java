@@ -2,7 +2,6 @@ package org.mvc.controller;
 
 import java.text.SimpleDateFormat;
 
-
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
  
 @Slf4j
 @Controller
-@RequestMapping("/ddarawazoom")  
+@RequestMapping("/ddarawazoom")   
 public class ZoomController { 
 	
 	@Autowired
@@ -166,17 +165,9 @@ public class ZoomController {
 	
 	// ===== 이미지 업데이트 ===== //
 	@RequestMapping("/imgUpdate")
-	public String imgUpdate(ZoomDTO dto , Model model) {
+	public String imgUpdate(int num, Model model) {
 		log.info(" -----CT-----> imgUpdate ");
-		
-		model.addAttribute("img", dto.getImg());
-		model.addAttribute("num", dto.getNum());
-		model.addAttribute("intro", dto.getIntro());
-		
-		log.info("img=" + dto.getImg());
-		log.info("intro=" + dto.getIntro());
-		log.info("num=" + dto.getNum());
-		
+		model.addAttribute("zoomContent" , service.zoomContent(num));
 		return "/zoom/class/imgUpdate";
 	}
 	
@@ -207,13 +198,12 @@ public class ZoomController {
 		String id = (String)session.getAttribute("id");
 		log.info("id=" + id);
 		
-		model.addAttribute("userInfo", service.getUserInfo(id));
-		
 		String c_id = (String)session.getAttribute("c_id"); 
-		log.info("c_id=" + c_id);  
+		log.info("c_id=" + c_id);
 		
 		if(id != null && c_id == null) {
 			model.addAttribute("result" , myService.zoomLikeCheck(id , dto.getNum()));
+			model.addAttribute("userInfo", service.getUserInfo(id)); 
 		}
 		
 		int pageSize = 5; 

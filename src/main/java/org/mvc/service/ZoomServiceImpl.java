@@ -2,7 +2,6 @@ package org.mvc.service;
 
 import java.util.List;
 
-import org.mvc.bean.LikeDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
@@ -28,7 +27,6 @@ public class ZoomServiceImpl implements ZoomService{
 	
 	@Override
 	public int zoomInsert(ZoomDTO dto) {
-		log.info("dto=" + dto);
 		return mapper.zoomInsert(dto);
 	}
 
@@ -62,6 +60,12 @@ public class ZoomServiceImpl implements ZoomService{
 		return mapper.zoomContent(num); 
 	}
 	
+	// 페이관련
+	@Override
+	public int getPrice(String merchant_Uid) {
+		return mapper.getPrice(merchant_Uid);
+	}
+
 	// 후기관련
 	@Override
 	public List<ReviewDTO> reviewList(int startRow, int endRow) { 
@@ -84,9 +88,6 @@ public class ZoomServiceImpl implements ZoomService{
 		return mapper.getUserInfo(id); 
 	}
 	
-	@Override
-	public int getPrice(String merchant_Uid) {
-		return mapper.getPrice(merchant_Uid);
-	}
+	
 
 }

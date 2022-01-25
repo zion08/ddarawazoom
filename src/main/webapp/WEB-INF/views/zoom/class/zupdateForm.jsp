@@ -123,7 +123,7 @@
 				<input type="button" class="btn btn-outline-secondary" value="목록으로" onClick="javascript:window.location='/ddarawazoom/zoom'" />	
 			</div>
 			&nbsp;	
-			</span>
+			</span> 
 		</div>	
 			</form>	
 		</div>

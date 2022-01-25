@@ -59,7 +59,8 @@
 			<input type="button" value="강의등록" class="btn btn-outline-primary" onclick="window.location='/ddarawazoom/zwriteForm'">
 		</div>  
 	</c:if> <br />
-
+	
+	<c:if test="${totalPage > 1}">
 		<div id="page">페이지&nbsp;  
 			<c:if test="${startPage > 10}">
 				<a href="/ddarawazoom/zoom?pageNum=${startPage - 10}"> [이전] </a>
@@ -71,6 +72,7 @@
 				<a href="/ddarawazoom/zoom?pageNum=${startPage + 10}"> [다음] </a>
 			</c:if>
 		</div>
+	</c:if>	
 				
  	</div>
 	</div>	 

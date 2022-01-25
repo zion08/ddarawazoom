@@ -38,5 +38,6 @@
 	<context:component-scan base-package="org.mvc.bean"/>
 	<context:component-scan base-package="org.mvc.service"/>
 	<context:component-scan base-package="org.mvc.test"/>
+	<context:component-scan base-package="org.mvc.aop"/>
 		
 </beans>

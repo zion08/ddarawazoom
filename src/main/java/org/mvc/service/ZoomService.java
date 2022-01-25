@@ -25,4 +25,4 @@ public interface ZoomService {
 	public int reInsert(ReviewDTO dto);
 	public int reCount(int num);
 	public UserInfoDTO getUserInfo(String id);   
-}
+} 

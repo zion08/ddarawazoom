@@ -25,6 +25,5 @@ public interface ZoomMapper {
 	public List<ReviewDTO> reviewList(@Param("startRow") int startRow, @Param("endRow")int endRow); 
 	public int reInsert(ReviewDTO dto);
 	public int reCount(int num);
-	public UserInfoDTO getUserInfo(String id);  
-
+	public UserInfoDTO getUserInfo(String id);   
 }

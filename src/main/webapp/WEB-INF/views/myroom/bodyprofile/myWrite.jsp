@@ -1,4 +1,3 @@
-<%@page import="org.mvc.bean.MyProfileDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -22,36 +21,36 @@
 				<form class="needs-validation" method="post" action="/myroom/bodyprofile/myWritePro" enctype="multipart/form-data">
 					<div class="row g-3">
 						<div class="col-6">
-							<label for="b_id" class="form-label">* 아이디</label><br/>
+							<label for="id" class="form-label">* 아이디</label><br/>
 								${sessionScope.id} 님
 						</div>
 						<div class="col-6">
-							<label for="b_nick" class="form-label">* 닉네임</label>
-							<input type="text" class="form-control" id="b_nick" name="b_nick" placeholder="닉네임을 입력하세요" required />
+							<label for="nick" class="form-label">* 닉네임</label>
+							<input type="text" class="form-control" id="nick" name="nick" placeholder="닉네임을 입력하세요" required />
 						</div>
 						<div class="col-6">
-							<label for="b_name" class="form-label">* 이 름</label>
-							<input type="text" class="form-control" id="b_name" name="b_name"  placeholder="이름을 입력하세요" required/>
+							<label for="name" class="form-label">* 이 름</label>
+							<input type="text" class="form-control" id="name" name="name"  placeholder="이름을 입력하세요" required/>
 						</div>
 						<div class="col-6">
-							<label for="b_birth" class="form-label">* 생년월일</label>
-							<input class="form-control"  type="date"  id="b_birth" name="b_birth" required/>
+							<label for="birth" class="form-label">* 생년월일</label>
+							<input class="form-control"  type="date"  id="birth" name="birth" required/>
 						</div>
 						<div class="col-12">
-							<label for="b_gender" class="form-label">* 성 별</label>
-							<select class="form-select" id="b_gender" name="b_gender" required>
+							<label for="gender" class="form-label">* 성 별</label>
+							<select class="form-select" id="gender" name="gender" required>
 								<option value="성별선택">성별 선택</option>
 								<option value="남성">남성</option>
 								<option value="여성">여성</option>
 							</select>
 						</div>
 						<div class="col-12">
-							<label for="b_tel" class="form-label">* 연락처</label>
-							<input type="text" class="form-control"  id="b_tel" name="b_tel" placeholder="'-'포함해서 전화번호를 입력하세요 " required/>
+							<label for="tel" class="form-label">* 연락처</label>
+							<input type="text" class="form-control"  id="tel" name="tel" placeholder="'-'포함해서 전화번호를 입력하세요 " required/>
 						</div>
 						<div class="col-12">
-							<label for="b_email" class="form-label">* 이메일</label>
-							<input type="email" class="form-control" id="b_email" name="b_email" placeholder="이메일을 입력하세요" required/>	
+							<label for="email" class="form-label">* 이메일</label>
+							<input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요" required/>	
 						</div>
 						<div class="col-12">
 							<label for="img" class="form-label">* 프로필 사진</label>
