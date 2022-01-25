@@ -16,10 +16,10 @@ public interface ZoomService {
 	public int zoomReadcount(int num);
 	public int imgUpdate(ZoomDTO dto); 
 	public ZoomDTO zoomContent(int num);
-	
+
 	// 후기관련
 	public List<ReviewDTO> reviewList(@Param("startRow") int startRow, @Param("endRow")int endRow); 
 	public int reInsert(ReviewDTO dto);
 	public int reCount(int num);
 	public UserInfoDTO getUserInfo(String id);   
-}
+} 

@@ -2,7 +2,6 @@ package org.mvc.service;
 
 import java.util.List;
 
-import org.mvc.bean.LikeDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
@@ -28,7 +27,6 @@ public class ZoomServiceImpl implements ZoomService{
 	
 	@Override
 	public int zoomInsert(ZoomDTO dto) {
-		log.info("dto=" + dto);
 		return mapper.zoomInsert(dto);
 	}
 
