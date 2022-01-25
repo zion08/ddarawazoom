@@ -54,6 +54,11 @@ public class UserInfoServiceImpl implements UserInfoService{
 		return mapper.coachCheck(coachDTO);
 	}
 
+	@Override
+	public int idCheck(String id) {
+		return mapper.idCheck(id);
+	}
+
 	
 	
 	

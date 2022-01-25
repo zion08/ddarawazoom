@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 public interface UserInfoService {
 
+	//아이디 중복 확인
+	public int idCheck(String id);
+	
 	//회원가입 정보 입력
 	//실행이 일어나기 위해서 필요한 변수값...? 
 	public int insertUserInfo(UserInfoDTO dto); 
