@@ -48,10 +48,6 @@ $(document).ready(function(){
 		if($("#result").text() == '아이디를 입력해주세요.' || $("#result").text() == '이미 사용중인 아이디입니다. 다른 아이디를 사용해주세요.'){
 			return false;
 		}
-		
-		if($("#pwCheck").text() == '비밀번호가 다릅니다.'){
-			return false;
-		}
 	});
 	
 });
