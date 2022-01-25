@@ -8,7 +8,7 @@ import org.mvc.bean.UserInfoDTO;
 public interface UserInfoMapper {
 
 	//아이디 중복 확인
-	//public List<UserInfoDTO> getList(String id);
+	public int idCheck(String id);
 	
 	//회원가입 정보 저장
 	public int insertUserInfo(UserInfoDTO dto);
