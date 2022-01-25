@@ -11,7 +11,7 @@
 	</insert>
 	
 	<select id="getUserInfo" resultType="int">
-		select count(*) from tbl_user where id=#{id} and pw=#{pw}
+		select count(*) from tbl_user where id=#{id} and pw=#{pw} and status != '탈퇴'
 	</select>
 	
 	<!-- 아이디 중복확인 -->
