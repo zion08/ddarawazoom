@@ -8,4 +8,3 @@
 		window.location="/ddarawazoom/zoom"; 
 	</script>
 </c:if>
-
