@@ -87,6 +87,17 @@ public class MainController {
 		return "/main/findidpw/findpw";
 	}
 	
+	@RequestMapping("/idCheck")
+	public @ResponseBody int idCheck(String id) {
+		log.info("	-----CT----->idCheck");
+		int result = 0;
+		if(id == "") {
+			result = -1;
+		} else {
+			result = service.idCheck(id);
+		}
+		return result;
+	}
 	
 	@RequestMapping("/signup")
 	public String signup(UserInfoDTO dto) {

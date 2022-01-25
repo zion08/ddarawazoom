@@ -15,7 +15,7 @@
 <c:if test="${result != 1 }">
 	<script>
 		alert('회원 가입이 완료되었습니다.')
-		window.location="/ddarawazoom"
+		window.location="/ddarawazoom/login"
 	</script>
 </c:if>
 
