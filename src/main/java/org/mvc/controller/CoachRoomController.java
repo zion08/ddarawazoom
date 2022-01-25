@@ -1,6 +1,7 @@
 package org.mvc.controller;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,9 +15,11 @@ import org.mvc.bean.ClassApplyDTO;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
+import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.CoachRoomService;
+import org.mvc.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +38,9 @@ public class CoachRoomController {
    
 	@Setter(onMethod_=@Autowired)
 	private CoachRoomService service;
+	
+	@Autowired
+	private PaymentService servicePayment;
 	
 	@Autowired
 	private FileInfo fileInfo;
@@ -403,5 +409,34 @@ public class CoachRoomController {
 		return "/coachroom/member/memberPage";
 	}
 //	=========== 회원관리 관련 코드 종료 ===========  //	
+
+	
+//	=========== 코치 수입 관련 코드 시작 ===========  //
+	@RequestMapping("/payment")
+	public String payment (Model model, HttpSession session) {
+		log.info("	-----CT-----> coach payment");
+		
+		// 코치별 결제 내역 출력
+		String c_id = (String)session.getAttribute("c_id");
+		List<PaymentDTO> paymentList = servicePayment.getPaymentCoachList(c_id);
+		model.addAttribute("payment", paymentList);
+		
+		// 코치별 총 거래액, 환불액, 매출액
+		DecimalFormat fmt = new DecimalFormat("###,###");
+		int amount = servicePayment.getAmountCoach(c_id);
+		String amountFmt = fmt.format(amount);
+		model.addAttribute("amount", amountFmt);
+		
+		int cancelAmount = servicePayment.getCancelAmountCoach(c_id);
+		String cancelAmoutFmt = fmt.format(cancelAmount);
+		model.addAttribute("cancelAmount", cancelAmoutFmt);
+		
+		int sales = amount - cancelAmount;
+		String salseFmt = fmt.format(sales);
+		model.addAttribute("sales", salseFmt);
+		
+		return "/coachroom/payment/coachPayment";
+	}		
+//	=========== 코치 수입 관련 코드 종료 ===========  //
 	
 }

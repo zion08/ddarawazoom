@@ -65,7 +65,7 @@ public class ZoomServiceImpl implements ZoomService{
 	public int getPrice(String merchant_Uid) {
 		return mapper.getPrice(merchant_Uid);
 	}
-
+	
 	// 후기관련
 	@Override
 	public List<ReviewDTO> reviewList(int startRow, int endRow) { 
@@ -87,7 +87,5 @@ public class ZoomServiceImpl implements ZoomService{
 	public UserInfoDTO getUserInfo(String id) {
 		return mapper.getUserInfo(id); 
 	}
-	
-	
 
 }

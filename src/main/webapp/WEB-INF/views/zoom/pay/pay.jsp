@@ -14,7 +14,7 @@
 	crossorigin="anonymous">
 </script>
 
-<script type="text/javascript">	  
+<script async type="text/javascript">	  
    $(document).ready(function(){
    	
    	//01. 결제 준비
@@ -25,23 +25,30 @@
 	$('#payBtn').click(function() {	// 결제하기 버튼 클릭      
 
 		var paymentData = new Object();	// json 데이터 생성
-		paymentData.merchantUid = "${ZoomDTO.merchant_uid}";
-		paymentData.c_id = "${ZoomDTO.c_id}";
-		paymentData.c_num = ${ZoomDTO.num};
+		paymentData.merchantUid = "${zoomContent.merchant_uid}"+"-ORD"+"${cnt}";
+		paymentData.c_id = "${zoomContent.c_id}";
+		paymentData.c_num = ${zoomContent.num};
+		paymentData.name = "${zoomContent.title}";
+		paymentData.amount = ${zoomContent.price};
+		paymentData.buyer_name = "${userInfo.id}";
+		paymentData.buyer_email = "${userInfo.email}";
+		paymentData.buyer_tel = "${userInfo.tel}";
 		console.log(paymentData);
 		
 		IMP.request_pay({		// iamport 결제 요청
 			pg: "nice",						// pg사
 	        pay_method: "card",				// 지불 수단
 	        merchant_uid: paymentData.merchantUid,		// 제품 주문번호
-	        name: "${ZoomDTO.title}",		// 강의명
-	        amount: ${ZoomDTO.price},		// 강의(제품) 가격
-	        buyer_name: "buyer_id",			// 구매자 id
-	        buyer_email: "test@test.com",	// 구매자 email
-	        buyer_tel: "010-4242-4242"		// 구매자 전화번호
+	        name: "${zoomContent.title}",			// 강의명
+	        amount: ${zoomContent.price},			// 강의(제품) 가격
+	        buyer_name: "${userInfo.id}",	// 구매자 id
+	        buyer_email: "${userInfo.email}",		// 구매자 email
+	        buyer_tel: "${userInfo.tel}"			// 구매자 전화번호
 	        },
-          
+        console.log("iamport 결제 요청"),
+
 	        function (rsp) {	// 결제 callback
+	        	console.log(rsp);
 	            if (rsp.success) {	// 결제 성공 시 로직          		       	            		            	
 	            	paymentData.impUid = rsp.imp_uid;		            	
 	            	var msg = '결제 완료';
