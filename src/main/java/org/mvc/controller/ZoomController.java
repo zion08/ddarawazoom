@@ -96,10 +96,12 @@ public class ZoomController {
 		
 		String id = (String)session.getAttribute("id");
 			
-		model.addAttribute("result" , myService.zoomLikeCheck(id, dto.getNum()));
+		if(id != null) {
+			model.addAttribute("result" , myService.zoomLikeCheck(id, dto.getNum()));
+			model.addAttribute("userInfo", myService.getUserInfo(id));
+		}
 		
-		
-		model.addAttribute("ZoomDTO" , service.zoomContent(num)); 
+		model.addAttribute("zoomContent" , service.zoomContent(num)); 
 		
 		String pageNum= request.getParameter("pageNum");	
 		if (pageNum == null){	
@@ -113,7 +115,7 @@ public class ZoomController {
 		int number = 0;
 		
 		int pageBlock = 5;	
-		int contentCount = service.reCount();	
+		int contentCount = service.reCount(num);	
 		int totalPage;	
 		int startPage;	
 		int endPage;	
@@ -130,13 +132,12 @@ public class ZoomController {
 		
 		if (contentCount > 0){
 			model.addAttribute("contentCount", contentCount);
-			model.addAttribute("reList", service.reList(firstRownum, lastRownum));  
+			model.addAttribute("reList", service.reviewList(firstRownum, lastRownum));  
 			model.addAttribute("totalPage", totalPage);
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("number", number);
 			model.addAttribute("pageNum", pageNum);
-			model.addAttribute("intro" , dto.getIntro());
 		} else {
 			model.addAttribute("contentCount", 0);
 		}
