@@ -19,13 +19,6 @@
 		<link href="../../resources/css/myroom/myprofile.css" rel="stylesheet">
 		
 
-	<c:if test="${sessionScope.id == null}">
-		<script>
-			alert('바디프로필 페이지를 이용하기 위해서는 로그인이 필요합니다.\n로그인 페이지로 이동합니다.');
-			location.href="/ddarawazoom/login"
-		</script>
-	</c:if>
-	
 	<c:if test="${userInfo == null}" >
 		<ul class="list-group list-group-flush">
 		    <li class="list-group-item">
