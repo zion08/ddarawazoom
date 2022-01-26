@@ -17,6 +17,9 @@ public interface ZoomService {
 	public int imgUpdate(ZoomDTO dto); 
 	public ZoomDTO zoomContent(int num);
 
+	//페이관련
+	public int getPrice(String merchant_Uid);
+	
 	// 후기관련
 	public List<ReviewDTO> reviewList(@Param("startRow") int startRow, @Param("endRow")int endRow); 
 	public int reInsert(ReviewDTO dto);

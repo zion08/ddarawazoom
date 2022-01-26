@@ -4,11 +4,18 @@
 
 <!-- session의 문자열을 비교하기 위한 tablib -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-	
-<link href="../../resources/image/Exercise.svg" rel="shortcut icon" type="image/x-icon">
-<link href="../../resources/css/styles.css?after" rel="stylesheet">
 
+<!-- favicon -->	
+<link href="../../resources/image/Exercise.svg" rel="shortcut icon" type="image/x-icon">
+
+<!-- bootstrap -->
+<link href="../../resources/css/styles.css?after" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<!-- JQurey -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!--  -->
 <script src="../../resources/js/header.js" type="text/javascript"></script>
 
 <!-- 카카오 로그아웃 관련 스크립트 -->

@@ -1,6 +1,7 @@
 package org.mvc.controller;
 
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +11,13 @@ import javax.servlet.http.HttpSession;
 import org.mvc.bean.BodyProfileDTO;
 import org.mvc.bean.FileInfo;
 import org.mvc.bean.LikeDTO;
+import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.MyRoomService;
+import org.mvc.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +35,9 @@ public class MyRoomController {
 	
 	@Autowired
 	private MyRoomService service;
+	
+	@Autowired
+	private PaymentService servicePayment;
 	
 	@Autowired
 	private FileInfo fileInfo;
@@ -472,7 +478,35 @@ public class MyRoomController {
 		
 		return result;
 	}
-//  =========== 멤버 리뷰 관련 코드 끝 ===========  //		
+//  =========== 멤버 리뷰 관련 코드 끝 ===========  //
+	
+	
+//	=========== 내 결제 내역 출력 ===============  //
+	@RequestMapping("/payment")
+	public String payment (Model model, HttpSession session) {
+		log.info("	-----CT-----> my payment");
+		
+		// 내 결제 내역 출력
+		String id = (String)session.getAttribute("id");
+		List<PaymentDTO> paymentList = servicePayment.getPaymentMyList(id);
+		model.addAttribute("payment", paymentList);
+		
+		// 총 거래액, 환불액, 결제액
+		DecimalFormat fmt = new DecimalFormat("###,###");
+		int amount = servicePayment.getAmountMy(id);
+		String amountFmt = fmt.format(amount);
+		model.addAttribute("amount", amountFmt);
+		
+		int cancelAmount = servicePayment.getCancelAmountMy(id);
+		String cancelAmoutFmt = fmt.format(cancelAmount);
+		model.addAttribute("cancelAmount", cancelAmoutFmt);
+		
+		int sales = amount - cancelAmount;
+		String salseFmt = fmt.format(sales);
+		model.addAttribute("sales", salseFmt);
+		
+		return "/myroom/payment/myPayment";
+	}
 
 }
 	

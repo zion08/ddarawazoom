@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
 <%@ include file="../../layout/header.jsp"%>    
+<%@ include file="../../pay/iamport.jsp"%>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src ="../../resources/js/myroom/like.js" type="text/javascript"></script>
 
 <div class="container-fluid"> 
@@ -27,9 +26,9 @@
 			<c:if test="${sessionScope.id != null}">
 				<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
 				<input type="button" class="btn btn-outline-primary" value="장바구니 담기">
-				<input type="button" class="btn btn-outline-primary" value="바로 결제하기">
-			</c:if>	
-			</div>
+				<input type="button" id="payBtn" class="btn btn-outline-primary" value="바로 결제하기">
+			</c:if>
+		</div>
 			<div>
 				<br />
 				&nbsp;&nbsp;<button type="button" class="btn btn-m btn-danger" disabled>${zoomContent.type}</button>	 	 
