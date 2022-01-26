@@ -39,8 +39,8 @@
 		              			<p class="card-text" >
 		              				관심있는 Zoom강의를 소중하게 담아놓은 공간입니다.
 		              			</p>
-		              			<a href="/myroom/likeZoom" class="btn btn-primary">
-		   							관심Zoom로 이동
+		              			<a href="/myroom/likeZoom" class="btn btn-outline-black">
+		   							<mark>관심Zoom로 이동</mark>
 		   			 			 </a>
 				            </div>
 				          </div>
@@ -54,8 +54,8 @@
 			              <p class="card-text">
 			              	관심있는 Vod강의를 소중하게 담아놓은 공간입니다.
 			              </p>
-			              <a href="/myroom/likeVod" class="btn btn-primary">
-			    			관심Vod로 이동
+			              <a href="/myroom/likeVod" class="btn btn-outline-black">
+			    			<mark>관심Vod로 이동</mark>
 			    		  </a>
 			            </div>
 			          </div>

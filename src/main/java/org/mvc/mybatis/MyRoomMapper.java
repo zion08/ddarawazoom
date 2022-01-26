@@ -49,6 +49,12 @@ public interface MyRoomMapper {
 	// 멤버 프로필 이미지 수정
 	public int updateImg(UserInfoDTO userDTO);
 		
+	// 멤버 탈퇴를 위한 패스워드 체크
+	public String pwCheck(String id);
+	
+	// 멤버 탈퇴
+	public int statusChange(String id);
+	
 	// 멤버 일정 데이터 데이터 가져오기
 	public ArrayList<ScheduleDTO> getAllClass(String id);
 		
