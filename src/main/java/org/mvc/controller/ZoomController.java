@@ -12,6 +12,7 @@ import org.mvc.bean.FileInfo;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.MyRoomService;
+import org.mvc.service.PaymentService;
 import org.mvc.service.ZoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,9 @@ public class ZoomController {
 
 	@Autowired
 	private MyRoomService myService;
+	
+	@Autowired
+	private PaymentService servicePayment;
 	
 	@Autowired
 	private FileInfo fileInfo;   
@@ -88,7 +92,7 @@ public class ZoomController {
 	    model.addAttribute("count", count);
 	    model.addAttribute("number", number);
 	    model.addAttribute("pageSize", pageSize);
-	    model.addAttribute("zoomList", zoomList);
+	    model.addAttribute("zoomList", zoomList);	    
 	    return "/zoom/class/zclass";	
 	}
 	
@@ -244,6 +248,8 @@ public class ZoomController {
 	    model.addAttribute("pageSize", pageSize);
 	    model.addAttribute("reviewList", reviewList);
 	    model.addAttribute("zoomContent" , service.zoomContent(num));
+	    // 총 결제 갯수
+	    model.addAttribute("cnt", servicePayment.getOerderCount());
 		return "/zoom/class/zclasscontent";   
 	} 
 	

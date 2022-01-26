@@ -51,6 +51,11 @@
 				where num=#{num}
 	</update>
 	
+	<!-- 페이 관련 -->
+	<select id="getPrice" resultType="int">
+		select price from tbl_coachclass where MERCHANT_UID=#{merchant_Uid}
+	</select>
+
 	<!-- 후기관련 -->
 	<select id="reviewList" resultType="org.mvc.bean.ReviewDTO">
 	<![CDATA[
