@@ -74,7 +74,7 @@ public class WebSocketChat {
         logger.info("Message From "+sender + ": "+message);
         try {
             final Basic basic=session.getBasicRemote();
-            basic.sendText("<나> : "+message);
+            basic.sendText("<따라와줌 멤버님> : "+message);
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
