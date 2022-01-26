@@ -1,8 +1,24 @@
 /* globals Chart:false, feather:false */
 
-(function () {
+$(document).ready(function(){
   'use strict'
-
+  
+  var amountData = new Array();
+  var paidDate = new Array();
+  
+  $.ajax({
+	url : "/coachroom/getPayment",
+	type : "post",
+	contentType : "application/json; charset=UTF-8",
+	success : function(data){
+		console.log(data);
+		
+		for (var i = 0; i < data.length; i++){
+			
+		}
+	}
+  });
+  
   feather.replace({ 'aria-hidden': 'true' })
 
   // Graphs
@@ -50,4 +66,4 @@
       }
     }
   })
-})()
+})

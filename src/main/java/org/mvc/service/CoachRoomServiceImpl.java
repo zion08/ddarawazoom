@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mvc.bean.ClassApplyDTO;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.bean.ZoomDTO;
@@ -131,6 +132,11 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	@Override
 	public List<ReviewDTO> getAllReview(String id) {
 		return mapper.getAllReview(id);
+	}
+
+	@Override
+	public List<PaymentDTO> getAmount(String id, String startDate, String endDate) {
+		return mapper.getAmount(id, startDate, endDate);
 	}
 	
 }
