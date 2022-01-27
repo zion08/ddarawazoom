@@ -84,7 +84,16 @@ public class MyRoomServiceImpl implements MyRoomService {
 	public int updateImg(UserInfoDTO userDTO) {
 		return mapper.updateImg(userDTO);
 	}
-
+	
+	@Override 
+	public String pwCheck(String id) {
+		return mapper.pwCheck(id);
+	}
+	
+	@Override
+	public int statusChange(String id) {
+		return mapper.statusChange(id);
+	}
 	
 // 멤버 일정 관련
 	@Override

@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.mb-4{
+	margin: 0 auto;
+	text-align: center;
+	margin-top:20px;
+}
+
+#imgTitle{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.imgSubTitle{
+	font-size:13px;
+	margin-top:10px;
+}
+
+.form-control{
+	width: 350px;
+	margin: 0 auto;
+}

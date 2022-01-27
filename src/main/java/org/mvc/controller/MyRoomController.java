@@ -111,6 +111,31 @@ public class MyRoomController {
 		}
 		return result;
 	}
+	
+	@RequestMapping("/userDelete")
+	public String userDelete() {
+		log.info("	-----CT----->userDelete");
+		
+		return"/myroom/userinfo/userDelete";
+	}
+	
+	@RequestMapping("/userDeletePro")
+	public @ResponseBody int userDelete(UserInfoDTO userDTO, HttpSession session) {
+		log.info("	-----CT----->userDeletePro");
+
+		String id = (String)session.getAttribute("id");
+		
+		int result = 0;
+
+		String pw = service.pwCheck(id);
+		
+		if(pw.equals(userDTO.getPw())) {
+			result = service.statusChange(id);
+			session.invalidate(); // session 삭제
+		}
+		
+		return result;
+	}
 //=========== 멤버 정보 관련 코드 종료 ===========  //		
 	
 

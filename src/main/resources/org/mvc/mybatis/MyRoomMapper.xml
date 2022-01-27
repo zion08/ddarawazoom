@@ -127,7 +127,11 @@
 			update tbl_user set
 				pw = #{pw},
 				email = #{email},
-				nick = #{nick}
+				nick = #{nick},
+				name = #{name},
+				gender = #{gender},
+				birth = #{birth},
+				tel = #{tel}
 			where id = #{id}
 		]]>
 	</update>
@@ -139,6 +143,18 @@
 				img = #{img}
 			where id = #{id}			
 		]]>
+	</update>
+	
+	<!-- 탈퇴를 위한 패스워드 체크 -->
+	<select id="pwCheck" resultType="String">
+		select pw from tbl_user where id = #{id}
+	</select>
+	
+	<!-- 멤버 탈퇴 -->
+	<update id="statusChange">
+		update tbl_user set
+			status = '탈퇴멤버'
+				where id = #{id}
 	</update>
 <!-- 멤버 관련 코드 종료 -->
 

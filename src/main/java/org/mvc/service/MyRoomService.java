@@ -45,6 +45,12 @@ public interface MyRoomService {
 	// 멤버 정보 수정
 	public int updateInfo(UserInfoDTO userDTO);
 	
+	// 멤버 탈퇴를 위한 패스워드 체크
+	public String pwCheck(String id);
+		
+	// 멤버 탈퇴
+	public int statusChange(String id);
+	
 	// 멤버 프로필 이미지 수정
 	public int updateImg(UserInfoDTO userDTO);
 	

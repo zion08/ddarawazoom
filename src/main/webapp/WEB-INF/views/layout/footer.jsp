@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
   
 <div class="container">
@@ -35,7 +36,9 @@
       <h6 class="fw-bold">맴버</h6>
       <ul class="nav flex-column">
         <li class="nav-item mb-2"><a href="/myroom" class="nav-link p-0 text-muted">마이룸</a></li>
+     <c:if test="${sessionScope.id != null}">
         <li class="nav-item mb-2"><a href="/myroom/bodyprofile" class="nav-link p-0 text-muted">바디프로필</a></li>
+      </c:if>
       </ul>
     </div>
     
