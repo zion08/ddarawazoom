@@ -274,11 +274,11 @@ $(document).ready(function(){
 					
 					var b_list = jsonList[i];
 					
-					chest.push(jsonList[i].b_chest);
-					waist.push(jsonList[i].b_waist);
-					arm.push(jsonList[i].b_arm);
-					thigh.push(jsonList[i].b_thigh);
-					hip.push(jsonList[i].b_hip);
+					chest.push(b_list.b_chest);
+					waist.push(b_list.b_waist);
+					arm.push(b_list.b_arm);
+					thigh.push(b_list.b_thigh);
+					hip.push(b_list.b_hip);
 					date.push(b_list.parse_date);
 				}
 			}
@@ -297,7 +297,7 @@ $(document).ready(function(){
 							lineTension: 0.3,
 							backgroundColor: '#ff91c2',
 			                borderColor: '#ff91c2',
-			                borderWidth: 2,
+			                borderWidth: 5,
 			                display : true,
 			                stack: 'combined',
 		               		type:'bar',
@@ -309,7 +309,7 @@ $(document).ready(function(){
 							lineTension: 0.3,
 							backgroundColor: '#FFE4B5',
 			                borderColor: '#FFE4B5',
-			                borderWidth: 2,
+			                borderWidth: 5,
 			                display : true,
 							data: waist
 						},
@@ -319,7 +319,7 @@ $(document).ready(function(){
 							lineTension: 0.3,
 							backgroundColor: '#FFB6C1',
 			                borderColor: '#FFB6C1',
-			                borderWidth: 2,
+			                borderWidth: 5,
 			                display : true,
 			                type:'bar',
 							data: arm
@@ -330,7 +330,7 @@ $(document).ready(function(){
 							lineTension: 0.3,
 							backgroundColor: '#66CDAA',
 			                borderColor: '#66CDAA',
-			                borderWidth: 2,
+			                borderWidth: 5,
 			                display : true,
 			                type:'bar',
 							data: thigh
@@ -341,7 +341,7 @@ $(document).ready(function(){
 							lineTension: 0.3,
 							backgroundColor: '#9370DB',
 			                borderColor: '#9370DB',
-			                borderWidth: 2,
+			                borderWidth: 5,
 			                display : true,
 							data: hip
 						}]
@@ -351,15 +351,15 @@ $(document).ready(function(){
 					scales: {
 						xAxes: [{
 							ticks: {
-							display: true,
-							fontColor : 'rgba(12, 13, 13, 1)',
-							fontSize : 15
-							},
-							stacked: true
+								display: true,
+								fontColor : 'rgba(12, 13, 13, 1)',
+								fontSize : 15,
+								barPercentage: 2
+							}
 						}],
 						yAxes: [{
 							ticks:{
-								max:400,
+								max:150,
 								min: 0,
 								stepSize:5,
 								autoSkip: false,
@@ -370,15 +370,20 @@ $(document).ready(function(){
 							gridLines: {
 								display:false,
 								drawBorder: false
-							},
-							stacked: true
+							}
 						}]
 					},
 					title: {
 						display: true,
 						text: '바디 사이즈 변화',
 						fontSize: 25
-					}
+					},
+			        // click event
+			        onClick: function(point, event) {
+			          if(event.length <= 0) return;
+			
+			          console.log(event[0]['_index'])
+			        }
 				},
 			});
 		});
