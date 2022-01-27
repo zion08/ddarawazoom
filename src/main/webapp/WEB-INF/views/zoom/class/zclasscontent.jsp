@@ -15,11 +15,11 @@
 		<div class="col">
 		<div class="card shadow-sm">  
 			<img src="/resources/coach/img/${zoomContent.img}" class="card-img-top" width="100" height="625">
-			<c:if test="${sessionScope.c_id != null}">	
+			<c:if test="${sessionScope.c_id == zoomContent.c_id}">	
 				<input type="button" value="사진변경" class="btn btn-outline-danger" onclick="window.location='/ddarawazoom/imgUpdate?img=${zoomContent.img}&num=${zoomContent.num}'" />
 			</c:if>	
 		<div class="btn-group">	
-           	<c:if test="${sessionScope.c_id != null}">
+           	<c:if test="${sessionScope.c_id == zoomContent.c_id}">
 				<input type="button" class="btn btn-outline-danger" value="글수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${zoomContent.num}'">
 				<input type="button" class="btn btn-outline-danger" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${zoomContent.num}'"> 
 			</c:if>	 
