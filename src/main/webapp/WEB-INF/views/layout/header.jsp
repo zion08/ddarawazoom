@@ -77,7 +77,7 @@
 					</c:if>
 					
 					<li><hr class="dropdown-divider"></li>
-					<li><a class="dropdown-item" href="#">따라와줌 파티룸</a></li>
+					<li><a class="dropdown-item" href="/chat.do">따라와줌 파티룸</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/manager/notice">공지사항</a></li>
 					<li><a class="dropdown-item" href="#">DDarawaZoom소개</a></li>

@@ -44,7 +44,7 @@ function infoUpdate_submit(){
 function imgUpdateForm(){
 	var url = "/myroom/imgUpdate";
 	var name = "img_update";
-	var option = "width=500, height=300 left=100, top=50, location=no";
+	var option = "width=500, height=300, left=100, top=50";
 	
 	window.open(url, name, option);
 }
@@ -80,4 +80,47 @@ function imgUpdatePro(){
 		}
 	});
 }
+
+
+// 멤버 탈퇴 확인 페이지
+function userDelete(){
+	if(window.confirm('정말로 탈퇴를 원하십니까?') == true){
+	
+		var url = "/myroom/userDelete";
+		var name = "user_delete";
+		var option = "width=500, height=300, left=100, top=50";
+		
+		window.open(url, name, option);
+	}
+}
+
+// 멤버 탈퇴 후, 상태 변경
+function userDeletePro(){
+	
+		if($("#pw").val() == ''){
+			alert('비밀번호를 입력해주세요');
+			return false;
+		}
+		
+		$.ajax({
+			data : $("#pw").serializeArray(),
+			url : "/myroom/userDeletePro",
+			type : "POST",
+			dataType : "json",
+			success : function(data){
+				var result = parseInt(data);
+				
+				if(result == 0){
+					alert("패스워드가 틀렸습니다");
+					return false;
+				}else{
+					if(window.confirm('멤버 탈퇴를 정말로 하시겠습니까?')){
+						$('#userDelete').submit();
+						opener.parent.location.reload();
+						window.close();
+					}
+				}
+			}
+		});
+	}
 

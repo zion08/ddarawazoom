@@ -4,7 +4,9 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
@@ -40,9 +42,18 @@
 	<!-- 컨트롤러 등록 -->
 	<!-- package 내에 @Controller, @Component, @Service를 스캔함 -->
 	<context:component-scan base-package="org.mvc.controller" />
+	<context:component-scan base-package="org.mvc.handler" />
 	
 	<!-- 객체 생성, <jsp:useBean>과 같음 -->
 	<beans:bean id="paymentDTO" class="org.mvc.bean.PaymentDTO"></beans:bean>
+	<beans:bean id="handlerChat" class="org.mvc.handler.HandlerChat" ></beans:bean>
+	
+	
+	<websocket:handlers allowed-origins="*" >
+        <websocket:mapping handler="handlerChat" path="/chat" />
+        <websocket:sockjs websocket-enabled="true" />
+    </websocket:handlers>
+    	
 	
 	<!-- AOP Advice 클래스 자동 등록 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>	

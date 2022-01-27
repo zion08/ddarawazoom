@@ -22,7 +22,8 @@ $.fn.serializeObject = function(){
 // 몸무게 그래프
 $(document).ready(function(){
 	var weight = new Array();
-		var date = new Array();
+	var date = new Array();
+		
 		$.ajax({
 			type: "post",
 			url: "/myroom/getBodyList", 
