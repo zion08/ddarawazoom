@@ -141,7 +141,19 @@ $(document).ready(function(){
 		    					}),this)
 		    				}),this);
 		    			}
-					}
+					},
+			        // click event
+			        onClick: function(point, event) {
+			          if(event.length <= 0) return;
+					  console.log(event);
+					  console.log(event[0]['_index'] + 1);
+
+					  var number = event[0]['_index'] + 1;
+					  
+					  var offset = $('#number' + number).offset();
+			          $('html, body').animate({scrollTop : offset.top}, 400);
+
+			        }
 				}
 			});
 		});
@@ -244,7 +256,19 @@ $(document).ready(function(){
 					display: true,
 					text: '근육량 / 체지방량 변화',
 					fontSize:23
-				}
+				},
+			        // click event
+			        onClick: function(point, event) {
+			          if(event.length <= 0) return;
+					  console.log(event);
+					  console.log(event[0]['_index'] + 1);
+
+					  var number = event[0]['_index'] + 1;
+					  
+					  var offset = $('#number' + number).offset();
+			          $('html, body').animate({scrollTop : offset.top}, 400);
+
+			        }
 			},
 		});
 	});
@@ -381,8 +405,14 @@ $(document).ready(function(){
 			        // click event
 			        onClick: function(point, event) {
 			          if(event.length <= 0) return;
-			
-			          console.log(event[0]['_index'])
+					  console.log(event);
+					  console.log(event[0]['_index'] + 1);
+
+					  var number = event[0]['_index'] + 1;
+					  
+					  var offset = $('#number' + number).offset();
+			          $('html, body').animate({scrollTop : offset.top}, 400);
+
 			        }
 				},
 			});
