@@ -3,12 +3,11 @@
 <%@ include file="../layout/header.jsp"%>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-
-<script src="/resources/coach/custom/js/dashboard.js?ver=1" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		
+<script src="/resources/coach/custom/js/dashboard.js" type="text/javascript"></script>
 
 <div class="container-fluid">
 
@@ -26,9 +25,11 @@
           </button>
         </div>
       </div>
-
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
+      
+	  <div class="chart-wrap mt-2">
+      	<canvas class="my-4 w-100" id="myChart" style="height:40vh; width:50vw; margin: 0 auto;"></canvas>
+	  </div>
+      
       <h2>최신 리뷰</h2>
       <div class="table-responsive">
       	<c:if test="${reviewList == null}">

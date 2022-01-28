@@ -1,18 +1,16 @@
 
-$(document).ready(function(){
-	  
+function chartData(ctx){
 	var amountData = new Array();
 	var payData = new Array();
 	
 	var maxAmount;
-	
+
 	$.ajax({
 	  url : "/coachroom/getPayment",
 	  type : "post",
-	  contentType : "application/json; charset=UTF-8",
+	  dataType: "json",
 	  success : function(data){
 		  console.log(data);
-  
 		  for(var key in data){
 			  
 			  if(data[key] > 0){
@@ -24,74 +22,52 @@ $(document).ready(function(){
 			  }
 			  
 		  }
-		  
-		  maxAmount = Math.max(...amountData);
+
+		  var myChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: payData,
+				datasets: [{
+					label: '월별 매출 (단위: 원)',
+					fill: false,
+					data: amountData,
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderWidth: 2,
+					borderColor: '#30d185',
+					pointBackgroundColor: '#30d185',
+					backgroundColor: '#30d185'
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				hoverMode: 'index',
+				stacked: false,
+				scales: {
+					yAxes: [{
+							type: 'linear',
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+			});
 		  
 		  console.log(payData);
 		  console.log(amountData);
-		  console.log(maxAmount);
 	  }
 	})
-	
-	feather.replace({ 'aria-hidden': 'true' })
-  
+
+
+}
+
+$(document).ready(function(){
+
 	// Graphs
-	var ctx = document.getElementById('myChart')
+	var ctx = document.getElementById('myChart').getContext('2d');
 	// eslint-disable-next-line no-unused-vars
-	var myChart = new Chart(ctx, {
-	  type: 'line',
-	  data: {
-		labels: payData,
-		datasets: [{
-			label: '월별 매출 (단위: 원)',
-			backgroundColor: '#0066ff',
-			borderColor: '#0066ff',
-			pointHoverBackgroundColor: 'white',
-			pointHoverBorderColor: '#black',
-			borderWidth: 3,
-			display : true,
-			fill: false,
-			stack: 'combined',
-			type: 'line',
-			data: amountData
-		}]
-	  },
-	  options: {
-		  elements: {
-			  line: {
-				  fill: false
-			  },
-			  point: {
-				  hoverRadiuse: 7,
-				  radius: 5
-			  }
-		  },
-		  scales: {
-			  xAxes: [{
-				  ticks: {
-					  fontColor : 'rgba(12, 13, 13, 1)',
-					  fontSize : 15
-					  }
-				  }],
-			  yAxes: [{
-				  ticks:{
-					  max: maxAmount,
-					  min: 0,
-					  stepSize:500,
-					  autoSkip: false,
-					  fontColor : 'rgba(12, 13, 13, 1)',
-					  fontSize : 14
-				  },
-				  stacked: true
-			  }]
-		  },
-		  interaction: {
-			  mode: 'index',
-			  intersect: false,
-		  },
-		  title: {
-			  display: false
-		  }
-	  }
-	})
+	chartData(ctx);
+	
   });
