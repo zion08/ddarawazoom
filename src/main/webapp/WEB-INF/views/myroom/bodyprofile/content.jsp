@@ -11,7 +11,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-		<script src="../../resources/js/myroom/bodyprofile.js" ></script>
+		<script src="../../resources/js/myroom/bodyprofile.js?ver=1" ></script>
 		<script src="../../resources/js/myroom/talk.js"></script>
 		<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>		
 		
@@ -86,7 +86,7 @@
 	                	<div class="counter">
 		                    	<div class="row">
 			                    	<c:forEach items="${bodyProfileDTO}" var="bodyProfileDTO">
-				                        <div class="col-6 col-lg-4">
+				                        <div class="col-6 col-lg-4" id="clickGragh">
 				                            <div class="count-data text-center">
 				                                <h6 class="count h2" data-to="500" data-speed="500">${bodyProfileDTO.b_height} cm</h6>
 				                                <p class="m-0px font-w-600">Height(키)</p>
@@ -210,7 +210,7 @@
 					</tr>
 				</thead>
 				<c:forEach var="bodyProfileDTO" items="${bodyList}" >	
-					<tbody>				
+					<tbody id="number${number}">				
 						<tr>
 							<th scope="row">
 								${number}

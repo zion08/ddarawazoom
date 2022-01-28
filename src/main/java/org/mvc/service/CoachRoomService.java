@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mvc.bean.ClassApplyDTO;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.bean.ZoomDTO;
@@ -78,5 +79,8 @@ public interface CoachRoomService {
 	
 	// 최신 리뷰목록
 	public List<ReviewDTO> getAllReview(String id);
+	
+	// 매출 정보
+	public List<PaymentDTO> getAmount(String id, String startDate, String endDate);
 	
 }

@@ -172,4 +172,14 @@
 	</select>
 	<!-- 회원관리 관련 코드 종료 -->
 	
+	<!-- 매출 내역 가져오기 -->
+	<select id="getAmount" resultType="org.mvc.bean.PaymentDTO">
+		<![CDATA[
+			select * from tbl_payment
+				where c_id = #{c_id} and
+				status = 'paid' and
+				paidAt >= #{startDate} and
+				paidAt <= #{endDate}
+		]]>
+	</select>
 </mapper>

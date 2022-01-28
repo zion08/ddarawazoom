@@ -12,7 +12,7 @@
     <h1 style="text-align: center;"> 리뷰/회원 관리 </h1>
     <div class="container">
 
-      <div class="row row-cols-1 row-cols-sm-1 g-3">
+      <div class="row row-cols-2 row-cols-sm-1 row-cols-md-3 g-2">
       <c:if test="${count == 0}">
 	      <section class="py-5 text-center container">
 		    <div class="row py-lg-5">
@@ -34,7 +34,7 @@
       	 
       	  <div class="col">
 	        <div class="card shadow-sm">
-	          <img src="/resources/coach/img/${list.img}" class="card-img-top" width="100%" height="100%">
+	          <img src="/resources/coach/img/${list.img}" class="card-img-top" width="100" height="225">
 	          <div class="card-body">
 	            <p class="card-text">${list.title}</p>
 	            <div class="d-flex justify-content-between align-items-center">
