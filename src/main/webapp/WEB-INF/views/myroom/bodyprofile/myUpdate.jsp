@@ -3,18 +3,15 @@
 <%@ include file="../../layout/header.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-    
-<!DOCTYPE html>
 <html>
-	<head>
-		<title>MyProfile 수정 페이지</title>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		
-		<link href="../../resources/css/myroom/myUpdate.css" rel="stylesheet" >
-	</head>
-	<body>
+<head>
+	<title>MyProfile 수정 페이지</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	
-		<div class="container">
+	<link href="../../resources/css/myroom/myUpdate.css" rel="stylesheet" >
+</head>
+<body>
+	<div class="container">
 		<div class="row justify-content-center">
 		    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
 		        <h2 class="h3 mb-4 page-title"></h2>
@@ -51,7 +48,7 @@
 		                </div>
 		                <hr class="my-4" />
 		                <div class="form-row">
-                    		<div class="form-group">
+	                   		<div class="form-group">
 		                        <label for="nick">* 닉 네 임 : </label>
 		                        <input type="text" id="nick" class="form-control" value="${userInfo.nick}" /><br/>
 		                    </div>
@@ -99,10 +96,8 @@
 		        </div>
 		    </div>
 		</div>
-		
-		</div>
-	
-	</body>
+	</div>
+</body>
 </html>
 
 <%@ include file="../../layout/footer.jsp"%>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ include file="../../layout/header.jsp"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -145,7 +144,6 @@
 	                		</div>
 	            		</div>
 	        	</section>
-	        	
 		         <div class="list_button">
 				    	<input type="button" value="${userInfo.nick}님의 추가정보 수정하러가기"  class="btn btn-outline-black"
 							onclick="document.location.href='/myroom/bodyprofile/myUpdate'"/>&nbsp;&nbsp;
@@ -157,7 +155,7 @@
 		  					<img src="/resources/image/upload/talk.png"/>
 						</a>
 				</div>
-	  </c:if>
+	  	</c:if>
    
    
 	   <c:if test="${bodyProfileDTO != null && bodyList != null}">
@@ -263,20 +261,20 @@
 					</tbody>
 				</c:forEach>
 			</table>
-			</c:if>
+		</c:if>
 			
 			
-			<!-- 바디 프로필 차트 -->
-			<div class="weightChart" style="position: relative; height:80vh; width:80vw; margin: 0 auto; margin-top: 100px;">
-				<canvas id="weightChart" style="height:40vh; width:50vw; margin: 0 auto;"></canvas>
-			</div>
-			<br/><br/>
-			<div class="muscleBodyChart" style="position: relative; height:80vh; width:80vw; margin: 0 auto; margin-top: 100px;">
-				<canvas id="muscleBodyChart" style="height:40vh; width:50vw; margin: 0 auto;"></canvas>
-			</div>
-			<div class="bodySizeChart" style="position: relative; height:80vh; width:80vw; margin: 0 auto; margin-top: 100px;">
-				<canvas id="bodySizeChart" style="height:40vh; width:50vw; margin: 0 auto;"></canvas>
-			</div>
+		<!-- 바디 프로필 차트 -->
+		<div class="weightChart" style="position: relative; height:80vh; width:80vw; margin: 0 auto; margin-top: 100px;">
+			<canvas id="weightChart" style="height:40vh; width:50vw; margin: 0 auto;"></canvas>
+		</div>
+		<br/><br/>
+		<div class="muscleBodyChart" style="position: relative; height:80vh; width:80vw; margin: 0 auto; margin-top: 100px;">
+			<canvas id="muscleBodyChart" style="height:40vh; width:50vw; margin: 0 auto;"></canvas>
+		</div>
+		<div class="bodySizeChart" style="position: relative; height:80vh; width:80vw; margin: 0 auto; margin-top: 100px;">
+			<canvas id="bodySizeChart" style="height:40vh; width:50vw; margin: 0 auto;"></canvas>
+		</div>
 		
 
 <%@ include file="../../layout/footer.jsp"%>
