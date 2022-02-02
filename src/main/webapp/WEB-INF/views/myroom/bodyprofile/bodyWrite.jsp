@@ -8,13 +8,14 @@
 <html>
 <head>
 	<title>BodyProfile 작성 페이지</title>
+	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet" />
 </head>
 <body>
 	<div class="container">
 	  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 	    <div class="row g-5">
 	      <div class="col-md-7 col-lg-8">
-			<h4 class="mb-3">마이 프로필 정보 수정</h4>
+			<h4 class="bodyprofile_title">${sessionScope.id} 님의 바디프로필 작성 페이지</h4>
 				<form method="post" action="/myroom/bodyprofile/bodyWritePro" enctype="multipart/form-data">
 					<div class="row g-3">
 						<div class="col-12">

@@ -5,17 +5,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
-<!DOCTYPE html>
 <html>
 <head>
 	<title>BodyProfile 수정 페이지</title>
+	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
 	  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 	    <div class="row g-5">
 	      <div class="col-md-7 col-lg-8">
-			<h4 class="mb-3">바디 프로필 수정</h4>
+			<h4 class="bodyprofile_title">${sessionScope.id} 님의 바디 프로필 수정</h4>
 				 <form action="/myroom/bodyprofile/bodyUpdatePro" id="updateForm" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="b_num" value="${bodyProfileDTO.b_num}" />
 						<div class="row g-3">
@@ -82,11 +82,11 @@
 						<hr class="my-4">
 							
 						<div style="text-align: center;">
-							<input type="submit" class="btn btn-outline-primary" value="수정하기" />
+							<input type="submit" class="btn btn-outline-black" value="수정하기" />
 								&nbsp;
-							<input type="reset" class="btn btn-outline-danger" value="다시작성하기" />
+							<input type="reset" class="btn btn-outline-black" value="다시작성하기" />
 								&nbsp;
-							<input type="button" class="btn btn-outline-secondary" value="바디프로필이동" onClick="javascript:window.location='/myroom/bodyprofile'" />
+							<input type="button" class="btn btn-outline-black" value="바디프로필이동" onClick="javascript:window.location='/myroom/bodyprofile'" />
 						</div>
 					</form>
 				</div>

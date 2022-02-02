@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
+<%@ include file="../pay/cancel.jsp"%>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 <head>
@@ -38,13 +39,9 @@
 	<c:if test="${sessionScope.id != null}">
 	    <div class="container">
 	        <div class="row">
-	            <div class="col-sm-12">
-	            </div>
-	        </div>
-	        <div class="row">
 	            <div class="col-xl-4">
 	                <div class="card-box">
-	                    <h4 class="header-title mt-0">${sessionScope.id} 님의 정보</h4>
+	                    <h4 class="header-title mt-0">${sessionScope.id} 님의 마이룸 페이지</h4>
 	                    <div class="panel-body">
 	                        <hr>
 	                        <div class="text-left">
@@ -59,35 +56,40 @@
 	                         <button type="button" onclick="window.location='/myroom/userInfo'" class="btn btn-light">회원정보 페이지 이동</button>
 	                    </div>
 	                </div>
-	                <!-- Personal-Information -->
-	                <div class="card-box ribbon-box">
-	                    <div class="clearfix"></div>
-	                    <div class="inbox-widget">
-	                        <a href="/myroom/likeZoom">
-	                            <div class="inbox-item">
-	                                <div class="inbox-item-img"><img src="../../resources/image/upload/zoom.png" class="rounded-circle" alt="zoom"></div>
-	                                <p class="inbox-item-author">관심Zoom</p>
-	                                <p class="inbox-item-text">관심있는 Zoom강의 페이지</p>
-	                            </div>
-	                        </a>
-	                        <a href="/myroom/likeVod">
-	                            <div class="inbox-item">
-	                                <div class="inbox-item-img"><img src="../../resources/image/upload/vod.jpg" class="rounded-circle" alt="vod"></div>
-	                                <p class="inbox-item-author">관심VOD</p>
-	                                <p class="inbox-item-text">관심있는 VOD강의 페이지</p>
-	                            </div>
-	                        </a>
-	                        <a href="/myroom/paymen">
-	                            <div class="inbox-item">
-	                                <div class="inbox-item-img"><img src="../../resources/image/upload/coin.png" class="rounded-circle" alt="coin"></div>
-	                                <p class="inbox-item-author">결재 내역</p>
-	                                <p class="inbox-item-text">강의를 구매한 결재 내역 페이지</p>
-	                            </div>
-	                        </a>
-	                    </div>
-	                </div>
 	            </div>
 	            <div class="col-xl-8">
+                	<div class="row">
+                    <div class="col-sm-4">
+                        <div class="card-box tilebox-one">
+                            <h6 class="text-muted text-uppercase mt-0">관심 Zoom 페이지</h6>
+	                            <div class="inbox-item-img">
+	                            	<a href="/myroom/likeZoom">
+	                            		<img src="../../resources/image/upload/zoom.png" class="rounded-circle" alt="zoom">
+	                            	</a>
+	                            </div>
+	                    </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card-box tilebox-one">
+                            <h6 class="text-muted text-uppercase mt-0">관심 Vod</h6>
+                            	<div class="inbox-item-img">
+                            		<a href="/myroom/likeVod">
+                            			<img src="../../resources/image/upload/vod.jpg" class="rounded-circle" alt="vod">
+                            		</a>
+                            	</div>
+                         </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card-box tilebox-one">
+                            <h6 class="text-muted text-uppercase mt-0">결제 내역 관리</h6>
+                            	<div class="inbox-item-img">
+                            		<a href="/myroom/payment">
+                            			<img src="../../resources/image/upload/coin.png" class="rounded-circle" alt="coin">
+                            		</a>
+                            	</div>
+                        </div>
+                    </div>
+                </div>
 	                  	<!--디데이-->
 	                   <div class="rgy-dday">
 	                   	<h3>${sessionScope.id} 님의 특별한 날</h3>
@@ -141,8 +143,59 @@
 	    					</div>
 		  				</form>
 		           </div>
-	           
-	              <c:if test="${reviewList != null}">
+		           <c:if test="${myPayment != null}">
+		               <div class="card-box">
+		               		<h4 class="header-title mb-3">결재내역 관리</h4>
+		               		<button onclick="window.location='/myroom/review'" class="btn btn-light">
+		               			결제내역 관리 페이지로 이동하기
+		               		</button>
+		               		<div class="table-responsive">
+			               		<table class="table" style="vertical-align: middle;">
+			               			<thead>
+			               				<tr>
+			              					<th class="payNum">주문 번호</th>
+											<th>강 의</th>
+											<th>결제 금액</th>
+											<th>환불 금액</th>
+											<th>결제 시간</th>
+											<th>상 태</th>
+			               				</tr>
+			               			</thead>
+			               			<c:forEach var="myPayment" items="${myPayment}" >
+				               			<tbody>
+				               				<tr>
+												<td class="payNum">${myPayment.merchantUid}</td>
+												<td>
+													<a href="/ddarawazoom/zclasscontent?num=${myPayment.c_num}">${myPayment.name}</a>
+													[코치 명: ${myPayment.c_id}]
+												</td>
+												<td>${myPayment.amount}</td>
+												<td>${myPayment.cancelAmount}</td>
+												<td>${myPayment.paidAt}</td>
+												<td>
+													<c:if test="${myPayment.status == 'paid'}">		              				 	 
+							               				<button class="btn btn-sm btn-success" disabled>결제완료</button></br>
+								              			<button class="refundReqBtn btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#refundModal">
+							              					취소 요청
+							              				</button> 
+						              				</c:if>
+						              				<c:if test="${myPayment.status == 'creq'}">		              				 	 
+							               				<button class="refundReqInfo btn btn-sm btn-secondary" >취소요청중</button>
+							               				<div id="c-req-detail" style="display: none;"></div>
+						              				</c:if>			              				
+								              		<c:if test="${myPayment.status == 'cancelled'}">
+								              			<button class="refundDone btn btn-sm btn btn-danger" id="">취소완료</button>	              				              			
+								              			<div id="c-detail" style="display: none;"></div>
+								              		</c:if>		
+												</td>
+											</tr>
+				               			</tbody>
+				               		</c:forEach>
+			               		</table>
+		               	    </div>	
+		                </div>
+	             	</c:if>
+	               <c:if test="${reviewList != null}">
 		               <div class="card-box">
 		               		<h4 class="header-title mb-3">작성한 리뷰 관리</h4>
 		               		<button onclick="window.location='/myroom/review'" class="btn btn-light">

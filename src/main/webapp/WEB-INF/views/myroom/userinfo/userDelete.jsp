@@ -9,7 +9,7 @@
 	<script src="../../resources/js/myroom/user.js" type="text/javascript"></script>
 	
 	<link href="../../resources/css/styles.css" rel="stylesheet">
-	<link href="../../resources/css/myroom/userDelete.css" rel="stylesheet">
+	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet">
 </head>
 <body>
 	<form class="needs-validation" novalidate id="userDelete"  method="post" onsubmit="userDeletePro();">

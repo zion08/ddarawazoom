@@ -10,7 +10,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="../../resources/js/myroom/review.js" type="text/javascript"></script>
 
-	<link href="../../resources/css/myroom/review.css" rel="stylesheet" >
+	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet" >
 </head>
 <body>
 	<div class="review_title">
@@ -31,18 +31,10 @@
 		<table class="table" id="review_list">
 			<thead>
 				<tr>
-					<th>
-						강의명
-					</th>
-					<th>
-						작성 내용
-					</th>
-					<th>
-						평 점
-					</th>
-					<th>
-						버 튼
-					</th>
+					<th>강의명</th>
+					<th>작성 내용</th>
+					<th>평 점</th>
+					<th>버 튼</th>
 				</tr>
 			</thead>
 			<c:forEach var="reviewList" items="${reviewList}" >
@@ -58,7 +50,7 @@
 							${reviewList.grade}
 						</td>
 						<td>
-							<input type="button"  value="리뷰 수정"  id="updateButton" class="btn btn-outline-primary"
+							<input type="button"  value="리뷰 수정"  class="btn btn-outline-primary"
 								onclick="window.location='/myroom/reviewUpdate?review_num=${reviewList.review_num}'"/>
 							&nbsp;&nbsp;
 							<input type="button" value="리뷰 삭제" class="btn btn-outline-danger"
@@ -69,6 +61,8 @@
 			</c:forEach>
 		</table>
 	</c:if>
+	
+	
 </body>
 </html>
 

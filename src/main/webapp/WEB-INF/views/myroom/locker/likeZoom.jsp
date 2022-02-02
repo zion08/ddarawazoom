@@ -11,7 +11,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src ="../../resources/js/myroom/like.js" type="text/javascript"></script>
 	
-	<link href="../../resources/css/myroom/like.css" rel="stylesheet" >
+	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet" >
 </head>
 <body>
 	<div class="likeZoom_title">
@@ -32,7 +32,8 @@
 		      </div>
 		    </div>
 		  </section>
-      	</c:if>	
+      	</c:if>
+      </div>
 		<c:if test="${count > 0 }">
 			<div class="container-fluid">
 	   		 	<div class="container">
@@ -74,7 +75,6 @@
 		 		</div>
 			</div>
 		</c:if>	
-	</div> 
 </body>
 </html>
 

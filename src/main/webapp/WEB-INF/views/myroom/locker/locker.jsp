@@ -5,7 +5,6 @@
 <html>
 <head>
 	<title>Locker 페이지</title>
-	<link href="../../resources/css/myroom/user.css" rel="stylesheet" >
 </head>
 <body>
 	<div class="container">

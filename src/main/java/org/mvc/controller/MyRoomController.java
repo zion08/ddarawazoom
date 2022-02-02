@@ -48,18 +48,17 @@ public class MyRoomController {
 		log.info("	-----CT----->myroomMain");
 		
 		String id = (String)session.getAttribute("id");
-
+		
+		model.addAttribute("myPayment", service.getPayment(id));
 		model.addAttribute("userInfo", service.getMyProfile(id));
 		model.addAttribute("bodyProfileDTO", service.getBodyProfile(id));
-		model.addAttribute("review" , service.getReview(zoomDTO.getNum(), id));
+		model.addAttribute("reviewList" , service.getReview(zoomDTO.getNum(), id));
 
 		return "/myroom/main";
 	}
 
 	
-	
 
-	
 //================= 멤버 관련 코드 시작 =================//
 	
 	@RequestMapping("/userInfo")
@@ -360,7 +359,7 @@ public class MyRoomController {
 	}
 	
 	@RequestMapping("/likeZoom")
-	public String likeZoom(HttpSession session, Model model) {
+	public String likeZoom(String pageNum, HttpSession session, Model model) {
 		log.info("	-----CT----->likeZoom");
 
 		String id = (String)session.getAttribute("id");
@@ -452,15 +451,6 @@ public class MyRoomController {
 		
 		String id = (String)session.getAttribute("id");
 		
-		int pageSize = 10;
-		
-		if(pageNum == null) {
-			pageNum = "1";
-		}
-		
-		int currentPage = Integer.parseInt(pageNum);
-		int startRow = (currentPage - 1) * pageSize + 1;
-		int endRow = currentPage * pageSize;
 		int count = 0;
 		
 		count = service.reviewCount(id);
@@ -470,10 +460,6 @@ public class MyRoomController {
 			reviewList = service.getReview(zoomDTO.getNum(), id);
 		}
 			model.addAttribute("reviewList", reviewList);
-			model.addAttribute("pageNum", pageNum);
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("startRow", startRow);
-			model.addAttribute("endRow", endRow);
 			model.addAttribute("count", count);
 		return "/myroom/review/review";
 	}

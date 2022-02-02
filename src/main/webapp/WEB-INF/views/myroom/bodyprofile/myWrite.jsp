@@ -8,13 +8,14 @@
 <html>
 <head>
 	<title>MyProfile 작성 페이지</title>
+	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet">
 </head>
 <body>
    <div class="container">
 	  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 	    <div class="row g-5">
 	      <div class="col-md-7 col-lg-8">
-			<h4 class="mb-3">마이 프로필 정보 수정</h4>
+			<h4 class="myprofile_title">마이 프로필 정보 수정</h4>
 			<form class="needs-validation" method="post" action="/myroom/bodyprofile/myWritePro" enctype="multipart/form-data">
 				<div class="row g-3">
 					<div class="col-6">
@@ -58,11 +59,11 @@
 					<hr class="my-4">
 				
 					<div style="text-align: center;"> 
-						<input type="submit" class="btn btn-outline-primary"  value="입력하기" />
+						<input type="submit" class="btn btn-outline-black"  value="입력하기" />
 							&nbsp;
-						<input type="reset" class="btn btn-outline-danger" value="다시작성하기" />
+						<input type="reset" class="btn btn-outline-black" value="다시작성하기" />
 							&nbsp;
-						<input type="button" class="btn btn-outline-secondary" value="마이룸이동" onClick="javascript:window.location='/myroom'" />
+						<input type="button" class="btn btn-outline-black" value="마이룸이동" onClick="javascript:window.location='/myroom'" />
 					</div>
 				</form>
 			 </div>

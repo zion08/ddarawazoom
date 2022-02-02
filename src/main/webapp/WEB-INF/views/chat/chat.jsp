@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 
-<!DOCTYPE html>
 <html>
 <head>
 	<title>Chating</title>

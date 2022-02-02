@@ -10,7 +10,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="../../resources/js/myroom/user.js" type="text/javascript"></script>
 	
-	<link href="../../resources/css/myroom/userinfo.css" rel="stylesheet">
+	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container-xl px-4 mt-4">

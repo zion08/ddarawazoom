@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.mvc.mybatis.NoticeMapper">
+
+	<!-- 공지 글 가져오기 -->
+	<select id="noticeList" resultType="org.mvc.bean.NoticeDTO">
+		<![CDATA[
+			select * from (
+				select num, title, content, writer_id, target_id, regdate, viewcnt, img, pin, rownum r from(
+					select * from tbl_notice order by pin desc , regdate desc))
+			where r > = #{startRow} and r <= #{endRow}
+		]]>
+	</select>
+	
+	<!-- 공지 글 수 -->
+	<select id="noticeCount" resultType="int">
+		select count(*) from tbl_notice
+	</select>
+	
+	<!-- 공지 글 작성 -->
+	<insert id="noticeWrite" parameterType="org.mvc.bean.NoticeDTO">
+		<![CDATA[
+			insert into tbl_notice(num, title, content, writer_id, target_id, pin, img) 
+				values(
+					seq_notice.nextval,
+					#{title},
+					#{content},
+					#{writer_id},
+					#{target_id},
+					#{pin},
+					#{img}
+				)
+			]]>
+	</insert>
+	
+	<!-- 관련 공지 글 출력 -->
+	<select id="getNotice" resultType="org.mvc.bean.NoticeDTO">
+		<![CDATA[
+			select * from tbl_notice where num = #{num}
+		]]>
+	</select>
+	
+	<!-- 공지 글 수정 -->
+	<update id="noticeUpdate">
+		<![CDATA[
+			update tbl_notice set
+				title = #{title},
+				content = #{content},
+				target_id = #{target_id},
+				pin = #{pin},
+				img = #{img}
+			where num = #{num}
+		]]>
+	</update>
+	
+	<!-- 공지 글 삭제 -->
+	<delete id="noticeDelete">
+		<![CDATA[
+			delete tbl_notice where num = #{num}
+		]]>
+	</delete>
+	
+	<!-- 공지 글 조회수 -->
+	<update id="noticeViewCount">
+		<![CDATA[
+			update tbl_notice set
+				viewcnt = viewcnt + 1
+			where num = #{num}
+		]]>
+	</update>
+	
+	<!-- 공지사항 댓글 작성 -->
+	<insert id="commentWrite" parameterType="org.mvc.bean.Notice_CDTO">
+		<![CDATA[
+			insert into tbl_notice_c(c_num, num, writer_id, content)
+				values(seq_notice_c.nextval, #{num}, #{writer_id}, #{content})
+			]]>
+	</insert>
+	
+	<!-- 공지사항 댓글 수 -->
+	<select id="commentCount" resultType="int">
+		<![CDATA[
+			select count(*) from tbl_notice_c where num = #{num} 
+		]]>
+	</select>
+	
+	<!-- 공지사항 댓글 가져오기 -->
+	<select id="getComment" resultType="org.mvc.bean.Notice_CDTO">
+		<![CDATA[
+			select * from(
+				select c_num, num, writer_id, content, ref, re_step, re_level, deleted, regdate, rownum r from(
+					select * from tbl_notice_c where num = #{num} order by c_num asc, ref asc))
+				where r >= #{startRow} and r <= #{endRow}
+			]]>
+	</select>
+	
+	
+</mapper>

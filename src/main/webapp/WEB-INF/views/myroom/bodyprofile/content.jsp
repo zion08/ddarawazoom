@@ -14,8 +14,8 @@
 		<script src="../../resources/js/myroom/talk.js"></script>
 		<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>		
 		
-		<link href="../../resources/css/myroom/bodyprofile.css" rel="stylesheet" >
 		<link href="../../resources/css/myroom/myprofile.css" rel="stylesheet">
+		<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet">
 		
 
 	<c:if test="${userInfo == null}" >
