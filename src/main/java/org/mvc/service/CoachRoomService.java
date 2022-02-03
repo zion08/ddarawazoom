@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.mvc.bean.BodyProfileDTO;
 import org.mvc.bean.ClassApplyDTO;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
+import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 
 public interface CoachRoomService {
@@ -83,4 +85,12 @@ public interface CoachRoomService {
 	// 매출 정보
 	public List<PaymentDTO> getAmount(String id, String startDate, String endDate);
 	
+	// 마이 프로필 데이터 가져오기
+	public UserInfoDTO getMyProfile(String id);
+		
+	// 최근 바디 프로필 데이터 가져오기
+	public List<BodyProfileDTO> getBodyProfile(String id);
+		
+	// 바디 프로필 리스트 데이터 가져오기
+	public List<BodyProfileDTO> bodyList(String id);
 }

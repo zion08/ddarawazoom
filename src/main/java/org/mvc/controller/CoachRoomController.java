@@ -12,6 +12,7 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.mvc.bean.BodyProfileDTO;
 import org.mvc.bean.ClassApplyDTO;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
@@ -408,6 +409,49 @@ public class CoachRoomController {
 		model.addAttribute("count", service.applyMemberCount(dto.getNum()));
 		
 		return "/coachroom/member/memberPage";
+	}
+	
+	@RequestMapping("/bodyprofile")
+	public String bodyprofile(String id, Model model) { 
+		log.info("	-----CT----->/bodypfile/bodyprofile");
+
+		model.addAttribute("userInfo", service.getMyProfile(id));
+		model.addAttribute("bodyProfileDTO", service.getBodyProfile(id));
+		model.addAttribute("bodyList", service.bodyList(id));
+		model.addAttribute("number", 1);
+		
+		return "/coachroom/member/content";
+	}
+	
+	@RequestMapping("/getBodyList")
+	public @ResponseBody List<BodyProfileDTO> getBodyList(Model model, String id){
+		log.info("	-----CT----->getBodyList");
+		log.info(id);
+		
+		//		=========== 날짜 포맷을 mm월 dd일로 바꾼 후 view로 보내는 코드 ===========		//
+		
+		List<BodyProfileDTO> list = service.bodyList(id); // list 변수에 DB에서 가져온 값을 대입
+		List<BodyProfileDTO> resultList = new ArrayList<BodyProfileDTO>(); // view로 보낼 리스트 선언
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일"); // 변경할 날짜 포맷 선언 후 생성
+		for(BodyProfileDTO dto : list) { // DB에서 가져온 값을 하나씩 꺼내옴
+			String date = sdf.format(dto.getB_date()); // dto안의 b_date의 포맷 변경 후 String 변수에 대입
+			
+			if(date.substring(4, 5).equals("0")) { // date문자열이(만약 날짜의 월)이 0으로 시작한다면
+				StringBuffer dateDelete = new StringBuffer(date);
+				date = dateDelete.deleteCharAt(4).toString(); // 문자열 0을 제거 (1번째 index부터 문자열을 잘라냄)
+				
+				if(date.substring(7, 8).equals("0")) { // 만약 날짜의 일이 0으로 시작한다면 (문자열의 3번째 index가 0이라면)
+					 // 문자열을 삭제하는 함수를 사용하기 위해 StringBuffer 클래스 생성
+					date = dateDelete.deleteCharAt(7).toString(); // 문자열 0을 제거 (3번째 index를 제거) 후 date 변수에 대입
+				}
+			}
+			dto.setParse_date(date); // 위에서 변환한 날짜를 dto안에 대입
+			resultList.add(dto); // view로 보낼 리스트에 dto 대입
+		}
+		model.addAttribute("bodyList", resultList);
+		
+		return resultList;
 	}
 //	=========== 회원관리 관련 코드 종료 ===========  //	
 
