@@ -19,4 +19,5 @@ public class NoticeDTO {
 	private int viewcnt;
 	private String img;
 	private String pin;
+
 }

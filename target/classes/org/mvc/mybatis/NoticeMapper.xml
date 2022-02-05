@@ -76,8 +76,8 @@
 	<!-- 공지사항 댓글 작성 -->
 	<insert id="commentWrite" parameterType="org.mvc.bean.Notice_CDTO">
 		<![CDATA[
-			insert into tbl_notice_c(c_num, num, writer_id, content)
-				values(seq_notice_c.nextval, #{num}, #{writer_id}, #{content})
+			insert into tbl_notice_c(c_num, num, ref, writer_id, pw, content)
+				values(seq_notice_c.nextval, #{num}, seq_notice_c.nextval, #{writer_id}, #{pw}, #{content})
 			]]>
 	</insert>
 	
@@ -88,15 +88,66 @@
 		]]>
 	</select>
 	
-	<!-- 공지사항 댓글 가져오기 -->
-	<select id="getComment" resultType="org.mvc.bean.Notice_CDTO">
+	<!-- 공지사항 댓글 리스트 -->
+	<select id="getCommentList" resultType="org.mvc.bean.Notice_CDTO">
 		<![CDATA[
 			select * from(
-				select c_num, num, writer_id, content, ref, re_step, re_level, deleted, regdate, rownum r from(
-					select * from tbl_notice_c where num = #{num} order by c_num asc, ref asc))
+				select c_num, num, writer_id, pw, content, ref, re_step, re_level, deleted, regdate, rownum r from(
+					select * from tbl_notice_c where num = #{num} order by ref asc, re_step asc))
 				where r >= #{startRow} and r <= #{endRow}
 			]]>
 	</select>
 	
+	<!-- 공지사항 댓글 삭제를 위한 패스워드 체크 -->
+	<select id="pwCheck" resultType="String">
+		select pw from tbl_notice_c where writer_id = #{writer_id} and c_num = #{c_num}
+	</select>
+	
+	<!-- 공지사항 댓글 삭제 -->
+	<update id="deletedChange">
+		update tbl_notice_c set
+			deleted = 'yes'
+		where c_num = #{c_num}
+	</update>
+	
+	<!-- 관리자 댓글 삭제 -->
+	<update id="managerDeletedChange">
+		update tbl_notice_c set
+			deleted = 'all'
+		where c_num = #{c_num}
+	</update>	
+	
+	<!-- 수정에 필요한 댓글 가져오기 -->
+	<select id="getComment" resultType="org.mvc.bean.Notice_CDTO">
+		<![CDATA[
+			select * from tbl_notice_c where c_num = #{c_num}
+		]]>
+	</select>
+	
+	<!-- 댓글 수정 -->
+	<update id="commentUpdate">
+		update tbl_notice_c set
+			content = #{content},
+			pw = #{pw}
+		where c_num = #{c_num}
+	</update>
+	
+	<!-- 대댓글 작성 -->
+	<insert id="insertReComment">
+		<![CDATA[
+			insert into tbl_notice_c(c_num, num, writer_id, pw, content, ref, re_step, re_level)
+				values(seq_notice_c.nextval, #{num}, #{writer_id}, #{pw}, #{content}, #{ref}, #{re_step}, #{re_level})
+			]]>
+	</insert>
+	
+	<!-- 관리자 페이지 관리용 모든 댓글 -->
+	<select id="getAllComment" resultType="org.mvc.bean.Notice_CDTO">
+		<![CDATA[
+			select * from(
+				select c_num, num, writer_id, pw, content, ref, re_step, re_level, deleted, regdate, rownum r from(
+					select * from tbl_notice_c order by c_num asc, ref asc))
+				where r >= #{startRow} and r <= #{endRow}
+			]]>
+	</select>
 	
 </mapper>

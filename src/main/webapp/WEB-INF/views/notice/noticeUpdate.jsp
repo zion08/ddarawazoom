@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../layout/header.jsp"%>
+<%@ include file="../layout/header.jsp"%>
 
 <html>
 <head>
@@ -27,7 +27,7 @@
 	                    </div>
 	                </div>
 	                <div class="custom-form">
-	                	<form class="needs-validation" method="post" action="/manager/noticeUpdatePro" enctype="multipart/form-data">
+	                	<form class="needs-validation" method="post" action="/ddarawazoom/noticeUpdatePro" enctype="multipart/form-data">
 	                		<input type="hidden" name="num" value="${noticeDTO.num}" />
 	                        <div class="row">
 	                            <div class="col-md-4">
@@ -79,7 +79,7 @@
 	                             <div class="col-lg-12">
 	                                <div class="form-group app-label">
 	                                    <label for="content" class="text-muted">내 용</label>
-	                                    <textarea id="content" rows="4" id="content" name="content" class="form-control resume" required>${noticeDTO.content}</textarea>
+	                                    <textarea id="content" rows="15" id="content" name="content" class="form-control resume" style="resize: none;" required>${noticeDTO.content}</textarea>
 	                                </div>
 	                                <div class="invalid-feedback">
 					     				내용을 입력해주세요.
@@ -97,7 +97,7 @@
 	                          			&nbsp;
 	                          		<input type="reset" class="btn btn-outline-black" value="다시 작성하기" />
 										&nbsp;
-									<input type="button" class="btn btn-outline-black" value="공지사항 페이지로 돌아가기" onClick="javascript:window.location='/manager/notice'" />
+									<input type="button" class="btn btn-outline-black" value="공지사항 페이지로 돌아가기" onClick="javascript:window.location='/ddarawazoom/notice'" />
 	                        	</div>
 	                        </div>
 	                    </form>
@@ -109,4 +109,4 @@
 </body>
 </html>
 
-<%@ include file="../../layout/footer.jsp"%>
+<%@ include file="../layout/footer.jsp"%>

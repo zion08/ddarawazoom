@@ -18,7 +18,7 @@
 	            <div class="card mb-4 mb-xl-0">
 	                <div class="card-header">Profile Picture</div>
 	                <div class="card-body text-center">
-	                    <img class="img-account-profile rounded-circle mb-2" src="../../resources/image/upload/${userInfo.img}" alt="">
+	                    <img class="img-account-profile rounded-circle mb-2" src="../../resources/image/upload/${userInfo.img}" alt="img">
 	                    <div class="small font-italic text-muted mb-4">${userInfo.nick}님의 프로필 사진</div>
 	                </div>
 	            </div>

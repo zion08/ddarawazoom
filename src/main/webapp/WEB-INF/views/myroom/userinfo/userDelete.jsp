@@ -12,7 +12,7 @@
 	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet">
 </head>
 <body>
-	<form class="needs-validation" novalidate id="userDelete"  method="post" onsubmit="userDeletePro();">
+	<form class="needs-validation" novalidate id="userDelete"  method="post" >
 		<div class="mb-4">
 			<label for="pw" class="form-label" id="deleteTitle">
 				* 패스워드 확인 *

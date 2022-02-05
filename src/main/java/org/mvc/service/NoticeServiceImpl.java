@@ -62,8 +62,42 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public List<Notice_CDTO> getComment(int num, int startRow, int endRow) {
-		return mapper.getComment(num, startRow, endRow);
+	public List<Notice_CDTO> getCommentList(int num, int startRow, int endRow) {
+		return mapper.getCommentList(num, startRow, endRow);
+	}
+	
+	@Override
+	public String pwCheck(String writer_id, int c_num) {
+		return mapper.pwCheck(writer_id, c_num);
+	}
+
+	@Override
+	public int deletedChange(int c_num) {
+		return mapper.deletedChange(c_num);
+	}
+
+	@Override
+	public int managerDeletedChange(int c_num) {
+		return mapper.managerDeletedChange(c_num);
+	}
+	@Override
+	public Notice_CDTO getComment(int c_num) {
+		return mapper.getComment(c_num);
+	}
+
+	@Override
+	public int commentUpdate(Notice_CDTO notice_CDTO) {
+		return mapper.commentUpdate(notice_CDTO);
+	}
+
+	@Override
+	public int insertReComment(Notice_CDTO notice_CDTO) {
+		return mapper.insertReComment(notice_CDTO);
+	}
+	
+	@Override
+	public List<Notice_CDTO> getAllComment(int startRow, int endRow) {
+		return mapper.getAllComment(startRow, endRow);
 	}
 
 }

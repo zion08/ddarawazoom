@@ -19,7 +19,7 @@
       <ul class="nav flex-column">
         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">사이트 소개</a></li>
         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">이용 방법</a></li>
-        <li class="nav-item mb-2"><a href="/manager/notice" class="nav-link p-0 text-muted">공지 사항</a></li>
+        <li class="nav-item mb-2"><a href="/ddarawazoom/notice" class="nav-link p-0 text-muted">공지 사항</a></li>
         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">QnA</a></li>
       </ul>
     </div>

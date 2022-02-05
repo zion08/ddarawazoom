@@ -12,6 +12,7 @@ public class Notice_CDTO {
 	private int c_num;
 	private int num;
 	private String writer_id;
+	private String pw;
 	private String content;
 	private int ref;
 	private int re_step;

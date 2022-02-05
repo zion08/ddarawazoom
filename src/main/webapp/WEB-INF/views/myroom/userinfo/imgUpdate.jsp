@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <html>
 <head>
 	<title>imgUpdate 페이지</title>
@@ -30,7 +30,7 @@
 		     	<hr class="my-4">
 		     	
 	     	<div class="imgUpdateButton">
-	     		<input type="submit" id="updateButton" class="btn btn-outline-black" value="사진 업로드">
+	     		<input type="submit" id="updateButton" class="btn btn-outline-black" value="사진 업로드"/>
 	     	</div>
 		</div>
 	</form>
