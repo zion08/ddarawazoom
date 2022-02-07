@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.mvc.bean.BodyProfileDTO;
 import org.mvc.bean.ClassApplyDTO;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
+import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 
 public interface CoachRoomMapper {
@@ -58,8 +61,8 @@ public interface CoachRoomMapper {
 	
 	// 해당 코치가 등록한 모든 수업 정보
 	public List<ZoomDTO> getAllClass(@Param("c_id") String id,
-								  @Param("startRow") int startRow,
-								  @Param("endRow") int endRow);
+								     @Param("startRow") int startRow,
+								     @Param("endRow") int endRow);
 	
 	// 코치 수업 갯수
 	public int getClassCount(String id);
@@ -82,4 +85,17 @@ public interface CoachRoomMapper {
 	// 최신 리뷰목록
 	public List<ReviewDTO> getAllReview(String id);
 	
+	// 매출 정보
+	public List<PaymentDTO> getAmount(@Param("c_id") String id,
+								      @Param("startDate") String startDate,
+									  @Param("endDate") String endDate);
+	
+	// 마이 프로필 데이터 가져오기
+	public UserInfoDTO getMyProfile(String id);
+		
+	// 최근 바디 프로필 데이터 가져오기
+	public List<BodyProfileDTO> getBodyProfile(String id);
+		
+	// 바디 프로필 리스트 데이터 가져오기
+	public List<BodyProfileDTO> bodyList(String id);
 }

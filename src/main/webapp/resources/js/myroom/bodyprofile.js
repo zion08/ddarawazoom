@@ -18,366 +18,170 @@ $.fn.serializeObject = function(){
 	return o;
 };
 
+//바디 프로필 작성 유효성 검사
+function body_Write(){
+	
+	var bW = document.body_write;
+	var fileCheck = document.getElementById("save").value;
+	
+	if(bW.b_date.value==''){
+		alert('작성 날짜가 없습니다.\n작성 날짜를 확인 후, 기입해 주세요.');
+		bW.b_date.focus();
+		return false;
+	}else if(bW.b_height.value==''){
+		alert('키에 대한 내용이 없습니다.\n현재 멤버님의 키를  측정하여 기입해 주세요.');
+		bW.b_height.focus();
+		return false;
+	}else if(bW.b_weight.value==''){
+		alert('몸무게에 대한 내용이 없습니다.\n현재 멤버님의 몸무게를 측정하여 기입해 주세요.');
+		bW.b_weight.focus();
+		return false;
+	}else if(bW.b_muscle.value==''){
+		alert('근육량에 대한 내용이 없습니다.\n현재 멤버님의 근육량을 측정하여 기입해 주세요.');
+		bW.b_muscle.focus();
+		return false;
+	}else if(bW.b_bodyfat.value==''){
+		alert('체지방량에 대한 내용이 없습니다.\n현재 멤버님의 체지방량을 측정하여 기입해 주세요.');
+		bW.b_bodyfat.focus();
+		return false;
+	}else if(bW.b_shape.value==''){
+		alert('체형에 대한 내용이 없습니다.\n현재 멤버님의 체형을 선택해 주세요.');
+		bW.b_shape.focus();
+		return false;
+	}else if(bW.b_chest.value==''){
+		alert('가슴 둘레에 대한 내용이 없습니다.\n현재 멤버님의 가슴 둘레를 측정하여 기입하여 주세요.');
+		bW.b_chest.focus();
+		return false;
+	}else if(bW.b_waist.value==''){
+		alert('허리 둘레에 대한 내용이 없습니다.\n현재 멤버님의 허리 둘레를 측정하여 기입하여 주세요.');
+		bW.b_waist.focus();
+		return false;
+	}else if(bW.b_arm.value==''){
+		alert('팔뚝 둘레에 대한 내용이 없습니다.\n현재 멤버님의 팔뚝 둘레를 측정하여 기입하여 주세요.');
+		bW.b_arm.focus();
+		return false;
+	}else if(bW.b_thigh.value==''){
+		alert('허벅지 둘레에 대한 내용이 없습니다.\n현재 멤버님의 허벅지 둘레를 측정하여 기입하여 주세요.');
+		bW.b_thigh.focus();
+		return false;
+	}else if(bW.b_hip.value==''){
+		alert('엉덩이 둘레에 대한 내용이 없습니다.\n현재 멤버님의 엉덩이 둘레를 측정하여 기입하여 주세요.');
+		bW.b_hip.focus();
+		return false;
+	}else if(!fileCheck){
+		alert('첨부된 바디 사진이 없습니다.\n오늘 하루의 바디 프로필 사진을 찍어서 기록을 남겨보세요~');
+		bW.save.focus();
+		return false;
+	}else{
+		alert('모든 바디프로필 정보가 기입되었습니다!\n등록 도와드리겠습니다.\n오늘도 화이팅하세요~!\n감사합니다^_^');
+		bW.submit();
+	}
+}
 
-// 몸무게 그래프
-$(document).ready(function(){
-	var weight = new Array();
-		var date = new Array();
-		$.ajax({
-			type: "post",
-			url: "/myroom/getBodyList", 
-			dataType: "json",
-			async: false,
-			success: function(result){
-				var bodyList = JSON.stringify(result);
-				var jsonList = JSON.parse(bodyList);
-				
-				console.log(jsonList);
-				
-				for(var i = 0; i < jsonList.length; i++){
-					
-					var b_list = jsonList[i];
-					
-					weight.push(jsonList[i].b_weight);
-					
-					// 날짜 리스트 안에 가져온 날짜 정보를 주입
-					date.push(b_list.parse_date);
-				}
-			}
-		});
-		
-		console.log(weight);
-		console.log(date);
-		
-		var ctx = document.getElementById('weightChart').getContext('2d');
-			var chart = new Chart(ctx, { 
-				type: 'line', 
-				data: {
-					labels: date,
-					datasets: [
-						{
-							label: '몸무게',
-							backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            pointBorderColor: '#80b6f4',
-                            pointHoverBackgroundColor: 'white',
-			                borderWidth: 3,
-			                display : true,
-			                fill: true,
-							data: weight
-						}]
-					},
-				options: {
-					scales: {
-						xAxes: [{
-							ticks:{
-								fontColor : 'rgba(12, 13, 13, 1)',
-								fontSize : 14
-								
-							}
-						}],
-						yAxes: [{
-							ticks:{
-								max:140,
-								min: 0,
-								stepSize: 5,
-								fontColor : 'rgba(12, 13, 13, 1)',
-								fontSize : 13
-							},
-							stacked: true
-						}],
-					},
-					responsive: true,
-					legend:{
-						display:true
-					},
-					elements: {
-						line: {
-							fill: false
-						},
-						point: {
-							hoverRadiuse: 7,
-							radius: 5
-						}
-					},
-					interaction: {
-						mode: 'index',
-						intersect: false,
-					},
-					title: {
-						display: true,
-						text: '몸무게 변화',
-						fontSize: 23
-					},
-					maintainAspectRatio: false, //차트 비율 유지하지 않음
-					randing: true,
-					tooltips: {
-						enabled:false
-					}, // hover시 보였던 툴팁 제거
-					hover: {
-						animationDuration: 0
-					}, // 차트 위에 값 나타내기
-					animation: {
-						duration: 1,
-						onComplete: function(){
-							var chartInstance = this.chart,
-	                        ctx = chartInstance.ctx;
-		                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-		        			ctx.textAlign = "center";
-		    				ctx.font = "22px Open Sans";
-		    				ctx.fillStyle = 'black';
-	    				
-	    				
-		    				Chart.helpers.each(this.data.datasets.forEach(function (dataset, i) {
-		    					var meta = chartInstance.controller.getDatasetMeta(i);
-		    					Chart.helpers.each(meta.data.forEach(function (bar, index) {
-		    						data = dataset.data[index];
-		    						if(i==0){
-		    							ctx.fillText(data, bar._model.x+18, bar._model.y-15); 
-		    						} else {
-		    							ctx.fillText(data, bar._model.x+18, bar._model.y-15);
-		    						}
-		    					}),this)
-		    				}),this);
-		    			}
-					}
-				}
-			});
-		});
-		
-		
 
-// 근육량 체지방량 그래프		
-$(document).ready(function(){
+// 바디 프로필 수정 유효성 검사
+function body_Update(){
 	
-	var muscle = new Array();
-	var bodyfat = new Array();
-	var date = new Array();
+	var bU = document.body_update;
+	var fileCheck = document.getElementById("save").value;
 	
-	$.ajax({
-		type: "post",
-		url: "/myroom/getBodyList", 
-		dataType: "json",
-		async: false,
-		success: function(result){
-			var bodyList = JSON.stringify(result);
-			var jsonList = JSON.parse(bodyList);
-			
-			for(var i = 0; i < jsonList.length; i++){
-				
-				var b_list = jsonList[i];
-				
-				muscle.push(jsonList[i].b_muscle);
-				bodyfat.push(jsonList[i].b_bodyfat);
-				date.push(b_list.parse_date);
-			}
-		}
-	});
-	
-	
-	var ctx = document.getElementById('muscleBodyChart').getContext('2d');
-		var chart = new Chart(ctx, { 
-			type: 'bar', 
-			data: {
-				labels: date,
-				datasets: [
-					{
-						label: '근육량',
-						backgroundColor: '#0066ff',
-					    borderColor: '#0066ff',
-					    pointHoverBackgroundColor: 'white',
-                        pointHoverBorderColor: '#black',
-		                borderWidth: 3,
-		                display : true,
-		                fill: false,
-		                stack: 'combined',
-		                type: 'line',
-						data: muscle
-					},
-					{
-						label: '체지방량',
-						backgroundColor: 'rgba(255, 99, 132, 0.2)',
-		                borderColor: 'rgba(255, 99, 132, 1)',
-		                borderWidth: 1,
-		                display : true,
-		                fill: false,
-		                stack: 'combined',
-		                type:'bar',
-						data: bodyfat
-					}]
-				},
-			options: {
-				elements: {
-					line: {
-						fill: false
-					},
-					point: {
-						hoverRadiuse: 7,
-						radius: 5
-					}
-				},
-				scales: {
-					xAxes: [{
-						ticks: {
-							fontColor : 'rgba(12, 13, 13, 1)',
-							fontSize : 15
-							}
-						}],
-					yAxes: [{
-						ticks:{
-							max:50,
-							min: 0,
-							stepSize:5,
-							autoSkip: false,
-							fontColor : 'rgba(12, 13, 13, 1)',
-							fontSize : 14
-						},
-						stacked: true
-					}]
-				},
-				interaction: {
-					mode: 'index',
-					intersect: false,
-				},
-				title: {
-					display: true,
-					text: '근육량 / 체지방량 변화',
-					fontSize:23
-				}
-			},
-		});
-	});
-				
-				
-// 바디 사이즈 그래프				
-$(document).ready(function(){
-		var chest = new Array();
-		var waist = new Array();
-		var arm = new Array();
-		var thigh = new Array();
-		var hip = new Array();
-		var date = new Array();
+	if(bU.b_date.value==''){
+		alert('작성 날짜가 없습니다.\n작성 날짜를 확인 후, 기입해 주세요.');
+		bU.b_date.focus();
+		return false;
+	}else if(bU.b_height.value==''){
+		alert('키에 대한 내용이 없습니다.\n현재 멤버님의 키를  측정하여 기입해 주세요.');
+		bU.b_height.focus();
+		return false;
+	}else if(bU.b_weight.value==''){
+		alert('몸무게에 대한 내용이 없습니다.\n현재 멤버님의 몸무게를 측정하여 기입해 주세요.');
+		bU.b_weight.focus();
+		return false;
+	}else if(bU.b_muscle.value==''){
+		alert('근육량에 대한 내용이 없습니다.\n현재 멤버님의 근육량을 측정하여 기입해 주세요.');
+		bU.b_muscle.focus();
+		return false;
+	}else if(bU.b_bodyfat.value==''){
+		alert('체지방량에 대한 내용이 없습니다.\n현재 멤버님의 체지방량을 측정하여 기입해 주세요.');
+		bU.b_bodyfat.focus();
+		return false;
+	}else if(bU.b_shape.value==''){
+		alert('체형에 대한 내용이 없습니다.\n현재 멤버님의 체형을 선택해 주세요.');
+		bU.b_shape.focus();
+		return false;
+	}else if(bU.b_chest.value==''){
+		alert('가슴 둘레에 대한 내용이 없습니다.\n현재 멤버님의 가슴 둘레를 측정하여 기입하여 주세요.');
+		bU.b_chest.focus();
+		return false;
+	}else if(bU.b_waist.value==''){
+		alert('허리 둘레에 대한 내용이 없습니다.\n현재 멤버님의 허리 둘레를 측정하여 기입하여 주세요.');
+		bU.b_waist.focus();
+		return false;
+	}else if(bU.b_arm.value==''){
+		alert('팔뚝 둘레에 대한 내용이 없습니다.\n현재 멤버님의 팔뚝 둘레를 측정하여 기입하여 주세요.');
+		bU.b_arm.focus();
+		return false;
+	}else if(bU.b_thigh.value==''){
+		alert('허벅지 둘레에 대한 내용이 없습니다.\n현재 멤버님의 허벅지 둘레를 측정하여 기입하여 주세요.');
+		bU.b_thigh.focus();
+		return false;
+	}else if(bU.b_hip.value==''){
+		alert('엉덩이 둘레에 대한 내용이 없습니다.\n현재 멤버님의 엉덩이 둘레를 측정하여 기입하여 주세요.');
+		bU.b_hip.focus();
+		return false;
+	}else if(!fileCheck){
+		alert('첨부된 바디 사진이 없습니다.\n오늘 하루의 바디 프로필 사진을 찍어서 기록을 남겨보세요~');
+		bU.save.focus();
+		return false;
+	}else{
+		alert('모든 바디프로필 정보가 기입되었습니다!\n수정 도와드리겠습니다.\n오늘도 화이팅하세요~!\n감사합니다^_^');
+		bU.submit();
+	}
+}
 
-		$.ajax({
-			type: "post",
-			url: "/myroom/getBodyList", 
-			dataType: "json",
-			async: false,
-			success: function(result){
-				var bodyList = JSON.stringify(result);
-				var jsonList = JSON.parse(bodyList);
-				
-				console.log(jsonList.length);
-				
-				for(var i = 0; i < jsonList.length; i++){
-					
-					var b_list = jsonList[i];
-					
-					chest.push(jsonList[i].b_chest);
-					waist.push(jsonList[i].b_waist);
-					arm.push(jsonList[i].b_arm);
-					thigh.push(jsonList[i].b_thigh);
-					hip.push(jsonList[i].b_hip);
-					date.push(b_list.parse_date);
-				}
-			}
-		});
-		
-		
-		var ctx = document.getElementById('bodySizeChart').getContext('2d');
-			var chart = new Chart(ctx, { 
-				type: 'bar', 
-				data: {
-					labels: date,
-					datasets: [
-						{
-							label: '가슴 둘레',
-							fill: false,
-							lineTension: 0.3,
-							backgroundColor: '#ff91c2',
-			                borderColor: '#ff91c2',
-			                borderWidth: 2,
-			                display : true,
-			                stack: 'combined',
-		               		type:'bar',
-							data: chest
-						},
-						{
-							label: '허리 둘레',
-							fill: false,
-							lineTension: 0.3,
-							backgroundColor: '#FFE4B5',
-			                borderColor: '#FFE4B5',
-			                borderWidth: 2,
-			                display : true,
-							data: waist
-						},
-						{
-							label: '팔뚝 둘레',
-							fill: false,
-							lineTension: 0.3,
-							backgroundColor: '#FFB6C1',
-			                borderColor: '#FFB6C1',
-			                borderWidth: 2,
-			                display : true,
-			                type:'bar',
-							data: arm
-						},
-						{
-							label: '허벅지 둘레',
-							fill: false,
-							lineTension: 0.3,
-							backgroundColor: '#66CDAA',
-			                borderColor: '#66CDAA',
-			                borderWidth: 2,
-			                display : true,
-			                type:'bar',
-							data: thigh
-						},
-						{
-							label: '엉덩이 둘레',
-							fill: false,
-							lineTension: 0.3,
-							backgroundColor: '#9370DB',
-			                borderColor: '#9370DB',
-			                borderWidth: 2,
-			                display : true,
-							data: hip
-						}]
-					},
-				options: {
-					responsive: true,
-					scales: {
-						xAxes: [{
-							ticks: {
-							display: true,
-							fontColor : 'rgba(12, 13, 13, 1)',
-							fontSize : 15
-							},
-							stacked: true
-						}],
-						yAxes: [{
-							ticks:{
-								max:400,
-								min: 0,
-								stepSize:5,
-								autoSkip: false,
-								fontColor : 'rgba(12, 13, 13, 1)',
-								fontSize : 15,
-								display:false
-							},
-							gridLines: {
-								display:false,
-								drawBorder: false
-							},
-							stacked: true
-						}]
-					},
-					title: {
-						display: true,
-						text: '바디 사이즈 변화',
-						fontSize: 25
-					}
-				},
-			});
-		});
+// 마이 프로필 수정 유효성 검사
+function myroom_update(){
+
+	var mW = document.myroom_form;
+	var fileCheck = document.getElementById("save").value;
+	
+	if(mW.nick.value==''){
+		alert('닉네임이 없습니다.\n닉네임을 기입해 주세요.');
+		mW.nick.focus();
+		return false;
+	}else if(mW.name.value==''){
+		alert('이름이 없습니다.\n멤버님의 이름을 기입해 주세요.');
+		mW.name.focus();
+		return false;
+	}else if(mW.birth.value==''){
+		alert('생년월일이 없습니다.\n멤버님의 특별한 생년월일을 기입해 주세요.');
+		mW.birth.focus();
+		return false;
+	}else if(mW.gender.value==''){
+		alert('선택된 성별이 없습니다.\n성별을 선택해 주세요.');
+		mW.gender.focus();
+		return false;
+	}else if(mW.tel.value==''){
+		alert('연락처가 없습니다.\n코치와 연락이 가능한 연락처를 기입해 주세요.');
+		mW.tel.focus();
+		return false;
+	}else if(mW.email.value==''){
+		alert('이메일이 없습니다.\n멤버님의 이메일을 기입해 주세요.');
+		mW.email.focus();
+		return false;
+	}else if(!fileCheck){
+		alert('첨부 파일이 없습니다\n코치님이 멤버님을 한 눈에 알아볼 수 있도록\n프로필을 등록해 주세요.');
+		mW.save.focus();
+		return false;
+	}else{
+		alert('마이프로필에 필요한 정보들이 모두 기입되었습니다!');
+		mW.submit();
+	}
+}
+
+
+
+function button_test(){
+	document.getElementById("body_button").style.visibility="visible"; //show
+	document.getElementById("body_button").style.visibility="hidden"; //show
+}

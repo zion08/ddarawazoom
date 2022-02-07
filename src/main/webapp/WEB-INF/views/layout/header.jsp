@@ -39,47 +39,65 @@
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/ddarawazoom/vod">Vod 강의</a></li>
 					
-					<c:if test="${sessionScope.id != null}">
-					<li><hr class="dropdown-divider"></li>
-					<li class="dropdown-submenu">
-						<a class="dropdown-item dropdown-toggle" href="#" >멤버 전용공간<span class="caret"></span></a>
-              			<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="/myroom">마 이 룸</a>						
-							<li><a class="dropdown-item" href="/myroom/bodyprofile">바디 프로필</a></li>						
-							<li><a class="dropdown-item" href="/myroom/userInfo">회원 정보</a></li>					
-							<li><a class="dropdown-item" href="/myroom/class">강의관리</a></li>
-							<li class="dropdown-submenu">
-								<a  class="dropdown-item dropdown-toggle" href="/myroom/locker">락커룸</a>
-									<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="/myroom/likeZoom">관심Zoom</a>
-									<li><a class="dropdown-item" href="/myroom/likeVod">관심Vod</a>
-								</ul>
-							</li>
-							<li><a class="dropdown-item" href="/myroom/payment">결재내역</a></li>
-							<li><a class="dropdown-item" href="/myroom/review">리뷰관리</a></li>
-						</ul>
-					</li>
+					<c:if test="${sessionScope.id eq 'admin'}">
+						<li><hr class="dropdown-divider"></li>
+						<li class="dropdown-submenu">
+							<a class="dropdown-item dropdown-toggle" href="#" >관리자 전용공간<span class="caret"></span></a>
+	              			<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/manager">관리자 룸</a>						
+								<li><a class="dropdown-item" href="/manager/user">멤버 관리</a>						
+								<li><a class="dropdown-item" href="/manager/coach">코치 관리</a>						
+								<li><a class="dropdown-item" href="/manager/visitor">방문자 관리</a>						
+								<li><a class="dropdown-item" href="/manager/sales">수입 관리</a></li>					
+								<li><a class="dropdown-item" href="/manager/zoom">Zoom강의 관리</a>						
+								<li><a class="dropdown-item" href="/manager/vod">Vod강의 관리</a>						
+								<li><a class="dropdown-item" href="/manager/review">리뷰 관리</a></li>
+								<li><a class="dropdown-item" href="/manager/notice">공지사항 관리</a></li>
+							</ul>
+						</li>
+					</c:if>
+					
+					<c:if test="${sessionScope.id != null && sessionScope.id ne 'admin'}">
+						<li><hr class="dropdown-divider"></li>
+						<li class="dropdown-submenu">
+							<a class="dropdown-item dropdown-toggle" href="#" >멤버 전용공간<span class="caret"></span></a>
+	              			<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/myroom">마 이 룸</a>						
+								<li><a class="dropdown-item" href="/myroom/bodyprofile">바디 프로필</a></li>						
+								<li><a class="dropdown-item" href="/myroom/userInfo">회원 정보</a></li>					
+								<li><a class="dropdown-item" href="/myroom/class">강의관리</a></li>
+								<li class="dropdown-submenu">
+									<a  class="dropdown-item dropdown-toggle" href="/myroom/locker">락커룸</a>
+										<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="/myroom/likeZoom">관심Zoom</a>
+										<li><a class="dropdown-item" href="/myroom/likeVod">관심Vod</a>
+									</ul>
+								</li>
+								<li><a class="dropdown-item" href="/myroom/payment">결재내역</a></li>
+								<li><a class="dropdown-item" href="/myroom/review">리뷰관리</a></li>
+							</ul>
+						</li>
 					</c:if>
 					
 					<c:if test="${sessionScope.c_id != null}">
-					<li><hr class="dropdown-divider"></li>
-					<li class="dropdown-submenu">
-						<a class="dropdown-item dropdown-toggle" href="#">코치 전용공간<span class="caret"></span></a>
-              			<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="/coachroom">코 치 룸</a></li>					
-							<li><a class="dropdown-item" href="/coachroom/schedule">스케줄관리</a></li>
-							<li><a class="dropdown-item" href="/coachroom/class">강의관리</a></li>
-							<li><a class="dropdown-item" href="/coachroom/payment">수입관리</a></li>
-
-							<li><a class="dropdown-item" href="/coachroom/info">정보관리</a></li>
-						</ul>
-					</li>
+						<li><hr class="dropdown-divider"></li>
+						<li class="dropdown-submenu">
+							<a class="dropdown-item dropdown-toggle" href="#">코치 전용공간<span class="caret"></span></a>
+	              			<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/coachroom">코 치 룸</a></li>					
+								<li><a class="dropdown-item" href="/coachroom/schedule">스케줄관리</a></li>
+								<li><a class="dropdown-item" href="/coachroom/class">강의관리</a></li>
+								<li><a class="dropdown-item" href="/coachroom/payment">수입관리</a></li>
+	
+								<li><a class="dropdown-item" href="/coachroom/info">정보관리</a></li>
+							</ul>
+						</li>
 					</c:if>
 					
 					<li><hr class="dropdown-divider"></li>
-					<li><a class="dropdown-item" href="#">따라와줌 파티룸</a></li>
+					<li><a class="dropdown-item" href="/chatRoom">따라와줌 파티룸</a></li>
 					<li><hr class="dropdown-divider"></li>
-					<li><a class="dropdown-item" href="/manager/notice">공지사항</a></li>
+					<li><a class="dropdown-item" href="/ddarawazoom/notice">공지사항</a></li>
 					<li><a class="dropdown-item" href="#">DDarawaZoom소개</a></li>
 					<li><a class="dropdown-item" href="#">DDarawaZoom이용가이드</a></li>
 					<li><a class="dropdown-item" href="#">DDarawaZoom코치소개</a></li>

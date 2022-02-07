@@ -42,17 +42,25 @@ public class MyRoomController {
 	@Autowired
 	private FileInfo fileInfo;
   
-//  =========== 마이룸 메인화면 ===========  //	
+//================= 마이룸 메인 화면 =================//
 	@RequestMapping()
-	public String list() {
+	public String myroomMain(HttpSession session, Model model, ZoomDTO zoomDTO) {
 		log.info("	-----CT----->myroomMain");
 		
+		String id = (String)session.getAttribute("id");
+		
+		model.addAttribute("myPayment", service.getPayment(id));
+		model.addAttribute("userInfo", service.getMyProfile(id));
+		model.addAttribute("bodyProfileDTO", service.getBodyProfile(id));
+		model.addAttribute("reviewList" , service.getReview(zoomDTO.getNum(), id));
+
 		return "/myroom/main";
 	}
 
-
 	
-//  =========== 멤버 정보 관련 코드 시작 ===========  //		
+
+//================= 멤버 관련 코드 시작 =================//
+	
 	@RequestMapping("/userInfo")
 	public String userInfo(HttpSession session, Model model) {
 		log.info("	-----CT----->userInfo");
@@ -65,7 +73,7 @@ public class MyRoomController {
 	}
 	
 	@RequestMapping("/infoUpdate")
-	public String userInfoUpdate(HttpSession session, Model model) {
+	public String userInfoUpdate(UserInfoDTO userDTO, HttpSession session, Model model) {
 		log.info("	-----CT----->infoUpdate");
 
 		String id = (String)session.getAttribute("id");
@@ -79,10 +87,16 @@ public class MyRoomController {
 	public @ResponseBody int infoUpdateData(@RequestBody UserInfoDTO userDTO, HttpSession session) {
 		log.info("	-----CT----->infoUpdateData");
 		
+		int result = 0;
+		
 		String id = (String)session.getAttribute("id");
 		
 		userDTO.setId(id);
-		int result = service.updateInfo(userDTO);
+		
+		log.info("======="+service.updateInfo(userDTO));
+		log.info("======="+userDTO);
+		
+		result = service.updateInfo(userDTO);
 		
 		return result;
 	}
@@ -111,11 +125,37 @@ public class MyRoomController {
 		}
 		return result;
 	}
-//=========== 멤버 정보 관련 코드 종료 ===========  //		
+	
+	@RequestMapping("/userDelete")
+	public String userDelete() {
+		log.info("	-----CT----->userDelete");
+		
+		return"/myroom/userinfo/userDelete";
+	}
+	
+	@RequestMapping("/userDeletePro")
+	public @ResponseBody int userDelete(UserInfoDTO userDTO, HttpSession session) {
+		log.info("	-----CT----->userDeletePro");
+
+		String id = (String)session.getAttribute("id");
+		
+		int result = 0;
+
+		String pw = service.pwCheck(id);
+		
+		if(pw.equals(userDTO.getPw())) {
+			result = service.statusChange(id);
+			session.invalidate(); // session 삭제
+		}
+		
+		return result;
+	}
+//================= 멤버 관련 코드 종료 =================//
 	
 
 
-//=========== 멤버 일정 관련 코드 시작 ===========  //		
+//================= 멤버 일정 코드 시작 =================//
+	
 	@RequestMapping("/class")
 	public String memberClass() {
 		log.info("	-----CT----->class");
@@ -131,11 +171,12 @@ public class MyRoomController {
 		
 		return service.getAllClass(id);
 	}
-//===========  멤버 일정 관련 코드 끝 ===========  //	
+//================= 멤버 일정 코드 끝 =================//
 		
 		
 	
-//  =========== 바디프로필 관련 코드 시작 ===========  //		
+//================= 바디 프로필 관련 코드 시작 =================//
+	
 	@RequestMapping("/bodyprofile")
 	public String bodyprofile(HttpSession session, Model model) { 
 		log.info("	-----CT----->/bodypfile/bodyprofile");
@@ -148,32 +189,6 @@ public class MyRoomController {
 		model.addAttribute("number", 1);
 		
 		return "/myroom/bodyprofile/content";
-	}
-	
-	
-	@RequestMapping("/bodyprofile/myWrite")
-	public String myWrite() {
-		log.info("	-----CT----->/bodypfile/myWrite");
-		
-		return "/myroom/bodyprofile/myWrite";
-	}
-	
-	@RequestMapping("/bodyprofile/myWritePro")
-	public String myWritePro(HttpSession session, UserInfoDTO userDTO,  MultipartFile save, Model model) {
-		log.info("	-----CT----->/bodypfile/myWritePro");
-		
-		String id = (String)session.getAttribute("id");
-		
-		userDTO.setId(id);
-		
-		String  file = fileInfo.imgUpload(save, id);
-		
-		if(file != null) {
-			userDTO.setImg(file);
-			model.addAttribute("result", service.myWrite(userDTO));
-		}
-		
-		return "/myroom/bodyprofile/myWritePro";
 	}
 	
 	@RequestMapping("/bodyprofile/myUpdate")
@@ -200,6 +215,7 @@ public class MyRoomController {
 			userDTO.setImg(file);
 			model.addAttribute("result", service.myUpdate(userDTO));
 		}
+		model.addAttribute("id", userDTO.getId());
 		
 		return "/myroom/bodyprofile/myUpdatePro";
 	}
@@ -224,7 +240,8 @@ public class MyRoomController {
 			bodyDTO.setB_img(file);
 			model.addAttribute("result",service.bodyWrite(bodyDTO));
 		}
-		
+		model.addAttribute("b_id", bodyDTO.getB_id());
+
 		return "/myroom/bodyprofile/bodyWritePro";
 	}
 	
@@ -237,7 +254,7 @@ public class MyRoomController {
 		bodyDTO.setB_id(id);
 		
 		model.addAttribute("bodyProfileDTO", service.getBodyInfo(bodyDTO));
-		
+
 		return "/myroom/bodyprofile/bodyUpdate";
 	}
 	
@@ -278,7 +295,7 @@ public class MyRoomController {
 		return "/myroom/bodyprofile/bodyDeletePro";
 	}
 
-//  =========== 바디프로필 그래프  ===========  //		
+//================= 바디 프로필 그래프 출력 =================//
 	@RequestMapping("/getBodyList")
 	public @ResponseBody List<BodyProfileDTO> getBodyList(Model model, HttpSession session){
 		log.info("	-----CT----->getBodyList");
@@ -310,11 +327,12 @@ public class MyRoomController {
 		
 		return resultList;
 	}
-//  =========== 바디프로필 관련 코드 종료 ===========  //		
+//================= 바디 프로필 관련 코드 종료 =================//
 
 	
 	
-//  =========== 관심 페이지 관련 코드 시작 ===========  //	
+//================= 관심 페이지 관련 코드 시작 =================//
+	
 	@RequestMapping("/locker")
 	public String locker() {
 		log.info("	-----CT----->locker");
@@ -323,7 +341,7 @@ public class MyRoomController {
 	}
 	
 	@RequestMapping("/likeZoom")
-	public String likeZoom(HttpSession session, Model model) {
+	public String likeZoom(String pageNum, HttpSession session, Model model) {
 		log.info("	-----CT----->likeZoom");
 
 		String id = (String)session.getAttribute("id");
@@ -403,25 +421,18 @@ public class MyRoomController {
 		
 		return result;
 	}
-//  =========== 관심 페이지 관련 코드 끝 ===========  //		
+//================= 관심 관련 코드 종료 =================//
 
 	
-//  =========== 멤버 리뷰 관련 코드 시작 ===========  //
+	
+//================= 멤버 리뷰 관련 코드 시작 =================//
+	
 	@RequestMapping("/review")
 	public String memberReview(ZoomDTO zoomDTO, HttpSession session, Model model, String pageNum) {
 		log.info("	-----CT----->review");
 		
 		String id = (String)session.getAttribute("id");
 		
-		int pageSize = 10;
-		
-		if(pageNum == null) {
-			pageNum = "1";
-		}
-		
-		int currentPage = Integer.parseInt(pageNum);
-		int startRow = (currentPage - 1) * pageSize + 1;
-		int endRow = currentPage * pageSize;
 		int count = 0;
 		
 		count = service.reviewCount(id);
@@ -431,10 +442,6 @@ public class MyRoomController {
 			reviewList = service.getReview(zoomDTO.getNum(), id);
 		}
 			model.addAttribute("reviewList", reviewList);
-			model.addAttribute("pageNum", pageNum);
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("startRow", startRow);
-			model.addAttribute("endRow", endRow);
 			model.addAttribute("count", count);
 		return "/myroom/review/review";
 	}
@@ -478,10 +485,12 @@ public class MyRoomController {
 		
 		return result;
 	}
-//  =========== 멤버 리뷰 관련 코드 끝 ===========  //
+//================= 멤버 리뷰 관련 코드 종료 =================//
 	
 	
-//	=========== 내 결제 내역 출력 ===============  //
+	
+//================= 멤버 결재 내역 출력 =================//
+	
 	@RequestMapping("/payment")
 	public String payment (Model model, HttpSession session) {
 		log.info("	-----CT-----> my payment");

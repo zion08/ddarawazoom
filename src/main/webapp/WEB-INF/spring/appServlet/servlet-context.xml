@@ -4,7 +4,9 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
@@ -34,15 +36,20 @@
 		<beans:property name="maxUploadSize" value="104857560"></beans:property>		
 		<beans:property name="maxUploadSizePerFile" value="2097152"></beans:property>		
 		<beans:property name="maxInMemorySize" value="10485756"></beans:property>		
-		<beans:property name="uploadTempDir" value="file:/D:/upload"></beans:property>
+		<beans:property name="uploadTempDir" value="file:/E:/upload"></beans:property>
 	</beans:bean>
 	
 	<!-- 컨트롤러 등록 -->
 	<!-- package 내에 @Controller, @Component, @Service를 스캔함 -->
 	<context:component-scan base-package="org.mvc.controller" />
+	<context:component-scan base-package="org.mvc.handler" />
+	<context:component-scan base-package="org.mvc.config" />
 	
 	<!-- 객체 생성, <jsp:useBean>과 같음 -->
 	<beans:bean id="paymentDTO" class="org.mvc.bean.PaymentDTO"></beans:bean>
+	
+	<!-- WebSocket handler -->
+	<beans:bean id="SocketHandler" class="org.mvc.handler.SocketHandler"></beans:bean>
 	
 	<!-- AOP Advice 클래스 자동 등록 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>	
