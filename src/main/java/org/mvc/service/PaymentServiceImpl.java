@@ -58,8 +58,13 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	
 	@Override
-	public int paymentCancelUpdate(PaymentDTO dto) {
-		return mapper.paymentCancelUpdate(dto);
+	public int paymentCancelUpdateTP(PaymentDTO dto) {
+		return mapper.paymentCancelUpdateTP(dto);
+	}
+	
+	@Override
+	public int paymentCancelUpdateTC(PaymentDTO dto) {
+		return mapper.paymentCancelUpdateTC(dto);
 	}
 
 	@Override

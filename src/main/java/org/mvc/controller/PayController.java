@@ -126,14 +126,14 @@ public class PayController {
 		
 		// 결제 취소 성공 > 취소 내역 DB 저장
 		if(cancelCode == 0) {
-			IamportResponse<Payment> verify = api.paymentByImpUid(imp_uid);	// 결제 번호(imp_uid)로 결제 검증				
+			IamportResponse<Payment> verify = api.paymentByImpUid(imp_uid);	// 결제 번호(imp_uid)로 결제 조회				
 			
-			Payment paymentAip = verify.getResponse();	// api로 결제 정보 조회 (iamport 서버)			
+			Payment paymentApi = verify.getResponse();	// api로 결제 정보 조회 (iamport 서버)			
 			
-			int cancelAmountInt = paymentAip.getCancelAmount().intValue();	
-			String status = paymentAip.getStatus();
-			String cancelReason = paymentAip.getCancelReason();
-			Date cancelledAt = paymentAip.getCancelledAt();
+			int cancelAmountInt = paymentApi.getCancelAmount().intValue();	
+			String status = paymentApi.getStatus();
+			String cancelReason = paymentApi.getCancelReason();
+			Date cancelledAt = paymentApi.getCancelledAt();
 			String cancelledAtStr = dateFormat.dateTimeFull(cancelledAt);
 									 
 			paymentDTO.setStatus(status);					//취소 관련 DTO 변수 업데이트
@@ -142,10 +142,10 @@ public class PayController {
 			paymentDTO.setCancelledAt(cancelledAtStr);
 			paymentDTO.setCancelpAmount(dto.getCancelpAmount());
 						
-			int result_u = servicePayment.paymentCancelUpdate(paymentDTO);	// 성공=1, 실패=0
-			int result_i = servicePayment.paymentCancelInsert(paymentDTO);
+			int result_tp = servicePayment.paymentCancelUpdateTP(paymentDTO);	// 성공=1, 실패=0
+			int result_tc = servicePayment.paymentCancelUpdateTC(paymentDTO);
 			
-			if(result_u == 1 && result_i == 1) {
+			if(result_tp == 1 && result_tc == 1) {
 				result = 1;
 				log.info("	------>cancel save: " + "저장 성공");
 			} else {
@@ -158,7 +158,6 @@ public class PayController {
 			result = 0;
 			return result;
 		}
-	
 		return result; 
 	}
 	
@@ -177,7 +176,7 @@ public class PayController {
 		dto.setStatus("creq");
 		
 		// 요청 내역 DB 반영
-		int result_u = servicePayment.paymentCancelUpdate(dto);
+		int result_u = servicePayment.paymentCancelUpdateTP(dto);
 		int result_i = servicePayment.paymentCancelInsert(dto);
 	
 		if(result_u == 1 && result_i == 1) {

@@ -27,7 +27,6 @@ $(document).ready(function(){
 		var cancelData = new Object();		// json 데이터 생성
 		cancelData.merchantUid = td.eq(1).text();
 		cancelData.cancelAmount = td.eq(3).text();		
-		console.log(cancelData);
 
 		$('#refundCheckBtn').click(function () {
 			cancelData.cancelReason = $("#refundReason").val();
@@ -41,7 +40,6 @@ $(document).ready(function(){
 			if(refund_type == "partial") {	// 부분 환불								
 				cancelData.cancelReqAmount = cancelData.cancelpAmount;
 			}	
-			console.log(cancelData.cancelReqAmount);
 		
 			$.ajax({
                 type: "post",
@@ -88,7 +86,7 @@ $(document).ready(function(){
 			
 			var refund_type = $("input[name=refundType]:checked").val();
 			if(refund_type == "partial") {	// 부분 환불								
-				cancelReqData.cancelReqAmount = cancelData.cancelpAmount;
+				cancelReqData.cancelReqAmount = cancelReqData.cancelpAmount;
 			}	
 
 			$.ajax({

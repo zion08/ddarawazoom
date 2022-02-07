@@ -24,7 +24,9 @@ public interface PaymentMapper {
 	public List<PaymentDTO> getCancelList(String imp_Uid);
 	
 	
-	public int paymentCancelUpdate(PaymentDTO dto);
+	public int paymentCancelUpdateTP(PaymentDTO dto);
+	
+	public int paymentCancelUpdateTC(PaymentDTO dto);
 
 	public int paymentCancelInsert(PaymentDTO dto);
 	

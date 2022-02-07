@@ -45,8 +45,16 @@
 
 	
 <!-- 결제 취소 관련 -->	
-	<update id="paymentCancelUpdate">
+	<update id="paymentCancelUpdateTP">
 		update tbl_payment set
+			status = #{status},
+			cancelAmount = #{cancelAmount}
+		where impUid = #{impUid}
+	</update>
+	
+	<update id="paymentCancelUpdateTC">
+		update tbl_cancel set
+			cancelledAt = #{cancelledAt,jdbcType=VARCHAR},
 			status = #{status},
 			cancelAmount = #{cancelAmount}
 		where impUid = #{impUid}
