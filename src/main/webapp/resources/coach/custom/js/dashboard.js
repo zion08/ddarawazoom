@@ -10,14 +10,12 @@ function chartData(ctx){
 	  type : "post",
 	  dataType: "json",
 	  success : function(data){
-		  console.log(data);
+
 		  for(var key in data){
 			  
 			  if(data[key] > 0){
-				  console.log(key);
 				  payData.push(key);
 				  
-				  console.log(data[key]);
 				  amountData.push(data[key]);
 			  }
 			  
@@ -54,9 +52,6 @@ function chartData(ctx){
 					}
 				}
 			});
-		  
-		  console.log(payData);
-		  console.log(amountData);
 	  }
 	})
 

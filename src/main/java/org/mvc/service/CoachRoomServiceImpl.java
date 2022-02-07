@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.mvc.bean.BodyProfileDTO;
 import org.mvc.bean.ClassApplyDTO;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
+import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.mybatis.CoachRoomMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,4 +141,18 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 		return mapper.getAmount(id, startDate, endDate);
 	}
 	
+	@Override
+	public UserInfoDTO getMyProfile(String id) {
+		return mapper.getMyProfile(id);
+	}
+	
+	@Override
+	public List<BodyProfileDTO> getBodyProfile(String id) {
+		return mapper.getBodyProfile(id);
+	}
+	
+	@Override
+	public List<BodyProfileDTO> bodyList(String id){
+		return mapper.bodyList(id);
+	}
 }
