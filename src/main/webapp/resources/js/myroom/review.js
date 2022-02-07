@@ -33,7 +33,7 @@ function reviewUpdate_submit(){
 		document.review_update.content.focus();
 		return false;
 	}else{
-		alert('네, 모든 정보가 기입되었습니다.');
+		alert('리뷰 수정에 필요한 모든 정보가 기입되었습니다!');
 		var updateReview = JSON.stringify($('form#updateForm').serializeObject());
 	}
 	

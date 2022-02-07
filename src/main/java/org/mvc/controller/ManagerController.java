@@ -63,7 +63,7 @@ public class ManagerController {
 	}		
 //	=========== 관리자 수입 관련 코드 종료 ===========  //
 
-//	=========== 관리자 공지사항 관련 코드 시자 ===========  //
+//	=========== 관리자 공지사항 관련 코드 시작 ===========  //
 	@RequestMapping("/notice")
 	public String notice(String pageNum, Model model, HttpSession session, Notice_CDTO notice_CDTO) {
 		log.info("	-----CT-----> manager notice");
