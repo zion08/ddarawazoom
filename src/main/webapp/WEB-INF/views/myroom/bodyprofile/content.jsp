@@ -21,11 +21,7 @@
 	<c:if test="${userInfo == null}" >
 		<ul class="list-group list-group-flush">
 		    <li class="list-group-item">
-		    	<h5>작성 된 바디 프로필이 없습니다.</h5>
-			    <p>
-			    	"${sessionScope.id} 님의 추가정보 수정하러가기" 를 클릭하고, 자신의 MyProfile 정보를 추가로 입력하세요.<br/>
-			    	"${sessionScope.id} 님의 오늘하루 바디 기록하기" 를 클릭하고, 자신의 BodyProfile을 작성해 보세요~<br/>
-				</p>
+		    	
 			</li>
 			<li class="list-group-item">
 				<div class="list_button">
@@ -104,14 +100,6 @@
 	                    </div>
 	                </div>
 	                	<div class="counter">
-	                		<c:if test="${bodyProfileDTO != null}">
-							    <li class="list-group-item">
-							    	<h5>작성 된 바디 프로필이 없습니다.</h5>
-								    	"${sessionScope.id} 님의 추가정보 수정하러가기" 를 클릭하고, 자신의 MyProfile 정보를 추가로 입력하세요.
-								    		<br/><br/>
-								    	"${sessionScope.id} 님의 오늘하루 바디 기록하기" 를 클릭하고, 자신의 BodyProfile을 작성해 보세요~
-								</li>
-							</c:if>
 	                    	<div class="row">
 		                    	<c:forEach items="${bodyProfileDTO}" var="bodyProfileDTO">
 			                        <div class="col-6 col-lg-4" id="clickGragh">
@@ -187,9 +175,6 @@
 	  	</c:if>
    
    		<!-- 바디프로필 리스트 -->
-	    <c:if test="${bodyList == null and body}">
-	    </c:if>
-	  	<c:if test="${bodyList != null}">
 			<table class="table" id="bodyprofileList" style="height: 130px ; vertical-align: middle;">
 				<thead>
 					<tr class="table-light">
@@ -291,7 +276,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</c:if>
 			
 			
 		<!-- 바디 프로필 차트 -->

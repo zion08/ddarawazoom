@@ -178,3 +178,10 @@ function myroom_update(){
 		mW.submit();
 	}
 }
+
+
+
+function button_test(){
+	document.getElementById("body_button").style.visibility="visible"; //show
+	document.getElementById("body_button").style.visibility="hidden"; //show
+}
