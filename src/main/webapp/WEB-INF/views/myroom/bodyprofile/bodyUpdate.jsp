@@ -85,7 +85,7 @@
 						<hr class="my-4">
 							
 						<div style="text-align: center;">
-							<input type="button" onclick="return body_form();" class="btn btn-outline-black" value="수정하기" />
+							<input type="button" onclick="return body_Update();" class="btn btn-outline-black" value="수정하기" />
 								&nbsp;
 							<input type="reset" class="btn btn-outline-black" value="다시작성하기" />
 								&nbsp;

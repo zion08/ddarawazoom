@@ -19,7 +19,7 @@ $.fn.serializeObject = function(){
 };
 
 //바디 프로필 작성 유효성 검사
-function body_form(){
+function body_Write(){
 	
 	var bW = document.body_write;
 	var fileCheck = document.getElementById("save").value;
@@ -80,7 +80,7 @@ function body_form(){
 
 
 // 바디 프로필 수정 유효성 검사
-function body_form(){
+function body_Update(){
 	
 	var bU = document.body_update;
 	var fileCheck = document.getElementById("save").value;
