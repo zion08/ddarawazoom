@@ -29,23 +29,6 @@
 		]]>
 	</select>
 	
-	<!-- 마이 프로필 작성 -->
-	<insert id="myWrite">
-		<![CDATA[
-			insert into tbl_user(id, nick, name, birth, gender, tel, email, img)
-				values(
-					#{id},
-					#{nick},
-					#{name},
-					#{birth},
-					#{gender},
-					#{tel},
-					#{email},
-					#{img}
-				)
-			]]>
-	</insert>
-	
 	<!--  마이 프로필 수정 -->
 	<update id="myUpdate" parameterType="org.mvc.bean.UserInfoDTO">
 		<![CDATA[
@@ -120,7 +103,7 @@
 	</select>
 	
 	<!-- 멤버 정보 수정 -->
-	<update id="updateInfo">
+	<update id="updateInfo" parameterType="org.mvc.bean.UserInfoDTO">
 		<![CDATA[
 			update tbl_user set
 				pw = #{pw},

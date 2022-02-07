@@ -6,6 +6,7 @@
 <head>
 	<title>공지사항 작성 페이지</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="../../resources/js/manager/notice.js" type="text/javascript"></script>
 	
 	<link href="../../resources/css/manager/notice.css" rel="stylesheet">
 </head>
@@ -13,22 +14,19 @@
 	<div class="container">
 	    <div class="row">
 	        <div class="col-lg-12">
-	            <h3 class="text-dark">Notice Write 페이지&nbsp;<img src="../../resources/image/Exercise.svg" class="notis_img" ></h3>
+	            <h3 class="text-dark">Notice Write 페이지&nbsp;<img src="../../resources/image/Exercise.svg" class="notice_img" ></h3>
 	        </div>
 	    </div>
 	    <div class="row">
 	        <div class="col-lg-12">
 	            <div class="job-detail mt-2 p-4">
-	                <div class="row">
-	                    <div class="col-lg-12">
-	                    </div>
-	                </div>
 	                <div class="custom-form">
-	                	<form class="needs-validation" method="post" name="noticeForm" action="/ddarawazoom/noticeWritePro" enctype="multipart/form-data">
+	                	<form class="needs-validation" method="post" name="notice_form" action="/ddarawazoom/noticeWritePro" onsubmit="return notice_write();" enctype="multipart/form-data">
 	                        <div class="row">
 	                            <div class="col-md-4">
 	                                <div class="form-group app-label">
 	                                    <label for="writer_id" class="text-muted">작 성 자</label><br/>
+	                                    <input type="hidden" name="writer_id" value="${sessionScope.id}" />
 	                                    ${sessionScope.id} 님
 	                                </div>
 	                            </div>
@@ -36,52 +34,38 @@
 	                                <div class="form-group app-label">
 	                                    <label for="taget_id" class="text-muted">공지 확인 대상</label>
 	                                    <div class="form-button">
-	                                        <select class="nice-select" name="target_id" id="target_id" class="required" >
-	                                            <option value="">대상 선택</option>
+	                                        <select class="nice-select" name="target_id" id="target_id">
 	                                            <option value="All">All</option>
 	                                            <option value="Coach">Coach</option>
 	                                            <option value="Member">Member</option>
 	                                        </select>
 	                                    </div>
-	                                    <div class="invalid-feedback">
-					     					option을 선택해주세요.
-					     				</div>
 	                                </div>
 	                            </div>
 	                            <div class="col-md-4">
 	                                <div class="form-group app-label">
 	                                    <label for="marital-status" class="text-muted">상단고정 여부</label>
 	                                    <div class="form-button">
-	                                        <select class="nice-select" name="pin" id="pin" class="required">
-	                                            <option value="">여부 선택</option>
+	                                        <select class="nice-select" name="pin" id="pin" >
+	                                        	<option value="no">no</option>
 	                                            <option value="yes">yes</option>
-	                                            <option value="no">no</option>
 	                                        </select>
 	                                    </div>
-	                                    <div class="invalid-feedback">
-					     					option을 선택해주세요.
-					     				</div>
 	                                </div>
 	                            </div>
 	                            <div class="col-md-12">
 	                                <div class="form-group app-label">
-	                                    <input id="university/college" type="text" id="title" name="title" class="form-control resume" placeholder="제목을 입력하세요." required>
+	                                    <input id="university/college" type="text" id="title" name="title" class="form-control resume" placeholder="제목을 기입해 주세요." />
 	                                </div>
-	                                <div class="invalid-feedback">
-					     				제목을 입력해주세요.
-					     			</div>
 	                            </div>
 	                             <div class="col-lg-12">
 	                                <div class="form-group app-label">
-	                                    <textarea id="content" rows="15" id="content" name="content" class="form-control resume" style="resize: none;" placeholder="작성 내용을 입력하세요." required></textarea>
+	                                    <textarea rows="15" id="content" name="content" class="form-control resume" style="resize: none;" placeholder="작성 내용을 기입해 주세요." ></textarea>
 	                                </div>
-	                                <div class="invalid-feedback">
-					     				내용을 입력해주세요.
-					     			</div>
 	                            </div>
 	                            <div class="col-md-12">
 	                             	<label for="img" class="text-muted">파일 첨부</label>
-	  								<input class="form-control" type="file" id="img" name="save" multiple="multiple"  required>
+	  								<input class="form-control" type="file" id="save" name="save" />
 	                            </div>
 	                        </div>
 	                         <div class="col-lg-12">
@@ -100,6 +84,5 @@
 	    </div>
     </div>
 </body>
-	<script src="../resources/coach/custom/js/form-validation.js"></script>
 </html>
 <%@ include file="../layout/footer.jsp"%>

@@ -24,7 +24,7 @@
 	                    <h5 class="header-title pb-3 mt-0">NOTICE</h5>
 	                    <div class="table-responsive">
 	                    	<c:if test="${sessionScope.id eq 'admin'}">
-	                    		<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/ddarawazoom/noticeWrite'" value="작성하기">
+	                    		<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/manager/notice'" value="[공지사항 관리자 페이지 이동]">
 	                    	</c:if>
 	                        <table class="table table-hover mb-0" id="boardtable">
 	                            <thead>

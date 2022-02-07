@@ -7,9 +7,7 @@
 <html>
 <head>
 	<title>userInfo 페이지</title>
-	<script src="../../resources/js/myroom/user.js" type="text/javascript"></script>
-	
-	<link href="../../resources/css/myroom/userInfo.css" rel="stylesheet">
+	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container-xl px-4 mt-4">
@@ -31,6 +29,7 @@
 	                        <div class="row gx-3 mb-3">
 	                            <div class="col-md-6">
 	                                <label class="small mb-1" for="inputFirstName">아 이 디 : </label>
+	                                <input type="hidden" name="id" value="${sessionScope.id}"/>
 	                                	${sessionScope.id}
 	                            </div>
 	                            <div class="col-md-6">
@@ -70,7 +69,7 @@
 	                            </div>
 	                        </div>
 	                         <hr class="my-4">
-	                        <div class="update_button">
+	                        <div>
 								<input type="button" class="btn btn-outline-black" value="정보수정 하러가기"
 									onclick="window.location='/myroom/infoUpdate'"/>
 										&nbsp;&nbsp;

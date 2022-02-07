@@ -40,11 +40,6 @@ public class MyRoomServiceImpl implements MyRoomService {
 	}
 	
 	@Override
-	public int myWrite(UserInfoDTO userDTO) {
-		return mapper.myWrite(userDTO);
-	}
-	
-	@Override
 	public int myUpdate(UserInfoDTO userDTO) {
 		return mapper.myUpdate(userDTO);
 	}

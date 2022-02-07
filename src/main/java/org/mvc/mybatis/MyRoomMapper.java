@@ -23,9 +23,6 @@ public interface MyRoomMapper {
 	// 바디 프로필 리스트 데이터 가져오기
 	public List<BodyProfileDTO> bodyList(String id);
 	
-	// 마이 프로필 작성
-	public int myWrite(UserInfoDTO userDTO);
-	
 	// 마이 프로필 수정
 	public int myUpdate(UserInfoDTO userDTO);
 	

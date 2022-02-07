@@ -4,7 +4,7 @@
     
 <c:if test="${result ==1}">
 	<script>
-		alert("바디프로필 작성이 완료되었습니다.");
+		alert("멤버님의 바디프로필 등록이 완료되었습니다.\nDDarawaZoom만의 실시간 화면으로 확인해 보세요~\n감사합니다^_^");
 		window.location="/myroom/bodyprofile";
 	</script>
 </c:if>

@@ -7,6 +7,7 @@
 <head>
 	<title>MyProfile 수정 페이지</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="../../resources/js/myroom/bodyprofile.js" type="text/javascript"></script>
 	
 	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet" >
 </head>
@@ -23,7 +24,7 @@
 		                    </a>
 		                </li>
 		            </ul>
-					<form class="needs-validation" method="post" action="/myroom/bodyprofile/myUpdatePro" enctype="multipart/form-data">
+					<form class="needs-validation" method="post" id="myroom_form" name="myroom_form" action="/myroom/bodyprofile/myUpdatePro" enctype="multipart/form-data">
 		                <div class="row mt-5 align-items-center">
 		                    <div class="col-md-3 text-center mb-5">
 		                        <div class="avatar avatar-xl">
@@ -45,16 +46,16 @@
 		                <div class="form-row">
 	                   		<div class="form-group">
 		                        <label for="nick">* 닉 네 임 : </label>
-		                        <input type="text" id="nick" name="nick" class="form-control" value="${userInfo.nick}" /><br/>
+		                        <input type="text" class="form-control" id="nick" name="nick" value="${userInfo.nick}" /><br/>
 		                    </div>
 		                </div>
 		                <div class="form-group">
 		                    <label for="inputEmail4">*  이 름 :</label>
-		                    <input type="text" class="form-control" id="inputEmail4" name="name" value="${userInfo.name}" /><br/>
+		                    <input type="text" class="form-control" id="inputEmail4" id="name" name="name" value="${userInfo.name}" /><br/>
 		                </div>
 		                <div class="form-group">
 		                    <label for="inputEmail4">*  이 메 일 :</label>
-		                    <input type="email" class="form-control" id="inputEmail4" name="email" value="${userInfo.email}" /><br/>
+		                    <input type="email" class="form-control" id="inputEmail4" id="email" name="email" value="${userInfo.email}" /><br/>
 		                </div>
 		                <div class="form-group">
 		                    <label for="birth">* 생 년 월 일 :</label>
@@ -64,24 +65,25 @@
 		                <div class="form-row">
 		                    <div class="form-group">
 		                        <label for="inputCompany5">* 연 락 처 :</label>
-		                        <input type="text" class="form-control" id="inputCompany5" name="tel" value="${userInfo.tel}" /><br/>
+		                        <input type="text" class="form-control" id="inputCompany5" id="tel" name="tel" value="${userInfo.tel}" /><br/>
 		                    </div>
 		                    <div class="form-group">
-		                        <label for="inputState5">* 성 별 :</label>
-		                        <select id="inputState5" class="form-control" id="gender" name="gender" required>
-									<option value="${userInfo.gender}">${userInfo.gender}</option>
+		                        <label for="inputState5">* 성 별 :</label> ${userInfo.gender}
+		                        <select id="inputState5" class="form-control" id="gender" name="gender">
+									<option value="">성별 선택</option>
 									<option value="남성">남성</option>
 									<option value="여성">여성</option>
 								</select><br/>
 		                    </div>
 		                    <div class="form-group">
+		                    
 		                        <label for="inputZip5">* 프로필 사진</label>
 		                        <input type="file" class="form-control" id="save" name="save" value="${userInfo.img}" /><br/>	
 		                    </div>
 		                </div>
 		                <hr class="my-4" >
 		                <div class="text-center">
-			                <input type="submit" class="btn btn-outline-black" value="수정하기" />
+			                <input type="button" onclick="return myroom_update();" class="btn btn-outline-black" value="수정하기" />
 			                	&nbsp;
 							<input type="reset" class="btn btn-outline-black" value="다시작성하기" />
 								&nbsp;

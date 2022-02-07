@@ -10,25 +10,30 @@
 	
 	<link href="../../resources/css/manager/notice.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-	
 </head>
 <body>
 	<div class="container">
 	    <div class="row">
 	        <div class="col-lg-12">
-	            <h3 class="text-dark">Notice Content 페이지&nbsp;<img src="../../resources/image/Exercise.svg" class="notis_img" ></h3>
+	            <h3 class="text-dark">Notice Content 페이지&nbsp;<img src="../../resources/image/Exercise.svg" class="notice_img" ></h3>
 	        </div>
 	    </div>
 	    <div class="row">
 	        <div class="col-lg-12">
 	            <div class="job-detail mt-2 p-4">
-	                <div class="row">
-	                    <div class="col-lg-12">
-	                    </div>
-	                </div>
 	                <div class="custom-form">
-	                	<form class="needs-validation" method="post" action="/ddarawazoom/noticeUpdatePro" enctype="multipart/form-data">
-	                		<input type="hidden" name="num" value="${noticeDTO.num}" />
+	                	<form class="needs-validation" name="notice_form" method="post" action="/ddarawazoom/noticeUpdatePro" onsubmit="return notice_update();" enctype="multipart/form-data">
+	                		<input type="hidden" name="num" value="${noticeDTO.num}"/>
+	                		<c:if test="${sessionScope.id != null}">
+								<c:set var="writer_id" value="${sessionScope.id}"></c:set>
+								<input type="hidden" id="writer_id" name="writer_id" value="${sessionScope.id}"/>
+							</c:if>
+							
+							<c:if test="${sessionScope.c_id != null}">
+								<c:set var="writer_id" value="${sessionScope.c_id}"></c:set>
+								<input type="hidden" id="writer_id" name="writer_id" value="${sessionScope.c_id}"/>
+							</c:if>
+							
 	                        <div class="row">
 	                            <div class="col-md-4">
 	                                <div class="form-group app-label">
@@ -40,16 +45,13 @@
 	                                <div class="form-group app-label">
 	                                    <label for="taget_id" class="text-muted">공지 확인 대상</label>
 	                                    <div class="form-button">
-	                                        <select class="nice-select" name="target_id" id="target_id" required>
+	                                        <select class="nice-select" name="target_id" id="target_id" required >
 	                                            <option data-display="${noticeDTO.target_id}">${noticeDTO.target_id}</option>
 	                                            <option value="All">All</option>
 	                                            <option value="Coach">Coach</option>
 	                                            <option value="Member">Member</option>
 	                                        </select>
 	                                    </div>
-	                                    <div class="invalid-feedback">
-					     					option을 선택해주세요.
-					     				</div>
 	                                </div>
 	                            </div>
 	                            <div class="col-md-4">
@@ -58,42 +60,32 @@
 	                                    <div class="form-button">
 	                                        <select class="nice-select" name="pin" id="pin" required>
 	                                            <option data-display="${noticeDTO.pin}">${noticeDTO.pin}</option>
-	                                            <option value="yes">yes</option>
 	                                            <option value="no">no</option>
+	                                            <option value="yes">yes</option>
 	                                        </select>
 	                                    </div>
-	                                    <div class="invalid-feedback">
-					     					option을 선택해주세요.
-					     				</div>
 	                                </div>
 	                            </div>
 	                            <div class="col-md-12">
 	                                <div class="form-group app-label">
-	                                    <label for="university/college" class="text-muted">제 목</label>
-	                                    <input id="university/college" type="text" id="title" name="title" class="form-control resume" value="${noticeDTO.title}" required>
+	                                    <label for="title" class="text-muted">제 목</label>
+	                                    <input type="text" id="title" name="title" class="form-control" value="${noticeDTO.title}"/>
 	                                </div>
-	                                <div class="invalid-feedback">
-					     				제목을 입력해주세요.
-					     			</div>
 	                            </div>
 	                             <div class="col-lg-12">
 	                                <div class="form-group app-label">
 	                                    <label for="content" class="text-muted">내 용</label>
-	                                    <textarea id="content" rows="15" id="content" name="content" class="form-control resume" style="resize: none;" required>${noticeDTO.content}</textarea>
+	                                    <textarea rows="15" id="content" name="content" class="form-control" style="resize: none;">${noticeDTO.content}</textarea>
 	                                </div>
-	                                <div class="invalid-feedback">
-					     				내용을 입력해주세요.
-					     			</div>
 	                            </div>
 	                            <div class="col-md-12">
-	                             	<label for="img" class="text-muted">첨부 파일</label>
 	                             	<img src="../../resources/image/upload/${noticeDTO.img}" alt="img">
-	  								<input class="form-control" type="file" id="save" name="save" multiple="multiple"  required>
 	                            </div>
+	                            <input class="form-control" type="file" id="save" name="save" multiple="multiple" value="${noticeDTO.img}"/>
 	                        </div>
 	                         <div class="col-lg-12">
 	                          	<div class="text-center">
-	                          		<input type="submit" class="btn btn-outline-black" value="수정 하기" />
+	                          		<input type="submit"  class="btn btn-outline-black" value="수정 하기" />
 	                          			&nbsp;
 	                          		<input type="reset" class="btn btn-outline-black" value="다시 작성하기" />
 										&nbsp;

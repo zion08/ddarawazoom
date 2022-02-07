@@ -10,7 +10,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-		<script src="../../resources/js/myroom/bodyprofile.js?ver=1" ></script>
+		<script src="../../resources/js/myroom/bodyprofile_Graph.js?ver=1" ></script>
 		<script src="../../resources/js/myroom/talk.js"></script>
 		<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>		
 		
@@ -58,11 +58,17 @@
                                         <label>Name</label>
                                         <p>${userInfo.name}</p>
                                     </div>
+                                    <div class="media">
+                                    	<label>Gender</label>
+                                    	<p>${userInfo.gender} 멤버님</p>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="media">
-                                        <label>Birth</label>
-                                        <p><fmt:formatDate pattern="yyyy-MM-dd" value="${userInfo.birth}" type="date" dateStyle="long"/></p>
+                                        <label>Birthday</label>
+                                        <p>
+                                        	<fmt:formatDate pattern="yyyy-MM-dd" value="${userInfo.birth}" type="date" dateStyle="long"/>
+                                        </p>
                                     </div>
                                     <div class="media">
                                         <label>Phone</label>
@@ -71,6 +77,12 @@
                                     <div class="media">
                                         <label>Email</label>
                                         <p>${userInfo.email}</p>
+                                    </div>
+                                    <div class="media">
+                                    	<label>Reg Date</label>
+                                    	<p>
+                                    		<fmt:formatDate pattern="yyyy년 MM월 dd일" value="${userInfo.regdate}" type="date" dateStyle="long"/>
+                                    	</p>
                                     </div>
                                 </div>
                             </div>
@@ -255,7 +267,7 @@
 									onclick="window.location='/myroom/bodyprofile/bodyUpdate?b_num=${bodyProfileDTO.b_num}'"/>
 									&nbsp;&nbsp;
 								<input type="button" value="삭 제" id="deleteButton" class="btn btn-outline-danger"
-									onclick="window.open('/myroom/bodyprofile/bodyDelete?b_num=${bodyProfileDTO.b_num}','delete','width=600,height=200');" />
+									onclick="window.open('/myroom/bodyprofile/bodyDelete?b_num=${bodyProfileDTO.b_num}','delete','width=600,height=250');" />
 							</td>
 						</tr>
 					</tbody>
