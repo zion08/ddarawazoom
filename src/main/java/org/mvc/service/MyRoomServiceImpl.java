@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mvc.bean.BodyProfileDTO;
+import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.bean.UserInfoDTO;
@@ -174,4 +175,10 @@ public class MyRoomServiceImpl implements MyRoomService {
 		return mapper.deleteReview(reviewDTO);
 	}
 
+	
+// 결제 내역 관련
+	@Override
+	public List<PaymentDTO> getPayment(String id){
+		return mapper.getPayment(id);
+	}
 }

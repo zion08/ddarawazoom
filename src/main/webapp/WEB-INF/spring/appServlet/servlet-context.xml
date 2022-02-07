@@ -43,17 +43,11 @@
 	<!-- package 내에 @Controller, @Component, @Service를 스캔함 -->
 	<context:component-scan base-package="org.mvc.controller" />
 	<context:component-scan base-package="org.mvc.handler" />
+	<context:component-scan base-package="org.mvc.config" />
 	
 	<!-- 객체 생성, <jsp:useBean>과 같음 -->
 	<beans:bean id="paymentDTO" class="org.mvc.bean.PaymentDTO"></beans:bean>
-	<beans:bean id="handlerChat" class="org.mvc.handler.HandlerChat" ></beans:bean>
-	
-	
-	<websocket:handlers allowed-origins="*" >
-        <websocket:mapping handler="handlerChat" path="/chat" />
-        <websocket:sockjs websocket-enabled="true" />
-    </websocket:handlers>
-    	
+	<beans:bean id="SocketHandler" class="org.mvc.handler.SocketHandler"></beans:bean>
 	
 	<!-- AOP Advice 클래스 자동 등록 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>	

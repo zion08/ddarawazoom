@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.mvc.bean.BodyProfileDTO;
+import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.bean.UserInfoDTO;
@@ -113,4 +114,7 @@ public interface MyRoomMapper {
 	
 	// 리뷰 삭제
 	public int deleteReview(ReviewDTO reviewDTO);
+	
+	// 결제 내역 출력
+	public List<PaymentDTO> getPayment(String id);
 }

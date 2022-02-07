@@ -323,8 +323,6 @@ $(document).ready(function(){
 			                borderColor: '#ff91c2',
 			                borderWidth: 5,
 			                display : true,
-			                stack: 'combined',
-		               		type:'bar',
 							data: chest
 						},
 						{
@@ -345,7 +343,6 @@ $(document).ready(function(){
 			                borderColor: '#FFB6C1',
 			                borderWidth: 5,
 			                display : true,
-			                type:'bar',
 							data: arm
 						},
 						{
@@ -356,7 +353,6 @@ $(document).ready(function(){
 			                borderColor: '#66CDAA',
 			                borderWidth: 5,
 			                display : true,
-			                type:'bar',
 							data: thigh
 						},
 						{

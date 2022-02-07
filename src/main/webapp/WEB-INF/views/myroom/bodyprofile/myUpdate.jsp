@@ -3,18 +3,15 @@
 <%@ include file="../../layout/header.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-    
-<!DOCTYPE html>
 <html>
-	<head>
-		<title>MyProfile 수정 페이지</title>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		
-		<link href="../../resources/css/myroom/myUpdate.css" rel="stylesheet" >
-	</head>
-	<body>
+<head>
+	<title>MyProfile 수정 페이지</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	
-		<div class="container">
+	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet" >
+</head>
+<body>
+	<div class="container">
 		<div class="row justify-content-center">
 		    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
 		        <h2 class="h3 mb-4 page-title"></h2>
@@ -22,11 +19,11 @@
 		            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
 		                <li class="nav-item">
 		                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">
-		                    	My Profile
+		                    	${sessionScope.id} 님의 마이 프로필 수정 페이지
 		                    </a>
 		                </li>
 		            </ul>
-		            <form>
+					<form class="needs-validation" method="post" action="/myroom/bodyprofile/myUpdatePro" enctype="multipart/form-data">
 		                <div class="row mt-5 align-items-center">
 		                    <div class="col-md-3 text-center mb-5">
 		                        <div class="avatar avatar-xl">
@@ -37,32 +34,27 @@
 		                        <div class="row align-items-center">
 		                            <div class="col-md-7">
 		                                <h4 class="mb-1">${sessionScope.id} 님</h4>
-		                                <p class="small mb-3"><span class="badge badge-dark">New York, USA</span></p>
-		                            </div>
-		                        </div>
-		                        <div class="row mb-4">
-		                            <div class="col-md-7">
 		                                <p class="text-muted">
-		                                    ${sessionScope.id} 님의 소중한 정보를 수정 할 수 있는 <br/>마이 프로필 페이지 입니다.
-		                                </p>
+			                                 ${sessionScope.id} 님의 소중한 정보를 수정 할 수 있는<br/>마이 프로필 페이지 입니다.
+			                             </p>
 		                            </div>
 		                        </div>
 		                    </div>
 		                </div>
 		                <hr class="my-4" />
 		                <div class="form-row">
-                    		<div class="form-group">
+	                   		<div class="form-group">
 		                        <label for="nick">* 닉 네 임 : </label>
-		                        <input type="text" id="nick" class="form-control" value="${userInfo.nick}" /><br/>
+		                        <input type="text" id="nick" name="nick" class="form-control" value="${userInfo.nick}" /><br/>
 		                    </div>
 		                </div>
 		                <div class="form-group">
 		                    <label for="inputEmail4">*  이 름 :</label>
-		                    <input type="text" class="form-control" id="inputEmail4" value="${userInfo.name}" /><br/>
+		                    <input type="text" class="form-control" id="inputEmail4" name="name" value="${userInfo.name}" /><br/>
 		                </div>
 		                <div class="form-group">
 		                    <label for="inputEmail4">*  이 메 일 :</label>
-		                    <input type="email" class="form-control" id="inputEmail4" value="${userInfo.email}" /><br/>
+		                    <input type="email" class="form-control" id="inputEmail4" name="email" value="${userInfo.email}" /><br/>
 		                </div>
 		                <div class="form-group">
 		                    <label for="birth">* 생 년 월 일 :</label>
@@ -72,7 +64,7 @@
 		                <div class="form-row">
 		                    <div class="form-group">
 		                        <label for="inputCompany5">* 연 락 처 :</label>
-		                        <input type="text" class="form-control" id="inputCompany5" value="${userInfo.tel}" /><br/>
+		                        <input type="text" class="form-control" id="inputCompany5" name="tel" value="${userInfo.tel}" /><br/>
 		                    </div>
 		                    <div class="form-group">
 		                        <label for="inputState5">* 성 별 :</label>
@@ -99,10 +91,8 @@
 		        </div>
 		    </div>
 		</div>
-		
-		</div>
-	
-	</body>
+	</div>
+</body>
 </html>
 
 <%@ include file="../../layout/footer.jsp"%>
