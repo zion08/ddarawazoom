@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
+    
 <c:if test="${result == 1}">
 	<script>
-		alert("공지사항이 등록되었습니다.");
-		window.location="/ddarawazoom/notice";
+	alert("공지사항이 등록되었습니다.");
+	window.location="/manager/notice";
 	</script>
 </c:if>
 

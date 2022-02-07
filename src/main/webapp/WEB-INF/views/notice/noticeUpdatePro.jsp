@@ -5,7 +5,7 @@
 <c:if test="${result == 1}">
 	<script>
 		alert("공지사항이 수정되었습니다.");
-		window.location="/ddarawazoom/notice";
+		window.location="/ddarawazoom/noticeContent?num=${num}";
 	</script>
 </c:if>
 

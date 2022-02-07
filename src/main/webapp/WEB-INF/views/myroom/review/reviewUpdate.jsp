@@ -19,8 +19,8 @@
 	      	<div class="review_title">
 	        	<h4>작성한 리뷰를 수정 할 수 있는 공간</h4>
 	        </div>
-	        <form class="needs-validation" novalidate id="updateForm" action="/myroom/review" method="post" onsubmit="reviewUpdate_submit();">
-	        <input type="hidden" name="review_num" value="${review.review_num}" /> 
+	        <form class="needs-validation"  id="updateForm" name="review_update" action="/myroom/review" method="post">
+	        	<input type="hidden" name="review_num" value="${review.review_num}" /> 
 	          <div class="row g-3">
 					<div class="col-12">
 						<label for="grade" class="form-label">
@@ -32,14 +32,11 @@
 					</div>
 					<div class="col-12">
 						<label for="grade" class="form-label">
-							<b>평 점</b>
+							<b>평 점</b> [최대 평점: 10점 <font style="color:red;">(초과 불가)</font>]
 						</label>
 						<div class="input-group has validation">
-							<input type="text" name="grade" class="form-control" value="${review.grade}" required/>
+							<input type="text" id="grade" name="grade" class="form-control" value="${review.grade}" autofocus="autofocus"/>
 						</div>
-						<div class="invalid-feedback">
-		                	평 점은 필수 항목입니다.
-		              	</div>
 					</div>
 		            <div class="col-12">
 						<label for="content" class="form-label">
@@ -48,16 +45,13 @@
 						<div class="input-group has validation">
 							<textarea rows="5" cols="20" name="content" class="form-control" >${review.content}</textarea>
 						</div>
-						<div class="invalid-feedback">
-	               		 	내용은 필수 항목입니다.
-	              		</div>
 					</div>
 	          </div>
 	          
 	          <hr class="my-4">
 	          
 	          <div class="reviewButton">
-		          <input type="submit" value="정보 수정" class="btn btn-outline-black" />
+		          <input type="button" value="정보 수정" onclick="reviewUpdate_submit(); return false;" class="btn btn-outline-black" />
 		          	&nbsp;&nbsp;
 		          <input type="reset" value="다시 작성" class="btn btn-outline-black" />
 		          	&nbsp;&nbsp;
@@ -70,7 +64,6 @@
 	  </main>
 	</div>
 </body>
-	<script src="../../resources/js/myroom/form-validation.js"></script>
 </html>
 
 <%@ include file="../../layout/footer.jsp"%>

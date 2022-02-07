@@ -73,9 +73,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/noticeWrite")
-	public String notisWrite() {
+	public String notisWrite( NoticeDTO noticeDTO, Model model) {
 		log.info("	-----CT-----> ddarawazoom noticeWrite");
-
+		
 		return "/notice/noticeWrite";
 	}
 	
@@ -147,13 +147,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/noticeUpdate")
-	public String noticeUpdate(HttpSession session, Model model, NoticeDTO noticeDTO) {
+	public String noticeUpdate(Model model, NoticeDTO noticeDTO) {
 		log.info("	-----CT-----> ddarawazoom noticeUpdate");
 
-		String id = (String)session.getAttribute("id");
-		
-		noticeDTO.setWriter_id(id);
-		
 		model.addAttribute("noticeDTO", serviceNotice.getNotice(noticeDTO));
 		
 		return "/notice/noticeUpdate";
@@ -171,6 +167,7 @@ public class NoticeController {
 		if(file != null) {
 			noticeDTO.setImg(file);
 			model.addAttribute("result", serviceNotice.noticeUpdate(noticeDTO));
+			model.addAttribute("num", noticeDTO.getNum());
 		}
 		
 		return "/notice/noticeUpdatePro";
@@ -187,6 +184,7 @@ public class NoticeController {
 		noticeDTO.setWriter_id(id);
 		
 		result = serviceNotice.noticeDelete(noticeDTO.getNum());
+		
 		return result;
 	}
 	
@@ -204,8 +202,9 @@ public class NoticeController {
 	@RequestMapping("/commentDelete")
 	public String commentDelete(Notice_CDTO notice_CDTO, Model model) {
 		log.info("	-----CT-----> ddarawazoom notice_commentDelete");
+		
+		model.addAttribute("notice_CDTO", serviceNotice.getComment(notice_CDTO.getC_num()));
 
-		model.addAttribute("c_num", notice_CDTO.getC_num());
 		return "/notice/commentDelete";
 	}
 	
@@ -246,8 +245,6 @@ public class NoticeController {
 	@RequestMapping("/reComment")
 	public String reComment(Notice_CDTO notice_CDTO, Model model) {
 		log.info("	-----CT-----> ddarawazoom notice_reComment");
-		
-		
 		
 		model.addAttribute("notice_CDTO", serviceNotice.getComment(notice_CDTO.getC_num()));
 		

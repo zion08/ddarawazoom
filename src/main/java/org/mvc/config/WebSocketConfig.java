@@ -16,14 +16,6 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	@Autowired
 	SocketHandler socketHandler;
 	
-	@Bean // file 사이즈 설정
-	public ServletServerContainerFactoryBean createWebSocketContainer() {
-	ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();
-	container.setMaxTextMessageBufferSize(500000);
-	container.setMaxBinaryMessageBufferSize(500000);
-	return container;
-	}
-	
 	@Override // chating 이후에 들어오는 {roomNumber} 값은 방을 구분하는 값
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(socketHandler, "/chating/{roomNumber}");

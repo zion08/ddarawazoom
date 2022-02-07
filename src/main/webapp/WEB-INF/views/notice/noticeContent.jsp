@@ -66,12 +66,13 @@
 	                         <div class="col-lg-12">
 	                          	<div class="text-center">
 	                          		<c:if test ="${sessionScope.id eq 'admin'}">
-		                          		<input type="button" class="btn btn-outline-black" onclick="window.location='/ddarawazoom/noticeUpdate?num=${noticeDTO.num}'" value="수정 페이지 이동"/>
+		                          		<input type="button" class="btn btn-outline-black" onclick="window.location='/ddarawazoom/noticeUpdate?num=${noticeDTO.num}'" value="[수정 페이지 이동]"/>
 		                          			&nbsp;
-		                          		<input type="button" class="btn btn-outline-black" onclick="noticeDelete(${noticeDTO.num})" value="삭제"/>
+		                          		<input type="button" class="btn btn-outline-black" onclick="noticeDelete(${noticeDTO.num})" value="[삭제하기]"/>
 		                          			&nbsp;
+		                          		<input type="button" class="btn btn-outline-black" onclick="window.location='/manager/notice'" value="[관리자 페이지로 이동]"/><br/>
 	                          		</c:if>
-									<input type="button" class="btn btn-outline-black" value="공지사항 페이지로 돌아가기" onClick="javascript:window.location='/ddarawazoom/notice'" />
+									<input type="button" class="btn btn-outline-black"  onclick="javascript:window.location='/ddarawazoom/notice'" value="- 공지사항 페이지로 돌아가기 -"/>
 	                        	</div>
 	                        </div>
 	                    </form>
@@ -109,10 +110,12 @@
 					      </td>
 					      <td>
 					        <c:if test="${notice_CList.deleted eq  'all'}">
-									관리자에 의해 삭제된 댓글입니다.
+								<font style="color: red;">
+									<b>[경고!]</b> ${notice_CList.writer_id}님께서 작성한 댓글은<br/> <b>"댓글 관리 기준"</b>을 위반하여 관리자에 의해 삭제되었습니다.
+								</font>
 							</c:if>
 							<c:if test="${notice_CList.deleted eq  'yes'}">
-								작성자가 직접 삭제한 댓글입니다.
+								<font style="color: blue;">${notice_CList.writer_id}님께서 직접 삭제한 댓글 입니다.</font>
 							</c:if>
 							<c:if test="${notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all' }">
 								${notice_CList.content}
@@ -132,7 +135,7 @@
 										<input type="button" class="btn btn-outline-black" onclick="commentUpdate(${notice_CList.c_num});" value="수정"/>
 										<input type="button" class="btn btn-outline-black" onclick="commentDelete(${notice_CList.c_num});" value="삭제"/>
 									</c:if>
-									<c:if test ="${sessionScope.id eq 'admin'}">
+									<c:if test ="${sessionScope.id eq 'admin' && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all'}">
 										<input type="button" class="btn btn-outline-black" onclick="reComment(${notice_CList.c_num});" value="답글"/>
 										<input type="button" class="btn btn-outline-black" onclick="managerDeletedChange(${notice_CList.c_num});" value="삭제"/>
 									</c:if>
@@ -144,31 +147,27 @@
 					</table>
 				</c:if>
 				<c:if test="${sessionScope.id == null || sessionScope.c_id == null }">
-					<form class="form-block" id="commentForm"  action="/ddarawazoom/noticeContent" onsubmit="commentWrite();" method="post">
+					<form class="form-block" id="commentForm"  name="comment" action="/ddarawazoom/noticeContent" onsubmit="commentWrite(); return false;" method="post">
 						<input type="hidden" name="num" value="${noticeDTO.num}" />
 						<div class="row">
 							<div class="col-xs-12 col-sm-6">
 								<div class="form-group fl_icon">
 									<c:if test="${sessionScope.id != null && sessionScope.c_id == null}">
-										<input class="form-input" name="writer_id" type="text" value="${sessionScope.id}" required="required">
+										<input class="form-control" id="writer_id" name="writer_id" type="text" value="${sessionScope.id}">
 									</c:if>
 									<c:if test="${sessionScope.id == null && sessionScope.c_id != null}">
-										<input class="form-input" name="writer_id" type="text" value="${sessionScope.c_id}" required="required">
+										<input class="form-control" id="writer_id" name="writer_id" type="text" value="${sessionScope.c_id}">
 									</c:if>
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-6 fl_icon">
-									<div class="form-group fl_icon">
-										<input class="form-input" type="password" name="pw" placeholder="PW를 입력" required="required">
-									</div>
+								<div class="form-group fl_icon">
+									<input class="form-control" type="password" id="pw" name="pw" placeholder="패스워드를 기입해 주세요." autofocus>
+								</div>
 							</div>
 							<div class="col-xs-12">									
 								<div class="form-group">
-									<textarea class="form-input" name="content">
-										<c:if test="${sessionScope.id == null && sessionScope.c_id == null }">
-											로그인이 필요합니다.
-										</c:if>
-									</textarea>
+									<textarea class="form-control" id="content" name="content" placeholder="댓글을 기입해 주세요." ></textarea>
 								</div>
 							</div>
 							<input type="submit" class="btn btn-black" value="댓글 작성" />

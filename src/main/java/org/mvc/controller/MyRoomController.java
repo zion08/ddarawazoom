@@ -73,7 +73,7 @@ public class MyRoomController {
 	}
 	
 	@RequestMapping("/infoUpdate")
-	public String userInfoUpdate(HttpSession session, Model model) {
+	public String userInfoUpdate(UserInfoDTO userDTO, HttpSession session, Model model) {
 		log.info("	-----CT----->infoUpdate");
 
 		String id = (String)session.getAttribute("id");
@@ -87,10 +87,16 @@ public class MyRoomController {
 	public @ResponseBody int infoUpdateData(@RequestBody UserInfoDTO userDTO, HttpSession session) {
 		log.info("	-----CT----->infoUpdateData");
 		
+		int result = 0;
+		
 		String id = (String)session.getAttribute("id");
 		
 		userDTO.setId(id);
-		int result = service.updateInfo(userDTO);
+		
+		log.info("======="+service.updateInfo(userDTO));
+		log.info("======="+userDTO);
+		
+		result = service.updateInfo(userDTO);
 		
 		return result;
 	}
@@ -185,32 +191,6 @@ public class MyRoomController {
 		return "/myroom/bodyprofile/content";
 	}
 	
-	
-	@RequestMapping("/bodyprofile/myWrite")
-	public String myWrite() {
-		log.info("	-----CT----->/bodypfile/myWrite");
-		
-		return "/myroom/bodyprofile/myWrite";
-	}
-	
-	@RequestMapping("/bodyprofile/myWritePro")
-	public String myWritePro(HttpSession session, UserInfoDTO userDTO,  MultipartFile save, Model model) {
-		log.info("	-----CT----->/bodypfile/myWritePro");
-		
-		String id = (String)session.getAttribute("id");
-		
-		userDTO.setId(id);
-		
-		String  file = fileInfo.imgUpload(save, id);
-		
-		if(file != null) {
-			userDTO.setImg(file);
-			model.addAttribute("result", service.myWrite(userDTO));
-		}
-		
-		return "/myroom/bodyprofile/myWritePro";
-	}
-	
 	@RequestMapping("/bodyprofile/myUpdate")
 	public String myUpdate(HttpSession session, Model model) {
 		log.info("	-----CT----->/bodypfile/myUpdate");
@@ -235,6 +215,7 @@ public class MyRoomController {
 			userDTO.setImg(file);
 			model.addAttribute("result", service.myUpdate(userDTO));
 		}
+		model.addAttribute("id", userDTO.getId());
 		
 		return "/myroom/bodyprofile/myUpdatePro";
 	}
@@ -259,7 +240,8 @@ public class MyRoomController {
 			bodyDTO.setB_img(file);
 			model.addAttribute("result",service.bodyWrite(bodyDTO));
 		}
-		
+		model.addAttribute("b_id", bodyDTO.getB_id());
+
 		return "/myroom/bodyprofile/bodyWritePro";
 	}
 	
@@ -272,7 +254,7 @@ public class MyRoomController {
 		bodyDTO.setB_id(id);
 		
 		model.addAttribute("bodyProfileDTO", service.getBodyInfo(bodyDTO));
-		
+
 		return "/myroom/bodyprofile/bodyUpdate";
 	}
 	

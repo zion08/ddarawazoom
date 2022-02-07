@@ -34,12 +34,6 @@
 					<input id="chatting" class="form-control" placeholder="보내실 메시지를 입력하세요.">
 					<button onclick="send()"  class="btn btn-light" id="sendBtn">보내기</button>
 				</div>
-			</div><Br/>
-			<div class="chat-message clearfix">
-				<div class="input-group">
-					<input type="file" class="form-control" id="fileUpload">
-					<button onclick="fileSend()" class="btn btn-light" id="sendFileBtn">파일올리기</button>
-				</div>
 			</div>
 		</div>
 	</div>

@@ -41,7 +41,7 @@
 				<tbody>
 					<tr>
 						<td>
-							<a href="/ddarawazoom/zclasscontent?num=${reviewList.review_num}">${reviewList.title}</a>
+							<a href="/ddarawazoom/zclasscontent?num=${reviewList.class_num}">${reviewList.title}</a>
 						</td>
 						<td>
 							${reviewList.content}

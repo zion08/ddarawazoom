@@ -12,25 +12,31 @@
 	<link href="../../resources/css/styles.css" rel="stylesheet">
 </head>
 <body>
-	<form class="needs-validation" id="commentDelete"  method="post">
-		<input type="hidden" name="c_num" value="${c_num}" />
+	<form class="needs-validation" id="commentDelete" name="comment_delete" method="post">
+		<input type="hidden" id="num" name="num" value="${notice_CDTO.num}" />
+		<input type="hidden" id="c_num" name="c_num" value="${notice_CDTO.c_num}" />
+		<input type="hidden" id="ref" name="ref" value="${notice_CDTO.ref}"/>
+		<input type="hidden" id="re_step" name="re_step" value="${notice_CDTO.re_step}"/>
+		<input type="hidden" id="re_level" name="re_level" value="${notice_CDTO.re_level}"/>
+			
 		<c:if test="${sessionScope.id != null}">
-		   <input type="hidden" name="writer_id" value="${sessionScope.id}" />
+			<c:set var="writer_id" value="${sessionScope.id}"></c:set>
+			<input type="hidden" id="writer_id" name="writer_id" value="${sessionScope.id}"/>
 		</c:if>
 		<c:if test="${sessionScope.c_id != null}">
-		   <input type="hidden" name="writer_id" value="${sessionScope.c_id}" />
+			<c:set var="writer_id" value="${sessionScope.c_id}"></c:set>
+			<input type="hidden" id="writer_id" name="writer_id" value="${sessionScope.c_id}"/>
 		</c:if>
+		
 		<div class="mb-4">
 			<p class="text-center" style="font-weight: bold; font-size:20px; margin:20px;">
 				* 댓글 삭제를 위한 패스워드 확인 *
 			</p>
 			<p class="text-center" style="font-size:13px;">
-				패스워드 확인이 필요합니다. 아래 칸에 패스워드를 입력해주세요.
+				댓글 삭제를 위해서는 작성 시, 패스워드 확인이 필요합니다.<br/>
+				댓글 입력 시, 기입했던 패스워드를 기입해주세요.
 			</p>
-			<input class="form-control" type="text" id="pw" name="pw" required>
-			<div class="invalid-feedback">
-				패스워드를 반드시 입력해주세요.
-			</div>
+			<input class="form-control" type="text" id="pw" name="pw" autofocus="autofocus">
 			
 			<hr class="my-4">
 			
@@ -40,5 +46,4 @@
 		</div>
 	</form>
 </body>
-	<script src="../../resources/js/form-validation.js"></script>
 </html>

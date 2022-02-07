@@ -23,8 +23,8 @@
 		 			프로필 사진을 변경하기 위해서 파일을 첨부해주세요.
 		 		</p>
 			 	<input class="form-control" type="file"  id="formFile" required>
-				 <div class="invalid-feedback">
-	     			사진을 선택해주세요.
+				<div class="invalid-feedback">
+	     			첨부된 파일이 없습니다. 파일을 첨부해 주세요.
 	     		</div>
      		
 		     	<hr class="my-4">
