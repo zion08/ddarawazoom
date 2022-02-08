@@ -42,17 +42,21 @@ public class ZoomController {
 	@Autowired
 	private FileInfo fileInfo;  
 	
-	// ===== zoom 강의실 ===== //
+	// ===== zoom 강의실 접속 ===== //
+	// 1.
 	@RequestMapping("/zclassroom")
 	public String zclassroom() {
 		return "/zoom/class/zclassroom"; 	
 	}
 	
+	// 2.
+	// 1에서 2로 연결 후 강의실 접속
 	@RequestMapping("/zclassroom2")
 	public String zclassroom2() {
 		return "/zoom/class/zclassroom2"; 	 
 	}
 	
+	// ===== zoom 내 강의실 ===== //
 	@RequestMapping("/myclassroom")
 	public String myclassroom(Model model, HttpSession session) {		
 		String id = (String)session.getAttribute("id"); 
@@ -230,7 +234,7 @@ public class ZoomController {
 			model.addAttribute("userInfo", service.getUserInfo(id)); 
 		}
 		
-		int pageSize = 5; 
+		int pageSize = 5;  
 		if (pageNum == null) {
 		    pageNum = "1"; 
 		} 
