@@ -19,6 +19,10 @@
 		select count(*) from tbl_user where id = #{id}
 	</select>
 	
+	<select id="c_idCheck" resultType="int">
+		select count(*) from tbl_coach where c_id = #{c_id}
+	</select>
+	
 	<!-- 아이디 찾기 -->
 	<select id="findId" resultType="String">
 		select id from tbl_user where name = #{name} and tel = #{tel}
@@ -80,6 +84,24 @@
 	<select id="coachCheck" resultType="Integer">
 		select count(*) from tbl_coach where c_id = #{c_id} and c_pw = #{c_pw}
 	</select>
+	
+	<!-- 코치 회원가입 -->
+	<insert id="coachInsert">
+		insert into tbl_coach(c_id, c_pw, c_name, c_nick, c_email, c_birth, c_gender, c_tel, company, c_time)
+			values(#{c_id}, #{c_pw}, #{c_name}, #{c_nick}, #{c_email}, #{c_birth}, #{c_gender}, #{c_tel}, #{company}, #{c_time})
+	</insert>
+	
+	<insert id="careerInsert">
+		insert into tbl_coach_career(c_id, specialty, career)
+			values(#{c_id}, #{specialty}, #{career})
+	</insert>
+	
+	<insert id="insertCertificate">
+		update tbl_coach_career set
+			certificate = #{certificate}
+		where c_id = #{c_id}
+	</insert>
+	
 </mapper>
 
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.service.UserEmailService;
@@ -143,7 +144,9 @@ public class MainController {
 		if(id == "") {
 			result = -1;
 		} else {
-			result = service.idCheck(id);
+			if(service.idCheck(id) == 1 || service.c_idCheck(id) == 1) {
+				result = 1;
+			}
 		}
 		return result;
 	}
@@ -168,6 +171,27 @@ public class MainController {
 	public String coachsignup() {
 		log.info("------CT----->coachsignup Page");
 		return "/main/signup/coachsignupForm";
+	}
+	
+	@RequestMapping("/coachsignupPro")
+	public String coachsignupPro(CoachInfoDTO dto, Model model) {
+		log.info("------CT----->coachsignupPro Page");
+		log.info(""+dto);
+		
+		service.coachInsert(dto);
+		model.addAttribute("c_id", dto.getC_id());
+		return "/main/signup/coachsignupPro";
+	}
+	
+	@RequestMapping("/coachCareerInsert")
+	public @ResponseBody int coachCareerInsert(@RequestBody CoachCareerDTO dto) {
+		log.info("------CT----->coachCareerInsert Page");
+		log.info(""+dto);
+		int result = 0;
+		
+		result = service.careerInsert(dto);
+		
+		return result;
 	}
 	
 	@RequestMapping("/signupwelcome")

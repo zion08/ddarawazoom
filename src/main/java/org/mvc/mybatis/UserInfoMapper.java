@@ -3,6 +3,7 @@ package org.mvc.mybatis;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.UserInfoDTO;
 
@@ -10,6 +11,8 @@ public interface UserInfoMapper {
 
 	//아이디 중복 확인
 	public int idCheck(String id);
+	
+	public int c_idCheck(String c_id);
 	
 	// 아이디 찾기
 	public String findId(UserInfoDTO dto);
@@ -46,4 +49,12 @@ public interface UserInfoMapper {
 	
 	// 코치 로그인
 	public int coachCheck(CoachInfoDTO coachDTO);
+	
+	// 코치 회원가입
+	public int coachInsert(CoachInfoDTO coachDTO);
+	
+	// 코치 경력 추가
+	public int careerInsert(CoachCareerDTO careerDTO);
+	
+	public int insertCertificate(CoachCareerDTO careerDTO);
 }

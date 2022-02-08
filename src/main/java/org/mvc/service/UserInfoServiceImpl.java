@@ -2,6 +2,7 @@ package org.mvc.service;
 
 import java.util.List;
 
+import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.mybatis.UserInfoMapper;
@@ -74,7 +75,22 @@ public class UserInfoServiceImpl implements UserInfoService{
 		return mapper.updatePw(dto);
 	}
 
-	
-	
+	@Override
+	public int c_idCheck(String c_id) {
+		return mapper.c_idCheck(c_id);
+	}
+
+	@Override
+	public int coachInsert(CoachInfoDTO coachDTO) {
+		return mapper.coachInsert(coachDTO);
+	}
+
+	@Override
+	public int careerInsert(CoachCareerDTO careerDTO) {
+		if(careerDTO.getCertificate() != null) {
+			mapper.insertCertificate(careerDTO);
+		}
+		return mapper.careerInsert(careerDTO);
+	}
 	
 }
