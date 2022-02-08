@@ -2,6 +2,7 @@ package org.mvc.mybatis;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.UserInfoDTO;
 
@@ -9,6 +10,18 @@ public interface UserInfoMapper {
 
 	//아이디 중복 확인
 	public int idCheck(String id);
+	
+	// 아이디 찾기
+	public String findId(UserInfoDTO dto);
+	
+	// 이메일 인증번호 발송
+	public int emailTemp(@Param("temp_pw") String key, @Param("id") String id, @Param("email") String email);
+	
+	// 이메일 인증
+	public int emailCheck(UserInfoDTO dto);
+	
+	// 비밀번호 변경
+	public int updatePw(UserInfoDTO dto);
 	
 	//회원가입 정보 저장
 	public int insertUserInfo(UserInfoDTO dto);

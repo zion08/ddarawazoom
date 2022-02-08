@@ -60,3 +60,137 @@ function selectAll(selectAll)  {
 	  })
 }
 	
+// 아이디 / 비밀번호 찾기
+$(document).ready(function(){
+		contentsView('idRadio');
+});
+
+         function contentsView(objValue) {
+             if (objValue == 'idRadio') {
+                 $('#findid').css('display', 'block');
+                 $('#findpw').css('display', 'none'); 
+                 //display 'none'은= div가 보이지않는!
+                 return false;
+             }
+             if (objValue == 'pwRadio') {
+                 $('#findid').css('display', 'none');
+                 $('#findpw').css('display', 'block');
+                 return false;
+             }
+         }
+         
+         
+	$.fn.serializeObject = function(){
+	   var o = {};
+	   var a = this.serializeArray();
+	   $.each(a, function() {
+	      var name = $.trim(this.name),
+	         value = $.trim(this.value);
+	      
+	      if (o[name]) {
+	         if (!o[name].push) {
+	            o[name] = [o[name]];
+	         }
+	         o[name].push(value || '');
+	      } else {
+	         o[name] = value || '';
+	      }
+	   });
+	   return o;
+	};
+	
+         function findId(){
+			if($("#name").val() == ''){
+				alert("이름을 입력해주세요.");
+				return false;
+			} else if($("#tel").val() == ''){
+				alert("전화번호를 입력해주세요.");
+				return false;
+			}
+	
+            var data = JSON.stringify($('form#findIdForm').serializeObject());
+            $.ajax({
+               data : data,
+               url : "/ddarawazoom/findIdPro",
+               type : "POST",
+               contentType : "application/json; charset=UTF-8",
+               success : function(data){
+                  if(data != ''){
+                     $("#result").html("고객님의 아이디는 <font color='green'>"+data+"</font>입니다.");
+                  } else {
+                     $("#result").html("<font color='red'>아이디가 존재하지 않습니다.</font>");
+                  }
+                  
+               }
+             });
+         }
+     
+        // 인증 이메일 발송
+        function emailSend(){
+        	if($("#id").val() == ''){
+        		alert("아이디를 입력해주세요.");
+        		return false;
+        	}
+        	
+        	if($("#email").val() == ''){
+        		alert("이메일을 입력해주세요.");
+        		return false;
+        	}
+        	
+        	$.ajax({
+                data : { id : $("#id").val(), email : $("#email").val() },
+                url : "/ddarawazoom/emailSend",
+                type : "POST",
+                success : function(data){
+                   if(data == 1){
+                	   alert("이메일이 전송되었습니다.");
+                  	   $('#emailForm').css('display', 'block');
+                   } else {
+                	   alert("아이디 혹은 이메일을 확인해주세요.");
+                   }
+                }
+           });
+        } 
+         
+        // 인증번호 체크
+        function emailCheck(){
+        	var data = JSON.stringify($('form#findPwForm').serializeObject());
+        	$.ajax({
+                data : data,
+                url : "/ddarawazoom/emailCheck",
+                type : "POST",
+                contentType : "application/json; charset=UTF-8",
+                success : function(data){
+                   if(data == 1){
+                 	  alert("인증되었습니다.");
+                 	  $('#mainForm').css('display', 'none'); 
+                 	  $('#findpw').css('display', 'none'); 
+                 	  $('#changePw').css('display', 'block');
+                   } else {
+                	   alert("인증번호가 틀립니다.");
+                   }
+                }
+              });
+        } 
+         
+        // 비밀번호 변경
+        function changePw(){
+            $.ajax({
+               data : {
+            	   pw1 : $("#pw1").val(),
+            	   pw2 : $("#pw2").val(),
+            	   id : $("#id").val(),
+            	   email : $("#email").val()
+               },
+               url : "/ddarawazoom/updatePw",
+               type : "POST",
+               success : function(data){
+                  if(data == 1){
+                	  alert("비밀번호가 변경되었습니다.");
+                	  window.location="/ddarawazoom/login";
+                  } else {
+                	  alert("비밀번호를 확인해주세요.");
+                  }
+               }
+             });
+         }	

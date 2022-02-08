@@ -59,6 +59,21 @@ public class UserInfoServiceImpl implements UserInfoService{
 		return mapper.idCheck(id);
 	}
 
+	@Override
+	public String findId(UserInfoDTO dto) {
+		return mapper.findId(dto);
+	}
+
+	@Override
+	public int emailCheck(UserInfoDTO dto) {
+		return mapper.emailCheck(dto);
+	}
+
+	@Override
+	public int updatePw(UserInfoDTO dto) {
+		return mapper.updatePw(dto);
+	}
+
 	
 	
 	

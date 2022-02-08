@@ -13,6 +13,15 @@ public interface UserInfoService {
 	//아이디 중복 확인
 	public int idCheck(String id);
 	
+	// 아이디 찾기
+	public String findId(UserInfoDTO dto);
+	
+	// 이메일 인증
+	public int emailCheck(UserInfoDTO dto);
+	
+	// 비밀번호 변경
+	public int updatePw(UserInfoDTO dto);
+		
 	//회원가입 정보 입력
 	//실행이 일어나기 위해서 필요한 변수값...? 
 	public int insertUserInfo(UserInfoDTO dto); 
@@ -34,4 +43,5 @@ public interface UserInfoService {
 	
 	// 코치 로그인
 	public int coachCheck(CoachInfoDTO coachDTO);
+	
 }
