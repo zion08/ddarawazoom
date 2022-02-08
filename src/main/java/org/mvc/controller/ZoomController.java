@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.FileInfo;
+import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.MyRoomService;
@@ -39,7 +40,26 @@ public class ZoomController {
 	private PaymentService servicePayment;
 	
 	@Autowired
-	private FileInfo fileInfo;   
+	private FileInfo fileInfo;  
+	
+	// ===== zoom 강의실 ===== //
+	@RequestMapping("/zclassroom")
+	public String zclassroom() {
+		return "/zoom/class/zclassroom"; 	
+	}
+	
+	@RequestMapping("/zclassroom2")
+	public String zclassroom2() {
+		return "/zoom/class/zclassroom2"; 	 
+	}
+	
+	@RequestMapping("/myclassroom")
+	public String myclassroom(Model model, HttpSession session) {		
+		String id = (String)session.getAttribute("id"); 
+		List<PaymentDTO> PaymentMyList = servicePayment.getPaymentMyList(id);	
+		model.addAttribute("payment", PaymentMyList); 
+		return "/zoom/class/myclassroom";
+	}
 	
 	// ===== zoom강의 메인(리스트) ===== //
 	@RequestMapping("zoom")

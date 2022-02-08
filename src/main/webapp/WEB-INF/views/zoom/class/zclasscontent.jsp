@@ -15,19 +15,18 @@
 		<div class="col">
 		<div class="card shadow-sm">  
 			<img src="/resources/coach/img/${zoomContent.img}" class="card-img-top" width="100" height="625">
-			<c:if test="${sessionScope.c_id == zoomContent.c_id}">	
+			<c:if test="${sessionScope.c_id != null}">	
 				<input type="button" value="사진변경" class="btn btn-outline-danger" onclick="window.location='/ddarawazoom/imgUpdate?img=${zoomContent.img}&num=${zoomContent.num}'" />
 			</c:if>	
 		<div class="btn-group">	
-           	<c:if test="${sessionScope.c_id == zoomContent.c_id}">
+           	<c:if test="${sessionScope.c_id != null}">
 				<input type="button" class="btn btn-outline-danger" value="글수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${zoomContent.num}'">
 				<input type="button" class="btn btn-outline-danger" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${zoomContent.num}'"> 
 			</c:if>	 
-			<c:if test="${sessionScope.id != null}">
 				<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
-				<input type="button" class="btn btn-outline-primary" value="장바구니 담기">
+			<c:if test="${sessionScope.id != null}">	
 				<input type="button" id="payBtn" class="btn btn-outline-primary" value="바로 결제하기">
-			</c:if>
+			</c:if>				
 		</div>
 			<div>
 				<br />
@@ -70,7 +69,7 @@
 			        txt=x.grade.value
 			        if (txt>=1 && txt<=10) {
 						alert("맞게 입력하셨습니다.")
-			            return false
+			            return true
 			        }else{
 			            alert("1부터 10까지 숫자만 입력가능합니다.")
 			            return false
@@ -81,7 +80,7 @@
 			<hr class="featurette-divider">
 	  			<div class="row featurette">
   			 	<div class="col-md-12">
-  			 		<form action="re_writePro" method="post" name="numbercheck">
+  			 		<form action="re_writePro" method="post" name="numbercheck" onsubmit='return validate(this.form);'> 
 	  			 		<input type="hidden" name="class_num" value="${zoomContent.num}">
 	  			 		<input type="hidden" name="title" value="${zoomContent.title}">
 	     	 	  	<table class="table table-bordered">
@@ -111,7 +110,7 @@
 				            <tr>
 				            	<td colspan="4" align="right">
 					            	<input type="submit" value="작성하기">&nbsp;&nbsp;
-					            	<input type="reset" value="초기화하기">&nbsp;&nbsp;		           
+					            	<input type="reset" value="초기화하기">&nbsp;&nbsp;	 	           
 				            	</td>
 				            </tr>
 	  		           </tbody>
