@@ -15,7 +15,7 @@
 </head>
 <body>
 		
-		<!-- Zoom강의 리뷰 리스트 -->
+		<!-- 리뷰 리스트 -->
 		<div class="container">
 	    	<div class="row">
 		        <div class="col-xl-12">

@@ -10,10 +10,14 @@ import org.mvc.bean.FileInfo;
 import org.mvc.bean.NoticeDTO;
 import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.PaymentDTO;
+import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.UserInfoDTO;
+import org.mvc.bean.VodDTO;
+import org.mvc.bean.ZoomDTO;
 import org.mvc.service.ManagerService;
 import org.mvc.service.NoticeService;
 import org.mvc.service.PaymentService;
+import org.mvc.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +44,9 @@ public class ManagerController {
 	
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private ReviewService serviceReview;
 	
 //	=========== 관리자 수입 관련 코드 시작 ===========  //
 	@RequestMapping("/sales")
@@ -126,8 +133,42 @@ public class ManagerController {
 
 //	=========== 관리자 리뷰 관련 코드 시작 ===========  //
 	
-	@RequestMapping("/review")
-	public String review() {
+		@RequestMapping("/review")
+		public String review(String pageNum, ReviewDTO reviewDTO, ZoomDTO zoomDTO, VodDTO vodDTO, Model model) {
+			log.info("	-----CT-----> manager review");
+
+			int pageSize = 8;
+			if (pageNum == null) {
+			    pageNum = "1";
+			}
+			
+			int currentPage = Integer.parseInt(pageNum);
+			int startRow = (currentPage - 1) * pageSize + 1;
+		    int endRow = currentPage * pageSize;
+		    int reviewCount = 0;
+		   
+		    reviewCount = serviceReview.reviewCount();
+		    
+		    List reviewList = null;
+		    
+		    if(reviewCount > 0) {
+		    	reviewList = serviceReview.reviewList(startRow, endRow);
+		    	
+		    	int reviewPageCount = reviewCount / pageSize + (reviewCount % pageSize == 0 ? 0 : 1);
+		    	
+		    	int startPage = (int)(currentPage/10)*10+1;
+		    	int pageBlock = 10;
+		    	int endPage = startPage + pageBlock - 1;
+		    	if (endPage > reviewPageCount) {
+		    		endPage = reviewPageCount;
+		    	}
+		    	model.addAttribute("startPage", startPage);
+		    	model.addAttribute("endPage", endPage);
+		    	model.addAttribute("reviewPageCount", reviewPageCount);
+		    }
+		    model.addAttribute("pageNum", pageNum);
+		    model.addAttribute("reviewCount", reviewCount);
+		    model.addAttribute("reviewList", reviewList);
 		
 		return "/manager/review/review";
 	}
