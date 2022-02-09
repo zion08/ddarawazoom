@@ -8,9 +8,9 @@
 	<select id="zoomList" resultType="org.mvc.bean.ZoomDTO">
 	<![CDATA[
 		select * from (
-			select num,c_id, title, intro, type, goal, tool, frequency, price, img, count, rownum r from (
+			select num,c_id, title, intro, type, goal, tool, frequency, price, img, count, status, rownum r from (
 				select * from tbl_coachclass order by num desc))
-		where r >= #{startRow} and r <= #{endRow} 
+		where r >= #{startRow} and r <= #{endRow} and status = '등록'
 	]]>
 	</select>
 	
@@ -36,7 +36,7 @@
 	</update>
 	
 	<select id="zoomCount" resultType="int">
-		select count(*) from tbl_coachclass 
+		select count(*) from tbl_coachclass where status = '등록'
 	</select> 
 	
 	<update id="zoomReadcount">
