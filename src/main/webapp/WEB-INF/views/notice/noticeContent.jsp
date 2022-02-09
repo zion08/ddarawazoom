@@ -66,7 +66,7 @@
 	                        </div>
 	                         <div class="col-lg-12">
 	                          	<div class="text-center">
-	                          		<c:if test ="${sessionScope.id eq 'admin'}">
+	                          		<c:if test ="${sessionScope.admin != null}">
 		                          		<input type="button" class="btn btn-outline-black" onclick="window.location='/ddarawazoom/noticeUpdate?num=${noticeDTO.num}'" value="[수정 페이지 이동]"/>
 		                          			&nbsp;
 		                          		<input type="button" class="btn btn-outline-black" onclick="noticeDelete(${noticeDTO.num})" value="[삭제하기]"/>
@@ -128,16 +128,16 @@
 								<fmt:formatDate var="notice_regdate" pattern="yyyy-MM-dd HH:mm" value="${notice_CList.regdate}" />
 									${notice_regdate}
 									&nbsp;
-									<c:if test="${sessionScope.id != null && notice_CList.deleted ne  'yes' && notice_CList.deleted ne 'all' && sessionScope.id ne 'admin'
+									<c:if test="${sessionScope.id != null && notice_CList.deleted ne  'yes' && notice_CList.deleted ne 'all' && sessionScope.admin == null
 										|| sessionScope.c_id != null && notice_CList.deleted ne  'yes' && notice_CList.deleted ne 'all'}">
 										<input type="button" class="btn btn-outline-black" onclick="reComment(${notice_CList.c_num});" value="답글"/>
 									</c:if>	
-									<c:if test="${sessionScope.id.equals(notice_CList.writer_id) && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all' && sessionScope.id ne 'admin' 
+									<c:if test="${sessionScope.id.equals(notice_CList.writer_id) && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all' && sessionScope.admin == null 
 										|| sessionScope.c_id.equals(notice_CList.writer_id) && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all'}">
 										<input type="button" class="btn btn-outline-black" onclick="commentUpdate(${notice_CList.c_num});" value="수정"/>
 										<input type="button" class="btn btn-outline-black" onclick="commentDelete(${notice_CList.c_num});" value="삭제"/>
 									</c:if>
-									<c:if test ="${sessionScope.id eq 'admin' && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all'}">
+									<c:if test ="${sessionScope.admin != null && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all'}">
 										<input type="button" class="btn btn-outline-black" onclick="reComment(${notice_CList.c_num});" value="답글"/>
 										<input type="button" class="btn btn-outline-black" onclick="managerDeletedChange(${notice_CList.c_num});" value="삭제"/>
 									</c:if>
