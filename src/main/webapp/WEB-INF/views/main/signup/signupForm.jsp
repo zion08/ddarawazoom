@@ -3,98 +3,10 @@
 <%@ include file="../../layout/header.jsp"%>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/resources/user/custom/js/user.js" type="text/javascript"></script>
+<script src="/resources/user/custom/js/user.js?ver=1" type="text/javascript"></script>
 
 <link href="/resources/coach/custom/css/form-validation.css" rel="stylesheet">
 <link href="/resources/user/custom/css/user.css" rel="stylesheet">
-
-<script>
-$(document).ready(function(){
-	// 아이디 중복체크
-	$("#idCheck").click(function(){
-		// ajax 호출
-		$.ajax({
-			// 값을 보내는 방식
-			type : "post",
-			// 호출할 링크(컨트롤과 연결)
-			url : "/ddarawazoom/idCheck",
-			// 보낼 파라미터
-			data : { id : $("#id").val() } ,
-			// 값을 성공적으로 가져왔을 때 data에 값을 대입
-			success : function(data){
-				console.log(data);
-				a = parseInt(data);
-				if(a == 1){
-					$("#result").html("<font color='red'>이미 사용중인 아이디입니다. 다른 아이디를 사용해주세요.</font>");
-					$("#id").attr('class', 'custom-form-control custom-is-invalid');
-				} else if(a == 0) {
-					$("#result").html("<font color='green'>사용가능한 아이디입니다.</font>");
-				} else if(a == -1){
-					$("#result").html("<font color='red'>아이디를 입력해주세요.</font>");
-					$("#id").attr('class', 'custom-form-control custom-is-invalid');
-				}
-			}
-		});
-	});
-	
-	$("form").submit(function(){
-		if($("#pw").val() != $("#re-pw").val()){
-			$("#pwCheck").html("<font color='red'>비밀번호가 다릅니다.</font>");
-			$("#pw").attr('class', 'custom-form-control custom-is-invalid');
-			$("#re-pw").attr('class', 'custom-form-control custom-is-invalid');
-			return false;
-		}
-		
-		if($("#result").text() == '아이디를 입력해주세요.' || $("#result").text() == '이미 사용중인 아이디입니다. 다른 아이디를 사용해주세요.'){
-			return false;
-		}
-	});
-	
-});
-
-</script>
-
-
-
-<script>
-$(document).ready(function(){
-	// 닉네임 중복체크
-	$("#nickCheck").click(function(){
-		// ajax 호출
-		$.ajax({
-			// 값을 보내는 방식
-			type : "post",
-			// 호출할 링크(컨트롤과 연결)
-			url : "/ddarawazoom/nickCheck",
-			// 보낼 파라미터
-			data : { nick : $("#nick").val() } ,
-			// 값을 성공적으로 가져왔을 때 data에 값을 대입
-			success : function(data){
-				console.log(data);
-				a = parseInt(data);
-				if(a == 1){
-					$("#outcome").html("<font color='red'>이미 사용중인 닉네임입니다. 다른 닉네임을 사용해주세요.</font>");
-					$("#nick").attr('class', 'custom-form-control custom-is-invalid');
-				} else if(a == 0) {
-					$("#outcome").html("<font color='green'>사용가능한 닉네임입니다.</font>");
-				} else if(a == -1){
-					$("#outcome").html("<font color='red'>닉네임을 입력해주세요.</font>");
-					$("#nick").attr('class', 'custom-form-control custom-is-invalid');
-				}
-			}
-		});
-	
-	
-		
-		if($("#outcome").text() == '닉네임를 입력해주세요.' || $("#outcome").text() == '이미 사용중인 닉네임입니다. 다른 닉네임을 사용해주세요.'){
-			return false;
-		}
-	});
-	
-});
-
-</script>
-
 
 <div class="container-fluid">
     

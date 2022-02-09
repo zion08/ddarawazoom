@@ -170,6 +170,39 @@
 	<select id="applyMemberCount" resultType="Integer">
 		select count(*) from tbl_classApply where num = #{num}
 	</select>
+	
+	<!-- 바디 프로필 리스트 데이터 가져오기 -->
+	<select id="bodyList" resultType="org.mvc.bean.BodyProfileDTO">
+		<![CDATA[
+		select * from(
+			select b_num, b_id, b_height, b_weight, b_muscle, b_bodyfat, b_shape, b_chest, b_waist, b_arm, b_thigh, b_hip, b_date, b_img, rownum r from( 
+			 	select * from tbl_bodyprofile order by b_date asc, rownum desc))
+		 	where b_id = #{b_id}
+		]]>
+	</select>
+	
+	<!-- 최근 바디 프로필 데이터 가져오기 -->
+	<select id="getBodyProfile" resultType="org.mvc.bean.BodyProfileDTO">
+		select * from tbl_bodyprofile
+			where b_id = #{b_id} and b_num = (
+				select max(b_num) from tbl_bodyprofile where b_id = #{b_id}
+			)
+	</select>
+	
+	<!-- 마이 프로필 데이터 가져오기 -->
+	<select id="getMyProfile" resultType="org.mvc.bean.UserInfoDTO">
+		select * from tbl_user where id = #{id}
+	</select>
 	<!-- 회원관리 관련 코드 종료 -->
 	
+	<!-- 매출 내역 가져오기 -->
+	<select id="getAmount" resultType="org.mvc.bean.PaymentDTO">
+		<![CDATA[
+			select * from tbl_payment
+				where c_id = #{c_id} and
+				status = 'paid' and
+				paidAt >= #{startDate} and
+				paidAt <= #{endDate}
+		]]>
+	</select>
 </mapper>

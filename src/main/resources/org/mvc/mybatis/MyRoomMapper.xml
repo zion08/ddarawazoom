@@ -6,7 +6,6 @@
 
 <mapper namespace="org.mvc.mybatis.MyRoomMapper">
 
-<!-- 바디 프로필 관련 코드 시작 -->	
 	<!-- 마이 프로필 데이터 가져오기 -->
 	<select id="getMyProfile" resultType="org.mvc.bean.UserInfoDTO">
 		select * from tbl_user where id = #{id}
@@ -23,27 +22,12 @@
 	<!-- 바디 프로필 리스트 데이터 가져오기 -->
 	<select id="bodyList" resultType="org.mvc.bean.BodyProfileDTO">
 		<![CDATA[
-		select * from(
-			select b_num, b_id, b_height, b_weight, b_muscle, b_bodyfat, b_shape, b_chest, b_waist, b_arm, b_thigh, b_hip, b_date, b_img, rownum r from( 
-			 	select * from tbl_bodyprofile order by b_date asc, rownum desc))
-		 	where b_id = #{b_id}
+			select * from(
+				select b_num, b_id, b_height, b_weight, b_muscle, b_bodyfat, b_shape, b_chest, b_waist, b_arm, b_thigh, b_hip, b_date, b_img, rownum r from( 
+				 	select * from tbl_bodyprofile order by b_date asc, rownum desc))
+			 	where b_id = #{b_id}
 		]]>
 	</select>
-	
-	<!-- 마이 프로필 작성 -->
-	<insert id="myWrite">
-			insert into tbl_user(id, nick, name, birth, gender, tel, email, img)
-				values(
-					#{id},
-					#{nick},
-					#{name},
-					#{birth},
-					#{gender},
-					#{tel},
-					#{email},
-					#{img}
-				)
-	</insert>
 	
 	<!--  마이 프로필 수정 -->
 	<update id="myUpdate" parameterType="org.mvc.bean.UserInfoDTO">
@@ -112,17 +96,14 @@
 	<delete id="bodyDelete">
 		delete tbl_bodyprofile where b_num = #{b_num}
 	</delete>
-<!-- 바디 프로필 관련 코드 종료 -->
-
 	
-<!-- 멤버 정보 관련 코드 시작 -->	
 	<!-- 멤버 정보 데이터 가져오기 -->
 	<select id="getUserInfo" resultType="org.mvc.bean.UserInfoDTO">
 		select * from tbl_user where id = #{id}
 	</select>
 	
 	<!-- 멤버 정보 수정 -->
-	<update id="updateInfo">
+	<update id="updateInfo" parameterType="org.mvc.bean.UserInfoDTO">
 		<![CDATA[
 			update tbl_user set
 				pw = #{pw},
@@ -153,13 +134,11 @@
 	<!-- 멤버 탈퇴 -->
 	<update id="statusChange">
 		update tbl_user set
-			status = '탈퇴멤버'
+			status = '탈퇴'
 				where id = #{id}
 	</update>
-<!-- 멤버 관련 코드 종료 -->
 
-
-<!-- 일정 관련 코드 시작 -->
+	<!-- 일정 관련 코드 -->
 	<resultMap type="org.mvc.bean.ScheduleDTO" id="calMap"> 
 		<result property="start" column="start_time"/> 
 		<result property="end" column="end_time"/> 
@@ -169,10 +148,7 @@
 	<select id="getAllClass" resultMap="calMap" resultType="org.mvc.bean.ScheduleDTO">
 		select * from tbl_calendar where m_id = #{m_id}
 	</select>
-<!-- 일정 관련 코드 끝 -->	
 
-
-<!-- 관심 등록 관련 코드 시작 -->
 	<!-- Zoom 관심등록 데이터 가져오기 -->
 	<select id="likeZoomList" resultType="org.mvc.bean.ZoomDTO">
 		<![CDATA[
@@ -251,10 +227,8 @@
 	<delete id="vodLikeDelete">
 		delete from tbl_like where id = #{id} and vod_num = #{vodm_num}
 	</delete>
-<!-- 관심 등록 관련 코드 끝 -->	
 
 
-<!-- 리뷰 관련 코드 시작 -->
 	<!-- 작성한 리뷰 가져오기 -->
 	<select id="getReview" resultType="org.mvc.bean.ReviewDTO">
 		<![CDATA[
@@ -287,5 +261,10 @@
 	<delete id="deleteReview">
 		delete tbl_review where id = #{id} and review_num = #{review_num}
 	</delete>
-<!-- 리뷰 관련 코드 종료 -->	
+
+	<!-- 결재 내역 가져오기 -->
+	<select id="getPayment" resultType="org.mvc.bean.PaymentDTO">
+		select * from tbl_payment
+			where buyerName = #{buyerName}
+	</select>
 </mapper>

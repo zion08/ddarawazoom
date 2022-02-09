@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mvc.bean.BodyProfileDTO;
+import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ScheduleDTO;
 import org.mvc.bean.UserInfoDTO;
@@ -20,9 +21,6 @@ public interface MyRoomService {
 	
 	// 바디 프로필 리스트 데이터 가져오기
 	public List<BodyProfileDTO> bodyList(String id);
-	
-	// 마이 프로필 작성
-	public int myWrite(UserInfoDTO userDTO);
 	
 	// 마이 프로필 수정
 	public int myUpdate(UserInfoDTO userDTO);
@@ -99,4 +97,6 @@ public interface MyRoomService {
 	// 리뷰 삭제
 	public int deleteReview(ReviewDTO reviewDTO);
 	
+	// 결제 내역 출력
+	public List<PaymentDTO> getPayment(String id);
 }

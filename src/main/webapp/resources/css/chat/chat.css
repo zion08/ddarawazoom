@@ -1,47 +1,61 @@
 @charset "UTF-8";
 
-
-.chat-online {
-    color: #34ce57
+#container{
+	width: 1000px;
+	margin: 0 auto;
+	padding: 25px
 }
 
-.chat-offline {
-    color: #e4606d
+#container h1{
+	text-align: left;
+	padding: 5px 5px 5px 15px;
+	color: #7B68EE;
+	border-left: 3px solid #7B68EE;
+	margin-bottom: 20px;
 }
 
-.chat-messages {
-    display: flex;
-    flex-direction: column;
-    max-height: 800px;
-    overflow-y: scroll
+#chating{
+	background-color: #F8F8FF;
+	border: 1px solid #7B68EE;
+	width: 1000px;
+	height: 700px;
+	overflow: auto;
 }
 
-.chat-message-left,
-.chat-message-right {
-    display: flex;
-    flex-shrink: 0
+.chating .me{
+	color: 	#000000;
+	text-align: right;
+	font-size:	24px;
 }
 
-.chat-message-left {
-    margin-right: auto
+.chating .others{
+	color: #DC143C;
+	text-align: left;
+	font-size: 24px;
 }
 
-.chat-message-right {
-    flex-direction: row-reverse;
-    margin-left: auto
-}
-.py-3 {
-    padding-top: 1rem!important;
-    padding-bottom: 1rem!important;
-}
-.px-4 {
-    padding-right: 1.5rem!important;
-    padding-left: 1.5rem!important;
-}
-.flex-grow-0 {
-    flex-grow: 0!important;
+#yourMsg{
+	display: none;
 }
 
-.flex-grow-1.pl-3 strong{
-	font-size: 20px;
+.msgImg{
+	width: 200px;
+	height: 200px;
+}
+
+.clearBoth{
+	clear: both;
+}
+
+.img{
+	float: right;
+}
+
+.input-group{
+	width:1000px;
+}
+
+#sendFileBtn , #sendBtn , #startBtn{
+	background-color: #7B68EE;
+	color: white;
 }
