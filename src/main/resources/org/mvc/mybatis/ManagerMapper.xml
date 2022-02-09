@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.mvc.mybatis.ManagerMapper">
+
+	<!-- 등록 돼있는 모든 코치의 정보 -->
+	<select id="getAllCoachInfo" resultType="org.mvc.bean.CoachInfoDTO">
+		select * from tbl_coach
+	</select>
+
+	<!-- 등록 돼있는 모든 코치 수 -->
+	<select id="countAllCoach" resultType="Integer">
+		select count(*) from tbl_coach
+	</select>
+	
+	<!-- 코치 한 명의 정보 -->
+	<select id="coachInfo" resultType="org.mvc.bean.CoachInfoDTO">
+		select * from tbl_coach where c_id = #{c_id}
+	</select>
+	
+	<!-- 코치 한 명의 경력 정보 -->
+	<select id="coachCareer" resultType="org.mvc.bean.CoachCareerDTO">
+		select * from tbl_coach_career where c_id = #{c_id}
+	</select>
+	
+	<!-- 코치가 등록한 강의 정보 -->
+	<select id="getCoachClass" resultType="org.mvc.bean.ZoomDTO">
+		select * from tbl_coachClass where c_id = #{c_id}
+	</select>
+	
+	<!-- 코치 강의 삭제 -->
+	<update id="deleteClass">
+		update tbl_coachClass set
+			status = '삭제'
+		where num = #{num}
+	</update>
+	
+	<!-- 코치 강의 복구 -->
+	<update id="restoreClass">
+		update tbl_coachClass set
+			status = '등록'
+		where num = #{num}
+	</update>
+	
+	<!-- 코치 상태 변경 -->
+	<update id="changeStatus">
+		update tbl_coach set
+			c_status = #{c_status}
+		where c_id = #{c_id}
+	</update>
+	
+</mapper>
