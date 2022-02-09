@@ -59,7 +59,8 @@
 			      
 			      <input type="button" class="w-100 btn btn-lg btn-secondary mb-3" value="인증번호 발송" style="margin-top: 20px;" onclick="emailSend();"/>
 			     
-			      <label id="mail_send"></label>		
+			      <label id="mail_send" style="margin-bottom: 10px;"></label>
+			      		
 			      <div class="form-floating" id="emailForm" style="display: none;">
 			    	  <input type="text" class="form-control" id="temp_pw" name="temp_pw" placeholder="인증번호">
 			    	  <label for="floatingPassword">인증번호</label>

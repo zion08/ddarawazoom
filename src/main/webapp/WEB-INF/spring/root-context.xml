@@ -20,7 +20,7 @@
 		<property name="password" value="final" />
 	</bean>
 	
-	<!-- 회원가입 메일 인증 -->
+	<!-- 비밀번호 찾기 메일 인증 -->
 	<bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" /><!-- 465 or 25 -->

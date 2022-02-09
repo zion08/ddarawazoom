@@ -53,9 +53,16 @@ public class MainController {
 		int result = 0;
 		
 		if(service.getUserInfo(userDTO) == 1){
-			result = 1;
-			session.setAttribute("id", userDTO.getId());
-			model.addAttribute("result", result);
+			if(userDTO.getId().equals("admin")) {
+				result = 1;
+				session.setAttribute("admin", userDTO.getId());
+				model.addAttribute("result", result);
+			} else {
+				result = 1;
+				session.setAttribute("id", userDTO.getId());
+				model.addAttribute("result", result);
+			}
+			
 		} else {
 			coachDTO.setC_id(userDTO.getId());
 			coachDTO.setC_pw(userDTO.getPw());
