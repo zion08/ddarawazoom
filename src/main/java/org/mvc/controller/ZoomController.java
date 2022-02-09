@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.FileInfo;
-import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.MyRoomService;
@@ -40,30 +39,7 @@ public class ZoomController {
 	private PaymentService servicePayment;
 	
 	@Autowired
-	private FileInfo fileInfo;  
-	
-	// ===== zoom 강의실 접속 ===== //
-	// 1.
-	@RequestMapping("/zclassroom")
-	public String zclassroom() {
-		return "/zoom/class/zclassroom"; 	
-	}
-	
-	// 2.
-	// 1에서 2로 연결 후 강의실 접속
-	@RequestMapping("/zclassroom2")
-	public String zclassroom2() {
-		return "/zoom/class/zclassroom2"; 	 
-	}
-	
-	// ===== zoom 내 강의실 ===== //
-	@RequestMapping("/myclassroom")
-	public String myclassroom(Model model, HttpSession session) {		
-		String id = (String)session.getAttribute("id"); 
-		List<PaymentDTO> PaymentMyList = servicePayment.getPaymentMyList(id);	
-		model.addAttribute("payment", PaymentMyList); 
-		return "/zoom/class/myclassroom";
-	}
+	private FileInfo fileInfo;   
 	
 	// ===== zoom강의 메인(리스트) ===== //
 	@RequestMapping("zoom")
@@ -234,7 +210,7 @@ public class ZoomController {
 			model.addAttribute("userInfo", service.getUserInfo(id)); 
 		}
 		
-		int pageSize = 5;  
+		int pageSize = 5; 
 		if (pageNum == null) {
 		    pageNum = "1"; 
 		} 
@@ -247,7 +223,7 @@ public class ZoomController {
 	    count = service.reCount(num);
 	    List reviewList = null;
 	    if (count > 0) {
-	    	reviewList = service.reviewList(startRow, endRow); 
+	    	reviewList = service.reviewList(num, startRow, endRow); 
 	    }	
 	    
 	    if(count > 0) {

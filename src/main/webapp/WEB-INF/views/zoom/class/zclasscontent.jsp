@@ -15,18 +15,19 @@
 		<div class="col">
 		<div class="card shadow-sm">  
 			<img src="/resources/coach/img/${zoomContent.img}" class="card-img-top" width="100" height="625">
-			<c:if test="${sessionScope.c_id != null}">	
+			<c:if test="${sessionScope.c_id == zoomContent.c_id}">	
 				<input type="button" value="사진변경" class="btn btn-outline-danger" onclick="window.location='/ddarawazoom/imgUpdate?img=${zoomContent.img}&num=${zoomContent.num}'" />
 			</c:if>	
 		<div class="btn-group">	
-           	<c:if test="${sessionScope.c_id != null}">
+           	<c:if test="${sessionScope.c_id == zoomContent.c_id}">
 				<input type="button" class="btn btn-outline-danger" value="글수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${zoomContent.num}'">
 				<input type="button" class="btn btn-outline-danger" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${zoomContent.num}'"> 
 			</c:if>	 
+			<c:if test="${sessionScope.id != null}">
 				<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
-			<c:if test="${sessionScope.id != null}">	
+				<input type="button" class="btn btn-outline-primary" value="장바구니 담기">
 				<input type="button" id="payBtn" class="btn btn-outline-primary" value="바로 결제하기">
-			</c:if>				
+			</c:if>
 		</div>
 			<div>
 				<br />
@@ -50,7 +51,7 @@
 				
 				</h2>
 				<h5>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">${zoomContent.c_id}</font> 강사님</h5><br />
-				<h5>&nbsp;&nbsp;${zoomContent.intro}</h5> 
+				<h5>&nbsp;&nbsp;${zoomContent.intro}</h5>
 			</div>
 		</div>	
 		</div>
@@ -69,32 +70,18 @@
 			        txt=x.grade.value
 			        if (txt>=1 && txt<=10) {
 						alert("맞게 입력하셨습니다.")
-			            return true;
+			            return false
 			        }else{
 			            alert("1부터 10까지 숫자만 입력가능합니다.")
-			            return false;
+			            return false
 			        }
 				}
-			    
-			    function nullcheck(){
-					var n = document.numbercheck;
-					if(n.grade.value == ""){
-						alert("평점은 필수항목입니다");
-						n.grade.focus();
-						return false;	
-					}
-					if(n.content.value == ""){
-						alert("내용은 필수항목입니다");
-						n.content.focus();
-						return false;	
-					}
-			    }	
 			</script> 
 			
 			<hr class="featurette-divider">
 	  			<div class="row featurette">
   			 	<div class="col-md-12">
-  			 		<form action="re_writePro" method="post" name="numbercheck" onsubmit='return validate(this.form);'> 
+  			 		<form action="re_writePro" method="post" name="numbercheck">
 	  			 		<input type="hidden" name="class_num" value="${zoomContent.num}">
 	  			 		<input type="hidden" name="title" value="${zoomContent.title}">
 	     	 	  	<table class="table table-bordered">
@@ -123,8 +110,8 @@
 				            </tr>
 				            <tr>
 				            	<td colspan="4" align="right">
-					            	<input type="submit" value="작성하기"  onclick='return nullcheck(this.form);'>&nbsp;&nbsp;
-					            	<input type="reset" value="초기화하기">&nbsp;&nbsp;	 	           
+					            	<input type="submit" value="작성하기">&nbsp;&nbsp;
+					            	<input type="reset" value="초기화하기">&nbsp;&nbsp;		           
 				            	</td>
 				            </tr>
 	  		           </tbody>
@@ -139,7 +126,7 @@
 			</c:if>	
 				   
 		   <c:if test="${count > 0}">
-		   <c:forEach var="reviewList" items="${reviewList}">  
+		   <c:forEach var="reviewList" items="${reviewList}"> 
 		   <hr class="featurette-divider">
   				<div class="row featurette">
   			 	<div class="col-md-12">

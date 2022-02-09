@@ -21,8 +21,8 @@ public interface ZoomService {
 	public int getPrice(String merchant_Uid);
 	
 	// 후기관련
-	public List<ReviewDTO> reviewList(@Param("startRow") int startRow, @Param("endRow")int endRow); 
+	public List<ReviewDTO> reviewList(int class_num, int startRow, int endRow); 
 	public int reInsert(ReviewDTO dto);
-	public int reCount(int num); 
+	public int reCount(int num);
 	public UserInfoDTO getUserInfo(String id);   
 } 
