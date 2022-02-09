@@ -421,7 +421,7 @@ public class MyRoomController {
 		String id = (String)session.getAttribute("id");
 		
 		likeDTO.setId(id);
-		result = service.vodLikeDelete(id, likeDTO.getZoom_num());
+		result = service.vodLikeDelete(id, likeDTO.getVod_num());
 		
 		return result;
 	}

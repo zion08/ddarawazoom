@@ -146,7 +146,7 @@
 		           <c:if test="${myPayment != null}">
 		               <div class="card-box">
 		               		<h4 class="header-title mb-3">결재내역 관리</h4>
-		               		<button onclick="window.location='/myroom/review'" class="btn btn-light">
+		               		<button onclick="window.location='/myroom/payment'" class="btn btn-light">
 		               			결제내역 관리 페이지로 이동하기
 		               		</button>
 		               		<div class="table-responsive">
@@ -205,29 +205,19 @@
 			               		<table class="table">
 			               			<thead>
 			               				<tr>
-			              					<th>
-												강의명
-											</th>
-											<th>
-												작성 내용
-											</th>
-											<th>
-												평 점
-											</th>
+			              					<th>강의 명</th>
+											<th>작성 내용</th>
+											<th>평 점</th>
 			               				</tr>
 			               			</thead>
 			               			<c:forEach var="reviewList" items="${reviewList}" >
 				               			<tbody>
 				               				<tr>
 												<td>
-													<a href="/ddarawazoom/zclasscontent?num=${reviewList.review_num}">${reviewList.title}</a>
+													<a href="/ddarawazoom/zclasscontent?num=${reviewList.class_num}">${reviewList.title}</a>
 												</td>
-												<td>
-													${reviewList.content}
-												</td>
-												<td>
-													${reviewList.grade}
-												</td>
+												<td>${reviewList.content}</td>
+												<td>${reviewList.grade}</td>
 											</tr>
 				               			</tbody>
 				               		</c:forEach>

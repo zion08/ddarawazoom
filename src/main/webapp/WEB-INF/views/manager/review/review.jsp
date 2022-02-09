@@ -14,14 +14,6 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 </head>
 <body>
-	<c:if test="${sessionScope.id ne 'admin'}">
-		<script>
-			alert("본 페이지는 관리자만 이용할 수 있습니다.\n메인 페이지로 이동합니다.");
-			window.location="/ddarawazoom";
-		</script>
-	</c:if>
-	
-	<c:if test="${sessionScope.id eq 'admin'}">
 		
 		<!-- Zoom강의 리뷰 리스트 -->
 		<div class="container">
@@ -103,7 +95,6 @@
 	            </div>
 	        </div>
 		</div>
-	</c:if>	
 </body>
 </html>
 
