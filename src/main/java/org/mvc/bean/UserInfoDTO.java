@@ -29,4 +29,5 @@ public class UserInfoDTO {
 	private Date birth;
 	private String tel;
 	
+	private String temp_pw;
 }

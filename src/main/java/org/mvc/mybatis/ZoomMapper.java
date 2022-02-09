@@ -22,7 +22,7 @@ public interface ZoomMapper {
 	public int getPrice(String merchant_Uid); 
 
 	// 후기관련
-	public List<ReviewDTO> reviewList(@Param("startRow") int startRow, @Param("endRow")int endRow); 
+	public List<ReviewDTO> reviewList(@Param("class_num") int class_num, @Param("startRow") int startRow, @Param("endRow")int endRow); 
 	public int reInsert(ReviewDTO dto);
 	public int reCount(int num);
 	public UserInfoDTO getUserInfo(String id);   
