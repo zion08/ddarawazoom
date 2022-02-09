@@ -267,4 +267,5 @@
 		select * from tbl_payment
 			where buyerName = #{buyerName}
 	</select>
+
 </mapper>
