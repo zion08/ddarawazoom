@@ -24,8 +24,7 @@
 				<input type="button" class="btn btn-outline-danger" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${zoomContent.num}'"> 
 			</c:if>	 
 			<c:if test="${sessionScope.id != null}">
-				<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
-				<input type="button" class="btn btn-outline-primary" value="장바구니 담기">
+				<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">			
 				<input type="button" id="payBtn" class="btn btn-outline-primary" value="바로 결제하기">
 			</c:if>
 		</div>
@@ -173,13 +172,13 @@
 			</c:forEach>
 			</c:if>	
 			
-		<c:if test="${totalPage > 1}">
+		<c:if test="${count > 1}">
 		<div id="page">페이지&nbsp;  
 			<c:if test="${startPage > 10}">
 				<a href="/ddarawazoom/zclasscontent?num=${zoomContent.num}&pageNum=${startPage - 10}"> [이전] </a>
 			</c:if>
 			
-			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1"> 
 				<a href="/ddarawazoom/zclasscontent?num=${zoomContent.num}&pageNum=${i}">${i}</a>
 			</c:forEach>
 			

@@ -28,7 +28,7 @@ function websdkready() {
       );
     })(),
     passWord: tmpArgs.pwd,
-    leaveUrl: "/index.html",
+    leaveUrl: "/ddarawazoom/myclassroom",
     role: parseInt(tmpArgs.role, 10),
     userEmail: (function () {
       try {

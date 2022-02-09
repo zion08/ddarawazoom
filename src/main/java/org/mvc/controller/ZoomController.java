@@ -246,11 +246,8 @@ public class ZoomController {
 	    List reviewList = null;
 	    if (count > 0) {
 	    	reviewList = service.reviewList(num, startRow, endRow); 
-	    }	
 	    
-	    if(count > 0) {
-	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-	    	
+	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);	   
 	    	int startPage = (int)(currentPage/10)*10+1;
 	    	int pageBlock = 10;
 	    	int endPage = startPage + pageBlock - 1;

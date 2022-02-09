@@ -82,7 +82,7 @@ function websdkready() {
     document.getElementById("meeting_pwd").value = "";
     document.getElementById("meeting_lang").value = "en-US";
     document.getElementById("meeting_role").value = 0;
-    window.location.href = "/ddarawazoom/ex"; 
+    window.location.href = "/ddarawazoom/zclassroom"; 
   });
 
   // click join meeting button
@@ -109,7 +109,7 @@ function websdkready() {
           console.log(res.result);
           meetingConfig.signature = res.result;
           meetingConfig.apiKey = API_KEY;
-          var joinUrl = "/ddarawazoom/ex2?" + testTool.serialize(meetingConfig);
+          var joinUrl = "/ddarawazoom/zclassroom2?" + testTool.serialize(meetingConfig);
           console.log(joinUrl);
           window.open(joinUrl, "_blank");
         },
@@ -143,7 +143,7 @@ function websdkready() {
         meetingConfig.apiKey = API_KEY;
         var joinUrl =
           testTool.getCurrentDomain() +
-          "/ddarawazoom/ex2?" +
+          "/ddarawazoom/zclassroom2?" +
           testTool.serialize(meetingConfig);
         document.getElementById('copy_link_value').setAttribute('link', joinUrl);
         copyToClipboard('copy_link_value');
