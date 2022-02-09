@@ -135,21 +135,17 @@ $(document).ready(function(){
         	if($("#email").val() == ''){
         		alert("이메일을 입력해주세요.");
         		return false;
-        	}
-        	
-        	$.ajax({
+			}
+			
+			$("#mail_send").html("<font color='green'>인증번호가 메일로 전송되었습니다.</font>");
+        	$('#emailForm').css('display', 'block');
+			
+			$.ajax({
                 data : { id : $("#id").val(), email : $("#email").val() },
                 url : "/ddarawazoom/emailSend",
-                type : "POST",
-                success : function(data){
-                   if(data == 1){
-                	   alert("이메일이 전송되었습니다.");
-                  	   $('#emailForm').css('display', 'block');
-                   } else {
-                	   alert("아이디 혹은 이메일을 확인해주세요.");
-                   }
-                }
-           });
+                type : "POST"
+		   });
+		   
         } 
          
         // 인증번호 체크
