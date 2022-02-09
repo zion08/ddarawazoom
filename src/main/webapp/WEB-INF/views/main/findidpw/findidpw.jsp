@@ -5,147 +5,93 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- ajax 여러 개의 값을 받기 위한 것 -->
-
-<script> 
-
-$.fn.serializeObject = function(){
-	var o = {};
-	var a = this.serializeArray();
-	$.each(a, function() {
-		var name = $.trim(this.name),
-			value = $.trim(this.value);
+<script src="/resources/user/custom/js/user.js?ver=123" type="text/javascript"></script>
+   
+   
+   
+<div class="form-sigminbox text-center">
+	<main class="form-signin">
+		<div id="mainForm">
+			<img class="mb-4" width="72" height="57" src="../../resources/image/Exercise.svg"/>
+		    <h1 class="h3 mb-3 fw-normal">아이디 / 비밀번호 찾기</h1>
 		
-		if (o[name]) {
-			if (!o[name].push) {
-				o[name] = [o[name]];
-			}
-			o[name].push(value || '');
-		} else {
-			o[name] = value || '';
-		}
-	});
-	return o;
-};
-</script>
+			<!-- findidpw의 name이 위아래 둘 다 같아줘야 radio 중복선택이 되지 않는다. -->
+			<!-- onclick의 () 안에 id 값을 적어준다. -->
+			<div class="form-check form-check-inline">
+			  <input class="form-check-input" type="radio" name="findidpw" id="idRadio" checked="checked" onclick="javascript:contentsView('idRadio');">
+			  <label class="form-check-label" for="idRadio">아이디 찾기</label>
+			</div>
+			<div class="form-check form-check-inline">
+			  <input class="form-check-input" type="radio" name="findidpw" id="pwRadio" onclick="javascript:contentsView('pwRadio');">
+			  <label class="form-check-label" for="pwRadio">비밀번호 찾기</label>
+			</div>
+		
+			<form id="findIdForm">
+			   <div id="findid" style="margin-top: 15px;">   
+				  <div class="form-floating">
+			    	 <input type="text" class="form-control" id="name" name="name" placeholder="이름">
+			    	  <label for="floatingInput">이름</label>
+			   	  </div>
+			   	  
+			      <div class="form-floating">
+			    	  <input type="text" class="form-control" id="tel" name="tel" placeholder="-를 제외한 전화번호">
+			    	  <label for="floatingPassword">-를 제외한 전화번호</label>
+			      </div>
+			      
+			      <input type="button" class="w-100 btn btn-lg btn-secondary mb-3" 
+			     		value="아이디 찾기" style="margin-top: 20px;" onclick="findId();"/>
+			     		
+			      <label id="result"></label>
+		      </div>
+		   </form>
+		
+			<form id="findPwForm">	
+			   <div id="findpw">
+			      <div class="form-floating">
+			    	 <input type="text" class="form-control" id="id" name="id" placeholder="아이디">
+			    	  <label for="floatingInput">아이디</label>
+			   	  </div>
+			   	  
+			      <div class="form-floating">
+			    	  <input type="text" class="form-control" id="email" name="email" placeholder="이메일 주소">
+			    	  <label for="floatingPassword">이메일 주소</label>
+			      </div>
+			      
+			      <input type="button" class="w-100 btn btn-lg btn-secondary mb-3" value="인증번호 발송" style="margin-top: 20px;" onclick="emailSend();"/>
+			     
+			      <label id="mail_send" style="margin-bottom: 10px;"></label>
+			      		
+			      <div class="form-floating" id="emailForm" style="display: none;">
+			    	  <input type="text" class="form-control" id="temp_pw" name="temp_pw" placeholder="인증번호">
+			    	  <label for="floatingPassword">인증번호</label>
+			      
+			      	  <input type="button" class="w-100 btn btn-lg btn-secondary mb-3" value="인증 확인" style="margin-top: 20px;" onclick="emailCheck();"/>
+			      </div>
+			      
+			   </div>
+		   </form>
+		</div>
+		
+			<form id="pwChange">
+		      	<div id="changePw" style="display: none;">
+		      	  <img class="mb-4" width="72" height="57" src="../../resources/image/Exercise.svg"/>
+		   		  <h1 class="h3 mb-3 fw-normal">비밀번호 변경</h1>
+		   		  
+		   		  <div class="form-floating">
+			    	  <input type="password" class="form-control" id="pw1" name="pw1" placeholder="비밀번호">
+			    	  <label for="floatingPassword">비밀번호</label>
+			      </div>
+		   		  
+		   		  <div class="form-floating">
+			    	  <input type="password" class="form-control" id="pw2" name="pw2" placeholder="비밀번호 확인">
+			    	  <label for="floatingPassword">비밀번호 확인</label>
+			      </div>
+			      
+			      <input type="button" class="w-100 btn btn-lg btn-secondary mb-3" value="비밀번호 변경" style="margin-top: 20px;" onclick="changePw();"/>
+			   </div>
+		   </form>
 
-<script type="text/javascript">
-         function contentsView(objValue) {
-        	 
-             if (objValue == 'id') {
-                 $('#findid').css('display', 'block');
-                 $('#findpw').css('display', 'none'); 
-                 //display 'none'은= div가 보이지않는!
-                 return false;
-             }
-             if (objValue == 'pw') {
-                 $('#findid').css('display', 'none');
-                 $('#findpw').css('display', 'block');
-                 return false;
-             }
-         }
-</script>
-        
-<script>
-         function findId(){
-        	 var data = { name : $("#name").val(), tel : $("#tel").val() }
-        	 $.ajax({
-            	data : data,
-         		url : "/ddarawazoom/findidpwPro",
-         		
-         		contentType : "application/json; charset=UTF-8",
-         		success : function(data){
-         			if(data != null){
-         				$("#result").html("고객님의 아이디는 <font color='green'>"+data+"</font>입니다.");
-         			} else {
-         				$("#result").html("<font color='red'>아이디가 존재하지 않습니다.</font>");
-         			}
-         			
-         		}
-             });
-         }
-</script>         
-         
-<script>     
-function findPw(){
- 			 alert("꺄아아아아");
- 			 //var sth = document.getElementById("email").value;
- 			 var sth = {email : $("#email").val}
-        	 var data = {name : $("#pw_name").val(), 
-        			 id : $("#pw_id").val(), 
-        			 email : $("#email").val() }
-        	 $.ajax({
-            	data : data,
-         		url : "/ddarawazoom/findpwPro",
-         		type: "GET",
-         		contentType : "application/json; charset=UTF-8",
-         		success : function(data){
-         			if(data == 1){
-         				$("#result");
-         				window.location="/ddarawazoom/sendEmail?email="+sth
-         			}else{
-         				alert("메시지가 발송되지 않았습니다. 사용자 정보를 확인하세요");
-         			}
-         		//alert(data);	
-         		}
-         		
-             });
-         }
-         
-</script>      
-     	
-        
-
-
-<h1>아이디/비밀번호</h1>
-
-
-<!-- findidpw의 name이 위아래 둘 다 같아줘야 radio 중복선택이 되지 않는다. -->
-<!-- onclick의 () 안에 id 값을 적어준다. -->
-
-   <input type="radio" id="id" name="findidpw" 
-   checked=checked onclick="javascript:contentsView('id');">아이디 찾기
-   
-   <input type="radio" id="pw" name="findidpw" 
-   	onclick="javascript:contentsView('pw');">비밀번호 찾기
-   <br/>
-   
-   
-   <div id="findid" >   
-      <input type="text" id="name" name="name" placeholder="이름">
-      <br/>
-
-      <input type="text" id="tel" name="tel" placeholder="-을 제외한 연락처">
-      <br/>
-      
-      <input type="button" value="확인" onclick="findId();">
-      <br/>
-      
-      <label id="result"></label>
-      
-      <br/>
-      
-   </div>
-
-   <div id="findpw">
-   
-   	  <input type="text" id="pw_name" name="name" placeholder="이름">
-      <br/>
-      
-      <input type="text" id="pw_id" name="id" placeholder="아이디">
-      <br/>
-
-      <input type="text" id="email" name="email" placeholder="이메일" >
-   
-      <input type="button" value="이메일전송 본인확인" onclick="findPw();">
-      <br/>
-
-      <br/>
-      
-   </div>
-
-
-
+	</main>
+</div>
 
 <%@ include file="../../layout/footer.jsp"%>
