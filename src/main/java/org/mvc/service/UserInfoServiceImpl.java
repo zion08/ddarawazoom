@@ -92,5 +92,20 @@ public class UserInfoServiceImpl implements UserInfoService{
 		}
 		return mapper.careerInsert(careerDTO);
 	}
+
+	@Override
+	public int coachImgUpload(CoachInfoDTO dto) {
+		return mapper.coachImgUpload(dto);
+	}
+
+	@Override
+	public int nickCheck(String nick) {
+		return mapper.nickCheck(nick);
+	}
+
+	@Override
+	public int c_nickCheck(String c_nick) {
+		return mapper.c_nickCheck(c_nick);
+	}
 	
 }

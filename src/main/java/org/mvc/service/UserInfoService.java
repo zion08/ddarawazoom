@@ -16,6 +16,11 @@ public interface UserInfoService {
 	
 	public int c_idCheck(String c_id);
 	
+	// 닉네임 중복 확인
+	public int nickCheck(String nick);
+		
+	public int c_nickCheck(String c_nick);
+	
 	// 아이디 찾기
 	public String findId(UserInfoDTO dto);
 	
@@ -52,4 +57,7 @@ public interface UserInfoService {
 	
 	// 코치 경력 추가
 	public int careerInsert(CoachCareerDTO careerDTO);
+	
+	// 코치 프로필 사진 등록
+	public int coachImgUpload(CoachInfoDTO dto);
 }

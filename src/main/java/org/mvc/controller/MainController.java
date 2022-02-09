@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.FileInfo;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.service.UserEmailService;
 import org.mvc.service.UserInfoService;
@@ -30,6 +31,9 @@ public class MainController {
 	
 	@Autowired
 	private UserEmailService emailService;
+	
+	@Autowired
+	private FileInfo fileInfo;
 	
 	@RequestMapping
 	public String main() {
@@ -148,13 +152,31 @@ public class MainController {
 	public @ResponseBody int idCheck(String id) {
 		log.info("	-----CT----->idCheck");
 		int result = 0;
-		if(id == "") {
+		
+		if(id == "" || id == null) {
 			result = -1;
 		} else {
 			if(service.idCheck(id) == 1 || service.c_idCheck(id) == 1) {
 				result = 1;
 			}
 		}
+		
+		return result;
+	}
+	
+	@RequestMapping("/nickCheck")
+	public @ResponseBody int nickCheck(String nick) {
+		log.info("	-----CT----->nickCheck");
+		int result = 0;
+		
+		if(nick == "" || nick == null) {
+			result = -1;
+		} else {
+			if(service.nickCheck(nick) == 1 || service.c_nickCheck(nick) == 1) {
+				result = 1;
+			}
+		}
+		
 		return result;
 	}
 	
@@ -181,11 +203,19 @@ public class MainController {
 	}
 	
 	@RequestMapping("/coachsignupPro")
-	public String coachsignupPro(CoachInfoDTO dto, Model model) {
+	public String coachsignupPro(CoachInfoDTO dto, Model model, MultipartFile save) {
 		log.info("------CT----->coachsignupPro Page");
 		log.info(""+dto);
+		log.info(save.getOriginalFilename());
 		
 		service.coachInsert(dto);
+		
+		String file = fileInfo.imgUpload(save, dto.getC_id());
+		if(file != null) {
+			dto.setC_img(file);
+			service.coachImgUpload(dto);
+		}
+		
 		model.addAttribute("c_id", dto.getC_id());
 		return "/main/signup/coachsignupPro";
 	}
