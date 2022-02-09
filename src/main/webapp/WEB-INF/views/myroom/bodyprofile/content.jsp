@@ -16,24 +16,20 @@
 		
 		<link href="../../resources/css/myroom/myprofile.css" rel="stylesheet">
 		<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet">
-		
 
 	<c:if test="${userInfo == null}" >
 		<ul class="list-group list-group-flush">
-		    <li class="list-group-item">
-		    	
-			</li>
 			<li class="list-group-item">
 				<div class="list_button">
-				    	<input type="button" value="${userInfo.nick}님의 추가정보 수정하러가기"  class="btn btn-outline-black"
-							onclick="document.location.href='/myroom/bodyprofile/myUpdate'"/>&nbsp;&nbsp;
-						<input type="button"  value="${userInfo.nick}님의 오늘하루 바디 기록하기"  class="btn btn-outline-black"
-							onclick="document.location.href='/myroom/bodyprofile/bodyWrite'"/>&nbsp;&nbsp;
-						<input type="button" onClick="sendLinkCustom();" class="btn btn-outline-black"
-		         			value="DDarawaZoom 알리기"/>&nbsp;&nbsp;
-		         		<a id="channel-chat-button" href="#" onclick="void chatChannel();">
-		  					<img src="/resources/image/upload/talk.png"/>
-						</a>
+			    	<input type="button" value="${userInfo.nick}님의 추가정보 수정하러가기"  class="btn btn-outline-black"
+						onclick="document.location.href='/myroom/bodyprofile/myUpdate'"/>&nbsp;&nbsp;
+					<input type="button"  value="${userInfo.nick}님의 오늘하루 바디 기록하기"  class="btn btn-outline-black"
+						onclick="document.location.href='/myroom/bodyprofile/bodyWrite'"/>&nbsp;&nbsp;
+					<input type="button" onClick="sendLinkCustom();" class="btn btn-outline-black"
+	         			value="DDarawaZoom 알리기"/>&nbsp;&nbsp;
+	         		<a id="channel-chat-button" href="#" onclick="void chatChannel();">
+	  					<img src="/resources/image/upload/talk.png"/>
+					</a>
 				</div>
 			</li>
 		</ul>
@@ -72,7 +68,7 @@
                                     <div class="media">
                                         <label>Birthday</label>
                                         <p>
-                                        	<fmt:formatDate pattern="yyyy-MM-dd" value="${userInfo.birth}" type="date" dateStyle="long"/>
+                                         	<fmt:formatDate pattern="yyyy-MM-dd" value="${userInfo.birth}" type="date" dateStyle="long"/>
                                         </p>
                                     </div>
                                     <div class="media">
@@ -175,108 +171,107 @@
 	  	</c:if>
    
    		<!-- 바디프로필 리스트 -->
-			<table class="table" id="bodyprofileList" style="height: 130px ; vertical-align: middle;">
-				<thead>
-					<tr class="table-light">
-						<th scope="col">
-							순 서
+		<table class="table" id="bodyprofileList" style="height: 130px ; vertical-align: middle;">
+			<thead>
+				<tr class="table-light">
+					<th scope="col">
+						순 서
+					</th>
+					<th scope="col">
+						바디 사진
+					</th>
+					<th scope="col">
+						측정 날짜
+					</th>
+					<th scope="col">
+						키
+					</th>
+					<th scope="col">
+						몸무게
+					</th>
+					<th scope="col">
+						근육량
+					</th>
+					<th scope="col">
+						체지방량
+					</th>
+					<th scope="col">
+						체 형
+					</th>
+					<th scope="col">
+						가슴 둘레
+					</th>
+					<th scope="col">
+						허리 둘레
+					</th>
+					<th scope="col">
+						팔뚝 둘레
+					</th>
+					<th scope="col">
+						허벅지 둘레
+					</th>
+					<th scope="col">
+						엉덩이 둘레
+					</th>
+					<th scope="col">
+						버 튼
+					</th>
+				</tr>
+			</thead>
+			<tbody id="number${number}">
+				<c:forEach var="bodyProfileDTO" items="${bodyList}" >	
+					<tr>
+						<th scope="row">
+							${number}
+							<c:set var="number" value="${number + 1}"/>
 						</th>
-						<th scope="col">
-							바디 사진
-						</th>
-						<th scope="col">
-							측정 날짜
-						</th>
-						<th scope="col">
-							키
-						</th>
-						<th scope="col">
-							몸무게
-						</th>
-						<th scope="col">
-							근육량
-						</th>
-						<th scope="col">
-							체지방량
-						</th>
-						<th scope="col">
-							체 형
-						</th>
-						<th scope="col">
-							가슴 둘레
-						</th>
-						<th scope="col">
-							허리 둘레
-						</th>
-						<th scope="col">
-							팔뚝 둘레
-						</th>
-						<th scope="col">
-							허벅지 둘레
-						</th>
-						<th scope="col">
-							엉덩이 둘레
-						</th>
-						<th scope="col">
-							버 튼
-						</th>
+						<td>
+							<img src="../../resources/image/upload/${bodyProfileDTO.b_img}" name="b_img" width="150px" height="150px"/>
+						</td>
+						<td>
+							<fmt:formatDate value="${bodyProfileDTO.b_date}" type="date" dateStyle="medium"/>
+						</td>
+						<td>
+							${bodyProfileDTO.b_height} cm
+						</td>
+						<td>
+							${bodyProfileDTO.b_weight} kg
+						</td>
+						<td>
+							${bodyProfileDTO.b_muscle} kg
+						</td>
+						<td>
+							${bodyProfileDTO.b_bodyfat} kg
+						</td>
+						<td>
+							${bodyProfileDTO.b_shape}
+						</td>
+						<td>
+							${bodyProfileDTO.b_chest} cm
+						</td>
+						<td>
+							${bodyProfileDTO.b_waist} cm
+						</td>
+						<td>
+							${bodyProfileDTO.b_arm} cm
+						</td>
+						<td>
+							${bodyProfileDTO.b_thigh} cm
+						</td>
+						<td>
+							${bodyProfileDTO.b_hip} cm
+						</td>
+						<td style="width: 10px; font-size:10px;">
+							<input type="button"  value="수 정"  id="updateButton" class="btn btn-outline-primary"
+								onclick="window.location='/myroom/bodyprofile/bodyUpdate?b_num=${bodyProfileDTO.b_num}'"/>
+								&nbsp;&nbsp;
+							<input type="button" value="삭 제" id="deleteButton" class="btn btn-outline-danger"
+								onclick="window.open('/myroom/bodyprofile/bodyDelete?b_num=${bodyProfileDTO.b_num}','delete','width=600,height=250');" />
+						</td>
 					</tr>
-				</thead>
-				<tbody id="number${number}">
-					<c:forEach var="bodyProfileDTO" items="${bodyList}" >	
-						<tr>
-							<th scope="row">
-								${number}
-								<c:set var="number" value="${number + 1}"/>
-							</th>
-							<td>
-								<img src="../../resources/image/upload/${bodyProfileDTO.b_img}" name="b_img" width="150px" height="150px"/>
-							</td>
-							<td>
-								<fmt:formatDate value="${bodyProfileDTO.b_date}" type="date" dateStyle="medium"/>
-							</td>
-							<td>
-								${bodyProfileDTO.b_height} cm
-							</td>
-							<td>
-								${bodyProfileDTO.b_weight} kg
-							</td>
-							<td>
-								${bodyProfileDTO.b_muscle} kg
-							</td>
-							<td>
-								${bodyProfileDTO.b_bodyfat} kg
-							</td>
-							<td>
-								${bodyProfileDTO.b_shape}
-							</td>
-							<td>
-								${bodyProfileDTO.b_chest} cm
-							</td>
-							<td>
-								${bodyProfileDTO.b_waist} cm
-							</td>
-							<td>
-								${bodyProfileDTO.b_arm} cm
-							</td>
-							<td>
-								${bodyProfileDTO.b_thigh} cm
-							</td>
-							<td>
-								${bodyProfileDTO.b_hip} cm
-							</td>
-							<td style="width: 10px; font-size:10px;">
-								<input type="button"  value="수 정"  id="updateButton" class="btn btn-outline-primary"
-									onclick="window.location='/myroom/bodyprofile/bodyUpdate?b_num=${bodyProfileDTO.b_num}'"/>
-									&nbsp;&nbsp;
-								<input type="button" value="삭 제" id="deleteButton" class="btn btn-outline-danger"
-									onclick="window.open('/myroom/bodyprofile/bodyDelete?b_num=${bodyProfileDTO.b_num}','delete','width=600,height=250');" />
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			
+				</c:forEach>
+			</tbody>
+		</table>
 			
 		<!-- 바디 프로필 차트 -->
 		<div class="weightChart" style="position: relative; height:80vh; width:80vw; margin: 0 auto; margin-top: 100px;">
@@ -289,6 +284,5 @@
 		<div class="bodySizeChart" style="position: relative; height:80vh; width:80vw; margin: 0 auto; margin-top: 100px;">
 			<canvas id="bodySizeChart" style="height:40vh; width:50vw; margin: 0 auto;"></canvas>
 		</div>
-		
 
 <%@ include file="../../layout/footer.jsp"%>

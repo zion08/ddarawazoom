@@ -31,8 +31,6 @@ function zoomLikeWrite(number){
 function zoomLikeDelete(number){
 	if(window.confirm('관심 등록을 해제 하시겠습니까?') == true){
 		
-		console.log(number);
-		
 		$.ajax({
 			data : JSON.stringify({ zoom_num : number }),
 			url : "/myroom/likeZoom_out",
@@ -117,11 +115,9 @@ function vodLikeWrite(number){
 function vodLikeDelete(number){
 	if(window.confirm('관심 등록 해제 하시겠습니까?') == true){
 		
-		console.log(number);
-		
 		$.ajax({
 			data : JSON.stringify({ vod_num : number }),
-			url : "/myroom/likeZoom_out",
+			url : "/myroom/likeVod_out",
 			type : "POST",
 			contentType : "application/json; charset=UTF-8",
 			esync : false,
@@ -145,8 +141,6 @@ function vodLikeDelete(number){
 // 관심 Vod 페이지에서 등록 해제 진행
 function deleteLikeVod(number){
 	if(window.confirm('관심 등록 해제 하시겠습니까?') == true){
-		
-		console.log(number);
 		
 		$.ajax({
 			data : JSON.stringify({ vod_num : number }),

@@ -81,7 +81,7 @@
 			]]>
 	</insert>
 	
-	<!-- 공지사항 댓글 수 -->
+	<!-- 관련 공지사항 댓글 수 -->
 	<select id="commentCount" resultType="int">
 		<![CDATA[
 			select count(*) from tbl_notice_c where num = #{num} 
@@ -148,6 +148,13 @@
 					select * from tbl_notice_c order by c_num asc, ref asc))
 				where r >= #{startRow} and r <= #{endRow}
 			]]>
+	</select>
+	
+	<!-- 관리자 페이지 모든 댓글 수 -->
+	<select id="getcommentCount" resultType="int">
+		<![CDATA[
+			select count(*) from tbl_notice_c
+		]]>
 	</select>
 	
 </mapper>

@@ -91,7 +91,6 @@
 								<li><a class="dropdown-item" href="/coachroom/schedule">스케줄관리</a></li>
 								<li><a class="dropdown-item" href="/coachroom/class">강의관리</a></li>
 								<li><a class="dropdown-item" href="/coachroom/payment">수입관리</a></li>
-	
 								<li><a class="dropdown-item" href="/coachroom/info">정보관리</a></li>
 							</ul>
 						</li>

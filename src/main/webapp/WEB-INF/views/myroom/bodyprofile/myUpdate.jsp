@@ -77,8 +77,9 @@
 		                    </div>
 		                    <div class="form-group">
 		                    
-		                        <label for="inputZip5">* 프로필 사진</label>
-		                        <input type="file" class="form-control" id="save" name="save" value="${userInfo.img}" /><br/>	
+		                        <label for="inputZip5">* 프로필 사진</label><br/>
+		                        <img class="img-account-profile rounded-circle mb-2" src="../../resources/image/upload/${userInfo.img}" alt="img">
+		                        <input type="file" class="form-control"  id="save" name="save" /><br/>	
 		                    </div>
 		                </div>
 		                <hr class="my-4" >

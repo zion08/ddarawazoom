@@ -225,15 +225,14 @@
 	
 	<!-- Vod 관심 등록 해제 -->
 	<delete id="vodLikeDelete">
-		delete from tbl_like where id = #{id} and vod_num = #{vodm_num}
+		delete from tbl_like where id = #{id} and vod_num = #{vod_num}
 	</delete>
-
 
 	<!-- 작성한 리뷰 가져오기 -->
 	<select id="getReview" resultType="org.mvc.bean.ReviewDTO">
 		<![CDATA[
 			select * from(
-			    select class_num, review_num, id, nick, title, content, grade, rownum r from(
+			    select class_num, review_num, id, nick, title, content, grade, deleted, rownum r from(
 			    select * from tbl_review order by review_num desc))
 			where id = #{id}
 		]]>	

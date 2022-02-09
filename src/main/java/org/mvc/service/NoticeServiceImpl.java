@@ -100,4 +100,9 @@ public class NoticeServiceImpl implements NoticeService{
 		return mapper.getAllComment(startRow, endRow);
 	}
 
+	@Override
+	public int getcommentCount() {
+		return mapper.getcommentCount();
+	}
+
 }
