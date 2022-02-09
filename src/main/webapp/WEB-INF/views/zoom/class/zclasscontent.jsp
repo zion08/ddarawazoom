@@ -3,6 +3,9 @@
 <%@ include file="../../layout/header.jsp"%>    
 <%@ include file="../../pay/iamport.jsp"%>
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
+
 <script src ="../../resources/js/myroom/like.js" type="text/javascript"></script>
 
 <div class="container-fluid"> 
@@ -150,7 +153,17 @@
 				            </tr>
 				      		<tr>
 				                <th scope="row"> 후기 </th>
-				                <td colspan="2">${reviewList.content}</td> 
+				                <td colspan="2">
+					                <c:if test="${reviewList.deleted ne 'yes'}">
+	                    					${reviewList.content}
+	                    			</c:if>
+	                    			<c:if test="${reviewList.deleted eq 'yes' and reviewList.deleted ne 'no'}">
+	                    				<font style="color: red;">
+                    						<b>[<i class="fas fa-dizzy"></i> 경고!]</b> ${reviewList.id}님께서 작성하신 리뷰는 <b>"리뷰 관리 기준"</b>을 위반하여 관리자에 의해 경고를 받았습니다.<br/><br/>
+                    						위 경고에 대해 궁금하신 사항이 있으시다면, <b>DDarawaZoom</b>으로 문의 주세요.<br/>
+	                    				</font>
+						           </c:if>
+				                </td> 
 				            </tr>
 	  		           </tbody>
 			         </table>				      			

@@ -34,7 +34,7 @@ public interface NoticeMapper {
 	// 공지 댓글 작성
 	public int commentWrite(Notice_CDTO notice_CDTO);
 	
-	// 공지 댓글 수
+	// 관련 글 공지 댓글 수
 	public int commentCount(int num);
 	
 	// 공지 댓글 리스트
@@ -68,5 +68,7 @@ public interface NoticeMapper {
 			@Param("startRow") int startRow,
 			@Param("endRow") int endRow);
 	
+	// 관리자 관리 - 댓글 수
+	public int getcommentCount();
 }
 

@@ -33,48 +33,48 @@
 		    </div>
 		  </section>
       	</c:if>
-      </div>
-		<c:if test="${count > 0 }">
-			<div class="container-fluid">
-	   		 	<div class="container">
-					<div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 g-3">
-						<c:forEach var="zoomList" items="${zoomList}">
-							<div class="col">
-								<div class="card shadow-sm">
-			        				<img src="/resources/coach/img/${zoomList.img}" class="card-img-top" width="100" height="225">       
-			         					<div class="card-body"> 	
-											<p class="card-text">
-												<b>코치 명 :</b> ${zoomList.c_id} 코치님
-											</p>
-											<p class="card-text">
-												<b>강의 명 :</b><br/>
-												<a href="/ddarawazoom/zoomReadcount?num=${zoomList.num}">${zoomList.title}</a>
-											</p>
-											<p class="card-text">
-												<b>강의 소개 :</b><br/>
-												${zoomList.intro}
-											</p>
-											<p class="card-text">
-												<b>가 격 :</b><br/>
-												${zoomList.price}원 
-											</p>	
-		 								<div class="d-flex justify-content-between align-items-center">
-			              					<div class="btn-group">
-								                <button type="button" class="btn btn-sm btn btn-danger" disabled>${zoomList.type}</button>&nbsp;&nbsp; 	 	 
-								               	<button type="button" class="btn btn-sm btn btn-success" disabled>${zoomList.goal}</button>&nbsp;&nbsp;
-								               	<button type="button" class="btn btn-sm btn btn-warning" disabled>${zoomList.tool}</button>&nbsp;&nbsp;
-								               	<button type="button" class="btn btn-sm btn btn-primary" disabled>${zoomList.frequency}</button>
-								               	<button type="button" class="btn btn-light" onclick="deleteLikeZoom(${zoomList.num});">관심 해제</button>
-			              					</div>	     
-							            </div>
-							         </div>
-				        		</div>
+	</div>
+	<c:if test="${count > 0 }">
+		<div class="container-fluid">
+   		 	<div class="container">
+				<div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 g-3">
+					<c:forEach var="zoomList" items="${zoomList}">
+						<div class="col">
+							<div class="card shadow-sm">
+		        				<img src="/resources/coach/img/${zoomList.img}" class="card-img-top" width="100" height="225">       
+		         					<div class="card-body"> 	
+										<p class="card-text">
+											<b>코치 명 :</b> ${zoomList.c_id} 코치님
+										</p>
+										<p class="card-text">
+											<b>강의 명 :</b><br/>
+											<a href="/ddarawazoom/zoomReadcount?num=${zoomList.num}">${zoomList.title}</a>
+										</p>
+										<p class="card-text">
+											<b>강의 소개 :</b><br/>
+											${zoomList.intro}
+										</p>
+										<p class="card-text">
+											<b>가 격 :</b><br/>
+											${zoomList.price}원 
+										</p>	
+	 								<div class="d-flex justify-content-between align-items-center">
+		              					<div class="btn-group">
+							                <button type="button" class="btn btn-sm btn btn-danger" disabled>${zoomList.type}</button>&nbsp;&nbsp; 	 	 
+							               	<button type="button" class="btn btn-sm btn btn-success" disabled>${zoomList.goal}</button>&nbsp;&nbsp;
+							               	<button type="button" class="btn btn-sm btn btn-warning" disabled>${zoomList.tool}</button>&nbsp;&nbsp;
+							               	<button type="button" class="btn btn-sm btn btn-primary" disabled>${zoomList.frequency}</button>
+							               	<button type="button" class="btn btn-light" onclick="deleteLikeZoom(${zoomList.num});">관심 해제</button>
+		              					</div>	     
+						            </div>
+						         </div>
 			        		</div>
-						</c:forEach> 
-					</div>		
-		 		</div>
-			</div>
-		</c:if>	
+		        		</div>
+					</c:forEach> 
+				</div>		
+	 		</div>
+		</div>
+	</c:if>	
 </body>
 </html>
 
