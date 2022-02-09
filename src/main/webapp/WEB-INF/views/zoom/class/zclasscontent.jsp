@@ -27,8 +27,7 @@
 				<input type="button" class="btn btn-outline-danger" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${zoomContent.num}'"> 
 			</c:if>	 
 			<c:if test="${sessionScope.id != null}">
-				<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
-				<input type="button" class="btn btn-outline-primary" value="장바구니 담기">
+				<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">			
 				<input type="button" id="payBtn" class="btn btn-outline-primary" value="바로 결제하기">
 			</c:if>
 		</div>
@@ -73,18 +72,32 @@
 			        txt=x.grade.value
 			        if (txt>=1 && txt<=10) {
 						alert("맞게 입력하셨습니다.")
-			            return false
+			            return true;
 			        }else{
 			            alert("1부터 10까지 숫자만 입력가능합니다.")
-			            return false
+			            return false;
 			        }
 				}
+			    
+			    function nullcheck(){
+					var n = document.numbercheck;
+					if(n.grade.value == ""){
+						alert("평점은 필수항목입니다");
+						n.grade.focus();
+						return false;	
+					}
+					if(n.content.value == ""){
+						alert("내용은 필수항목입니다");
+						n.content.focus();
+						return false;	
+					}
+			    }	
 			</script> 
 			
 			<hr class="featurette-divider">
 	  			<div class="row featurette">
   			 	<div class="col-md-12">
-  			 		<form action="re_writePro" method="post" name="numbercheck">
+  			 		<form action="re_writePro" method="post" name="numbercheck" onsubmit='return validate(this.form);'>
 	  			 		<input type="hidden" name="class_num" value="${zoomContent.num}">
 	  			 		<input type="hidden" name="title" value="${zoomContent.title}">
 	     	 	  	<table class="table table-bordered">
@@ -113,7 +126,7 @@
 				            </tr>
 				            <tr>
 				            	<td colspan="4" align="right">
-					            	<input type="submit" value="작성하기">&nbsp;&nbsp;
+					            	<input type="submit" value="작성하기" onclick='return nullcheck(this.form);'>&nbsp;&nbsp;
 					            	<input type="reset" value="초기화하기">&nbsp;&nbsp;		           
 				            	</td>
 				            </tr>
@@ -172,13 +185,13 @@
 			</c:forEach>
 			</c:if>	
 			
-		<c:if test="${totalPage > 1}">
+		<c:if test="${count > 1}">
 		<div id="page">페이지&nbsp;  
 			<c:if test="${startPage > 10}">
 				<a href="/ddarawazoom/zclasscontent?num=${zoomContent.num}&pageNum=${startPage - 10}"> [이전] </a>
 			</c:if>
 			
-			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1"> 
 				<a href="/ddarawazoom/zclasscontent?num=${zoomContent.num}&pageNum=${i}">${i}</a>
 			</c:forEach>
 			
