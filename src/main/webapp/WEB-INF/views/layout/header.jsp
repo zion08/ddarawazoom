@@ -36,6 +36,9 @@
 				</a> 
 				<ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
 					<li><a class="dropdown-item" href="/ddarawazoom/zoom">Zoom 강의</a></li>
+						<c:if test="${sessionScope.id != null}">
+							<li><a class="dropdown-item" href="/ddarawazoom/myclassroom">내 강의실</a></li>
+						</c:if>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/ddarawazoom/vod">Vod 강의</a></li>
 					

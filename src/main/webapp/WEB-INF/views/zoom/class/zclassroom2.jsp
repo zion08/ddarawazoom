@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<head>
+<head> 
     <title>Zoom WebSDK</title>
     <meta charset="utf-8" />
     <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.2.0/css/bootstrap.css" />
@@ -22,10 +22,6 @@
     <script src="/resources/js/zoom/tool.js"></script>
     <script src="/resources/js/zoom/vconsole.min.js"></script>
     <script src="/resources/js/zoom/meeting.js"></script>
-
-    <script>
-
-    </script>
 </body>
 
 </html>

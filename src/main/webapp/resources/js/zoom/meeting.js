@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', function(event) {
+window.addEventListener('DOMContentLoaded', function(event) { 
   console.log('DOM fully loaded and parsed');
   websdkready();
 });

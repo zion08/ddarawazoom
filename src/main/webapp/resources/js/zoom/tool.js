@@ -1,4 +1,4 @@
-var testTool = {
+var testTool = { 
   b64EncodeUnicode: function (str) {
     // first we use encodeURIComponent to get percent-encoded UTF-8,
     // then we convert the percent encodings into raw bytes which

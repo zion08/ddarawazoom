@@ -9,8 +9,7 @@
     <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.2.0/css/react-select.css" />
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-</head>
+</head> 
 
 <body>
     <style>
@@ -150,11 +149,6 @@
     <script src="/resources/js/zoom/tool.js"></script>
     <script src="/resources/js/zoom/vconsole.min.js"></script>
     <script src="/resources/js/zoom/index.js"></script> 
-
-    <script>
-
-
-    </script>
 </body>
 
 </html>

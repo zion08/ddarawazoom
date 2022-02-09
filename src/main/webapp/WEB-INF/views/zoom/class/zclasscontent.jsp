@@ -70,18 +70,32 @@
 			        txt=x.grade.value
 			        if (txt>=1 && txt<=10) {
 						alert("맞게 입력하셨습니다.")
-			            return false
+			            return true;
 			        }else{
 			            alert("1부터 10까지 숫자만 입력가능합니다.")
-			            return false
+			            return false;
 			        }
 				}
+			    
+			    function nullcheck(){
+					var n = document.numbercheck;
+					if(n.grade.value == ""){
+						alert("평점은 필수항목입니다");
+						n.grade.focus();
+						return false;	
+					}
+					if(n.content.value == ""){
+						alert("내용은 필수항목입니다");
+						n.content.focus();
+						return false;	
+					}
+			    }	
 			</script> 
 			
 			<hr class="featurette-divider">
 	  			<div class="row featurette">
   			 	<div class="col-md-12">
-  			 		<form action="re_writePro" method="post" name="numbercheck">
+  			 		<form action="re_writePro" method="post" name="numbercheck" onsubmit='return validate(this.form);'>
 	  			 		<input type="hidden" name="class_num" value="${zoomContent.num}">
 	  			 		<input type="hidden" name="title" value="${zoomContent.title}">
 	     	 	  	<table class="table table-bordered">
@@ -110,7 +124,7 @@
 				            </tr>
 				            <tr>
 				            	<td colspan="4" align="right">
-					            	<input type="submit" value="작성하기">&nbsp;&nbsp;
+					            	<input type="submit" value="작성하기" onclick='return nullcheck(this.form);'>&nbsp;&nbsp;
 					            	<input type="reset" value="초기화하기">&nbsp;&nbsp;		           
 				            	</td>
 				            </tr>
