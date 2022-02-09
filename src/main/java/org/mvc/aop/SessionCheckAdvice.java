@@ -66,4 +66,28 @@ public class SessionCheckAdvice {
 		Object obj = jp.proceed();
 		return obj;
 	}
+	
+	@Around("execution(* org.mvc.controller.Manager*.*(..))")
+	public Object adminSessionCheck(ProceedingJoinPoint jp)throws Throwable{
+		log.info("=====[ AOP - session check ]=====");
+		
+		// 현재 실행중인 Servlet 설정 정보를 모두 가져옴
+		RequestAttributes ra = RequestContextHolder.currentRequestAttributes();
+				
+		// Servlet 설정 정보에서 Request를 꺼내기 위해 타입 변경
+		ServletRequestAttributes sra = (ServletRequestAttributes)ra;
+		
+		// 타입 변경된 객체에서 Request 객체를 가져옴
+		HttpServletRequest request = sra.getRequest();
+		
+		// Request에서 session 객체를 가져옴
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("admin") == null) {
+			return "/main/adminSessionCheck";
+		}
+		
+		Object obj = jp.proceed();
+		return obj;
+	}
 }

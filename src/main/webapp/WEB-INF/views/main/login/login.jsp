@@ -43,15 +43,14 @@
 		    
 		   <div class="findidpw">
 		   		<label>
-		   			<input type="button" value="아이디/비밀번호 찾기" onclick="window.location='/ddarawazoom/findidpw'">
+		   			<input type="button" class="w-100 btn btn-lg btn-Dark mb-3" value="아이디/비밀번호 찾기" onclick="window.location='/ddarawazoom/findIdPw'"/>
 		   		</label>
 		   </div>
 		    
 		    <!-- 보라색 로그인 버튼 -->
 		    <input type="submit"
 		    class="w-100 btn btn-lg btn-secondary mb-3"
-		    value="Login"
-		    style="margin-top: 20px;"/>
+		    value="Login"/>
 		    
 		    <!-- 카카오톡 로그인 버튼 -->
 		    <img src="/resources/user/custom/img/kakao_login_large_narrow.png" width="320px" onclick="kakaoLogin();" />

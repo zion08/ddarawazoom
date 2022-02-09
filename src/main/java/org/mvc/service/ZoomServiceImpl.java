@@ -68,8 +68,8 @@ public class ZoomServiceImpl implements ZoomService{
 	
 	// 후기관련
 	@Override
-	public List<ReviewDTO> reviewList(int startRow, int endRow) { 
-		return mapper.reviewList(startRow, endRow);  
+	public List<ReviewDTO> reviewList(int class_num, int startRow, int endRow) { 
+		return mapper.reviewList(class_num, startRow, endRow);  
 	}
 
 	@Override

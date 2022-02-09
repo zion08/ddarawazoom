@@ -3,8 +3,7 @@ package org.mvc.service;
 import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
+import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.mybatis.UserInfoMapper;
@@ -67,32 +66,48 @@ public class UserInfoServiceImpl implements UserInfoService{
 	public int idCheck(String id) {
 		return mapper.idCheck(id);
 	}
-	
-	@Override
-	public int idCheckcoach(String id) {
-		return mapper.idCheckcoach(id);
-	}
-	
+
 	@Override
 	public int nickCheck(String nick) {
 		return mapper.nickCheck(nick);
+
+
+	@Override
+	public String findId(UserInfoDTO dto) {
+		return mapper.findId(dto);
 	}
-	
+
+	@Override
+	public int emailCheck(UserInfoDTO dto) {
+		return mapper.emailCheck(dto);
+	}
+
+	@Override
+	public int updatePw(UserInfoDTO dto) {
+		return mapper.updatePw(dto);
+	}
+
+	@Override
+	public int c_idCheck(String c_id) {
+		return mapper.c_idCheck(c_id);
+	}
+
 	@Override
 	public int nickCheckcoach(String nick) {
 		return mapper.nickCheckcoach(nick);
 	}
 
-//	@Override
-//	public String getId(String name, String tel) {
-//		return mapper.getId(name, tel);
-//	}
-//
-//
-//	@Override
-//	public int findPw(String name, String id, String email) {
-//		return mapper.findPw(name, id, email);
-//	}
+	@Override
+	public int coachInsert(CoachInfoDTO coachDTO) {
+		return mapper.coachInsert(coachDTO);
+	}
+
+	@Override
+	public int careerInsert(CoachCareerDTO careerDTO) {
+		if(careerDTO.getCertificate() != null) {
+			mapper.insertCertificate(careerDTO);
+		}
+		return mapper.careerInsert(careerDTO);
 	
 
 

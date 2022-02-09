@@ -2,9 +2,10 @@ package org.mvc.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.UserInfoDTO;
-import org.mvc.service.CoachRoomServiceImpl;
+import org.mvc.service.UserEmailService;
 import org.mvc.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,10 @@ public class MainController {
 
 	@Autowired // service 끌어다 놨다.
 	private UserInfoService service;
+	
+	@Autowired
+	private UserEmailService emailService;
+	
 
 	@RequestMapping
 	public String main() {
@@ -43,11 +48,18 @@ public class MainController {
 		System.out.println(coachDTO);
 
 		int result = 0;
-
-		if (service.getUserInfo(userDTO) == 1) {
-			result = 1;
-			session.setAttribute("id", userDTO.getId());
-			model.addAttribute("result", result);
+		
+		if(service.getUserInfo(userDTO) == 1){
+			if(userDTO.getId().equals("admin")) {
+				result = 1;
+				session.setAttribute("admin", userDTO.getId());
+				model.addAttribute("result", result);
+			} else {
+				result = 1;
+				session.setAttribute("id", userDTO.getId());
+				model.addAttribute("result", result);
+			}
+			
 		} else {
 			coachDTO.setC_id(userDTO.getId());
 			coachDTO.setC_pw(userDTO.getPw());
@@ -71,49 +83,64 @@ public class MainController {
 		log.info("	-----CT----->logout Page");
 		return "/main/logout/logout";
 	}
-
-//	// 아이디, 비밀번호 찾기 페이지
-//	@RequestMapping("/findidpw")
-//	public String findidpw() {
-//		log.info("	-----CT----->findidpw Page");
-//		return "/main/findidpw/findidpw";
-//	}
-//
-//
-//	// 찾은 아이디값 내어주기
-//	@RequestMapping("/findidpwPro")
-//	public @ResponseBody String findidpwPro(
-//		@RequestParam("name") String name, @RequestParam("tel") String tel
-//
-//	) {
-//		String result = service.getId(name, tel);
-//		log.info("	-----CT----->findidpwPro Page");
-//		return result;
-//	}
-//
-//	// 비밀번호 찾기 : 이름, 아이디, 이메일 맞나 확인
-//	@RequestMapping("/findpwPro")
-//	public @ResponseBody int findpwPro(@RequestParam("name") String name, @RequestParam("id") String id,
-//			@RequestParam("email") String email) {
-//		int result = 0;
-//		log.info("name=" + name + "id=" + id + "email=" + email);
-//		if (service.findPw(name, id, email) == 1) {
-//			log.info("1 나오라고" + service.findPw(name, id, email));
-//			result = 1;
-//		}
-//		// String result=service.findPw(int);
-//		log.info("	-----CT----->findpwPro Page");
-//		return result;
-//	}
-//
-//	
-//	// 비밀번호 찾기
-//	@RequestMapping("/findpw")
-//	public void findpw(UserInfoDTO dto) throws Exception {
-//		log.info("------CT----->findpw Page");
-//	}
-
-	// 아이디 중복체크
+	
+	@RequestMapping("/findIdPw")
+	public String findid() {
+		log.info("	-----CT----->findIdPw Page");
+		return "/main/findidpw/findIdPw";
+	}
+	
+	@RequestMapping("/findIdPro")
+	public @ResponseBody String findIdPro(@RequestBody UserInfoDTO dto) {
+		log.info("	-----CT----->findIdPro Page");
+		
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append(dto.getTel());
+		sb.insert(3, "-");
+		sb.insert(8, "-");
+		
+		dto.setTel(sb.toString());
+		
+		String result = null;
+		result = service.findId(dto);
+		
+		return result;
+	}
+	
+	@RequestMapping("/emailSend")
+	public @ResponseBody int emailSend(String id, String email) {
+		log.info("	-----CT----->emailSend Page");
+		
+		int result = 0;
+		result = emailService.mailSendWithUserKey(id, email);
+		
+		return result;
+	}
+	
+	@RequestMapping("/emailCheck")
+	public @ResponseBody int emailCheck(@RequestBody UserInfoDTO dto) {
+		log.info("	-----CT----->emailCheck Page");
+		
+		int result = 0;
+		result = service.emailCheck(dto);
+		
+		return result;
+	}
+	
+	@RequestMapping("/updatePw")
+	public @ResponseBody int updatePw(UserInfoDTO dto, String pw1, String pw2) {
+		log.info("	-----CT----->updatePw Page");
+		
+		int result = 0;
+		if(pw1.equals(pw2)) {
+			dto.setPw(pw1);
+			result = service.updatePw(dto);
+		}
+		
+		return result;
+	}
+	
 	@RequestMapping("/idCheck")
 	public @ResponseBody int idCheck(String id) {
 		log.info("	-----CT----->idCheck");
@@ -121,7 +148,9 @@ public class MainController {
 		if (id == "") {
 			result = -1;
 		} else {
-			result = service.idCheck(id);
+			if(service.idCheck(id) == 1 || service.c_idCheck(id) == 1) {
+				result = 1;
+			}
 		}
 		return result;
 	}
@@ -193,15 +222,25 @@ public class MainController {
 	
 	@RequestMapping("/coachsignupPro")
 	public String coachsignupPro(CoachInfoDTO dto, Model model) {
-		log.info("------CT----->coachsignupPro Page"+dto.getC_id());
-		if(service.insertCoachInfo(dto) == 1) {
-			model.addAttribute("result",  1);
-		}else {
-			model.addAttribute("result", 0);
-		}
+		log.info("------CT----->coachsignupPro Page");
+		log.info(""+dto);
+		
+		service.coachInsert(dto);
+		model.addAttribute("c_id", dto.getC_id());
 		return "/main/signup/coachsignupPro";
 	}
-
+	
+	@RequestMapping("/coachCareerInsert")
+	public @ResponseBody int coachCareerInsert(@RequestBody CoachCareerDTO dto) {
+		log.info("------CT----->coachCareerInsert Page");
+		log.info(""+dto);
+		int result = 0;
+		
+		result = service.careerInsert(dto);
+		
+		return result;
+	}
+	
 	@RequestMapping("/signupwelcome")
 	public String signupwelcome() {
 		log.info("------CT----->signupwelcome Page");
