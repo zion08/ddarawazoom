@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
 import org.mvc.bean.NoticeDTO;
 import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.UserInfoDTO;
+import org.mvc.service.ManagerService;
 import org.mvc.service.NoticeService;
 import org.mvc.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class ManagerController {
 	
 	@Autowired
 	private NoticeService serviceNotice;
+	
+	@Autowired
+	private ManagerService managerService;
 	
 //	=========== 관리자 수입 관련 코드 시작 ===========  //
 	@RequestMapping("/sales")
@@ -129,4 +134,59 @@ public class ManagerController {
 	
 //	=========== 관리자 리뷰 관련 코드 종료 ===========  //
 
+//	=========== 관리자 코치 관련 코드 시작 ===========  //
+	
+	@RequestMapping("/coach")
+	public String coachMain(Model model) {
+		log.info("	-----CT-----> manager coachMain");
+		model.addAttribute("count", managerService.countAllCoach());
+		model.addAttribute("allCoachInfo", managerService.getAllCoachInfo());
+		return "/manager/coach/coachMain";
+	}
+	
+	@RequestMapping("/coachInfo")
+	public String coachInfo(String c_id, Model model) {
+		log.info("	-----CT-----> manager coachInfo");
+		
+		// 코치 정보
+		model.addAttribute("number", 1);
+		model.addAttribute("coachInfo", managerService.coachInfo(c_id));
+		model.addAttribute("coachCareer", managerService.coachCareer(c_id));
+
+		// 코치가 등록한 수업 정보
+		model.addAttribute("classNumber", 1);
+		model.addAttribute("coachClass", managerService.getCoachClass(c_id));
+		
+		return "/manager/coach/coachInfo";
+	}
+	
+	@RequestMapping("/coachStatusChange")
+	public @ResponseBody int coachStatusChange(CoachInfoDTO dto) {
+		log.info("	-----CT-----> manager coachStatusChange");
+		int result = 0;
+		result = managerService.changeStatus(dto);
+		
+		return result;
+	}
+	
+	@RequestMapping("/classDelete")
+	public @ResponseBody int classDelete(int num){
+		log.info("	-----CT-----> manager classDelete");
+		int result = 0;
+		result = managerService.deleteClass(num);
+		
+		return result;
+	}
+	
+	@RequestMapping("/classRestore")
+	public @ResponseBody int classRestore(int num) {
+		log.info("	-----CT-----> manager classRestore");
+		int result = 0;
+		result = managerService.restoreClass(num);
+		
+		return result;
+	}
+	
+//	=========== 관리자 코치 관련 코드 종료 ===========  //
+	
 }
