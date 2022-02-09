@@ -62,7 +62,7 @@
 		select * from (
 			select review_num,class_num, id,nick,title,content, grade, deleted, rownum r from (
 				select * from tbl_review order by review_num desc))
-		where r >= #{startRow} and r <= #{endRow}
+		where class_num = #{class_num} and r >= #{startRow} and r <= #{endRow}
 	]]>
 	</select>
 	
