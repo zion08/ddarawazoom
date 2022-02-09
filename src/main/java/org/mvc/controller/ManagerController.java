@@ -172,6 +172,39 @@ public class ManagerController {
 		
 		return "/manager/review/review";
 	}
+		
+		@RequestMapping("/managerReviewChange")
+		public @ResponseBody int managerReviewChange(@RequestBody ReviewDTO reviewDTO) {
+			log.info("	-----CT-----> manager managerReviewChange");
+			
+			int result = 0;
+			
+			result = serviceReview.managerReviewChange(reviewDTO.getReview_num());
+			
+			return result;
+		}
+		
+		@RequestMapping("/managerChangeCancell")
+		public @ResponseBody int managerChangeCancell(@RequestBody ReviewDTO reviewDTO) {
+			log.info("	-----CT-----> manager managerChangeCancell");
+			
+			int result = 0;
+			
+			result = serviceReview.managerChangeCancell(reviewDTO.getReview_num());
+			
+			return result;
+		}
+		
+		@RequestMapping("/managerReviewDelete")
+		public @ResponseBody int managerReviewDelete(@RequestBody ReviewDTO reviewDTO) {
+			log.info("	-----CT-----> manager managerReviewDelete");
+			
+			int result = 0;
+			
+			result = serviceReview.managerReviewDelete(reviewDTO.getReview_num());
+			
+			return result;
+		}
 	
 //	=========== 관리자 리뷰 관련 코드 종료 ===========  //
 

@@ -39,6 +39,6 @@
 	     	</div>
 		</div>
 	</form>
-</body>
 	<script src="../../resources/js/myroom/form-validation.js"></script>
+</body>
 </html>

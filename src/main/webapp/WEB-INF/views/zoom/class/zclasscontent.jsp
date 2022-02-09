@@ -159,7 +159,7 @@
 	                    			</c:if>
 	                    			<c:if test="${reviewList.deleted eq 'yes' and reviewList.deleted ne 'no'}">
 	                    				<font style="color: red;">
-                    						<b>[<i class="fas fa-dizzy"></i> 경고!]</b> ${reviewList.id}님께서 작성하신 리뷰는 <b>"리뷰 관리 기준"</b>을 위반하여 관리자에 의해 경고를 받았습니다.<br/>
+                    						<b>[<i class="fas fa-dizzy"></i> 경고!]</b> ${reviewList.id}님께서 작성하신 리뷰는 <b>"리뷰 관리 기준"</b>을 위반하여 관리자에 의해 경고를 받았습니다.<br/><br/>
                     						위 경고에 대해 궁금하신 사항이 있으시다면, <b>DDarawaZoom</b>으로 문의 주세요.<br/>
 	                    				</font>
 						           </c:if>
