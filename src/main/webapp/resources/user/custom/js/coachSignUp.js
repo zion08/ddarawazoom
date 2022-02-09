@@ -94,7 +94,12 @@ function careerInsert(){
 		return false;
 	}
 	
+	if($('#c_img').val() != null){
+		imgUpload();
+	}
+
 	var data = JSON.stringify($('form#coachCareerForm').serializeObject());
+
             $.ajax({
                data : data,
                url : "/ddarawazoom/coachCareerInsert",
@@ -111,4 +116,18 @@ function careerInsert(){
                   
                }
              });
+}
+
+function imgUpload(){
+
+	var form = new FormData();
+	form.append('save', $('#formFile')[0].files[0]);
+
+	$.ajax({
+		data : form,
+        url : "/ddarawazoom/imgUpload",
+        type : "POST",
+		processData : false,
+		contentType : false
+	});
 }
