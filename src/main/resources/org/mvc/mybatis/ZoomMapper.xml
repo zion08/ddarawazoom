@@ -60,9 +60,9 @@
 	<select id="reviewList" resultType="org.mvc.bean.ReviewDTO">
 	<![CDATA[
 		select * from (
-			select review_num, class_num, id, nick, title, content, grade, rownum r from (
-				select * from tbl_review order by review_num desc)) 
-		where r >= #{startRow} and r <= #{endRow}
+			select review_num,class_num, id,nick,title,content, grade, rownum r from (
+				select * from tbl_review order by review_num desc))
+		where class_num = #{class_num} and r >= #{startRow} and r <= #{endRow}
 	]]>
 	</select>
 	

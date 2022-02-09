@@ -247,7 +247,7 @@ public class ZoomController {
 	    count = service.reCount(num);
 	    List reviewList = null;
 	    if (count > 0) {
-	    	reviewList = service.reviewList(startRow, endRow); 
+	    	reviewList = service.reviewList(num, startRow, endRow); 
 	    }	
 	    
 	    if(count > 0) {

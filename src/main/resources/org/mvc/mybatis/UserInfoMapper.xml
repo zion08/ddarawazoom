@@ -19,6 +19,35 @@
 		select count(*) from tbl_user where id = #{id}
 	</select>
 	
+	<select id="c_idCheck" resultType="int">
+		select count(*) from tbl_coach where c_id = #{c_id}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="String">
+		select id from tbl_user where name = #{name} and tel = #{tel}
+	</select>
+	
+	<!-- 이메일 인증 -->
+	<update id="emailTemp">
+		update tbl_user set
+			temp_pw = #{temp_pw}
+		where id = #{id} and email = #{email}
+	</update>
+	
+	<!-- 인증번호 체크 -->
+	<select id="emailCheck" resultType="Integer">
+		select count(*) from tbl_user
+			where id = #{id} and email = #{email} and temp_pw = #{temp_pw}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePw">
+		update tbl_user set
+			pw = #{pw}
+		where id = #{id} and email = #{email}
+	</update>
+	
 	<!-- 카카오 로그인 -->
 	<insert id="kakaoInsert">
 		insert into tbl_user(id, email, nick, img)
@@ -55,6 +84,24 @@
 	<select id="coachCheck" resultType="Integer">
 		select count(*) from tbl_coach where c_id = #{c_id} and c_pw = #{c_pw}
 	</select>
+	
+	<!-- 코치 회원가입 -->
+	<insert id="coachInsert">
+		insert into tbl_coach(c_id, c_pw, c_name, c_nick, c_email, c_birth, c_gender, c_tel, company, c_time)
+			values(#{c_id}, #{c_pw}, #{c_name}, #{c_nick}, #{c_email}, #{c_birth}, #{c_gender}, #{c_tel}, #{company}, #{c_time})
+	</insert>
+	
+	<insert id="careerInsert">
+		insert into tbl_coach_career(c_id, specialty, career)
+			values(#{c_id}, #{specialty}, #{career})
+	</insert>
+	
+	<insert id="insertCertificate">
+		update tbl_coach_career set
+			certificate = #{certificate}
+		where c_id = #{c_id}
+	</insert>
+	
 </mapper>
 
 
