@@ -153,7 +153,7 @@
 	<!-- 멤버 탈퇴 -->
 	<update id="statusChange">
 		update tbl_user set
-			status = '탈퇴'
+			status = '탈퇴멤버'
 				where id = #{id}
 	</update>
 <!-- 멤버 관련 코드 종료 -->

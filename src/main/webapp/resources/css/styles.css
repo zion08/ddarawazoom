@@ -12,11 +12,23 @@
  */
 
 .wrapper{
-	width: 50%; margin: 0 auto; background: ivory; margin-top: 100px;
+	width: 50%; margin: 0 auto; background: ivory;
 }
 
 .signupTitle{
 	width: 100%; background: lightblue;
+}
+
+
+#findid{
+	display:block;
+}
+#findpw{
+	display:none;
+}
+
+#idSpan{
+	display: block;
 }
 
 

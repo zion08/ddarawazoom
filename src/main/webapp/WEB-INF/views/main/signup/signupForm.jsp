@@ -54,6 +54,48 @@ $(document).ready(function(){
 
 </script>
 
+
+
+<script>
+$(document).ready(function(){
+	// 닉네임 중복체크
+	$("#nickCheck").click(function(){
+		// ajax 호출
+		$.ajax({
+			// 값을 보내는 방식
+			type : "post",
+			// 호출할 링크(컨트롤과 연결)
+			url : "/ddarawazoom/nickCheck",
+			// 보낼 파라미터
+			data : { nick : $("#nick").val() } ,
+			// 값을 성공적으로 가져왔을 때 data에 값을 대입
+			success : function(data){
+				console.log(data);
+				a = parseInt(data);
+				if(a == 1){
+					$("#outcome").html("<font color='red'>이미 사용중인 닉네임입니다. 다른 닉네임을 사용해주세요.</font>");
+					$("#nick").attr('class', 'custom-form-control custom-is-invalid');
+				} else if(a == 0) {
+					$("#outcome").html("<font color='green'>사용가능한 닉네임입니다.</font>");
+				} else if(a == -1){
+					$("#outcome").html("<font color='red'>닉네임을 입력해주세요.</font>");
+					$("#nick").attr('class', 'custom-form-control custom-is-invalid');
+				}
+			}
+		});
+	
+	
+		
+		if($("#outcome").text() == '닉네임를 입력해주세요.' || $("#outcome").text() == '이미 사용중인 닉네임입니다. 다른 닉네임을 사용해주세요.'){
+			return false;
+		}
+	});
+	
+});
+
+</script>
+
+
 <div class="container-fluid">
     
     <div class="container">
@@ -61,6 +103,7 @@ $(document).ready(function(){
 	    <div class="row g-5">
 	      <div class="col-md-7 col-lg-8">
 	        <h4 class="mb-3">회원가입</h4>
+	        
 	        <form class="needs-validation" novalidate action="/ddarawazoom/signupPro" method="post" onsubmit="submit_check">
 	          <div class="row g-3">
 	            <div class="col-8">
@@ -99,19 +142,24 @@ $(document).ready(function(){
 				
 	            <div class="col-12">
 	              <label for="email" class="form-label">* 이메일</label>
-	              <input type="email" class="form-control" id="email" name="email" placeholder="exapmle@email.com" required>
+	              <input type="email" class="form-control" id="email" name="email" placeholder="example@email.com" required>
 	              <div class="invalid-feedback">
 	                이메일은 필수항목입니다.
 	              </div>
 	            </div>
 	
-	            <div class="col-12">
+	            <div class="col-8">
 	              <label for="nickname" class="form-label">* 닉네임</label>
 	              <input type="text" class="form-control" id="nick" name="nick" placeholder="닉네임을 입력하세요." required>
 	              <div class="invalid-feedback">
 	                닉네임은 필수항목입니다.
 	              </div>
 	            </div>
+	            <div class="col-4" style="float: right;">
+				    <input style="margin-top: 31px;" type="button"
+				    	class="btn btn-primary mb-3 form-control" id="nickCheck" value="닉네임 중복확인"/>
+				</div>
+				<label id=outcome class="font" style="margin-top: 0px;"></label>
 
 			    <div class="form-check">
 			      <input type="checkbox" class="form-check-input" id="checkbox1" name="checkbox" required onclick="selectAll(this);">

@@ -1,12 +1,16 @@
 package org.mvc.service;
 
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.mybatis.UserInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +26,11 @@ public class UserInfoServiceImpl implements UserInfoService{
 	@Override
 	public int insertUserInfo(UserInfoDTO dto) {
 		return mapper.insertUserInfo(dto);
+	}
+	
+	@Override
+	public int insertCoachInfo(CoachInfoDTO dto) {
+		return mapper.insertCoachInfo(dto);
 	}
 
 	@Override
@@ -58,8 +67,47 @@ public class UserInfoServiceImpl implements UserInfoService{
 	public int idCheck(String id) {
 		return mapper.idCheck(id);
 	}
+	
+	@Override
+	public int idCheckcoach(String id) {
+		return mapper.idCheckcoach(id);
+	}
+	
+	@Override
+	public int nickCheck(String nick) {
+		return mapper.nickCheck(nick);
+	}
+	
+	@Override
+	public int nickCheckcoach(String nick) {
+		return mapper.nickCheckcoach(nick);
+	}
+
+//	@Override
+//	public String getId(String name, String tel) {
+//		return mapper.getId(name, tel);
+//	}
+//
+//
+//	@Override
+//	public int findPw(String name, String id, String email) {
+//		return mapper.findPw(name, id, email);
+//	}
+	
+
+
+	
+
+}
+
 
 	
 	
 	
-}
+	
+	
+
+
+
+	
+

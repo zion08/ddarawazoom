@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../layout/header.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -43,8 +43,7 @@
 		    
 		   <div class="findidpw">
 		   		<label>
-		   			<input type="button" value="아이디 찾기" onclick="window.location='/ddarawazoom/findid'">
-		   			<input type="button" value="비밀번호 찾기" onclick="window.location='/ddarawazoom/findpw'">
+		   			<input type="button" value="아이디/비밀번호 찾기" onclick="window.location='/ddarawazoom/findidpw'">
 		   		</label>
 		   </div>
 		    

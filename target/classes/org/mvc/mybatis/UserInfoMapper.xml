@@ -5,19 +5,58 @@
     
 <mapper namespace="org.mvc.mybatis.UserInfoMapper">
 	
-	<insert id="insertUserInfo" >
+	<!-- 일반 회원가입할 때 삽입하는 정보 -->
+	<insert id="insertUserInfo">
 		insert into tbl_user(id, pw, email, nick)
 			values(#{id} , #{pw} , #{email}, #{nick})
 	</insert>
 	
+	
+	<!-- 코치 회원가입할 때 삽입하는 정보 -->
+	<insert id="insertCoachInfo" >
+		insert into tbl_coach(c_id, c_pw, c_name, c_nick, c_gender, c_tel, c_email, c_img, company)
+			values(#{c_id} , #{c_pw} , #{c_name} , #{c_nick}, #{c_gender}, #{c_tel}, #{c_email}, #{c_img}, #{company})
+	</insert>
+	
+	
+	<!-- 로그인 확인 : 아이디, 패스워드 -->
 	<select id="getUserInfo" resultType="int">
 		select count(*) from tbl_user where id=#{id} and pw=#{pw} and status != '탈퇴'
 	</select>
 	
-	<!-- 아이디 중복확인 -->
+	<!-- 회원가입 아이디 중복확인 -->
 	<select id="idCheck" resultType="int">
 		select count(*) from tbl_user where id = #{id}
 	</select>
+	
+	<!-- 코치 회원가입 아이디 중복확인 -->
+	<select id="idCheckcoach" resultType="int">
+		select count(*) from tbl_coach where c_id = #{c_id}
+	</select>
+	
+	<!-- 회원가입 닉네임 중복확인 -->
+	<select id="nickCheck" resultType="int">
+		select count(*) from tbl_user where nick = #{nick}
+	</select>
+	
+	<!-- 코치 회원가입 닉네임 중복확인 -->
+	<select id="nickCheckcoach" resultType="int">
+		select count(*) from tbl_coach where c_nick = #{c_nick}
+	</select>
+	
+	
+	<!-- 아이디 찾기 : 이름, 전화번호 불러서 아이디값을 내어주기 
+	<select id="getId" resultType="String">
+		select id from tbl_user where name=#{name} and tel=#{tel}
+	</select> -->
+	
+	
+	<!-- 비밀번호 찾기 : 이름, 아이디, 이메일이 정확한 지 확인 
+	<select id="findPw" resultType="int">
+		select count(*) from tbl_user where id = #{id} and name=#{name} and email=#{email}
+	</select> -->
+
+ 	
 	
 	<!-- 카카오 로그인 -->
 	<insert id="kakaoInsert">
