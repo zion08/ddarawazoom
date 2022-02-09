@@ -102,8 +102,12 @@ public class MyRoomController {
 	}
 	
 	@RequestMapping("/imgUpdate")
-	public String imgUpdate() {
+	public String imgUpdate(UserInfoDTO userDTO, HttpSession session, Model model) {
 		log.info("	-----CT----->imgUpdate");
+		
+		String id = (String)session.getAttribute("id");
+		
+		model.addAttribute("userInfo", service.getUserInfo(id));
 		
 		return "/myroom/userinfo/imgUpdate";
 	}

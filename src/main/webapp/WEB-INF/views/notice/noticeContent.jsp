@@ -13,6 +13,7 @@
 	
 	<link href="../../resources/css/manager/notice.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 </head>
 <body>
 	<div class="container">
@@ -111,7 +112,8 @@
 					      <td>
 					        <c:if test="${notice_CList.deleted eq  'all'}">
 								<font style="color: red;">
-									<b>[경고!]</b> ${notice_CList.writer_id}님께서 작성한 댓글은<br/> <b>"댓글 관리 기준"</b>을 위반하여 관리자에 의해 삭제되었습니다.
+									<b>[<i class="fas fa-dizzy"></i> 경고!]</b> ${notice_CList.writer_id}님께서 작성하신 댓글은<b><br/><br/>
+									"댓글 관리 기준"</b>을 위반하여 관리자에 의해 삭제되었습니다.
 								</font>
 							</c:if>
 							<c:if test="${notice_CList.deleted eq  'yes'}">

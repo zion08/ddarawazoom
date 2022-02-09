@@ -46,7 +46,7 @@
 		                                <tr>
 		                                    <td>
 		                                    	<c:if test="${noticeList.pin eq 'yes' }">
-		                                    		<i class="fas fa-grin-stars" style="color:red;">★</i>
+		                                    		<i class="fas fa-grin-stars" style="font-size:20px; color:red;">★</i>
 		                                    	</c:if>
 		                                    	<c:if test="${noticeList.pin eq 'no' }">
 		                                    		<c:set var="number" value="${number + 1}"/>
@@ -77,15 +77,15 @@
 		                                    </td>
 		                                    <td>${noticeList.writer_id}</td>
 		                                    <td>
-		                                    		<c:if test="${noticeList.target_id eq 'All'}">
-		                                    			<i class="fa fa-users icon2"></i>&nbsp;${noticeList.target_id}
-		                                    		</c:if>
-		                                    		<c:if test="${noticeList.target_id eq 'Coach'}">
-		                                    			<i class="fa fa-user icon3" style="color: skyblue;"></i>&nbsp;${noticeList.target_id}
-		                                    		</c:if>
-		                                    		<c:if test="${noticeList.target_id eq 'Member'}">
-		                                    			<i class="fa fa-user icon3" style="color: pink;"></i>&nbsp;${noticeList.target_id}
-		                                    		</c:if>
+	                                    		<c:if test="${noticeList.target_id eq 'All'}">
+	                                    			<i class="fa fa-users icon2"></i>&nbsp;${noticeList.target_id}
+	                                    		</c:if>
+	                                    		<c:if test="${noticeList.target_id eq 'Coach'}">
+	                                    			<i class="fa fa-user icon3" style="color: skyblue;"></i>&nbsp;${noticeList.target_id}
+	                                    		</c:if>
+	                                    		<c:if test="${noticeList.target_id eq 'Member'}">
+	                                    			<i class="fa fa-user icon3" style="color: pink;"></i>&nbsp;${noticeList.target_id}
+	                                    		</c:if>
 		                                    </td>
 		                                    <td>
 												<fmt:formatDate var="notice_regdate" pattern="yyyy-MM-dd HH:mm" value="${noticeList.regdate}" />

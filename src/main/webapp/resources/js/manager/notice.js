@@ -253,7 +253,7 @@ function managerDeletedChange(number){
 	if(window.confirm('본 댓글이 해당 글과 관련이 없거나,\n좋지 않은 댓글이라고 판단되신다면,\n확인을 클릭하세요!') == true){
 	
 			$.ajax({
-			data : JSON.stringify({ c_num : number}),
+			data : JSON.stringify({ c_num : number }),
 			url : "/manager/commentDelete",
 			type : "POST",
 			contentType : "application/json; charset=UTF-8",

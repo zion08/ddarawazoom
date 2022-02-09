@@ -5,8 +5,8 @@
     
 <c:if test="${result == 1}">
 	<script>
-	alert("공지사항이 등록되었습니다.");
-	window.location="/manager/notice";
+		alert("공지사항이 등록되었습니다.");
+		window.location="/manager/notice";
 	</script>
 </c:if>
 

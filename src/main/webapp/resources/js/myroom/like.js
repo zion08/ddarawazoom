@@ -31,8 +31,6 @@ function zoomLikeWrite(number){
 function zoomLikeDelete(number){
 	if(window.confirm('관심 등록을 해제 하시겠습니까?') == true){
 		
-		console.log(number);
-		
 		$.ajax({
 			data : JSON.stringify({ zoom_num : number }),
 			url : "/myroom/likeZoom_out",
