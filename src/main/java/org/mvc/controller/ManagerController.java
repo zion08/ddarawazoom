@@ -118,13 +118,35 @@ public class ManagerController {
 		return "/manager/notice/notice";
 	}
 	
-	@RequestMapping("/commentDelete")
+	@RequestMapping("/managerDeletedChange")
 	public @ResponseBody int commentDelete(@RequestBody Notice_CDTO notice_CDTO) {
-		log.info("	-----CT-----> manager notice_commentDelete");
+		log.info("	-----CT-----> manager managerDeletedChange");
 
 		int result = 0;
 		
 		result = serviceNotice.managerDeletedChange(notice_CDTO.getC_num());
+		
+		return result;
+	}
+	
+	@RequestMapping("/managerDeletedCancell")
+	public @ResponseBody int managerDeletedCancell(@RequestBody Notice_CDTO notice_CDTO) {
+		log.info("	-----CT-----> manager managerDeletedCancell");
+		
+		int result = 0;
+		
+		result = serviceNotice.managerDeletedChange(notice_CDTO.getC_num());
+		
+		return result;
+	}
+	
+	@RequestMapping("/managerCommentDelete")
+	public @ResponseBody int managerCommentDelete(@RequestBody Notice_CDTO notice_CDTO) {
+		log.info("	-----CT-----> manager managerCommentDelete");
+		
+		int result = 0;
+		
+		result = serviceNotice.managerCommentDelete(notice_CDTO.getC_num());
 		
 		return result;
 	}

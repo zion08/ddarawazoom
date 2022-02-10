@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.FileInfo;
+import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.MyRoomService;
@@ -158,6 +159,27 @@ public class ZoomController {
 		return "/zoom/class/zupdatePro"; 
 	}
 	
+	// ===== zoom 내 강의실 ===== //
+	// 1. 1에서 2로 이동
+	@RequestMapping("/zclassroom")
+	public String zclassroom() {
+		return "/zoom/class/zclassroom"; 	
+	}
+	
+	// 2.
+	@RequestMapping("/zclassroom2")
+	public String zclassroom2() {
+		return "/zoom/class/zclassroom2"; 	 
+	}
+	
+	@RequestMapping("/myclassroom")
+	public String myclassroom(Model model, HttpSession session) {		
+		String id = (String)session.getAttribute("id"); 
+		List<PaymentDTO> PaymentMyList = servicePayment.getPaymentMyList(id);	
+		model.addAttribute("payment", PaymentMyList); 
+		return "/zoom/class/myclassroom";
+	}
+	
 	// ===== 조회수 더하기(redirect zclasscontent) ===== //
 	@RequestMapping("zoomReadcount")
 	public String zoomReadcount(int num , RedirectAttributes rttr) {
@@ -224,11 +246,8 @@ public class ZoomController {
 	    List reviewList = null;
 	    if (count > 0) {
 	    	reviewList = service.reviewList(num, startRow, endRow); 
-	    }	
 	    
-	    if(count > 0) {
-	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-	    	
+	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);	   
 	    	int startPage = (int)(currentPage/10)*10+1;
 	    	int pageBlock = 10;
 	    	int endPage = startPage + pageBlock - 1;

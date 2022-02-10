@@ -110,13 +110,28 @@
 		where c_num = #{c_num}
 	</update>
 	
-	<!-- 관리자 댓글 삭제 -->
+	<!-- 관리자 댓글 경고 -->
 	<update id="managerDeletedChange">
 		update tbl_notice_c set
 			deleted = 'all'
 		where c_num = #{c_num}
-	</update>	
+	</update>
 	
+	<!-- 관리자 댓글 경고 취소 -->
+	<update id="managerDeletedCancell">
+		<![CDATA[
+			update tbl_notice_c set
+				deleted = 'cancell'
+			where c_num = #{c_num}
+		]]>
+	</update>
+	
+	<!-- 관리자 댓글 삭제 -->
+	<delete id="managerCommentDelete">
+		delete from tbl_notice_c
+			where c_num = ${c_num}
+	</delete>
+		
 	<!-- 수정에 필요한 댓글 가져오기 -->
 	<select id="getComment" resultType="org.mvc.bean.Notice_CDTO">
 		<![CDATA[
