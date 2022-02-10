@@ -23,6 +23,15 @@
 		select count(*) from tbl_coach where c_id = #{c_id}
 	</select>
 	
+	<!-- 닉네임 중복확인 -->
+	<select id="nickCheck" resultType="int">
+		select count(*) from tbl_user where nick = #{nick}
+	</select>
+	
+	<select id="c_nickCheck" resultType="int">
+		select count(*) from tbl_coach where c_nick = #{c_nick}
+	</select>
+	
 	<!-- 아이디 찾기 -->
 	<select id="findId" resultType="String">
 		select id from tbl_user where name = #{name} and tel = #{tel}
@@ -101,6 +110,29 @@
 			certificate = #{certificate}
 		where c_id = #{c_id}
 	</insert>
+	
+	<update id="coachImgUpload">
+		update tbl_coach set
+			c_img = #{c_img}
+		where c_id = #{c_id}
+	</update>
+	
+	<!-- 코치 소개 페이지 -->
+	<select id="getAllCoach" resultType="org.mvc.bean.CoachInfoDTO">
+		select * from tbl_coach where c_status = '코치'
+	</select>
+	
+	<select id="coachInfo" resultType="org.mvc.bean.CoachInfoDTO">
+		select * from tbl_coach where c_id = #{c_id}
+	</select>
+	
+	<select id="coachCareer" resultType="org.mvc.bean.CoachCareerDTO">
+		select * from tbl_coach_career where c_id = #{c_id}
+	</select>
+	
+	<select id="getCoachClass" resultType="org.mvc.bean.ZoomDTO">
+		select * from tbl_coachClass where c_id = #{c_id}
+	</select>
 	
 </mapper>
 

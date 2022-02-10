@@ -16,7 +16,7 @@
 	      <div class="col-md-7 col-lg-8">
 	        <h2 style="text-align: center; margin-bottom: 40px;"> ddarawazoom 코치지원 </h2>
 	        <h4 class="mb-3">기본정보 입력</h4>
-	        <form class="needs-validation" novalidate action="/ddarawazoom/coachsignupPro" method="post" onsubmit="submit_check">
+	        <form class="needs-validation" novalidate action="/ddarawazoom/coachsignupPro" method="post" enctype="multipart/form-data" onsubmit="submit_check">
 	          <div class="row g-3">
 	            <div class="col-8">
 	              <label for="c_id" class="form-label">* 아이디</label>
@@ -60,13 +60,18 @@
 	              </div>
 	            </div>
 				
-				<div class="col-12">
+				<div class="col-8">
 	              <label for="c_nick" class="form-label">* 닉네임</label>
 	              <input type="text" class="form-control" id="c_nick" name="c_nick" placeholder="닉네임을 입력해주세요" required>
 	              <div class="invalid-feedback">
 	                닉네임은 필수항목입니다.
 	              </div>
 	            </div>
+				<div class="col-4" style="float: right;">
+				    <input style="margin-top: 31px;" type="button"
+				    	class="btn btn-primary mb-3 form-control" id="nickCheck" value="중복확인"/>
+				</div>
+				<label id="nickResult" class="font" style="margin-top: 0px;"></label>
 				
 	            <div class="col-12">
 	              <label for="email" class="form-label">* 이메일</label>
@@ -125,7 +130,7 @@
 	            
 	            <div class="col-12">
 	              <label for="c_img" class="form-label">프로필 사진</label>
-	              <input type="file" class="form-control" id="c_img" name="c_img">
+	              <input type="file" class="form-control" id="save" name="save">
 	            </div>
 
 			    <div class="form-check">

@@ -5,6 +5,7 @@ import java.util.List;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.UserInfoDTO;
+import org.mvc.bean.ZoomDTO;
 import org.mvc.controller.MainController;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,11 @@ public interface UserInfoService {
 	public int idCheck(String id);
 	
 	public int c_idCheck(String c_id);
+	
+	// 닉네임 중복 확인
+	public int nickCheck(String nick);
+		
+	public int c_nickCheck(String c_nick);
 	
 	// 아이디 찾기
 	public String findId(UserInfoDTO dto);
@@ -52,4 +58,19 @@ public interface UserInfoService {
 	
 	// 코치 경력 추가
 	public int careerInsert(CoachCareerDTO careerDTO);
+	
+	// 코치 프로필 사진 등록
+	public int coachImgUpload(CoachInfoDTO dto);
+	
+	// 코치 소개 페이지
+	public List<CoachInfoDTO> getAllCoach();
+	
+	// 코치 정보
+	public CoachInfoDTO coachInfo(String c_id);
+		
+	// 코치 경력
+	public List<CoachCareerDTO> coachCareer(String c_id);
+	
+	// 등록한 강의
+	public List<ZoomDTO> getCoachClass(String c_id);
 }
