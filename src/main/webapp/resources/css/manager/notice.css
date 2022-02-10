@@ -51,7 +51,7 @@
 	margin: auto;
 }
 
-#notice_button{
+#notice_button, #review_button{
 	float: right;
 }
 

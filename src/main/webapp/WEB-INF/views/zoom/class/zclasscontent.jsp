@@ -3,6 +3,9 @@
 <%@ include file="../../layout/header.jsp"%>    
 <%@ include file="../../pay/iamport.jsp"%>
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
+
 <script src ="../../resources/js/myroom/like.js" type="text/javascript"></script>
 
 <div class="container-fluid"> 
@@ -24,8 +27,7 @@
 				<input type="button" class="btn btn-outline-danger" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${zoomContent.num}'"> 
 			</c:if>	 
 			<c:if test="${sessionScope.id != null}">
-				<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
-				<input type="button" class="btn btn-outline-primary" value="장바구니 담기">
+				<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">			
 				<input type="button" id="payBtn" class="btn btn-outline-primary" value="바로 결제하기">
 			</c:if>
 		</div>
@@ -70,18 +72,32 @@
 			        txt=x.grade.value
 			        if (txt>=1 && txt<=10) {
 						alert("맞게 입력하셨습니다.")
-			            return false
+			            return true;
 			        }else{
 			            alert("1부터 10까지 숫자만 입력가능합니다.")
-			            return false
+			            return false;
 			        }
 				}
+			    
+			    function nullcheck(){
+					var n = document.numbercheck;
+					if(n.grade.value == ""){
+						alert("평점은 필수항목입니다");
+						n.grade.focus();
+						return false;	
+					}
+					if(n.content.value == ""){
+						alert("내용은 필수항목입니다");
+						n.content.focus();
+						return false;	
+					}
+			    }	
 			</script> 
 			
 			<hr class="featurette-divider">
 	  			<div class="row featurette">
   			 	<div class="col-md-12">
-  			 		<form action="re_writePro" method="post" name="numbercheck">
+  			 		<form action="re_writePro" method="post" name="numbercheck" onsubmit='return validate(this.form);'>
 	  			 		<input type="hidden" name="class_num" value="${zoomContent.num}">
 	  			 		<input type="hidden" name="title" value="${zoomContent.title}">
 	     	 	  	<table class="table table-bordered">
@@ -110,7 +126,7 @@
 				            </tr>
 				            <tr>
 				            	<td colspan="4" align="right">
-					            	<input type="submit" value="작성하기">&nbsp;&nbsp;
+					            	<input type="submit" value="작성하기" onclick='return nullcheck(this.form);'>&nbsp;&nbsp;
 					            	<input type="reset" value="초기화하기">&nbsp;&nbsp;		           
 				            	</td>
 				            </tr>
@@ -150,7 +166,17 @@
 				            </tr>
 				      		<tr>
 				                <th scope="row"> 후기 </th>
-				                <td colspan="2">${reviewList.content}</td> 
+				                <td colspan="2">
+					                <c:if test="${reviewList.deleted ne 'yes'}">
+	                    					${reviewList.content}
+	                    			</c:if>
+	                    			<c:if test="${reviewList.deleted eq 'yes' and reviewList.deleted ne 'no'}">
+	                    				<font style="color: red;">
+                    						<b>[<i class="fas fa-dizzy"></i> 경고!]</b> ${reviewList.id}님께서 작성하신 리뷰는 <b>"리뷰 관리 기준"</b>을 위반하여 관리자에 의해 경고를 받았습니다.<br/><br/>
+                    						위 경고에 대해 궁금하신 사항이 있으시다면, <b>DDarawaZoom</b>으로 문의 주세요.<br/>
+	                    				</font>
+						           </c:if>
+				                </td> 
 				            </tr>
 	  		           </tbody>
 			         </table>				      			
@@ -159,13 +185,13 @@
 			</c:forEach>
 			</c:if>	
 			
-		<c:if test="${totalPage > 1}">
+		<c:if test="${count > 1}">
 		<div id="page">페이지&nbsp;  
 			<c:if test="${startPage > 10}">
 				<a href="/ddarawazoom/zclasscontent?num=${zoomContent.num}&pageNum=${startPage - 10}"> [이전] </a>
 			</c:if>
 			
-			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1"> 
 				<a href="/ddarawazoom/zclasscontent?num=${zoomContent.num}&pageNum=${i}">${i}</a>
 			</c:forEach>
 			

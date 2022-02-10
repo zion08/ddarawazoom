@@ -23,9 +23,13 @@
 	                <div class="card-body">
 	                    <h5 class="header-title pb-3 mt-0">NOTICE</h5>
 	                    <div class="table-responsive">
-	                    	<c:if test="${sessionScope.id eq 'admin'}">
+	                    	<c:if test="${sessionScope.admin != null}">
 	                    		<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/manager/notice'" value="[공지사항 관리자 페이지 이동]">
 	                    	</c:if>
+	                    	<c:if test="${noticeList == null}">
+	                    		
+	                    	</c:if>
+	                    	
 	                        <table class="table table-hover mb-0" id="boardtable">
 	                            <thead>
 	                                <tr class="align-self-center">
@@ -36,7 +40,7 @@
 	                                    <th>작 성 일</th>
 	                                    <th>조 회 수</th>
 	                                    <th>첨부 파일</th>
-	                                    <c:if test="${sessionScope.id eq 'admin'}">
+	                                    <c:if test="${sessionScope.admin != null}">
 	                                    	<th>버 튼</th>
 	                                    </c:if>
 	                                </tr>
@@ -46,7 +50,7 @@
 		                                <tr>
 		                                    <td>
 		                                    	<c:if test="${noticeList.pin eq 'yes' }">
-		                                    		<i class="fas fa-grin-stars" style="color:red;">★</i>
+		                                    		<i class="fas fa-grin-stars" style="font-size:20px; color:red;">★</i>
 		                                    	</c:if>
 		                                    	<c:if test="${noticeList.pin eq 'no' }">
 		                                    		<c:set var="number" value="${number + 1}"/>
@@ -77,15 +81,15 @@
 		                                    </td>
 		                                    <td>${noticeList.writer_id}</td>
 		                                    <td>
-		                                    		<c:if test="${noticeList.target_id eq 'All'}">
-		                                    			<i class="fa fa-users icon2"></i>&nbsp;${noticeList.target_id}
-		                                    		</c:if>
-		                                    		<c:if test="${noticeList.target_id eq 'Coach'}">
-		                                    			<i class="fa fa-user icon3" style="color: skyblue;"></i>&nbsp;${noticeList.target_id}
-		                                    		</c:if>
-		                                    		<c:if test="${noticeList.target_id eq 'Member'}">
-		                                    			<i class="fa fa-user icon3" style="color: pink;"></i>&nbsp;${noticeList.target_id}
-		                                    		</c:if>
+	                                    		<c:if test="${noticeList.target_id eq 'All'}">
+	                                    			<i class="fa fa-users icon2"></i>&nbsp;${noticeList.target_id}
+	                                    		</c:if>
+	                                    		<c:if test="${noticeList.target_id eq 'Coach'}">
+	                                    			<i class="fa fa-user icon3" style="color: skyblue;"></i>&nbsp;${noticeList.target_id}
+	                                    		</c:if>
+	                                    		<c:if test="${noticeList.target_id eq 'Member'}">
+	                                    			<i class="fa fa-user icon3" style="color: pink;"></i>&nbsp;${noticeList.target_id}
+	                                    		</c:if>
 		                                    </td>
 		                                    <td>
 												<fmt:formatDate var="notice_regdate" pattern="yyyy-MM-dd HH:mm" value="${noticeList.regdate}" />
@@ -97,10 +101,10 @@
 		                                    		<i class="fa fa-picture-o icon5"></i>
 		                                    	</c:if>
 		                                    </td>
-		                                    <c:if test="${sessionScope.id eq 'admin'}">
+		                                    <c:if test="${sessionScope.admin != null}">
 			                                    <td>
 			                                    	<input type="button" class="btn btn-outline-black" onclick="window.location='/ddarawazoom/noticeUpdate?num=${noticeList.num}'" value="수정"/>
-			                                    	<input type="button" class="btn btn-outline-black" onclick="noticeDelete(${noticeList.num});" value="삭제"/>
+			                                    	<input type="button" class="btn btn-outline-black" onclick="noticeDelete(${noticeList.num});" value="삭 제"/>
 			                                    </td>
 		                                    </c:if>
 		                                </tr>
@@ -127,7 +131,6 @@
 				</c:if>
 			</c:if>	
 		</div>
-	
 </body>
 </html>
 

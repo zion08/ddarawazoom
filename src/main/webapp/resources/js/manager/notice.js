@@ -248,13 +248,56 @@ function notice_update(){
 	}
 }
 
-// 관리자 댓글 삭제
+
+// 관리자 댓글 경고
 function managerDeletedChange(number){
 	if(window.confirm('본 댓글이 해당 글과 관련이 없거나,\n좋지 않은 댓글이라고 판단되신다면,\n확인을 클릭하세요!') == true){
 	
 			$.ajax({
-			data : JSON.stringify({ c_num : number}),
-			url : "/manager/commentDelete",
+			data : JSON.stringify({ c_num : number }),
+			url : "/manager/managerDeletedChange",
+			type : "POST",
+			contentType : "application/json; charset=UTF-8",
+			async : false,
+			success : function(data){
+				if(data == 1){
+					alert("본 댓글에 경고를 주었습니다.\n댓글에 내용을 확인하실 수 없습니다.");
+					window.location.reload();
+				}
+			}
+		});
+	}
+}
+
+
+// 관리자 댓글 경고 취소
+function managerDeletedCancell(number){
+	if(window.confirm('경고를 취소 하시겠습니까?') == true){
+	
+			$.ajax({
+			data : JSON.stringify({ c_num : number }),
+			url : "/manager/managerDeletedCancell",
+			type : "POST",
+			contentType : "application/json; charset=UTF-8",
+			async : false,
+			success : function(data){
+				if(data == 1){
+					alert("본 댓글은 경고가 취소되었습니다.\n댓글의 내용을 확인하실 수 있습니다.");
+					window.location.reload();
+				}
+			}
+		});
+	}
+}
+
+
+// 관리자 댓글 삭제
+function managerCommentDelete(number){
+	if(window.confirm('본 댓글을 완전히 삭제하시겠습니까?') == true){
+	
+			$.ajax({
+			data : JSON.stringify({ c_num : number }),
+			url : "/manager/managerCommentDelete",
 			type : "POST",
 			contentType : "application/json; charset=UTF-8",
 			async : false,
@@ -263,13 +306,11 @@ function managerDeletedChange(number){
 					alert("댓글 삭제가 완료되었습니다.");
 					window.location.reload();
 				}
-			} 
+			}
 		});
-		
-		}else{
-		//Tyey clicked no
 	}
 }
+
 
 // 공지사항 리스트에서 관리자가 공지글 삭제
 function noticeDelete(number){

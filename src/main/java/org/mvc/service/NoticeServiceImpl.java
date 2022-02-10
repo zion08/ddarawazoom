@@ -80,6 +80,17 @@ public class NoticeServiceImpl implements NoticeService{
 	public int managerDeletedChange(int c_num) {
 		return mapper.managerDeletedChange(c_num);
 	}
+	
+	@Override
+	public int managerDeletedCancell(int c_num) {
+		return mapper.managerDeletedCancell(c_num);
+	}
+	
+	@Override
+	public int managerCommentDelete(int c_num) {
+		return mapper.managerCommentDelete(c_num);
+	}
+	
 	@Override
 	public Notice_CDTO getComment(int c_num) {
 		return mapper.getComment(c_num);
@@ -98,6 +109,11 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public List<Notice_CDTO> getAllComment(int startRow, int endRow) {
 		return mapper.getAllComment(startRow, endRow);
+	}
+
+	@Override
+	public int getcommentCount() {
+		return mapper.getcommentCount();
 	}
 
 }

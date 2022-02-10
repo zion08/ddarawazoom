@@ -13,6 +13,7 @@
 	
 	<link href="../../resources/css/manager/notice.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 </head>
 <body>
 	<div class="container">
@@ -65,7 +66,7 @@
 	                        </div>
 	                         <div class="col-lg-12">
 	                          	<div class="text-center">
-	                          		<c:if test ="${sessionScope.id eq 'admin'}">
+	                          		<c:if test ="${sessionScope.admin != null}">
 		                          		<input type="button" class="btn btn-outline-black" onclick="window.location='/ddarawazoom/noticeUpdate?num=${noticeDTO.num}'" value="[수정 페이지 이동]"/>
 		                          			&nbsp;
 		                          		<input type="button" class="btn btn-outline-black" onclick="noticeDelete(${noticeDTO.num})" value="[삭제하기]"/>
@@ -111,7 +112,8 @@
 					      <td>
 					        <c:if test="${notice_CList.deleted eq  'all'}">
 								<font style="color: red;">
-									<b>[경고!]</b> ${notice_CList.writer_id}님께서 작성한 댓글은<br/> <b>"댓글 관리 기준"</b>을 위반하여 관리자에 의해 삭제되었습니다.
+									<b>[<i class="fas fa-dizzy"></i> 경고!]</b> ${notice_CList.writer_id}님께서 작성하신 댓글은<b><br/><br/>
+									"댓글 관리 기준"</b>을 위반하여 관리자에 의해 삭제되었습니다.
 								</font>
 							</c:if>
 							<c:if test="${notice_CList.deleted eq  'yes'}">
@@ -126,16 +128,16 @@
 								<fmt:formatDate var="notice_regdate" pattern="yyyy-MM-dd HH:mm" value="${notice_CList.regdate}" />
 									${notice_regdate}
 									&nbsp;
-									<c:if test="${sessionScope.id != null && notice_CList.deleted ne  'yes' && notice_CList.deleted ne 'all' && sessionScope.id ne 'admin'
+									<c:if test="${sessionScope.id != null && notice_CList.deleted ne  'yes' && notice_CList.deleted ne 'all' && sessionScope.admin == null
 										|| sessionScope.c_id != null && notice_CList.deleted ne  'yes' && notice_CList.deleted ne 'all'}">
 										<input type="button" class="btn btn-outline-black" onclick="reComment(${notice_CList.c_num});" value="답글"/>
 									</c:if>	
-									<c:if test="${sessionScope.id.equals(notice_CList.writer_id) && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all' && sessionScope.id ne 'admin' 
+									<c:if test="${sessionScope.id.equals(notice_CList.writer_id) && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all' && sessionScope.admin == null 
 										|| sessionScope.c_id.equals(notice_CList.writer_id) && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all'}">
 										<input type="button" class="btn btn-outline-black" onclick="commentUpdate(${notice_CList.c_num});" value="수정"/>
 										<input type="button" class="btn btn-outline-black" onclick="commentDelete(${notice_CList.c_num});" value="삭제"/>
 									</c:if>
-									<c:if test ="${sessionScope.id eq 'admin' && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all'}">
+									<c:if test ="${sessionScope.admin != null && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all'}">
 										<input type="button" class="btn btn-outline-black" onclick="reComment(${notice_CList.c_num});" value="답글"/>
 										<input type="button" class="btn btn-outline-black" onclick="managerDeletedChange(${notice_CList.c_num});" value="삭제"/>
 									</c:if>

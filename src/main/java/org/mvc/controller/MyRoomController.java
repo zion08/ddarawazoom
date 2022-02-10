@@ -102,8 +102,12 @@ public class MyRoomController {
 	}
 	
 	@RequestMapping("/imgUpdate")
-	public String imgUpdate() {
+	public String imgUpdate(UserInfoDTO userDTO, HttpSession session, Model model) {
 		log.info("	-----CT----->imgUpdate");
+		
+		String id = (String)session.getAttribute("id");
+		
+		model.addAttribute("userInfo", service.getUserInfo(id));
 		
 		return "/myroom/userinfo/imgUpdate";
 	}
@@ -417,7 +421,7 @@ public class MyRoomController {
 		String id = (String)session.getAttribute("id");
 		
 		likeDTO.setId(id);
-		result = service.vodLikeDelete(id, likeDTO.getZoom_num());
+		result = service.vodLikeDelete(id, likeDTO.getVod_num());
 		
 		return result;
 	}
@@ -486,7 +490,6 @@ public class MyRoomController {
 		return result;
 	}
 //================= 멤버 리뷰 관련 코드 종료 =================//
-	
 	
 	
 //================= 멤버 결재 내역 출력 =================//

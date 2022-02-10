@@ -11,4 +11,5 @@ public class ReviewDTO {
 	private String title;
 	private String content;
 	private int grade;
+	private String deleted;
 }

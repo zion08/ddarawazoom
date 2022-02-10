@@ -74,7 +74,7 @@ function infoUpdate_submit(){
 function imgUpdateForm(){
 	var url = "/myroom/imgUpdate";
 	var name = "img_update";
-	var option = "width=500, height=300, left=100, top=50";
+	var option = "width=500, height=550";
 	
 	window.open(url, name, option);
 }
@@ -85,7 +85,11 @@ function imgUpdatePro(){
 	var form = new FormData();
     form.append( "save", $("#formFile")[0].files[0] );
         
-	
+    if($('#formFile').val() == ''){
+    			alert('첨부된 사진이 없습니다. 수정을 원하신다면, 사진을 첨부해 주세요.');
+                return false;
+            }    
+        
 	$.ajax({
 		url : "/myroom/imgUpdatePro",
 		type : "POST",
@@ -95,12 +99,18 @@ function imgUpdatePro(){
 		async: false,
 		success : function(data){
 			var result = parseInt(data);
-			if(result == 1){
-				alert("업로드 완료되었습니다.");
-				opener.parent.location.reload();
-				window.close();
-			} else {
-				alert("이미지만 업로드 가능합니다.");
+			
+			
+			
+			if(resutl == 0){
+				alert('사진이 등록되지 않았습니다.');
+				return false;
+			}else{
+				if(window.confirm('등록한 프로필 사진으로 변경하시겠습니까?') == true){
+					alert("프로필 사진 업로드가 완료되었습니다.\n수정화면으로 돌아갑니다.");
+					opener.parent.location.reload();
+					window.close();
+				}
 			}
 		}
 	});

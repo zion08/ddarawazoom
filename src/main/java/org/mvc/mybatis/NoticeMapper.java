@@ -34,7 +34,7 @@ public interface NoticeMapper {
 	// 공지 댓글 작성
 	public int commentWrite(Notice_CDTO notice_CDTO);
 	
-	// 공지 댓글 수
+	// 관련 글 공지 댓글 수
 	public int commentCount(int num);
 	
 	// 공지 댓글 리스트
@@ -51,8 +51,14 @@ public interface NoticeMapper {
 	// 공지 댓글 삭제
 	public int deletedChange(int c_num);
 	
-	// 관리자 댓글 삭제
+	// 관리자 댓글 경고
 	public int managerDeletedChange(int c_num);
+	
+	// 관리자 댓글 경고 취소
+	public int managerDeletedCancell(int c_num);
+	
+	// 관리자 댓글 삭제
+	public int managerCommentDelete(int c_num);
 	
 	// 공지 댓글 가져오기
 	public Notice_CDTO getComment(int c_num);
@@ -68,5 +74,7 @@ public interface NoticeMapper {
 			@Param("startRow") int startRow,
 			@Param("endRow") int endRow);
 	
+	// 관리자 관리 - 댓글 수
+	public int getcommentCount();
 }
 
