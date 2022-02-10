@@ -119,7 +119,7 @@
 	
 	<!-- 코치 소개 페이지 -->
 	<select id="getAllCoach" resultType="org.mvc.bean.CoachInfoDTO">
-		select * from tbl_coach
+		select * from tbl_coach where c_status = '코치'
 	</select>
 	
 	<select id="coachInfo" resultType="org.mvc.bean.CoachInfoDTO">
