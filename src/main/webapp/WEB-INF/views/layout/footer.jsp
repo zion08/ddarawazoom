@@ -45,8 +45,7 @@
     <div class="col">
       <h6 class="fw-bold">코치</h6>
       <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">코치소개</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">스케줄관리</a></li>
+        <li class="nav-item mb-2"><a href="/ddarawazoom/coachIntro" class="nav-link p-0 text-muted">코치소개</a></li>
       </ul>
     </div>
     

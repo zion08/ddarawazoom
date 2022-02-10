@@ -117,6 +117,23 @@
 		where c_id = #{c_id}
 	</update>
 	
+	<!-- 코치 소개 페이지 -->
+	<select id="getAllCoach" resultType="org.mvc.bean.CoachInfoDTO">
+		select * from tbl_coach
+	</select>
+	
+	<select id="coachInfo" resultType="org.mvc.bean.CoachInfoDTO">
+		select * from tbl_coach where c_id = #{c_id}
+	</select>
+	
+	<select id="coachCareer" resultType="org.mvc.bean.CoachCareerDTO">
+		select * from tbl_coach_career where c_id = #{c_id}
+	</select>
+	
+	<select id="getCoachClass" resultType="org.mvc.bean.ZoomDTO">
+		select * from tbl_coachClass where c_id = #{c_id}
+	</select>
+	
 </mapper>
 
 

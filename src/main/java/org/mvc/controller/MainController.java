@@ -8,6 +8,7 @@ import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
 import org.mvc.bean.UserInfoDTO;
+import org.mvc.bean.ZoomDTO;
 import org.mvc.service.UserEmailService;
 import org.mvc.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -276,6 +277,30 @@ public class MainController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping("/coachIntro")
+	public String coachIntro(Model model) {
+		log.info("------CT----->coachIntro");
+		model.addAttribute("coachInfo", service.getAllCoach());
+		return "/main/coachIntroduce/coachIntro";
+	}
+	
+	@RequestMapping("/coachInfo")
+	public String coachInfo(String c_id, Model model) {
+		log.info("------CT----->coachInfo");
+		
+		model.addAttribute("coachInfo", service.coachInfo(c_id));
+		model.addAttribute("number", 1);
+		model.addAttribute("coachCareer", service.coachCareer(c_id));
+		
+		List<ZoomDTO> classList = service.getCoachClass(c_id);
+		
+		model.addAttribute("classNumber", 1);
+		model.addAttribute("coachClass", classList);
+		model.addAttribute("classCount", classList.size());
+		
+		return "/main/coachIntroduce/coachInfo";
 	}
 	
 }
