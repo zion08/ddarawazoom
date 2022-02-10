@@ -1,7 +1,5 @@
 package org.mvc.bean;
 
-import com.siot.IamportRestClient.request.CancelData;
-
 import lombok.Data;
 
 @Data
