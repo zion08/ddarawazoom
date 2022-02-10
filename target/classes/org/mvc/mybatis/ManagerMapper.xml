@@ -51,4 +51,63 @@
 		where c_id = #{c_id}
 	</update>
 	
+	<!-- 모든 멤버 정보 -->
+	<select id="getAllUserInfo" resultType="org.mvc.bean.UserInfoDTO">
+		<![CDATA[
+			select * from tbl_user where TO_DATE(regdate, 'yyyy/mm/dd') != TO_DATE(sysdate, 'yyyy/mm/dd') and status != '탈퇴'
+		]]>
+	</select>
+	
+	<!-- 모든 멤버 수 -->	
+	<select id="countAllUser" resultType="Integer">
+		select count(*) from tbl_user where status != '탈퇴'
+	</select>
+	
+	<!-- 멤버 한 명의 정보 -->
+	<select id="userInfo" resultType="org.mvc.bean.UserInfoDTO">
+		select * from tbl_user where id = #{id}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updateUserPw">
+		<![CDATA[
+			update tbl_user set pw = #{pw}
+				where id = #{id}
+		]]>
+	</update>
+	
+	<!-- 멤버 탈퇴 -->
+	<update id="userDelete">
+		update tbl_user set
+			status = '탈퇴'
+		where id = #{id}
+	</update>
+	
+	<!-- 신규 가입자 수 -->
+	<select id="newUserCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from tbl_user
+				where TO_DATE(regdate, 'yyyy/mm/dd') = TO_DATE(sysdate, 'yyyy/mm/dd') and status != '탈퇴'
+		]]>
+	</select>
+	
+	<!-- 오늘의 신규 가입자 리스트 -->
+	<select id="newUser" resultType="org.mvc.bean.UserInfoDTO">
+		<![CDATA[
+			select * from tbl_user
+				where TO_DATE(regdate, 'yyyy/mm/dd') = TO_DATE(sysdate, 'yyyy/mm/dd') and status != '탈퇴'
+		]]>
+	</select>
+	
+	<!-- 탈퇴 멤버 리스트 -->
+	<select id="getDeleteUser" resultType="org.mvc.bean.UserInfoDTO">
+		select * from tbl_user
+			where status = '탈퇴'
+	</select>
+	
+	<!-- 탈퇴 멤버 수 -->
+	<select id="getDeleteUserCount" resultType="Integer">
+		select count(*) from tbl_user
+			where status = '탈퇴'
+	</select>
 </mapper>

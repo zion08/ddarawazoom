@@ -28,6 +28,6 @@
 			</div>
 		</div>
 	</form>
+	<script src="../../resources/js/form-validation.js"></script>
 </body>
-		<script src="../../resources/js/form-validation.js"></script>
 </html>
