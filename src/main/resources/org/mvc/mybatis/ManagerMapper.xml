@@ -51,14 +51,6 @@
 		where c_id = #{c_id}
 	</update>
 	
-  
-	<!-- 모든 멤버 정보 -->
-	<select id="getAllUserInfo" resultType="org.mvc.bean.UserInfoDTO">
-		<![CDATA[
-			select * from tbl_user where TO_DATE(regdate, 'yyyy/mm/dd') != TO_DATE(sysdate, 'yyyy/mm/dd') and status != '탈퇴'
-		]]>
-	</select>
-	
 	<!-- 전체 멤버 수 -->	
 	<select id="countAllUser" resultType="Integer">
 		select count(*) from tbl_user where status != '탈퇴'

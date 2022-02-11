@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
 @Controller
 @RequestMapping("/manager")
@@ -366,7 +365,6 @@ public class ManagerController {
 		}else{
 			userList = managerService.searchUserList(category, input, startRow, endRow);
 		}
-		
 		
 		if(searchCount > 0) {
 	    	int pageCount = searchCount / pageSize + (searchCount % pageSize == 0 ? 0 : 1);
