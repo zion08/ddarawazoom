@@ -8,30 +8,29 @@
 
 <section class="masthead">
 	
-	<form action="/manager/salesSearch" method="post">
-	
-	  <div style="width: 50%; text-align: center; margin: auto 0;">
-		  <div class="input-group mb-3">
-		    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
-		      <option selected value="">선택하세요</option>
-		      <option value="c_id">코치명</option>
-		      <option value="name">강의 제목</option>
-		      <option value="buyername">구매자</option>
-		    </select>
-		  
-		    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
-		    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
-		  </div>
-	  </div>
-	  
-	</form>
-	
 	<div class="col-md-9 m-sm-auto col-lg-10 px-md-4 fs-7">
 		<p class="text-end m-sm-0">(+) 총 거래액: ${amount}</p>
 		<p class="text-end m-sm-0">(-) 총 환불액: ${cancelAmount}</p>
 		<p class="text-end m-sm-0">(=) 총 매출액: ${sales}</p>
 	</div>
 	<div class="table-responsive col-md-9 m-sm-auto col-lg-10 px-md-4" >
+		<form action="/manager/salesSearch" method="post">
+	
+		  <div style="width: 50%; text-align: center; margin: auto 0;">
+			  <div class="input-group mb-3">
+			    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
+			      <option selected value="">선택하세요</option>
+			      <option value="c_id">코치명</option>
+			      <option value="name">강의 제목</option>
+			      <option value="buyername">구매자</option>
+			    </select>
+			  
+			    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
+			    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
+			  </div>
+		  </div>
+		  
+		</form>
 		<table id="paymentList" class="table table-striped table-sm table-hover">
 			<thead>
 	            <tr>
