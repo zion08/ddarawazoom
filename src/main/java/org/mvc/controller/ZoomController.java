@@ -21,9 +21,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
  
 @Slf4j
@@ -313,7 +315,6 @@ public class ZoomController {
 
 	    if(count > 0) {
 	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-
 	    	int startPage = (int)(currentPage/10)*10+1;
 	    	int pageBlock = 10;
 	    	int endPage = startPage + pageBlock - 1;
@@ -335,10 +336,10 @@ public class ZoomController {
 	    model.addAttribute("number", number);
 	    model.addAttribute("pageSize", pageSize);
 	    model.addAttribute("zoomList", zoomList);
-
 	    model.addAttribute("category", category);
 	    model.addAttribute("input", input);
-
+	    model.addAttribute("category", category);
+	    model.addAttribute("input", input);
 		return "/zoom/class/searchClass";
 	}
 }	

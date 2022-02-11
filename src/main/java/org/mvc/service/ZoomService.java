@@ -19,7 +19,10 @@ public interface ZoomService {
 	public int zoomReadcount(int num);
 	public int imgUpdate(ZoomDTO dto); 
 	public ZoomDTO zoomContent(int num);
-
+	// 강의 검색
+	public List<ZoomDTO> searchList(String category, String input, int startRow, int endRow);
+	public int searchCount(String category, String input);
+	
 	//페이관련
 	public int getPrice(String merchant_Uid);
 	

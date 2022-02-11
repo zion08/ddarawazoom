@@ -31,10 +31,13 @@
          	<div class="card-body"> 	
 				<p class="card-text">No.${number} 
 					<c:set var="number" value="${number - 1}"/>
+
 					readcount <font color="red">${zoomList.count}</font> <img src="/resources/image/zoom/eye.png"> 
 					<c:if test="${zoomList.count >= 50}">
 					  <span class="hit">hit!!</span> 
 					</c:if>
+					조회수${zoomList.count} 
+
 				</p>
 				<p class="card-text">
 					${zoomList.c_nick} 강사님
@@ -72,7 +75,6 @@
 	</div><br /> 
 
 	<form action="/ddarawazoom/searchClass" method="post" onsubmit="return valueCheck()">
-
 	  <div style="width: 50%; text-align: center; margin: auto 0;">
 		  <div class="input-group mb-3">
 		    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
@@ -107,7 +109,6 @@
 			</c:if>
 		</div>
 	</c:if>	
-
  	</div>
 	</div>	 
 </div>  
