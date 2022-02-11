@@ -41,10 +41,20 @@
 					가격 : ${zoomList.price}원  
 				</p>	
 			<div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group"> &nbsp;&nbsp;&nbsp;&nbsp; 
-              	<button type="button" class="btn btn-sm btn btn-danger" disabled>${zoomList.type}</button>&nbsp;&nbsp; 	 	 
-             	<button type="button" class="btn btn-sm btn btn-success" disabled>${zoomList.goal}</button>&nbsp;&nbsp;
-             	<button type="button" class="btn btn-sm btn btn-warning" disabled>${zoomList.tool}</button>&nbsp;&nbsp;
+            <div class="btn-group">
+              	<button type="button" class="btn btn-sm btn btn-danger"
+              		onclick="window.location='/ddarawazoom/searchClass?category=type&input=${zoomList.type}'">${zoomList.type}</button>&nbsp;	 	 
+             	<button type="button" class="btn btn-sm btn btn-success"
+             		onclick="window.location='/ddarawazoom/searchClass?category=goal&input=${zoomList.goal}'">${zoomList.goal}</button>&nbsp;
+             		
+             	<c:if test="${zoomList.tool == '-'}">
+             		<button type="button" class="btn btn-sm btn btn-warning" disabled>${zoomList.tool}</button>&nbsp;
+             	</c:if>
+             	<c:if test="${zoomList.tool != '-'}">
+             		<button type="button" class="btn btn-sm btn btn-warning"
+             			onclick="window.location='/ddarawazoom/searchClass?category=tool&input=${zoomList.tool}'">${zoomList.tool}</button>&nbsp;
+             	</c:if>
+             	
              	<button type="button" class="btn btn-sm btn btn-primary" disabled>${zoomList.frequency}</button> 
             </div>	          
 	        </div>
