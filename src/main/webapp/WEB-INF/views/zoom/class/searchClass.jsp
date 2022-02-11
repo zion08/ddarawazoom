@@ -82,13 +82,13 @@
 	<c:if test="${count > 1}">
 		<div id="page">페이지&nbsp;  
 			<c:if test="${startPage > 10}">
-				<a href="/ddarawazoom/zoom?pageNum=${startPage - 10}"> [이전] </a>
+				<a href="/ddarawazoom/searchClass?category=${category}&input=${input}&pageNum=${startPage - 10}"> [이전] </a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/ddarawazoom/zoom?pageNum=${i}">${i}</a>
+				<a href="/ddarawazoom/searchClass?category=${category}&input=${input}&pageNum=${i}">${i}</a>
 			</c:forEach>
 			<c:if test="${endPage < pageCount}">
-				<a href="/ddarawazoom/zoom?pageNum=${startPage + 10}"> [다음] </a>
+				<a href="/ddarawazoom/searchClass?category=${category}&input=${input}&pageNum=${startPage + 10}"> [다음] </a>
 			</c:if>
 		</div>
 	</c:if>	
