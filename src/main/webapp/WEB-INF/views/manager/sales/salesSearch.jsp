@@ -7,7 +7,7 @@
 <script src="/resources/coach/custom/js/coach-info.js" type="text/javascript"></script>
 
 <section class="masthead">
-
+	
 	<div class="col-md-9 m-sm-auto col-lg-10 px-md-4 fs-7">
 		<p class="text-end m-sm-0">(+) 총 거래액: ${amount}</p>
 		<p class="text-end m-sm-0">(-) 총 환불액: ${cancelAmount}</p>
