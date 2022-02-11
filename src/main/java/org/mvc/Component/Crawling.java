@@ -15,6 +15,7 @@ import org.json.simple.parser.ParseException;
 import org.mvc.bean.YoutubeDTO;
 
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -27,16 +28,16 @@ import java.net.HttpURLConnection;
 @Component 
 public class Crawling {
 
-	private static String API_KEY="AIzaSyAZuwtlFJBrAGio_FIgv01ERvJrdq_EwiA";
+	private static String API_KEY="AIzaSyCcOEnQ6vwsnUcrMAXm-5e0nF3H-kCti0c";
 	private static URL url = null;
 	private static HttpURLConnection conn = null;
-	private static StringBuffer sb = new StringBuffer();
+	private static StringBuffer sb = null;
 	
 	@Autowired
 	private YoutubeDTO youtubeDTO;
 	
 	public JSONObject getJson(String urlGet) throws IOException, ParseException {
-
+		sb = new StringBuffer();
 		// 1.url 연결 
 		url = new URL(urlGet);	
 		conn = (HttpURLConnection) url.openConnection();	// url 연결 생성		
@@ -61,13 +62,16 @@ public class Crawling {
 	}
 	
 	
-	public List<String> getVideioId(String qurey, int maxResults) throws IOException, ParseException {
+	public List<String> getVideioId(String qurey, String maxResults) throws IOException, ParseException {
+		String encodeQurey = URLEncoder.encode(qurey, "UTF-8");
+		String encodemaxResults = URLEncoder.encode(maxResults, "UTF-8");
+		
 		String urlBase = "https://www.googleapis.com/youtube/v3/search?part=snippet";
-		String urlGet = urlBase+"&q="+qurey+"&maxResults="+maxResults+"&key="+API_KEY;		
+		String urlGet = urlBase+"&q="+encodeQurey+"&maxResults="+encodemaxResults+"&key="+API_KEY;		
 
 		JSONObject resultAll = getJson(urlGet);
 		
-		// 4. Json 파싱 --> 필요한 데이터 추출
+		// 4. Json 파싱 --> 비디오 id만 가져옴
 		JSONArray itemsArray = (JSONArray) resultAll.get("items");		
 
 		List<String> videoIdList = new ArrayList<String>();
@@ -85,8 +89,9 @@ public class Crawling {
 	public YoutubeDTO getVideioInfo (String videoId) throws IOException, ParseException {
 		System.out.println("---getInfo Start-->: " +videoId);
 		
+		String encodeVideoId = URLEncoder.encode(videoId, "UTF-8");
 		String urlBase="https://www.googleapis.com/youtube/v3/videos?part=snippet,player";
-		String urlGet = urlBase+"&id="+videoId+"&key="+API_KEY;
+		String urlGet = urlBase+"&id="+encodeVideoId+"&key="+API_KEY;
 		
 		System.out.println("---getInfo urlGet-->: " +urlGet);
 		

@@ -24,8 +24,8 @@ public class VodController {
 	public String main() throws IOException, ParseException {
 		log.info("	-----CT----->vod Page");
 		
-		String qurey = "근력운동";
-		int maxResults = 7;
+		String qurey = "java";
+		String maxResults = "5";
 		
 		List<String> videoIdList = crawling.getVideioId(qurey, maxResults);
 		System.out.println(videoIdList.toString());
@@ -41,8 +41,8 @@ public class VodController {
 //			System.out.println(dto);
 //		}
 		
-		YoutubeDTO dto = crawling.getVideioInfoTest();
-		System.out.println(dto);
+//		YoutubeDTO dto = crawling.getVideioInfoTest();
+//		System.out.println(dto);
 
 		return "/vod/vclass";
 	}

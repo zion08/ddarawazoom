@@ -1,10 +1,14 @@
 package org.mvc.controller;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.parser.ParseException;
+import org.mvc.Component.Crawling;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
 import org.mvc.bean.NoticeDTO;
@@ -13,6 +17,7 @@ import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.VodDTO;
+import org.mvc.bean.YoutubeDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.ManagerService;
 import org.mvc.service.NoticeService;
@@ -47,6 +52,39 @@ public class ManagerController {
 	
 	@Autowired
 	private ReviewService serviceReview;
+	
+	@Autowired
+	private Crawling crawling;
+
+//	=========== 관리자 Vod 관련 코드 시작 ===========  //
+	@RequestMapping("/vod")
+	public String vodManage() {
+		
+		return "/manager/vod/vodManage";
+	}
+	
+	@RequestMapping("/searchVod")
+	public @ResponseBody List<String> searchVod(String qurey, String maxResults) throws IOException, ParseException {
+		System.out.println(qurey);
+		System.out.println(maxResults);
+
+		List<String> videoIdList = crawling.getVideioId(qurey, maxResults);
+		System.out.println(videoIdList.toString());
+		return videoIdList;
+	}
+	
+	@RequestMapping("/insertVod")
+	public @ResponseBody int insertVod(String videoId) throws IOException, ParseException {
+		int result=0;
+		System.out.println(videoId);
+	
+
+		YoutubeDTO dto = crawling.getVideioInfo(videoId);
+		System.out.println(dto);
+		return result;
+	}
+//	=========== 관리자 Vod 관련 코드 종료 ===========  //
+
 	
 //	=========== 관리자 수입 관련 코드 시작 ===========  //
 	@RequestMapping("/sales")
