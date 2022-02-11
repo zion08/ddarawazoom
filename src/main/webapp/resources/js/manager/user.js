@@ -79,3 +79,18 @@ function userDelete(id){
 		});
 	}
 }
+
+// 멤버 검색 버튼
+function valueCheck(){
+	if($('#search-category').val() == ''){
+		alert('카테고리를 선택해 주세요.');
+		document.searchForm.category.focus();
+		return false;
+	}
+	
+	if($('#search-input').val() == ''){
+		alert('검색어를 작성해 주세요.');
+		document.searchForm.input.focus();
+		return false;
+	}
+}

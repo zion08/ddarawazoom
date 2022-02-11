@@ -116,4 +116,14 @@ public class NoticeServiceImpl implements NoticeService{
 		return mapper.getcommentCount();
 	}
 
+	@Override
+	public List<NoticeDTO> searchNoticeList(String category, String input, int startRow, int endRow) {
+		return mapper.searchNoticeList(category, input, startRow, endRow);
+	}
+
+	@Override
+	public int searchCount(String category, String input) {
+		return mapper.searchCount(category, input);
+	}
+
 }

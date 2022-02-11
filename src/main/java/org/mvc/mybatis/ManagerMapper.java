@@ -34,10 +34,7 @@ public interface ManagerMapper {
 	// 코치 상태 변경
 	public int changeStatus(CoachInfoDTO dto);
 	
-	// 모든 멤버 정보
-	public List<UserInfoDTO> getAllUserInfo();
-	
-	// 모든 멤버 수
+	// 전체 멤버 수
 	public int countAllUser();
 	
 	// 멤버 한 명의 정보
@@ -49,15 +46,45 @@ public interface ManagerMapper {
 	// 멤버 탈퇴
 	public int userDelete(String id);
 	
-	// 신규 가입자 수
-	public int newUserCount();
+	// 일반 가입 멤버 리스트
+	public List<UserInfoDTO> getUserInfo();
+	
+	// 일반 가입 멤버 수
+	public int userCount();
 	
 	// 오늘의 신규 가입자 리스트
 	public List<UserInfoDTO> newUser();
+	
+	// 신규 가입자 수
+	public int newUserCount();
 	
 	// 탈퇴 멤버 
 	public List<UserInfoDTO> getDeleteUser();
 	
 	// 탈퇴 멤버 수
 	public int getDeleteUserCount();
+	
+	// 카카오톡 가입 멤버 리스트
+	public List<UserInfoDTO> getKakaoUser();
+	
+	// 카카오톡 가입 멤버 수
+	public int kakaoUserCount();
+	
+	// 네이버 가입 멤버 리스트
+	public List<UserInfoDTO> getNaverUser();
+	
+	// 네이버 가입 멤버 수
+	public int naverUserCount();
+	
+	// 멤버 검색 리스트
+	public List<UserInfoDTO> searchUserList(
+			@Param("category") String category,
+			@Param("input") String input,
+			@Param("startRow") int startRow,
+			@Param("endRow") int endRow);
+	
+	// 검색 결과 수
+	public int searchCount(
+			@Param("category") String category,
+			@Param("input") String input);
 }

@@ -76,5 +76,18 @@ public interface NoticeMapper {
 	
 	// 관리자 관리 - 댓글 수
 	public int getcommentCount();
+	
+	// 공지사항 검색기능
+	public List<NoticeDTO> searchNoticeList(
+			@Param("category") String category,
+			@Param("input") String input,
+			@Param("startRow") int startRow,
+			@Param("endRow") int endRow);
+	
+	// 검색 결과 수
+	public int searchCount(
+			@Param("category") String category,
+			@Param("input") String input);
+	
 }
 

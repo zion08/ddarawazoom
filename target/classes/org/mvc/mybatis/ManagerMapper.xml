@@ -51,7 +51,7 @@
 		where c_id = #{c_id}
 	</update>
 	
-
+  
 	<!-- 모든 멤버 정보 -->
 	<select id="getAllUserInfo" resultType="org.mvc.bean.UserInfoDTO">
 		<![CDATA[
@@ -59,7 +59,7 @@
 		]]>
 	</select>
 	
-	<!-- 모든 멤버 수 -->	
+	<!-- 전체 멤버 수 -->	
 	<select id="countAllUser" resultType="Integer">
 		select count(*) from tbl_user where status != '탈퇴'
 	</select>
@@ -84,18 +84,32 @@
 		where id = #{id}
 	</update>
 	
-	<!-- 신규 가입자 수 -->
-	<select id="newUserCount" resultType="Integer">
+	<!-- 일반 가입 멤버 리스트 -->
+	<select id="getUserInfo" resultType="org.mvc.bean.UserInfoDTO">
 		<![CDATA[
-			select count(*) from tbl_user
-				where TO_DATE(regdate, 'yyyy/mm/dd') = TO_DATE(sysdate, 'yyyy/mm/dd') and status != '탈퇴'
+			select id from tbl_user
+				where id not like'%kakaoLogin%'  and id not like '%naverLogin%' and status != '탈퇴'
 		]]>
+	</select>
+	
+	<!-- 일반 가입 멤버 수 -->
+	<select id="userCount" resultType="Integer">
+		select count(*) from tbl_user
+			where id not like'%kakaoLogin%'  and id not like '%naverLogin%' and status != '탈퇴'
 	</select>
 	
 	<!-- 오늘의 신규 가입자 리스트 -->
 	<select id="newUser" resultType="org.mvc.bean.UserInfoDTO">
 		<![CDATA[
 			select * from tbl_user
+				where TO_DATE(regdate, 'yyyy/mm/dd') = TO_DATE(sysdate, 'yyyy/mm/dd') and status != '탈퇴'
+		]]>
+	</select>
+	
+	<!-- 신규 가입자 수 -->
+	<select id="newUserCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from tbl_user
 				where TO_DATE(regdate, 'yyyy/mm/dd') = TO_DATE(sysdate, 'yyyy/mm/dd') and status != '탈퇴'
 		]]>
 	</select>
@@ -110,5 +124,48 @@
 	<select id="getDeleteUserCount" resultType="Integer">
 		select count(*) from tbl_user
 			where status = '탈퇴'
+  </select>
+
+	<!-- 카카오톡 회원가입 멤버 리스트 -->
+	<select id="getKakaoUser" resultType="org.mvc.bean.UserInfoDTO">
+		<![CDATA[
+			select id from tbl_user where id like '%kakaoLogin%' and status != '탈퇴'
+		]]>
+	</select>
+	
+	<!-- 카카오톡 회원가입 멤버 수 -->
+	<select id="kakaoUserCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from tbl_user where id like '%kakaoLogin%' and status != '탈퇴'
+		]]>
+	</select>
+		
+	<!-- 네이버 회원가입 멤버 리스트 -->
+	<select id="getNaverUser" resultType="org.mvc.bean.UserInfoDTO">
+		<![CDATA[
+			select id from tbl_user where id like '%naverLogin%' and status != '탈퇴'
+		]]>
+	</select>
+	
+	<!-- 네이버 회원가입 멤버 수 -->
+	<select id="naverUserCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from tbl_user where id like '%naverLogin%' and status != '탈퇴'
+		]]>
+	</select>
+	
+	<!-- 멤버 검색 리스트-->
+	<select id="searchUserList" resultType="org.mvc.bean.UserInfoDTO">
+		<![CDATA[
+			select * from (
+				select id, pw, email, regdate, img, status, nick, name, gender, birth, tel, temp_pw, rownum r from(
+					select * from tbl_user  where ${category} like '%'||#{input}||'%' order by id desc))
+			where r >= #{startRow} and r <= #{endRow}
+		]]>
+	</select>
+	
+	<!-- 검색 결과 수 -->
+	<select id="searchCount" resultType="int">
+		select count(*) from tbl_user where ${category} like '%'||#{input}||'%'
 	</select>
 </mapper>

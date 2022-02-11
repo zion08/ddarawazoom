@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.CoachInfoDTO;
-import org.mvc.bean.FileInfo;
 import org.mvc.bean.NoticeDTO;
 import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.PaymentDTO;
@@ -21,12 +20,9 @@ import org.mvc.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -112,31 +108,40 @@ public class ManagerController {
 		int currentPage = Integer.parseInt(pageNum);
 		int startRow = (currentPage - 1) * pageSize + 1;
 	    int endRow = currentPage * pageSize;
-	    int count = 0;
+	    int noticeCount = 0;
+	    int commentCount = 0;
 	    
-	    count = serviceNotice.noticeCount();
+	    noticeCount = serviceNotice.noticeCount();
+	    commentCount = serviceNotice.getcommentCount();
 	    
-	    List noticeList = null;
-	    List commentList = null;
+	    List<NoticeDTO> noticeList = null;
+	    List<Notice_CDTO> commentList = null;
 	    
-	    if(count > 0) {
+	    if(noticeCount > 0 && commentCount > 0) {
 	    	noticeList = serviceNotice.noticeList(startRow, endRow);
 	    	commentList = serviceNotice.getAllComment(startRow, endRow);
 	    	
-	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+	    	int notice_pageCount =  noticeCount / pageSize + ( noticeCount % pageSize == 0 ? 0 : 1);
+	    	int comment_pageCount =  commentCount / pageSize + ( commentCount % pageSize == 0 ? 0 : 1);
 	    	
 	    	int startPage = (int)(currentPage/10)*10+1;
 	    	int pageBlock = 10;
-	    	int endPage = startPage + pageBlock - 1;
-	    	if (endPage > pageCount) {
-	    		endPage = pageCount;
+	    	int notice_endPage = startPage + pageBlock - 1;
+	    	int comment_endPage = startPage + pageBlock - 1;
+	    	if (notice_endPage > notice_pageCount && comment_endPage > comment_pageCount) {
+	    		notice_endPage = notice_pageCount;
+	    		comment_endPage = comment_pageCount;
+	    		
 	    	}
 	    	model.addAttribute("startPage", startPage);
-	    	model.addAttribute("endPage", endPage);
-	    	model.addAttribute("pageCount", pageCount);
+	    	model.addAttribute("notice_endPage", notice_endPage);
+	    	model.addAttribute("comment_endPage", comment_endPage);
+	    	model.addAttribute("notice_pageCount", notice_pageCount);
+	    	model.addAttribute("comment_pageCount", comment_pageCount);
 	    }
 	    model.addAttribute("pageNum", pageNum);
-	    model.addAttribute("count", count);
+	    model.addAttribute("notice_count", noticeCount);
+	    model.addAttribute("comment_count", commentCount);
 	    model.addAttribute("noticeList", noticeList);
 	    model.addAttribute("commentList", commentList);
 	    model.addAttribute("c_num", notice_CDTO.getC_num());
@@ -196,7 +201,7 @@ public class ManagerController {
 		   
 		    reviewCount = serviceReview.reviewCount();
 		    
-		    List reviewList = null;
+		    List<ReviewDTO> reviewList = null;
 		    
 		    if(reviewCount > 0) {
 		    	reviewList = serviceReview.reviewList(startRow, endRow);
@@ -315,16 +320,95 @@ public class ManagerController {
 	public String user(Model model) {
 		log.info("	-----CT-----> manager user");
 		
-		model.addAttribute("newUserCount", managerService.newUserCount());
 		model.addAttribute("newUser", managerService.newUser());
-		model.addAttribute("deleteUserCount", managerService.getDeleteUserCount());
+		model.addAttribute("newUserCount", managerService.newUserCount());
+		
 		model.addAttribute("deleteUser", managerService.getDeleteUser());
+		model.addAttribute("deleteUserCount", managerService.getDeleteUserCount());
+		
+		model.addAttribute("kakaoUser", managerService.getKakaoUser());
+		model.addAttribute("kakaoUserCount", managerService.kakaoUserCount());
+		
+		model.addAttribute("naverUser", managerService.getNaverUser());
+		model.addAttribute("naverUserCount", managerService.naverUserCount());
+		
+		model.addAttribute("userInfo", managerService.getUserInfo());
+		model.addAttribute("userCount", managerService.userCount());
+		
+		// 탈퇴 멤버 제외한 모든 멤버 수
 		model.addAttribute("count", managerService.countAllUser());
-		model.addAttribute("userInfo", managerService.getAllUserInfo());
 
 		return "/manager/user/user";
 	}
 	
+	@RequestMapping("/searchUserList")
+	public String searchUserList(String category, String input, String pageNum, Model model) {
+		log.info("	-----CT-----> manager searchUserList");
+		log.info("category="+category+" input="+input);
+
+		int pageSize = 8;
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = currentPage * pageSize;
+		int searchCount = 0;
+		int number = 0;
+	
+		searchCount = managerService.searchCount(category, input);
+		
+		List<UserInfoDTO> userList = null;
+		
+		if(searchCount > 0) {
+			userList = managerService.searchUserList(category, input, startRow, endRow);
+		}else{
+			userList = managerService.searchUserList(category, input, startRow, endRow);
+		}
+		
+		
+		if(searchCount > 0) {
+	    	int pageCount = searchCount / pageSize + (searchCount % pageSize == 0 ? 0 : 1);
+	    	
+	    	int startPage = (int)(currentPage/10)*10+1;
+	    	int pageBlock = 10;
+	    	int endPage = startPage + pageBlock - 1;
+	    	if (endPage > pageCount) {
+	    		endPage = pageCount;
+	    	}
+	    	model.addAttribute("startPage", startPage);
+	    	model.addAttribute("endPage", endPage);
+	    	model.addAttribute("pageCount", pageCount);
+	    } 
+		
+		number = searchCount - (currentPage - 1) * pageSize;
+		
+		model.addAttribute("pageNum", pageNum);
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("startRow", startRow);
+	    model.addAttribute("endRow", endRow);
+	    model.addAttribute("searchCount", searchCount);
+	    model.addAttribute("number", number);
+	    model.addAttribute("pageSize", pageSize);
+	    model.addAttribute("userList", userList);
+	    
+	    log.info("=======ddd"+userList);
+	    log.info("========================"+userList.size());
+	    
+	    model.addAttribute("category", category);
+	    model.addAttribute("input", input);
+	    
+		model.addAttribute("newUserCount", managerService.newUserCount());
+		model.addAttribute("deleteUserCount", managerService.getDeleteUserCount());
+		model.addAttribute("kakaoUserCount", managerService.kakaoUserCount());
+		model.addAttribute("naverUserCount", managerService.naverUserCount());
+		model.addAttribute("userCount", managerService.userCount());
+		model.addAttribute("count", managerService.countAllUser());
+	    
+		return "/manager/user/searchUserList";
+	}
+
 	@RequestMapping("/userInfo")
 	public String userInfo(String id, Model model) {
 		log.info("	-----CT-----> manager userInfo");

@@ -21,12 +21,12 @@ function wsEvt() {
 					var si = d.sessionId != null ? d.sessionId : "";
 					if(si != ''){
 						$("#sessionId").val(si); 
-					}
+					} 
 				}else if(d.type == "message"){
 					if(d.sessionId == $("#sessionId").val()){
-						$("#chatting").append("<p class='me'>나 :" + d.msg + "</p>");	
+						$("#partyRoom").append("<p class='me'>나 :" + d.msg + "</p>");	
 					}else{
-						$("#chatting").append("<p class='others'>" + d.userName + " :" + d.msg + "</p>");
+						$("#partyRoom").append("<p class='others'>" + d.userName + " :" + d.msg + "</p>");
 					}
 						
 				}else{

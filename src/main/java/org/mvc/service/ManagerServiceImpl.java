@@ -57,11 +57,6 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 
 	@Override
-	public List<UserInfoDTO> getAllUserInfo() {
-		return mapper.getAllUserInfo();
-	}
-
-	@Override
 	public int countAllUser() {
 		return mapper.countAllUser();
 	}
@@ -82,13 +77,23 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 
 	@Override
-	public int newUserCount() {
-		return mapper.newUserCount();
+	public List<UserInfoDTO> getUserInfo() {
+		return mapper.getUserInfo();
+	}
+
+	@Override
+	public int userCount() {
+		return mapper.userCount();
 	}
 	
 	@Override
 	public List<UserInfoDTO> newUser() {
 		return mapper.newUser();
+	}
+	
+	@Override
+	public int newUserCount() {
+		return mapper.newUserCount();
 	}
 
 	@Override
@@ -99,6 +104,36 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public int getDeleteUserCount() {
 		return mapper.getDeleteUserCount();
+	}
+
+	@Override
+	public List<UserInfoDTO> getKakaoUser() {
+		return mapper.getKakaoUser();
+	}
+
+	@Override
+	public int kakaoUserCount() {
+		return mapper.kakaoUserCount();
+	}
+
+	@Override
+	public List<UserInfoDTO> getNaverUser() {
+		return mapper.getNaverUser();
+	}
+
+	@Override
+	public int naverUserCount() {
+		return mapper.naverUserCount();
+	}
+
+	@Override
+	public List<UserInfoDTO> searchUserList(String category, String input, int startRow, int endRow) {
+		return mapper.searchUserList(category, input, startRow, endRow);
+	}
+
+	@Override
+	public int searchCount(String category, String input) {
+		return mapper.searchCount(category, input);
 	}
 
 }
