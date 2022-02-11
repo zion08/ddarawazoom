@@ -152,6 +152,7 @@ $(document).ready(function(){
 					  var number = event[0]['_index'] + 1;
 					  
 					  var offset = $('#number' + number).offset();
+					  console.log(offset);
 			          $('html, body').animate({scrollTop : offset.top}, 400);
 
 			        }
@@ -267,8 +268,8 @@ $(document).ready(function(){
 
 					  var number = event[0]['_index'] + 1;
 					  
-					  var offset = $('#number' + number).offset();
-			          $('html, body').animate({scrollTop : offset.top}, 400);
+					  var offset = $('#number' + number).offset().top;
+			          $('html, body').animate({scrollTop : offset}, 400);
 
 			        }
 			},

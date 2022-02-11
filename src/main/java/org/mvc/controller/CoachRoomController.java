@@ -417,6 +417,7 @@ public class CoachRoomController {
 
 		model.addAttribute("userInfo", service.getMyProfile(id));
 		model.addAttribute("bodyProfileDTO", service.getBodyProfile(id));
+		model.addAttribute("bodyList", service.bodyList(id));
 		model.addAttribute("number", 1);
 		
 		return "/coachroom/member/content";
