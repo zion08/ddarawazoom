@@ -3,7 +3,7 @@
 <%@ include file="../../layout/header.jsp"%>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/resources/user/custom/js/user.js?ver=1" type="text/javascript"></script>
+<script src="/resources/user/custom/js/user.js?ver=123" type="text/javascript"></script>
 
 <link href="/resources/coach/custom/css/form-validation.css" rel="stylesheet">
 <link href="/resources/user/custom/css/user.css" rel="stylesheet">
@@ -59,13 +59,18 @@
 	              </div>
 	            </div>
 	
-	            <div class="col-12">
+	            <div class="col-8">
 	              <label for="nickname" class="form-label">* 닉네임</label>
 	              <input type="text" class="form-control" id="nick" name="nick" placeholder="닉네임을 입력하세요." required>
 	              <div class="invalid-feedback">
 	                닉네임은 필수항목입니다.
 	              </div>
 	            </div>
+				<div class="col-4" style="float: right;">
+				    <input style="margin-top: 31px;" type="button"
+				    	class="btn btn-primary mb-3 form-control" id="nickCheck" value="중복확인"/>
+				</div>
+				<label id="nickResult" class="font" style="margin-top: 0px;"></label>
 
 			    <div class="form-check">
 			      <input type="checkbox" class="form-check-input" id="checkbox1" name="checkbox" required onclick="selectAll(this);">

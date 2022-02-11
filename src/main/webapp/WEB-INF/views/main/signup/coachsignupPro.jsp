@@ -16,7 +16,7 @@
 	      <div class="col-md-7 col-lg-8">
 	        <h2 style="text-align: center; margin-bottom: 40px;"> ddarawazoom 코치지원 </h2>
 	        <h4 class="mb-3">경력정보 입력</h4>
-	        <form class="needs-validation" novalidate method="post" id="coachCareerForm" onsubmit="return careerInsert();">
+	        <form class="needs-validation" novalidate method="post" action="/ddarawazoom/coachCareerInsert" id="coachCareerForm" onsubmit="careerInsert();">
 	          <div class="row g-3">
 	            <div class="col-8">
 	              <label for="specialty" class="form-label">* 전문분야</label>
