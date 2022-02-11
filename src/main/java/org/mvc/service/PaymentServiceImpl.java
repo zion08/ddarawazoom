@@ -102,6 +102,21 @@ public class PaymentServiceImpl implements PaymentService {
 		return mapper.getCancelAmountMy(id);
 	}
 
+	@Override
+	public List<PaymentDTO> getSearchPaymentList(String category, String input) {
+		return mapper.getSearchPaymentList(category, input);
+	}
+
+	@Override
+	public int getSearchAmountTotal(String category, String input) {
+		return mapper.getSearchAmountTotal(category, input);
+	}
+
+	@Override
+	public int getSearchCancelAmountTotal(String category, String input) {
+		return mapper.getSearchCancelAmountTotal(category, input);
+	}
+
 
 	
 }

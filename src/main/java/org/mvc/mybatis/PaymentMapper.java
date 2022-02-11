@@ -2,6 +2,7 @@ package org.mvc.mybatis;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.mvc.bean.PaymentDTO;
 
 public interface PaymentMapper {
@@ -14,6 +15,8 @@ public interface PaymentMapper {
 	
 
 	public List<PaymentDTO> getPaymentList();
+	
+	public List<PaymentDTO> getSearchPaymentList(@Param("category")String category, @Param("input")String input);
 	
 	public List<PaymentDTO> getPaymentMyList(String id);
 	
@@ -33,7 +36,11 @@ public interface PaymentMapper {
 
 	public int getAmountTotal();
 
+	public int getSearchAmountTotal(@Param("category")String category, @Param("input")String input);
+	
 	public int getCancelAmountTotal();
+	
+	public int getSearchCancelAmountTotal(@Param("category")String category, @Param("input")String input);
 	
 	public int getAmountCoach(String c_id);
 	

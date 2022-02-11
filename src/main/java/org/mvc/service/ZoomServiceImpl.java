@@ -88,4 +88,14 @@ public class ZoomServiceImpl implements ZoomService{
 		return mapper.getUserInfo(id); 
 	}
 
+	@Override
+	public List<ZoomDTO> searchList(String category, String input, int startRow, int endRow) {
+		return mapper.searchList(category, input, startRow, endRow);
+	}
+
+	@Override
+	public int searchCount(String category, String input) {
+		return mapper.searchCount(category, input);
+	}
+
 }

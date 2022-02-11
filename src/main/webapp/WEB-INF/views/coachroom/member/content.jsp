@@ -11,7 +11,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-		<script src="/resources/coach/custom/js/bodyprofile.js" ></script>
+		<script src="/resources/coach/custom/js/bodyprofile.js?ver=1" ></script>
 		<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>		
 		
 		<link href="/resources/css/myroom/bodyprofile.css" rel="stylesheet" >
@@ -65,7 +65,7 @@
 	                	<div class="counter">
 		                    	<div class="row">
 		                    	
-		                    		<c:if test="${bodyList == null}" >
+		                    		<c:if test="${bodyProfileDTO == null}" >
 										<ul class="list-group list-group-flush">
 										    <li class="list-group-item">
 										    	<h5>작성 된 바디 프로필이 없습니다.</h5>
@@ -73,7 +73,7 @@
 										</ul>
 									</c:if>
 		                    	
-		                    		<c:if test="${bodyList != null}">
+		                    		<c:if test="${bodyProfileDTO != null}">
 		                    		
 			                    	<c:forEach items="${bodyProfileDTO}" var="bodyProfileDTO">
 				                        <div class="col-6 col-lg-4" id="clickGragh">
@@ -184,9 +184,6 @@
 						<th scope="col">
 							엉덩이 둘레
 						</th>
-						<th scope="col">
-							버 튼
-						</th>
 					</tr>
 				</thead>
 				<c:forEach var="bodyProfileDTO" items="${bodyList}" >	
@@ -231,13 +228,6 @@
 							</td>
 							<td>
 								${bodyProfileDTO.b_hip} cm
-							</td>
-							<td style="width: 10px; font-size:10px;">
-								<input type="button"  value="수 정"  id="updateButton" class="btn btn-outline-primary"
-									onclick="window.location='/myroom/bodyprofile/bodyUpdate?b_num=${bodyProfileDTO.b_num}'"/>
-									&nbsp;&nbsp;
-								<input type="button" value="삭 제" id="deleteButton" class="btn btn-outline-danger"
-									onclick="window.open('/myroom/bodyprofile/bodyDelete?b_num=${bodyProfileDTO.b_num}','delete','width=600,height=200');" />
 							</td>
 						</tr>
 					</tbody>

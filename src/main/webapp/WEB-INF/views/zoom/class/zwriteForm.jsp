@@ -56,8 +56,9 @@
 				&nbsp;	
 				<div class="col-12">
 					<label for="c_id" class="form-label">- 코치아이디</label>
-					<input type="hidden" name="c_id" value="${c_id}">
-					<div class="form-control">${c_id}</div>
+					<input type="hidden" name="c_id" value="${sessionScope.c_id}">
+					<input type="hidden" name="c_nick" value="${coachInfo.c_nick}" />
+					<div class="form-control">${coachInfo.c_nick}</div>
 				</div>
 				&nbsp;
 				<div class="col-12">

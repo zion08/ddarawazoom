@@ -110,7 +110,32 @@ public class ManagerController {
 		model.addAttribute("sales", salseFmt);
 		
 		return "/manager/sales/sales";
-	}		
+	}
+	
+	@RequestMapping("/salesSearch")
+	public String salesSearch (Model model, HttpSession session, String category, String input) {
+		log.info("	-----CT-----> manager sales");
+		
+		// 결제 내역 출력
+		List<PaymentDTO> paymentList = servicePayment.getSearchPaymentList(category, input);
+		model.addAttribute("payment", paymentList);
+		
+		// 총 거래액, 환불액, 매출액
+		DecimalFormat fmt = new DecimalFormat("###,###");
+		int amount = servicePayment.getSearchAmountTotal(category, input);
+		String amountFmt = fmt.format(amount);
+		model.addAttribute("amount", amountFmt);
+		
+		int cancelAmount = servicePayment.getSearchCancelAmountTotal(category, input);
+		String cancelAmoutFmt = fmt.format(cancelAmount);
+		model.addAttribute("cancelAmount", cancelAmoutFmt);
+		
+		int sales = amount - cancelAmount;
+		String salseFmt = fmt.format(sales);
+		model.addAttribute("sales", salseFmt);
+		
+		return "/manager/sales/salesSearch";
+	}
 //	=========== 관리자 수입 관련 코드 종료 ===========  //
 
 //	=========== 관리자 공지사항 관련 코드 시작 ===========  //

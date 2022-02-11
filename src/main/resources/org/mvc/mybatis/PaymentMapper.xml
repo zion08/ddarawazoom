@@ -27,6 +27,10 @@
 		select * from tbl_payment order by paidat desc
 	</select>
 	
+	<select id="getSearchPaymentList" resultType="org.mvc.bean.PaymentDTO">
+		select * from tbl_payment where ${category} like '%'||#{input}||'%' order by paidat desc
+	</select>
+	
 	<select id="getPaymentMyList" resultType="org.mvc.bean.PaymentDTO">
 		select * from tbl_payment where buyerName = #{id} order by paidat desc 
 	</select>
@@ -72,8 +76,16 @@
 		select sum(AMOUNT) from tbl_payment
 	</select>
 	
+	<select id="getSearchAmountTotal" resultType="int">
+		select sum(AMOUNT) from tbl_payment where ${category} like '%'||#{input}||'%'
+	</select>
+	
 	<select id="getCancelAmountTotal" resultType="int">
 		select sum(CANCELAMOUNT) from tbl_payment
+	</select>
+	
+	<select id="getSearchCancelAmountTotal" resultType="int">
+		select sum(CANCELAMOUNT) from tbl_payment where ${category} like '%'||#{input}||'%'
 	</select>
 	
 	<select id="getAmountCoach" resultType="int">

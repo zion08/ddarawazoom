@@ -41,22 +41,22 @@
 					가격 : ${zoomList.price}원  
 				</p>	
 			<div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-              	<button type="button" class="btn btn-sm btn btn-danger"
-              		onclick="window.location='/ddarawazoom/searchClass?category=type&input=${zoomList.type}'">${zoomList.type}</button>&nbsp;	 	 
-             	<button type="button" class="btn btn-sm btn btn-success"
-             		onclick="window.location='/ddarawazoom/searchClass?category=goal&input=${zoomList.goal}'">${zoomList.goal}</button>&nbsp;
-             		
-             	<c:if test="${zoomList.tool == '-'}">
-             		<button type="button" class="btn btn-sm btn btn-warning" disabled>${zoomList.tool}</button>&nbsp;
-             	</c:if>
-             	<c:if test="${zoomList.tool != '-'}">
-             		<button type="button" class="btn btn-sm btn btn-warning"
-             			onclick="window.location='/ddarawazoom/searchClass?category=tool&input=${zoomList.tool}'">${zoomList.tool}</button>&nbsp;
-             	</c:if>
-             	
-             	<button type="button" class="btn btn-sm btn btn-primary" disabled>${zoomList.frequency}</button> 
-            </div>	          
+	            <div class="btn-group">
+	              	<button type="button" class="btn btn-sm btn btn-danger"
+	              		onclick="window.location='/ddarawazoom/searchClass?category=type&input=${zoomList.type}'">${zoomList.type}</button>&nbsp;	 	 
+	             	<button type="button" class="btn btn-sm btn btn-success"
+	             		onclick="window.location='/ddarawazoom/searchClass?category=goal&input=${zoomList.goal}'">${zoomList.goal}</button>&nbsp;
+	             		
+	             	<c:if test="${zoomList.tool == '-'}">
+	             		<button type="button" class="btn btn-sm btn btn-warning" disabled>${zoomList.tool}</button>&nbsp;
+	             	</c:if>
+	             	<c:if test="${zoomList.tool != '-'}">
+	             		<button type="button" class="btn btn-sm btn btn-warning"
+	             			onclick="window.location='/ddarawazoom/searchClass?category=tool&input=${zoomList.tool}'">${zoomList.tool}</button>&nbsp;
+	             	</c:if>
+	             	
+	             	<button type="button" class="btn btn-sm btn btn-primary" disabled>${zoomList.frequency}</button> 
+	            </div>	          
 	        </div>
             </div>
         	</div>
@@ -92,13 +92,13 @@
 	<c:if test="${count > 1}">
 		<div id="page">페이지&nbsp;  
 			<c:if test="${startPage > 10}">
-				<a href="/ddarawazoom/zoom?pageNum=${startPage - 10}"> [이전] </a>
+				<a href="/ddarawazoom/searchClass?category=${category}&input=${input}&pageNum=${startPage - 10}"> [이전] </a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/ddarawazoom/zoom?pageNum=${i}">${i}</a>
+				<a href="/ddarawazoom/searchClass?category=${category}&input=${input}&pageNum=${i}">${i}</a>
 			</c:forEach>
 			<c:if test="${endPage < pageCount}">
-				<a href="/ddarawazoom/zoom?pageNum=${startPage + 10}"> [다음] </a>
+				<a href="/ddarawazoom/searchClass?category=${category}&input=${input}&pageNum=${startPage + 10}"> [다음] </a>
 			</c:if>
 		</div>
 	</c:if>	

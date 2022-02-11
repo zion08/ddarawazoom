@@ -2,6 +2,7 @@ package org.mvc.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.mvc.bean.PaymentDTO;
 
 public interface PaymentService {
@@ -18,6 +19,9 @@ public interface PaymentService {
 	
 	//결제 내역 전체 조회
 	public List<PaymentDTO> getPaymentList();
+	
+	//결제 내역 검색
+	public List<PaymentDTO> getSearchPaymentList(String category, String input);
 	
 	//내 결제 내역
 	public List<PaymentDTO> getPaymentMyList(String id);
@@ -43,8 +47,14 @@ public interface PaymentService {
 	// 총 거래 금액
 	public int getAmountTotal();
 	
+	// 검색된 거래금액
+	public int getSearchAmountTotal(String category, String input);
+	
 	// 총 환불 금액
 	public int getCancelAmountTotal();
+	
+	// 검색된 환불 금액
+	public int getSearchCancelAmountTotal(String category, String input);
 	
 	//코치별 총 거래 금액
 	public int getAmountCoach(String c_id);
