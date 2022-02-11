@@ -2,6 +2,7 @@ package org.mvc.mybatis;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.ZoomDTO;
@@ -31,4 +32,12 @@ public interface ManagerMapper {
 	
 	// 코치 상태 변경
 	public int changeStatus(CoachInfoDTO dto);
+	
+	// 관리자 강의 삭제
+	public int zoomClassDelete(Long num);
+	
+	// 관리자 강의 검색 관련
+	public int zoomSearchCount(@Param("sort")String sort, @Param("search")String search);
+	
+	public List<ZoomDTO> zoomSearchList(@Param("startRow") int startRow, @Param("endRow")int endRow, @Param("sort")String sort, @Param("search")String search); 
 }

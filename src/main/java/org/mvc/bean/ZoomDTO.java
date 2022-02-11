@@ -17,4 +17,5 @@ public class ZoomDTO {
 	private Long count;
 	private String merchant_uid;
 	private String status;
+	private String c_nick;
 }

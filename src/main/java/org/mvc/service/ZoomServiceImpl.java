@@ -2,6 +2,7 @@ package org.mvc.service;
 
 import java.util.List;
 
+
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
@@ -21,8 +22,8 @@ public class ZoomServiceImpl implements ZoomService{
 	
 	// 코치강의관련
 	@Override
-	public List<ZoomDTO> zoomList(int startRow, int endRow) { 
-		return mapper.zoomList(startRow, endRow);  
+	public List<ZoomDTO> zoomList(int startRow, int endRow) {
+		return mapper.zoomList(startRow, endRow);
 	}
 	
 	@Override
@@ -88,4 +89,13 @@ public class ZoomServiceImpl implements ZoomService{
 		return mapper.getUserInfo(id); 
 	}
 
+	@Override
+	public List<ZoomDTO> searchList(String category, String input, int startRow, int endRow) {
+		return mapper.searchList(category, input, startRow, endRow);
+	}
+
+	@Override
+	public int searchCount(String category, String input) {
+		return mapper.searchCount(category, input); 
+	}
 }

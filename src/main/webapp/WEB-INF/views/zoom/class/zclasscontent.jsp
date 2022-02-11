@@ -23,11 +23,11 @@
 			</c:if>	
 		<div class="btn-group">	
            	<c:if test="${sessionScope.c_id == zoomContent.c_id}">
-				<input type="button" class="btn btn-outline-danger" value="글수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${zoomContent.num}'">
-				<input type="button" class="btn btn-outline-danger" value="글삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${zoomContent.num}'"> 
+				<input type="button" class="btn btn-outline-danger" value="강의정보 수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${zoomContent.num}'">
+				<input type="button" class="btn btn-outline-danger" value="강의 삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${zoomContent.num}'"> 
 			</c:if>	 
-			<c:if test="${sessionScope.id != null}">
-				<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">			
+			<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
+			<c:if test="${sessionScope.id != null}">			
 				<input type="button" id="payBtn" class="btn btn-outline-primary" value="바로 결제하기">
 			</c:if>
 		</div>
@@ -39,7 +39,10 @@
              	&nbsp;&nbsp;<button type="button" class="btn btn-m btn-primary" disabled>${zoomContent.frequency}</button> 
 			</div>
 			<div class="card-body">
-				<h4 align="left">No.${zoomContent.num}</h4><h5 align="left">${zoomContent.count}회 조회</h5>
+				<h4 align="left">No.${zoomContent.num}</h4>
+				<h5 align="left">readcount 
+				<font color="red"> ${zoomContent.count} </font><img src="/resources/image/zoom/eye.png"></h5>
+				
 				<h2>${zoomContent.title}
 				
  				 <c:if test="${sessionScope.c_id == null}">   

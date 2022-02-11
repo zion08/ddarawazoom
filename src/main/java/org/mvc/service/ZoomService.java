@@ -8,7 +8,10 @@ import org.mvc.bean.ZoomDTO;
 
 public interface ZoomService {
 	// 코치강의관련
-	public List<ZoomDTO> zoomList(@Param("startRow") int startRow, @Param("endRow")int endRow);  
+	public List<ZoomDTO> zoomList(@Param("startRow") int startRow, @Param("endRow") int endRow);  
+	public List<ZoomDTO> searchList(@Param("category") String category, @Param("input") String input, 
+									@Param("startRow") int startRow, @Param("endRow") int endRow);
+	public int searchCount(@Param("category") String category, @Param("input") String input);  
 	public int zoomInsert(ZoomDTO dto);
 	public int zoomDelete(int num); 
 	public int zoomUpdate(ZoomDTO dto);
@@ -24,5 +27,5 @@ public interface ZoomService {
 	public List<ReviewDTO> reviewList(int class_num, int startRow, int endRow); 
 	public int reInsert(ReviewDTO dto);
 	public int reCount(int num);
-	public UserInfoDTO getUserInfo(String id);   
+	public UserInfoDTO getUserInfo(String id);
 } 

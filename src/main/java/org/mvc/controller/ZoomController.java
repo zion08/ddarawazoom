@@ -12,6 +12,7 @@ import org.mvc.bean.FileInfo;
 import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.ZoomDTO;
+import org.mvc.service.CoachRoomService;
 import org.mvc.service.MyRoomService;
 import org.mvc.service.PaymentService;
 import org.mvc.service.ZoomService;
@@ -38,6 +39,9 @@ public class ZoomController {
 	
 	@Autowired
 	private PaymentService servicePayment;
+	
+	@Autowired
+	private CoachRoomService coachService;
 	
 	@Autowired
 	private FileInfo fileInfo;   
@@ -68,11 +72,8 @@ public class ZoomController {
 	    List zoomList = null;
 	    if (count > 0) {
 	    	zoomList = service.zoomList(startRow, endRow);
-	    }
-	    
-	    if(count > 0) {
+	 
 	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-	    	
 	    	int startPage = (int)(currentPage/10)*10+1;
 	    	int pageBlock = 10;
 	    	int endPage = startPage + pageBlock - 1;
@@ -103,7 +104,7 @@ public class ZoomController {
 		log.info(" -----CT-----> writeForm ");
 		
 		String c_id = (String)session.getAttribute("c_id");
-		model.addAttribute("c_id" , c_id);
+		model.addAttribute("coachInfo" , coachService.getCoachInfo(c_id));
 		log.info("c_id=" + c_id);
 		
 		return "/zoom/class/zwriteForm"; 
@@ -283,5 +284,61 @@ public class ZoomController {
 		model.addAttribute("num" , dto.getClass_num());  
 		model.addAttribute("result" , service.reInsert(dto)); 
 		return "/zoom/class/re_writePro"; 
+	}
+	
+	// ===== zoom 강의 검색 ===== //
+	@RequestMapping("/searchClass")
+	public String searchClass(String category, String input, String pageNum, Model model) {
+		log.info(" -----CT-----> searchClass ");
+		log.info("category="+category+" input="+input);
+
+		int pageSize = 9;
+		if (pageNum == null) {
+		    pageNum = "1";
+		}
+
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+	    int endRow = currentPage * pageSize;
+	    int count = 0;
+	    int number= 0;
+
+	    count = service.searchCount(category, input);
+	    log.info("count=="+count);
+	    List zoomList = null;
+	    if (count > 0) {
+	    	zoomList = service.searchList(category, input, startRow, endRow);
+	    	log.info("list size == "+zoomList.size());
+	    }
+
+	    if(count > 0) {
+	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+
+	    	int startPage = (int)(currentPage/10)*10+1;
+	    	int pageBlock = 10;
+	    	int endPage = startPage + pageBlock - 1;
+	    	if (endPage > pageCount) {
+	    		endPage = pageCount;
+	    	}
+	    	model.addAttribute("startPage", startPage);
+	    	model.addAttribute("endPage", endPage);
+	    	model.addAttribute("pageCount", pageCount);
+	    } 
+
+	    number = count - (currentPage-1) * pageSize;
+
+	    model.addAttribute("pageNum", pageNum);
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("startRow", startRow);
+	    model.addAttribute("endRow", endRow);
+	    model.addAttribute("count", count);
+	    model.addAttribute("number", number);
+	    model.addAttribute("pageSize", pageSize);
+	    model.addAttribute("zoomList", zoomList);
+
+	    model.addAttribute("category", category);
+	    model.addAttribute("input", input);
+
+		return "/zoom/class/searchClass";
 	}
 }	

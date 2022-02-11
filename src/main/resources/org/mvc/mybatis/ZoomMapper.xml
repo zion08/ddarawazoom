@@ -8,15 +8,29 @@
 	<select id="zoomList" resultType="org.mvc.bean.ZoomDTO">
 	<![CDATA[
 		select * from (
-			select num,c_id, title, intro, type, goal, tool, frequency, price, img, count, status, rownum r from (
+			select num, c_id, title, intro, type, goal, tool, frequency, price, img, count, status, c_nick, rownum r from (
 				select * from tbl_coachclass order by num desc))
 		where r >= #{startRow} and r <= #{endRow} and status = '등록'
 	]]>
 	</select>
 	
+	<!-- 강의 검색 -->
+	<select id="searchList" resultType="org.mvc.bean.ZoomDTO">
+	<![CDATA[
+		select * from (
+			select num, c_id, title, intro, type, goal, tool, frequency, price, img, count, status, c_nick, rownum r from (
+				select * from tbl_coachclass where ${category} like '%'||#{input}||'%' order by num desc))
+		where r >= #{startRow} and r <= #{endRow} and status = '등록'
+	]]>
+	</select>
+
+	<select id="searchCount" resultType="int">
+		select count(*) from tbl_coachclass where status = '등록' and ${category} like '%'||#{input}||'%'
+	</select>
+	
 	<insert id="zoomInsert" parameterType="org.mvc.bean.ZoomDTO">
-		insert into tbl_coachclass(num, c_id, title, intro, type, goal, tool, frequency, price, merchant_uid) 
-			values(seq_coachclass.nextval, #{c_id}, #{title}, #{intro}, #{type}, #{goal}, #{tool}, #{frequency}, #{price}, #{merchant_uid})
+		insert into tbl_coachclass(num, c_id, title, intro, type, goal, tool, frequency, price, merchant_uid, c_nick) 
+			values(seq_coachclass.nextval, #{c_id}, #{title}, #{intro}, #{type}, #{goal}, #{tool}, #{frequency}, #{price}, #{merchant_uid}, #{c_nick})
 	</insert>
 	
 	<delete id="zoomDelete">
@@ -82,5 +96,4 @@
 	<select id="getUserInfo" resultType="org.mvc.bean.UserInfoDTO">
 		select * from tbl_user where id = #{id}
 	</select>
-	
 </mapper>  
