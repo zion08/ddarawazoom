@@ -23,7 +23,7 @@
 			        <a href="#"><div class="circle-tile-heading purple"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
 			        <div class="circle-tile-content purple">
 			          <div class="circle-tile-description text-faded">총 멤버 수<br/>[탈퇴멤버 제외]</div>
-			          <div class="circle-tile-number text-faded ">${count} 명</div>
+			          <div class="circle-tile-number text-faded ">총 ${count} 명</div>
 			        </div>
 			      </div>
 			    </div>
@@ -54,7 +54,7 @@
 			        <a href="#"><div class="circle-tile-heading orange"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
 			        <div class="circle-tile-content orange">
 			          <div class="circle-tile-description text-faded"> 일반 가입 멤버 </div>
-			          <div class="circle-tile-number text-faded ">${userCount}</div>
+			          <div class="circle-tile-number text-faded ">${userCount} 명</div>
 			          <a class="circle-tile-footer" href="#user">일반 멤버 확인<i class="fa fa-chevron-circle-right"></i></a>
 			        </div>
 			      </div>
