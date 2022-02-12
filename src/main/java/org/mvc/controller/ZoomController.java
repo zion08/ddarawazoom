@@ -342,4 +342,9 @@ public class ZoomController {
 	    model.addAttribute("input", input);
 		return "/zoom/class/searchClass";
 	}
+	
+	@RequestMapping("intro")
+	public String intro() {
+		return "/intro/intro"; 
+	}
 }	
