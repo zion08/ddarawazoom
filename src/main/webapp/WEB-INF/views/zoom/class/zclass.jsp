@@ -5,6 +5,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/resources/js/zoom/search.js" type="text/javascript"></script>
 
+<link href="../../resources/css/manager/zoom.css" rel="stylesheet">
+
 <div class="container-fluid">
 	<div class="album py-2 bg-light"><br>
     	<h2 style="text-align: center;"> 따라와 줌 </h2>
@@ -27,9 +29,12 @@
 			<div class="card shadow-sm">
 	        	<img src="/resources/coach/img/${zoomList.img}" class="card-img-top" width="100" height="225">       
          	<div class="card-body"> 	
-				<p class="card-text">No.${number} 
+				<p class="card-text">No.${number} /
 					<c:set var="number" value="${number - 1}"/>
-					조회수${zoomList.count} 
+					readcount <font color="red">${zoomList.count}</font> <img src="/resources/image/zoom/eye.png"> 
+					<c:if test="${zoomList.count >= 50}">
+					  <span class="hit">hit!!</span> 
+					</c:if>
 				</p>
 				<p class="card-text">
 					${zoomList.c_nick} 강사님
@@ -46,7 +51,7 @@
               		onclick="window.location='/ddarawazoom/searchClass?category=type&input=${zoomList.type}'">${zoomList.type}</button>&nbsp;	 	 
              	<button type="button" class="btn btn-sm btn btn-success"
              		onclick="window.location='/ddarawazoom/searchClass?category=goal&input=${zoomList.goal}'">${zoomList.goal}</button>&nbsp;
-             		
+
              	<c:if test="${zoomList.tool == '-'}">
              		<button type="button" class="btn btn-sm btn btn-warning" disabled>${zoomList.tool}</button>&nbsp;
              	</c:if>
@@ -54,7 +59,7 @@
              		<button type="button" class="btn btn-sm btn btn-warning"
              			onclick="window.location='/ddarawazoom/searchClass?category=tool&input=${zoomList.tool}'">${zoomList.tool}</button>&nbsp;
              	</c:if>
-             	
+
              	<button type="button" class="btn btn-sm btn btn-primary" disabled>${zoomList.frequency}</button> 
             </div>	          
 	        </div>
@@ -67,7 +72,7 @@
 	</div><br /> 
 	
 	<form action="/ddarawazoom/searchClass" method="post" onsubmit="return valueCheck()">
-	
+
 	  <div style="width: 50%; text-align: center; margin: auto 0;">
 		  <div class="input-group mb-3">
 		    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
@@ -76,7 +81,7 @@
 		      <option value="title">강의 제목</option>
 		      <option value="type">운동 타입</option>
 		    </select>
-		  
+
 		    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
 		    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
 		  </div>

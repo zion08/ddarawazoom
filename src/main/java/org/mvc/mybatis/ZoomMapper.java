@@ -12,7 +12,7 @@ public interface ZoomMapper {
 	public List<ZoomDTO> zoomList(@Param("startRow") int startRow, @Param("endRow") int endRow);  
 	public List<ZoomDTO> searchList(@Param("category") String category, @Param("input") String input, 
 									@Param("startRow") int startRow, @Param("endRow") int endRow);
-	public int searchCount(@Param("category") String category, @Param("input") String input);
+	public int searchCount(@Param("category") String category, @Param("input") String input);  
 	public int zoomInsert(ZoomDTO dto);
 	public int zoomDelete(int num); 
 	public int zoomUpdate(ZoomDTO dto);

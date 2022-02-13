@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../layout/header.jsp"%>   
 
-<h4 align="center">No.${num}번의 강의 ${zoom.title}을/를 정말 삭제하시겠습니까?</h4><br />
+<h4 align="center"><font color="red">No.${num}</font>의 강의&nbsp;<font color="red">${zoom.title}</font>을/를 정말 삭제하시겠습니까?</h4><br />
 
 <form name="zdeleteForm" action="/ddarawazoom/zdeletePro" method="post" align="center">
 	<input type="hidden" name="num" value="${num}" />

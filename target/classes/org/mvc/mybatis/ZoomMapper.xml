@@ -8,7 +8,7 @@
 	<select id="zoomList" resultType="org.mvc.bean.ZoomDTO">
 	<![CDATA[
 		select * from (
-			select num,c_id, title, intro, type, goal, tool, frequency, price, img, count, status, c_nick, rownum r from (
+			select num, c_id, title, intro, type, goal, tool, frequency, price, img, count, status, c_nick, rownum r from (
 				select * from tbl_coachclass order by num desc))
 		where r >= #{startRow} and r <= #{endRow} and status = '등록'
 	]]>
@@ -18,12 +18,12 @@
 	<select id="searchList" resultType="org.mvc.bean.ZoomDTO">
 	<![CDATA[
 		select * from (
-			select num,c_id, title, intro, type, goal, tool, frequency, price, img, count, status, c_nick, rownum r from (
+			select num, c_id, title, intro, type, goal, tool, frequency, price, img, count, status, c_nick, rownum r from (
 				select * from tbl_coachclass where ${category} like '%'||#{input}||'%' order by num desc))
 		where r >= #{startRow} and r <= #{endRow} and status = '등록'
 	]]>
 	</select>
-	
+
 	<select id="searchCount" resultType="int">
 		select count(*) from tbl_coachclass where status = '등록' and ${category} like '%'||#{input}||'%'
 	</select>
@@ -96,5 +96,4 @@
 	<select id="getUserInfo" resultType="org.mvc.bean.UserInfoDTO">
 		select * from tbl_user where id = #{id}
 	</select>
-	
 </mapper>  

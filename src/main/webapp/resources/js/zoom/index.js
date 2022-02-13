@@ -29,7 +29,7 @@ function websdkready() {
   document.getElementById("display_name").value =
     "CDN" +
     ZoomMtg.getJSSDKVersion()[0] +
-    testTool.detectOS() +
+    testTool.detectOS() + 
     "#" +
     testTool.getBrowserInfo();
   document.getElementById("meeting_number").value = testTool.getCookie(
