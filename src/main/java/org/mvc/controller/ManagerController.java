@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.parser.ParseException;
@@ -23,6 +24,7 @@ import org.mvc.service.ManagerService;
 import org.mvc.service.NoticeService;
 import org.mvc.service.PaymentService;
 import org.mvc.service.ReviewService;
+import org.mvc.service.YoutubeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,33 +56,89 @@ public class ManagerController {
 	private ReviewService serviceReview;
 	
 	@Autowired
+	private YoutubeService serviceYoutube;
+	
+	@Autowired
 	private Crawling crawling;
 
 //	=========== 관리자 Vod 관련 코드 시작 ===========  //
 	@RequestMapping("/vod")
-	public String vodManage() {
+	public String vodManage(Model model, HttpServletRequest request) {
 		
+		String pageNum= request.getParameter("pageNum");	
+		if (pageNum == null) {
+		    pageNum = "1";
+		}
+		
+		int pageSize = 5;	
+		int currentPage = Integer.parseInt(pageNum); 
+		int firstRownum = (currentPage-1)*pageSize + 1;	
+		int lastRownum = currentPage*pageSize;		
+		
+		int pageBlock = 5;	
+		int contentCount = serviceYoutube.vodCount();
+		int totalPage;	
+		int startPage;	
+		int endPage;	
+		
+		totalPage = contentCount/pageSize + (contentCount%pageSize == 0 ? 0 : 1);
+		startPage = (currentPage/pageBlock)*pageBlock + 1;
+		endPage = startPage + pageBlock - 1;
+		if(endPage > totalPage) {
+			endPage = totalPage;
+		}
+		
+		if (contentCount > 0){
+			model.addAttribute("contentCount", contentCount);
+			model.addAttribute("onCount", serviceYoutube.vodOnCount());
+			model.addAttribute("offCount", serviceYoutube.vodOffCount());
+			model.addAttribute("youtube", serviceYoutube.getManageVideoList(firstRownum, lastRownum));
+			model.addAttribute("totalPage", totalPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+		} else {
+			model.addAttribute("contentCount", 0);
+		}
+
 		return "/manager/vod/vodManage";
 	}
 	
 	@RequestMapping("/searchVod")
 	public @ResponseBody List<String> searchVod(String qurey, String maxResults) throws IOException, ParseException {
-		System.out.println(qurey);
-		System.out.println(maxResults);
-
 		List<String> videoIdList = crawling.getVideioId(qurey, maxResults);
-		System.out.println(videoIdList.toString());
 		return videoIdList;
+	}
+	
+	@RequestMapping("/autoInsertVod")
+	public @ResponseBody int autoInsertVod(String qurey, String maxResults) throws IOException, ParseException {
+		int result=0;	
+		List<String> videoIdList = crawling.getVideioId(qurey, maxResults);		
+		for (int i=0; i<videoIdList.size(); i++) {
+			String videoId = videoIdList.get(i);
+			result = insertVod(videoId);
+		}
+		return result;
 	}
 	
 	@RequestMapping("/insertVod")
 	public @ResponseBody int insertVod(String videoId) throws IOException, ParseException {
-		int result=0;
-		System.out.println(videoId);
+		int result=0;	
+		YoutubeDTO dto = crawling.getVideioInfo(videoId.trim());		
+		result = serviceYoutube.insertVideo(dto);		
+		return result;
+	}
 	
-
-		YoutubeDTO dto = crawling.getVideioInfo(videoId);
-		System.out.println(dto);
+	@RequestMapping("/deleteVod")
+	public @ResponseBody int deleteVod(int vnum) {
+		int result=0;
+		result = serviceYoutube.deleteVod(vnum);
+		return result;
+	}
+	
+	@RequestMapping("/changeStatusVod")
+	public @ResponseBody int changeStatusVod(int vnum, String status) {
+		int result=0;		
+		result = serviceYoutube.changeStatusVod(vnum, status);
 		return result;
 	}
 //	=========== 관리자 Vod 관련 코드 종료 ===========  //
@@ -88,7 +146,7 @@ public class ManagerController {
 	
 //	=========== 관리자 수입 관련 코드 시작 ===========  //
 	@RequestMapping("/sales")
-	public String payment (Model model, HttpSession session) {
+	public String payment (Model model) {
 		log.info("	-----CT-----> manager sales");
 		
 		// 결제 내역 출력
@@ -113,7 +171,7 @@ public class ManagerController {
 	}
 	
 	@RequestMapping("/salesSearch")
-	public String salesSearch (Model model, HttpSession session, String category, String input) {
+	public String salesSearch (Model model, String category, String input) {
 		log.info("	-----CT-----> manager sales");
 		
 		// 결제 내역 출력

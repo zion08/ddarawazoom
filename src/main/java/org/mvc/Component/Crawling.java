@@ -68,7 +68,8 @@ public class Crawling {
 		
 		String urlBase = "https://www.googleapis.com/youtube/v3/search?part=snippet";
 		String urlGet = urlBase+"&q="+encodeQurey+"&maxResults="+encodemaxResults+"&key="+API_KEY;		
-
+		
+		System.out.println("---getURL--> "+urlGet);
 		JSONObject resultAll = getJson(urlGet);
 		
 		// 4. Json 파싱 --> 비디오 id만 가져옴
@@ -91,8 +92,8 @@ public class Crawling {
 		
 		String encodeVideoId = URLEncoder.encode(videoId, "UTF-8");
 		String urlBase="https://www.googleapis.com/youtube/v3/videos?part=snippet,player";
-		String urlGet = urlBase+"&id="+encodeVideoId+"&key="+API_KEY;
-		
+		String urlGet = urlBase + "&id=" + encodeVideoId + "&key=" + API_KEY;
+
 		System.out.println("---getInfo urlGet-->: " +urlGet);
 		
 		JSONObject resultAll = getJson(urlGet);
@@ -102,119 +103,53 @@ public class Crawling {
 		JSONObject itemsObject= (JSONObject)itemsArray.get(0);
 		JSONObject snippet = (JSONObject)itemsObject.get("snippet");
 		JSONObject player = (JSONObject)itemsObject.get("player");
-		
-		String title = (String)snippet.get("title");
-		String description = (String)snippet.get("description");
-		String channelTitle = (String)snippet.get("channelTitle");
+		JSONObject thumbnails = (JSONObject)snippet.get("thumbnails");
+		JSONObject thumbnails_default = (JSONObject)thumbnails.get("default");
+		JSONArray tagsArray = (JSONArray)snippet.get("tags");
+
+		String videoid = (String)itemsObject.get("id");
+		String title = (String)snippet.get("title");		
+		String channelTitle = (String)snippet.get("channelTitle");		
 		String embedHtml = (String)player.get("embedHtml");
-		String[] tagsTem = description.split("#");
-		ArrayList<String> tags = new ArrayList<String>(Arrays.asList(tagsTem));
-		if (tags.size()>1) {
-			System.out.println("---getTest--tags.size-> "+tags.size());
-			tags.remove(0);
-		};		
-		if (tags.size()<=1) {
-			System.out.println("---getTest--tags.size-> "+tags.size());
-			JSONArray tagsArray = (JSONArray)snippet.get("tags");
-			if (tagsArray==null) {
-				tags.clear();
-			} else {
-				Random random = new Random();
-				Set<Integer> idx = new HashSet<>(); 
-				while (idx.size() < 3) { 
-					int num = random.nextInt(tagsArray.size()); 
-					idx.add(num); 
-				}
-				tags.clear();
-				Iterator<Integer> iterSet = idx.iterator();
-				while(iterSet.hasNext()) {
-					tags.add((String) tagsArray.get(iterSet.next()));
-				}	
-			}				
+		String thumbnail_url = (String)thumbnails_default.get("url");
+		ArrayList<String> tags = new ArrayList<String>();
+		if (tagsArray.size() <= 3) {
+			for(int i=0; i<tagsArray.size(); i++) {
+				tags.add((String) tagsArray.get(i));
+			}
+		}
+		if (tagsArray.size() > 3) {
+			Random random = new Random();		
+			Set<Integer> idx = new HashSet<>(); // idx 랜덤 3개 -> tag 랜덤 3개 선택
+			while (idx.size() < 3) { 
+				int num = random.nextInt(tagsArray.size()); 
+				idx.add(num); 
+			}
+			
+			Iterator<Integer> iterSet = idx.iterator();
+			while(iterSet.hasNext()) {
+				tags.add((String) tagsArray.get(iterSet.next()));
+			}	
 		}
 		
+		
+		System.out.println("---getInfo tags-->: " +tags);
+		System.out.println("---getInfo tags.get(0)-->: " +tags.get(0));
+		System.out.println("---getInfo tags.get(1)-->: " +tags.get(1));
+		System.out.println("---getInfo tags.get(2)-->: " +tags.get(2));
+			
 		// 5. dto 세팅
+		youtubeDTO.setVideoid(videoid);
 		youtubeDTO.setTitle(title);
-		youtubeDTO.setChannelTitle(channelTitle);
-		youtubeDTO.setTags(tags);
-		youtubeDTO.setEmbedHtml(embedHtml);
+		youtubeDTO.setChanneltitle(channelTitle);
+		youtubeDTO.setEmbedhtml(embedHtml);
+		youtubeDTO.setThumbnail_url(thumbnail_url);
+		youtubeDTO.setTag1(tags.get(0));
+		youtubeDTO.setTag2(tags.get(1));
+		youtubeDTO.setTag3(tags.get(2));
 		
 		return youtubeDTO;
 	}
-	
-
-
-	
-	public YoutubeDTO getVideioInfoTest () throws IOException, ParseException {
-
-		String urlGet = "https://www.googleapis.com/youtube/v3/videos?part=snippet,player&id=wYg3W24w99A&key=AIzaSyAZuwtlFJBrAGio_FIgv01ERvJrdq_EwiA";
-
-		// 1.url 연결 
-		url = new URL(urlGet);	
-		conn = (HttpURLConnection) url.openConnection();	// url 연결 생성		
-		conn.setRequestMethod("GET");	// request 방식 설정, 속성 설정
-		conn.setRequestProperty("Content-type", "application/json");			
-		conn.setDoOutput(true);			// json을 출력 가능 형태로 번경		
-
-		// 2. json 데이터 담기		
-		InputStreamReader is = new InputStreamReader(conn.getInputStream(), "UTF-8");
-		BufferedReader br = new BufferedReader(is);
-		while(br.ready()) {
-			sb.append(br.readLine());
-		}
-		
-		JSONObject resultAll = (JSONObject) new JSONParser().parse(sb.toString());
-		System.out.println("---getTest--sb--------> "+sb);				
-		System.out.println("---getTest--resultAll-> "+resultAll);
-		
-		// 3. 연결 끊기
-		conn.disconnect();
-		
-		// 4. Json 파싱 --> {,}(Object) [,](Array) --> 필요한 데이터 추출
-		JSONArray itemsArray = (JSONArray) resultAll.get("items");
-		JSONObject itemsObject= (JSONObject)itemsArray.get(0);
-		JSONObject snippet = (JSONObject)itemsObject.get("snippet");
-		JSONObject player = (JSONObject)itemsObject.get("player");
-		
-		String title = (String)snippet.get("title");
-		String description = (String)snippet.get("description");
-		String channelTitle = (String)snippet.get("channelTitle");
-		String embedHtml = (String)player.get("embedHtml");
-		String[] tagsTem = description.split("#");
-		ArrayList<String> tags = new ArrayList<String>(Arrays.asList(tagsTem));
-		if (tags.size()>1) {
-			System.out.println("---getTest--tags.size-> "+tags.size());
-			tags.remove(0);
-		};		
-		if (tags.size()<=1) {
-			System.out.println("---getTest--tags.size-> "+tags.size());
-			JSONArray tagsArray = (JSONArray)snippet.get("tags");
-			if (tagsArray==null) {
-				tags.clear();
-			} else {
-				Random random = new Random();
-				Set<Integer> idx = new HashSet<>(); 
-				while (idx.size() < 3) { 
-					int num = random.nextInt(tagsArray.size()); 
-					idx.add(num); 
-				}
-				tags.clear();
-				Iterator<Integer> iterSet = idx.iterator();
-				while(iterSet.hasNext()) {
-					tags.add((String) tagsArray.get(iterSet.next()));
-				}	
-			}				
-		}
-
-		// 5. dto 세팅
-		youtubeDTO.setTitle(title);
-		youtubeDTO.setChannelTitle(channelTitle);
-		youtubeDTO.setTags(tags);
-		youtubeDTO.setEmbedHtml(embedHtml);
-		
-		return youtubeDTO;
-	}
-
 
 	
 }
