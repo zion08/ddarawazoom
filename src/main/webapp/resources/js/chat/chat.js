@@ -5,7 +5,7 @@ function wsOpen(){
 	ws = new WebSocket("ws://" + location.host + "/chating/"+$("#roomNumber").val());
 	wsEvt();
 }
-	
+
 function wsEvt() {
 	ws.onopen = function(data){
 		//소켓이 열리면 동작
@@ -24,9 +24,9 @@ function wsEvt() {
 					} 
 				}else if(d.type == "message"){
 					if(d.sessionId == $("#sessionId").val()){
-						$("#partyRoom").append("<p class='me'>나 :" + d.msg + "</p>");	
+						$("#partyRoom").append("&nbsp;<p class='me'>" + d.userName + "(나) :" + d.msg + "</p>");	
 					}else{
-						$("#partyRoom").append("<p class='others'>" + d.userName + " :" + d.msg + "</p>");
+						$("#partyRoom").append("&nbsp;<p class='others'>" + d.userName + " :" + d.msg + "</p>");
 					}
 						
 				}else{

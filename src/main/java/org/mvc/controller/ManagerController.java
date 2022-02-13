@@ -20,6 +20,7 @@ import org.mvc.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,6 +43,7 @@ public class ManagerController {
 	
 	@Autowired
 	private ReviewService serviceReview;
+	
 	
 //	=========== 관리자 수입 관련 코드 시작 ===========  //
 	@RequestMapping("/sales")
@@ -449,4 +451,6 @@ public class ManagerController {
 		return result; 
 	}
 //	=========== 관리자 멤버 관련 코드 종료 ===========  //
+	
+
 }
