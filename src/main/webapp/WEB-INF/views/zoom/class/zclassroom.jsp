@@ -59,12 +59,12 @@
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Zoom Classroom</a>
-            </div>
+            </div><br />
             <div id="navbar" class="websdktest">
                 <form class="navbar-form navbar-right" id="meeting_form">
                     <div class="form-group">
                         <input type="hidden" name="display_name" id="display_name" value="2.2.0#CDN" maxLength="100"
-                            placeholder="display_name" class="form-control" required>
+                            placeholder="display name" class="form-control" required>  
                     </div>
                     <div class="form-group">
                         <input type="text" name="meeting_number" id="meeting_number" value="" maxLength="200"
@@ -81,9 +81,7 @@
 
                     <div class="form-group">
                         <select id="meeting_role" class="sdk-select">
-                            <option value=0>Attendee</option>
-                            <option value=1>Host</option>
-                            <option value=5>Assistant</option>
+                            <option value=0>수강생</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -100,13 +98,13 @@
                             <option value="zh-CN">Chinese 简体中文</option>
                             <option value="zh-TW">Chinese 繁体中文</option>                                                      
                         </select>
-                    </div>
+                    </div><br />
 
                     <input type="hidden" value="" id="copy_link_value" /><br />
-                    <button type="submit" class="btn btn-primary" id="join_meeting">입장</button>
-                    <button type="submit" class="btn btn-primary" id="clear_all">다시입력</button>                 
-
-                </form>
+                    <button type="submit" class="btn btn-primary" id="join_meeting">입장</button>                 
+                    <button type="submit" class="btn btn-primary" id="clear_all">다시입력</button>
+            		<input type="button" class="btn btn-primary" value="뒤로가기" onclick="window.location='/ddarawazoom/myclassroom'">
+                </form> 
             </div>
             <!--/.navbar-collapse -->
         </div>
