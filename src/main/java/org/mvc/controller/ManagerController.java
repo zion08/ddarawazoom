@@ -1,28 +1,32 @@
 package org.mvc.controller;
 
 import java.text.DecimalFormat;
+
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.CoachInfoDTO;
+
 import org.mvc.bean.NoticeDTO;
+
 import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
-import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.VodDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.ManagerService;
 import org.mvc.service.NoticeService;
 import org.mvc.service.PaymentService;
 import org.mvc.service.ReviewService;
+import org.mvc.service.ZoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +48,9 @@ public class ManagerController {
 	@Autowired
 	private ReviewService serviceReview;
 	
+	@Autowired
+	private ZoomService serviceZoom;
+
 	
 //	=========== 관리자 수입 관련 코드 시작 ===========  //
 	@RequestMapping("/sales")
@@ -453,4 +460,98 @@ public class ManagerController {
 //	=========== 관리자 멤버 관련 코드 종료 ===========  //
 	
 
+=======
+//	=========== 관리자 zoom강의 관련 코드 시작 ===========  //	
+	
+	@RequestMapping("/zoom")
+	public String zoom(String pageNum, Model model) {
+		log.info("	-----CT-----> manager zoomclass");
+		
+		int pageSize = 10;
+		if(pageNum == null) {
+			pageNum = "1"; 
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1; 
+		int endRow = currentPage * pageSize;
+		int count = 0;
+		count = serviceZoom.zoomCount();
+		List zoomList = null;
+		if(count > 0) {
+			zoomList = serviceZoom.zoomList(startRow, endRow);
+			
+			int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+			int startPage = (int)(currentPage/10) * 10 + 1;
+			int pageBlock = 10;
+			int endPage = startPage + pageBlock -1;
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+			model.addAttribute("startPage" , startPage);
+			model.addAttribute("endPage" , endPage);
+			model.addAttribute("pageCount" , pageCount);
+		}
+		
+		model.addAttribute("pageNum" , pageNum);
+		model.addAttribute("currentPage" , currentPage);
+		model.addAttribute("startRow" , startRow);
+		model.addAttribute("endRow" , endRow);
+		model.addAttribute("count" , count);
+		model.addAttribute("pageSize" , pageSize);
+		model.addAttribute("zoomList" , zoomList);
+		return "/manager/zoom/zoomClass"; 
+	}
+	
+	@RequestMapping("/zoomClassDelete")
+	public @ResponseBody int zoomClassDelete(@RequestBody ZoomDTO dto) {
+		log.info("	-----CT-----> manager zoomClassDelete");
+		int result = 0;
+		result = managerService.zoomClassDelete(dto.getNum());
+		return result;
+	} 
+	
+	@RequestMapping("/zoomSearchClass")
+	public String zoomSearchClass(String pageNum, Model model, String sort, String search) {
+		log.info("	-----CT-----> manager zoomSearchclass");
+		
+		int pageSize = 10;
+		if(pageNum == null) {
+			pageNum = "1"; 
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1; 
+		int endRow = currentPage * pageSize;
+		int count = 0;
+		
+		count = managerService.zoomSearchCount(sort, search);
+		
+		List zoomList = null;
+		if(count > 0) {
+			zoomList = managerService.zoomSearchList(startRow, endRow, sort, search);  
+			
+			int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+			int startPage = (int)(currentPage/10) * 10 + 1;
+			int pageBlock = 10;
+			int endPage = startPage + pageBlock -1;
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+			model.addAttribute("startPage" , startPage);
+			model.addAttribute("endPage" , endPage);
+			model.addAttribute("pageCount" , pageCount);
+		}
+		
+		model.addAttribute("pageNum" , pageNum);
+		model.addAttribute("currentPage" , currentPage);
+		model.addAttribute("startRow" , startRow);
+		model.addAttribute("endRow" , endRow);
+		model.addAttribute("count" , count);
+		model.addAttribute("pageSize" , pageSize);
+		model.addAttribute("zoomList" , zoomList);
+		
+		return "/manager/zoom/zoomSearchClass";
+	}
+	//	=========== 관리자 zoom강의 관련 코드 종료 ===========  //	
 }

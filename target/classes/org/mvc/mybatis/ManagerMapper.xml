@@ -160,4 +160,22 @@
 	<select id="searchCount" resultType="int">
 		select count(*) from tbl_user where ${category} like '%'||#{input}||'%'
 	</select>
+
+	<!-- 관리자 강의 삭제 -->
+	<delete id="zoomClassDelete">
+		delete from tbl_coachclass where num = #{num} 
+	</delete> 
+	
+	<select id="zoomSearchCount" resultType="int">
+		select count(*) from tbl_coachclass where status = '등록' and ${sort} like '%'||#{search}||'%'
+	</select>
+	
+	<select id="zoomSearchList" resultType="org.mvc.bean.ZoomDTO">
+	<![CDATA[
+		select * from (
+			select num, c_id, title, intro, type, goal, tool, frequency, price, img, count, status, c_nick, rownum r from (
+				select * from tbl_coachclass where ${sort} like '%'||#{search}||'%' order by num desc))
+		where r >= #{startRow} and r <= #{endRow} and status = '등록'
+	]]>
+	</select>
 </mapper>
