@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.QnADTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 
@@ -89,4 +90,10 @@ public interface ManagerService {
 	public int zoomSearchCount(@Param("sort")String sort, @Param("search")String search);
 	
 	public List<ZoomDTO> zoomSearchList(@Param("startRow") int startRow, @Param("endRow")int endRow, @Param("sort")String sort, @Param("search")String search); 
+		
+	// Q&A 질문 삭제
+	public int deleteQnA(int q_num);
+	
+	// Q&A 상단 고정 여부
+	public int pinUpdate(QnADTO dto);
 }
