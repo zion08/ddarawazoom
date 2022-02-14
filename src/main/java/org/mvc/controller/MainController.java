@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.FileInfo;
+import org.mvc.bean.NoticeDTO;
+import org.mvc.bean.QnADTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.UserEmailService;
@@ -57,13 +59,12 @@ public class MainController {
 		
 		int result = 0;
 		
-		if(service.getUserInfo(userDTO) == 1){
+		if(service.getUserInfoCount(userDTO) == 1){
 			if(userDTO.getId().equals("admin")) {
 				result = 1;
 				session.setAttribute("admin", userDTO.getId());
 				model.addAttribute("result", result);
 			} else {
-				service.loginCount(userDTO.getId());
 				result = 1;
 				session.setAttribute("id", userDTO.getId());
 				model.addAttribute("result", result);
@@ -73,7 +74,6 @@ public class MainController {
 			coachDTO.setC_id(userDTO.getId());
 			coachDTO.setC_pw(userDTO.getPw());
 			if(service.coachCheck(coachDTO) == 1) {
-				service.coachLoginCount(coachDTO.getC_id());
 				result = 1;
 				session.setAttribute("c_id", coachDTO.getC_id());
 				model.addAttribute("result", result);
@@ -284,7 +284,7 @@ public class MainController {
 		
 		return result;
 	}
-	
+
 	@RequestMapping("/coachIntro")
 	public String coachIntro(Model model) {
 		log.info("------CT----->coachIntro");
@@ -307,6 +307,171 @@ public class MainController {
 		model.addAttribute("classCount", classList.size());
 		
 		return "/main/coachIntroduce/coachInfo";
+	}
+
+	@RequestMapping("/QnA")
+	public String QnA(Model model, String pageNum) {
+		log.info("------CT----->QnA");
+		
+		int pageSize = 10;
+		if (pageNum == null) {
+		    pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+	    int endRow = currentPage * pageSize;
+	    int count = 0;
+	    int number = 0;
+	    
+	    count = service.getQnACount();
+	    System.out.println(count);
+	    
+	    model.addAttribute("count", count);
+	    
+	    List<QnADTO> qnaList = null;
+	    if(count > 0) {
+	    	qnaList = service.getQnAList(startRow, endRow);
+	    	model.addAttribute("qnaList", qnaList);
+	    }
+	    
+	    if(count > 0) {
+	    	
+	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+	    	
+	    	int startPage = (int)(currentPage/10)*10+1;
+	    	int pageBlock = 10;
+	    	int endPage = startPage + pageBlock - 1;
+	    	if (endPage > pageCount) {
+	    		endPage = pageCount;
+	    	}
+	    	model.addAttribute("startPage", startPage);
+	    	model.addAttribute("endPage", endPage);
+	    	model.addAttribute("pageCount", pageCount);
+	    }
+	    System.out.println(qnaList);
+	    number = count = (currentPage - 1) * pageSize;
+	    
+	    model.addAttribute("pageNum", pageNum);
+	    model.addAttribute("number", number);
+	    
+		return "/main/QnA/QnA";
+	}
+	
+	@RequestMapping("/QnASearch")
+	public String qnaSearch(Model model, String pageNum, String category, String input) {
+		log.info("------CT----->qnaSearch");
+		
+		model.addAttribute("category", category);
+		model.addAttribute("input", input);
+		
+		int pageSize = 10;
+		if (pageNum == null) {
+		    pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+	    int endRow = currentPage * pageSize;
+	    int count = 0;
+	    int number = 0;
+	    
+	    count = service.getQnASearchCount(category, input);
+	    System.out.println(count);
+	    
+	    model.addAttribute("count", count);
+	    
+	    List<QnADTO> qnaList = null;
+	    if(count > 0) {
+	    	qnaList = service.getQnASearchList(category, input, startRow, endRow);
+	    	model.addAttribute("qnaList", qnaList);
+	    }
+	    
+	    if(count > 0) {
+	    	
+	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+	    	
+	    	int startPage = (int)(currentPage/10)*10+1;
+	    	int pageBlock = 10;
+	    	int endPage = startPage + pageBlock - 1;
+	    	if (endPage > pageCount) {
+	    		endPage = pageCount;
+	    	}
+	    	model.addAttribute("startPage", startPage);
+	    	model.addAttribute("endPage", endPage);
+	    	model.addAttribute("pageCount", pageCount);
+	    }
+	    System.out.println(qnaList);
+	    number = count = (currentPage - 1) * pageSize;
+	    
+	    model.addAttribute("pageNum", pageNum);
+	    model.addAttribute("number", number);
+		
+		return "/main/QnA/QnASearch";
+	}
+	
+	@RequestMapping("/QnAWrite")
+	public String QnAWrite(Model model, HttpSession session, int q_num) {
+		log.info("------CT----->QnAWrite");
+		
+		String id = (String) session.getAttribute("id");
+		String c_id = (String) session.getAttribute("c_id");
+		
+		if(id != null) {
+			model.addAttribute("userInfo", service.getUserInfo(id));
+		} else if(c_id != null) {
+			model.addAttribute("coachInfo", service.getCoachInfo(c_id));
+		}
+		
+		model.addAttribute("q_num", q_num);
+		
+		return "/main/QnA/QnAWrite";
+	}
+	
+	@RequestMapping("/QnAWritePro")
+	public @ResponseBody int QnAWritePro(@RequestBody QnADTO dto) {
+		log.info("------CT----->QnAWritePro");
+		int result = 0;
+		
+		System.out.println(dto);
+		
+		int q_num = dto.getQ_num();
+		int ref;
+		int re_step;
+		
+		if(q_num != 0) {
+			ref = dto.getQ_num();
+			re_step = 1;
+			dto.setRef(ref);
+			dto.setRe_step(re_step);
+			service.answerDone(q_num);
+			result = service.insertQnA(dto);
+		} else {
+			System.out.println(service.getMaxNumber());
+			ref = service.getMaxNumber()+1;
+			dto.setRef(ref);
+			result = service.insertQnA(dto);
+		}
+		
+		System.out.println(dto);
+		
+		return result;
+	}
+	
+	@RequestMapping("/qnaRcUp")
+	public String qnaRcUp(int q_num, RedirectAttributes rttr) {
+		log.info("------CT----->QnAContent");
+		service.readcountUp(q_num);
+		rttr.addAttribute("q_num", q_num);
+		return "redirect:/ddarawazoom/QnAContent";
+	}
+	
+	@RequestMapping("/QnAContent")
+	public String QnAContent(int q_num, Model model) {
+		log.info("------CT----->QnAContent");
+		List<QnADTO> list = service.getContent(q_num);
+		model.addAttribute("content", list);
+		return "/main/QnA/content";
 	}
 	
 }

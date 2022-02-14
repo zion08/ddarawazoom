@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.QnADTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.mybatis.UserInfoMapper;
@@ -27,8 +28,8 @@ public class UserInfoServiceImpl implements UserInfoService{
 	}
 
 	@Override
-	public int getUserInfo(UserInfoDTO dto) {
-		return mapper.getUserInfo(dto);
+	public int getUserInfoCount(UserInfoDTO dto) {
+		return mapper.getUserInfoCount(dto);
 	}
 
 	@Override
@@ -137,6 +138,61 @@ public class UserInfoServiceImpl implements UserInfoService{
 	@Override
 	public int coachLoginCount(String id) {
 		return mapper.coachLoginCount(id);
+	}
+
+	@Override
+	public List<QnADTO> getQnAList(int startRow, int endRow) {
+		return mapper.getQnAList(startRow, endRow);
+	}
+
+	@Override
+	public int getQnACount() {
+		return mapper.getQnACount();
+	}
+
+	@Override
+	public UserInfoDTO getUserInfo(String id) {
+		return mapper.getUserInfo(id);
+	}
+
+	@Override
+	public CoachInfoDTO getCoachInfo(String c_id) {
+		return mapper.getCoachInfo(c_id);
+	}
+
+	@Override
+	public int getMaxNumber() {
+		return mapper.getMaxNumber();
+	}
+
+	@Override
+	public List<QnADTO> getContent(int q_num) {
+		return mapper.getContent(q_num);
+	}
+
+	@Override
+	public int insertQnA(QnADTO dto) {
+		return mapper.insertQnA(dto);
+	}
+
+	@Override
+	public void readcountUp(int q_num) {
+		mapper.readcountUp(q_num);
+	}
+
+	@Override
+	public int answerDone(int q_num) {
+		return mapper.answerDone(q_num);
+	}
+
+	@Override
+	public List<QnADTO> getQnASearchList(String category, String input, int startRow, int endRow) {
+		return mapper.getQnASearchList(category, input, startRow, endRow);
+	}
+
+	@Override
+	public int getQnASearchCount(String category, String input) {
+		return mapper.getQnASearchCount(category, input);
 	}
 	
 }

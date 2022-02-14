@@ -17,6 +17,7 @@ import org.mvc.bean.NoticeDTO;
 
 import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.PaymentDTO;
+import org.mvc.bean.QnADTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.VodDTO;
@@ -307,17 +308,6 @@ public class ManagerController {
 		int result = 0;
 		
 		result = serviceNotice.managerDeletedChange(notice_CDTO.getC_num());
-		
-		return result;
-	}
-	
-	@RequestMapping("/managerCommentDelete")
-	public @ResponseBody int managerCommentDelete(@RequestBody Notice_CDTO notice_CDTO) {
-		log.info("	-----CT-----> manager managerCommentDelete");
-		
-		int result = 0;
-		
-		result = serviceNotice.managerCommentDelete(notice_CDTO.getC_num());
 		
 		return result;
 	}
@@ -685,4 +675,23 @@ public class ManagerController {
 		return "/manager/zoom/zoomSearchClass";
 	}
 	//	=========== 관리자 zoom강의 관련 코드 종료 ===========  //	
+	
+	@RequestMapping("/deleteQnA")
+	public @ResponseBody int deleteQnA(int q_num) {
+		log.info("	-----CT-----> manager deleteQnA");
+		int result = 0;
+		
+		result = managerService.deleteQnA(q_num);
+		
+		return result;
+	}
+	
+	@RequestMapping("/pinUpdate")
+	public @ResponseBody int pinUpdate(QnADTO dto) {
+		int result = 0;
+		result = managerService.pinUpdate(dto);
+		
+		return result;
+	}
+	
 }
