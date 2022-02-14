@@ -2,6 +2,7 @@ package org.mvc.controller;
 
 import java.util.List;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.FileInfo;
@@ -151,8 +152,17 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/noticeContent")
-	public String noticeContent(String pageNum, Model model, NoticeDTO noticeDTO, int num, Notice_CDTO notice_CDTO) {
+	public String noticeContent(String pageNum, Model model, NoticeDTO noticeDTO, int num, Notice_CDTO notice_CDTO, HttpSession session) {
 		log.info("	-----CT-----> ddarawazoom noticeContent");
+		
+		String id = (String) session.getAttribute("id");
+		String c_id = (String) session.getAttribute("c_id");
+		
+		if(id != null) {
+			model.addAttribute("userInfo", serviceNotice.getUserInfo(id));
+		} else if(c_id != null) {
+			model.addAttribute("coachInfo", serviceNotice.getCoachInfo(c_id));
+		}
 		
 		int pageSize = 8;
 		if (pageNum == null) {
@@ -247,7 +257,6 @@ public class NoticeController {
 		log.info("	-----CT-----> ddarawazoom notice_commentWrite");
 		
 		int result = 0;
-		
 		result = serviceNotice.commentWrite(notice_CDTO);
 		
 		return result;
@@ -263,22 +272,28 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/commentDeletePro")
-	public @ResponseBody int commentDeletePro(@RequestBody Notice_CDTO notice_CDTO) {
+	public @ResponseBody int commentDeletePro(int c_num) {
 		log.info("	-----CT-----> ddarawazoom notice_commentDeletePro");
 
 		int result = 0;
 		
-		String pw = serviceNotice.pwCheck(notice_CDTO.getWriter_id(), notice_CDTO.getC_num());
+		result = serviceNotice.deletedChange(c_num);
 		
-		if(pw.equals(notice_CDTO.getPw())) {
-			result = serviceNotice.deletedChange(notice_CDTO.getC_num());
-		}
 		return result;
 	}
 	
 	@RequestMapping("/commentUpdate")
-	public String commentUpdate(Notice_CDTO notice_CDTO, Model model) {
+	public String commentUpdate(Notice_CDTO notice_CDTO, Model model, HttpSession session) {
 		log.info("	-----CT-----> ddarawazoom notice_commentUpdate");
+		
+		String id = (String) session.getAttribute("id");
+		String c_id = (String) session.getAttribute("c_id");
+		
+		if(id != null) {
+			model.addAttribute("userInfo", serviceNotice.getUserInfo(id));
+		} else if(c_id != null) {
+			model.addAttribute("coachInfo", serviceNotice.getCoachInfo(c_id));
+		}
 		
 		model.addAttribute("notice_CDTO", serviceNotice.getComment(notice_CDTO.getC_num()));
 		
@@ -288,7 +303,6 @@ public class NoticeController {
 	@RequestMapping("/commentUpdatePro")
 	public @ResponseBody int commentUpdatePro(@RequestBody Notice_CDTO notice_CDTO) {
 		log.info("	-----CT-----> ddarawazoom notice_commentUpdatePro");
-
 		int result = 0;
 		
 		result = serviceNotice.commentUpdate(notice_CDTO);

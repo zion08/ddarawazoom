@@ -128,5 +128,15 @@ public class UserInfoServiceImpl implements UserInfoService{
 	public List<ZoomDTO> getCoachClass(String c_id) {
 		return mapper.getCoachClass(c_id);
 	}
+
+	@Override
+	public int loginCount(String id) {
+		return mapper.loginCount(id);
+	}
+
+	@Override
+	public int coachLoginCount(String id) {
+		return mapper.coachLoginCount(id);
+	}
 	
 }

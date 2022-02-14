@@ -16,21 +16,17 @@
 	<div class="container">
 		<form class="needs-validation" role="form" novalidate id="comment_UpdateForm" name="comment_update" action="/ddarawazoom/noticeContent" method="post">
 			<input type="hidden" name="c_num" value="${notice_CDTO.c_num}" />
-			<c:if test="${sessionScope.id != null}">
-			   <input type="hidden" name="writer_id" value="${sessionScope.id}" />
+			<c:if test="${sessionScope.id != null && userInfo != null}">
+			   <input type="hidden" name="writer_id" value="${userInfo.nick}" />
 			</c:if>
-			<c:if test="${sessionScope.c_id != null}">
-			   <input type="hidden" name="writer_id" value="${sessionScope.c_id}" />
+			<c:if test="${sessionScope.c_id != null && coachInfo != null}">
+			   <input type="hidden" name="writer_id" value="${coachInfo.c_nick}" />
 			</c:if>
 			<p class="text-center" style="font-weight: bold; font-size:20px; margin:10px;">
 				* 댓글 수정 *
 			</p>
 			<div class="col-lg-4"> 
 				작 성 자 : ${notice_CDTO.writer_id}
-			</div>
-			<div class="col-lg-4"> 
-				패스워드 : 
-				<input type="text" name="pw" class="form-control" value="${notice_CDTO.pw}" placeholder="패스워드를 기입해 주세요."  autofocus="autofocus"/>
 			</div>
 			<div class="col-lg-4"> 
 				작성 내용 :

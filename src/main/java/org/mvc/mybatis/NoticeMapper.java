@@ -3,11 +3,18 @@ package org.mvc.mybatis;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.NoticeDTO;
 import org.mvc.bean.Notice_CDTO;
+import org.mvc.bean.UserInfoDTO;
 
 public interface NoticeMapper {
 
+	// 유저, 코치 정보
+	public UserInfoDTO getUserInfo(String id);
+	
+	public CoachInfoDTO getCoachInfo(String c_id);
+	
 	// 공지 글 가져오기
 	public List<NoticeDTO> noticeList(
 			@Param("startRow") int startRow,
@@ -43,11 +50,6 @@ public interface NoticeMapper {
 				@Param("startRow") int startRow,
 				@Param("endRow") int endRow);
 	
-	// 공지 댓글 삭제 패스워드 체크
-	public String pwCheck(
-			@Param("writer_id") String writer_id,
-			@Param("c_num") int c_num);
-	
 	// 공지 댓글 삭제
 	public int deletedChange(int c_num);
 	
@@ -56,9 +58,6 @@ public interface NoticeMapper {
 	
 	// 관리자 댓글 경고 취소
 	public int managerDeletedCancell(int c_num);
-	
-	// 관리자 댓글 삭제
-	public int managerCommentDelete(int c_num);
 	
 	// 공지 댓글 가져오기
 	public Notice_CDTO getComment(int c_num);

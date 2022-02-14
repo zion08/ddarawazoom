@@ -131,7 +131,6 @@
 		                                <tr class="align-self-center">
 		                                    <th>작 성 자</th>
 		                                    <th>작성 내용</th>
-		                                    <th>패스워드</th>
 		                                    <th>작 성 일</th>
 		                                    <th>상 태</th>
 		                                    <th>버 튼</th>
@@ -146,7 +145,6 @@
 		                                    			${commentList.content}
 		                                    		</a>
 			                                    </td>
-			                                    <td>${commentList.pw}</td>
 			                                    <td>
 													<fmt:formatDate var="comment_regdate" pattern="yyyy-MM-dd HH:mm" value="${commentList.regdate}" />
 													 ${comment_regdate}
@@ -170,7 +168,6 @@
 				                                    <c:if test="${commentList.deleted eq ' all' && commentList.deleted ne 'no' && commentList.deleted ne 'yes'}">
 				                                        <input type="button" class="btn btn-outline-black" onclick="managerDeletedCancell(${commentList.c_num});" value="경고취소"/>
 				                                    </c:if>
-				                                    	<input type="button" class="btn btn-outline-black" onclick="managerCommentDelete(${commentList.c_num});" value="삭제"/>
 			                                    </td>
 			                                </tr>
 			                             </c:forEach>
