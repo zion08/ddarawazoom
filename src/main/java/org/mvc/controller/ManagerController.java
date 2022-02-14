@@ -18,6 +18,7 @@ import org.mvc.bean.NoticeDTO;
 import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
+import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.VodDTO;
 import org.mvc.bean.YoutubeDTO;
 import org.mvc.bean.ZoomDTO;
@@ -555,8 +556,6 @@ public class ManagerController {
 	}
 //	=========== 관리자 멤버 관련 코드 종료 ===========  //
 	
-
-=======
 //	=========== 관리자 zoom강의 관련 코드 시작 ===========  //	
 	
 	@RequestMapping("/zoom")
