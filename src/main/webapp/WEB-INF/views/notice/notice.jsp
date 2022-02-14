@@ -114,23 +114,37 @@
 	                        </div>
 		                </div>
 		            </div>
-		        </div>
+ 						<div style="width: 50%; text-align:center; margin: 0 auto;">
+		                  <form action="/ddarawazoom/searchNoticeList" method="post" name="searchForm" onsubmit="return valueCheck()">
+							  <div class="input-group mb-3">
+							    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
+							      <option selected value="">선 택</option>
+							      <option value="title">제 목</option>
+							      <option value="content">내 용</option>
+							      <option value="target_id">대 상</option>
+							    </select>
+						    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
+						    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
+						  </div>
+						</form>
+					 </div>
+				</div>
 		    </div>
 		</div>
-		<div id="page">
-			<c:if test="${pageCount > 0}">
-				페이지&nbsp;
-				<c:if test="${startPage > 10}">
-					<a href="/manager/notice?pageNum=${startPage - 10}"> [이전] </a>
-				</c:if>
-				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<a href="/manager/notice?pageNum=${i}">${i}</a>
-				</c:forEach>
-				<c:if test="${endPage < pageCount}">
-					<a href="/manager/notice?pageNum=${startPage + 10}"> [다음] </a>
-				</c:if>
-			</c:if>	
-		</div>
+	 <div id="page">
+		<c:if test="${pageCount > 0}">
+			페이지&nbsp;
+			<c:if test="${startPage > 10}">
+				<a href="/manager/notice?pageNum=${startPage - 10}"> [이전] </a>
+			</c:if>
+			<c:forEach var="i" begin="${startPage}" end="${endPage}">
+				<a href="/manager/notice?pageNum=${i}">${i}</a>
+			</c:forEach>
+			<c:if test="${endPage < pageCount}">
+				<a href="/manager/notice?pageNum=${startPage + 10}"> [다음] </a>
+			</c:if>
+		</c:if>	
+	 </div>
 </body>
 </html>
 

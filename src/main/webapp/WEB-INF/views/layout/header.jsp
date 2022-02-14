@@ -47,7 +47,6 @@
 						<li class="dropdown-submenu">
 							<a class="dropdown-item dropdown-toggle" href="#" >관리자 전용공간<span class="caret"></span></a>
 	              			<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="/manager">관리자 룸</a>						
 								<li><a class="dropdown-item" href="/manager/user">멤버 관리</a>						
 								<li><a class="dropdown-item" href="/manager/coach">코치 관리</a>						
 								<li><a class="dropdown-item" href="/manager/visitor">방문자 관리</a>						
@@ -100,7 +99,7 @@
 					<li><a class="dropdown-item" href="/chatRoom">따라와줌 파티룸</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/ddarawazoom/notice">공지사항</a></li>
-					<li><a class="dropdown-item" href="#">DDarawaZoom소개</a></li>
+					<li><a class="dropdown-item" href="/ddarawazoom/intro">DDarawaZoom소개</a></li>
 					<li><a class="dropdown-item" href="#">DDarawaZoom이용가이드</a></li>
 					<li><a class="dropdown-item" href="/ddarawazoom/coachIntro">DDarawaZoom코치소개</a></li>
 				</ul>

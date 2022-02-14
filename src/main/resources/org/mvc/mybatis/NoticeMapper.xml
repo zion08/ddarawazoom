@@ -172,4 +172,19 @@
 		]]>
 	</select>
 	
+	<!-- 공지사항 검색 리스트 -->
+	<select id="searchNoticeList" resultType="org.mvc.bean.NoticeDTO">
+		<![CDATA[
+			select * from (
+				select num, title, content, writer_id, target_id, regdate, viewcnt, img, pin, rownum r from(
+					select * from tbl_notice  where ${category} like '%'||#{input}||'%' order by pin desc , regdate desc))
+			where r >= #{startRow} and r <= #{endRow}
+		]]>
+	</select>
+	
+	<!-- 검색 결과 수 -->
+	<select id="searchCount" resultType="int">
+		select count(*) from tbl_notice where ${category} like '%'||#{input}||'%'
+	</select>
+	
 </mapper>

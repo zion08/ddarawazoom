@@ -27,8 +27,6 @@
 	                    	<h6 class="header-title  mt-1">* NOTICE *</h6>
 	                    	<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/ddarawazoom/notice'" value="[공지사항 페이지 이동]">
 	                    	<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/ddarawazoom/noticeWrite'" value="[공지사항 작성하기]">
-	                    	
-	                    	
 	                        <table class="table table-hover mb-0">
 	                            <thead>
 	                                <tr class="align-self-center">

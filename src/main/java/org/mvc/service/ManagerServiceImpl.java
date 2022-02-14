@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.mybatis.ManagerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,99 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public int changeStatus(CoachInfoDTO dto) {
 		return mapper.changeStatus(dto);
+	}
+
+	@Override
+	public int countAllUser() {
+		return mapper.countAllUser();
+	}
+
+	@Override
+	public UserInfoDTO userInfo(String id) {
+		return mapper.userInfo(id);
+	}
+
+	@Override
+	public int updateUserPw(UserInfoDTO userDTO) {
+		return mapper.updateUserPw(userDTO);
+	}
+
+	@Override
+	public int userDelete(String id) {
+		return mapper.userDelete(id);
+	}
+
+	@Override
+	public List<UserInfoDTO> getUserInfo() {
+		return mapper.getUserInfo();
+	}
+
+	@Override
+	public int userCount() {
+		return mapper.userCount();
+	}
+	
+	@Override
+	public List<UserInfoDTO> newUser() {
+		return mapper.newUser();
+	}
+	
+	@Override
+	public int newUserCount() {
+		return mapper.newUserCount();
+	}
+
+	@Override
+	public List<UserInfoDTO> getDeleteUser() {
+		return mapper.getDeleteUser();
+	}
+
+	@Override
+	public int getDeleteUserCount() {
+		return mapper.getDeleteUserCount();
+	}
+
+	@Override
+	public List<UserInfoDTO> getKakaoUser() {
+		return mapper.getKakaoUser();
+	}
+
+	@Override
+	public int kakaoUserCount() {
+		return mapper.kakaoUserCount();
+	}
+
+	@Override
+	public List<UserInfoDTO> getNaverUser() {
+		return mapper.getNaverUser();
+	}
+
+	@Override
+	public int naverUserCount() {
+		return mapper.naverUserCount();
+	}
+
+	@Override
+	public List<UserInfoDTO> searchUserList(String category, String input, int startRow, int endRow) {
+		return mapper.searchUserList(category, input, startRow, endRow);
+	}
+
+	@Override
+	public int searchCount(String category, String input) {
+		return mapper.searchCount(category, input);
+	}
+
+	public int zoomClassDelete(Long num) {
+		return mapper.zoomClassDelete(num);
+	}
+
+	@Override
+	public int zoomSearchCount(String sort, String search) {
+		return mapper.zoomSearchCount(sort, search); 
+	}
+
+	@Override
+	public List<ZoomDTO> zoomSearchList(int startRow, int endRow, String sort, String search) {
+		return mapper.zoomSearchList(startRow, endRow, sort, search);
 	}
 }

@@ -74,11 +74,8 @@ public class ZoomController {
 	    List zoomList = null;
 	    if (count > 0) {
 	    	zoomList = service.zoomList(startRow, endRow);
-	    }
-	    
-	    if(count > 0) {
+	 
 	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-	    	
 	    	int startPage = (int)(currentPage/10)*10+1;
 	    	int pageBlock = 10;
 	    	int endPage = startPage + pageBlock - 1;
@@ -296,18 +293,18 @@ public class ZoomController {
 	public String searchClass(String category, String input, String pageNum, Model model) {
 		log.info(" -----CT-----> searchClass ");
 		log.info("category="+category+" input="+input);
-		
+
 		int pageSize = 9;
 		if (pageNum == null) {
 		    pageNum = "1";
 		}
-	
+
 		int currentPage = Integer.parseInt(pageNum);
 		int startRow = (currentPage - 1) * pageSize + 1;
 	    int endRow = currentPage * pageSize;
 	    int count = 0;
 	    int number= 0;
-			
+
 	    count = service.searchCount(category, input);
 	    log.info("count=="+count);
 	    List zoomList = null;
@@ -315,10 +312,9 @@ public class ZoomController {
 	    	zoomList = service.searchList(category, input, startRow, endRow);
 	    	log.info("list size == "+zoomList.size());
 	    }
-	    
+
 	    if(count > 0) {
 	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-	    	
 	    	int startPage = (int)(currentPage/10)*10+1;
 	    	int pageBlock = 10;
 	    	int endPage = startPage + pageBlock - 1;
@@ -329,9 +325,9 @@ public class ZoomController {
 	    	model.addAttribute("endPage", endPage);
 	    	model.addAttribute("pageCount", pageCount);
 	    } 
-	    
+
 	    number = count - (currentPage-1) * pageSize;
-	    
+
 	    model.addAttribute("pageNum", pageNum);
 	    model.addAttribute("currentPage", currentPage);
 	    model.addAttribute("startRow", startRow);
@@ -340,10 +336,15 @@ public class ZoomController {
 	    model.addAttribute("number", number);
 	    model.addAttribute("pageSize", pageSize);
 	    model.addAttribute("zoomList", zoomList);
-		
 	    model.addAttribute("category", category);
 	    model.addAttribute("input", input);
-	    
+	    model.addAttribute("category", category);
+	    model.addAttribute("input", input);
 		return "/zoom/class/searchClass";
+	}
+	
+	@RequestMapping("intro")
+	public String intro() {
+		return "/intro/intro"; 
 	}
 }	

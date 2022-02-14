@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -48,7 +47,7 @@ public class NoticeController {
 	    int number = 0;
 	    count = serviceNotice.noticeCount();
 	    
-	    List noticeList = null;
+	    List<NoticeDTO> noticeList = null;
 	    if(count > 0) {
 	    	noticeList = serviceNotice.noticeList(startRow, endRow);
 	    	
@@ -70,6 +69,61 @@ public class NoticeController {
 	    model.addAttribute("number", number);
 	    
 		return "/notice/notice";
+	}
+	
+	@RequestMapping("/searchNoticeList")
+	public String searchNoticeList(String category, String input, String pageNum, Model model) {
+		log.info("	-----CT-----> ddarawazoom searchNoticeList");
+		log.info("category="+category+" input="+input);
+		
+		int pageSize = 8;
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = currentPage * pageSize;
+		int count = 0;
+		int number = 0;
+	
+		count = serviceNotice.searchCount(category, input);
+		
+		List<NoticeDTO> noticeList = null;
+		if(count > 0) {
+			noticeList = serviceNotice.searchNoticeList(category, input, startRow, endRow);
+			log.info("noticeList Size ="+noticeList.size());
+		}
+		
+		if(count > 0) {
+	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+	    	
+	    	int startPage = (int)(currentPage/10)*10+1;
+	    	int pageBlock = 10;
+	    	int endPage = startPage + pageBlock - 1;
+	    	if (endPage > pageCount) {
+	    		endPage = pageCount;
+	    	}
+	    	model.addAttribute("startPage", startPage);
+	    	model.addAttribute("endPage", endPage);
+	    	model.addAttribute("pageCount", pageCount);
+	    } 
+		
+		number = count = (currentPage - 1) * pageSize;
+		
+		model.addAttribute("pageNum", pageNum);
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("startRow", startRow);
+	    model.addAttribute("endRow", endRow);
+	    model.addAttribute("count", count);
+	    model.addAttribute("number", number);
+	    model.addAttribute("pageSize", pageSize);
+	    model.addAttribute("noticeList", noticeList);
+	    
+	    model.addAttribute("category", category);
+	    model.addAttribute("input", input);
+	    
+		return "/notice/searchNoticeList";
 	}
 	
 	@RequestMapping("/noticeWrite")
@@ -112,7 +166,7 @@ public class NoticeController {
 	    
 	    count = serviceNotice.commentCount(notice_CDTO.getNum());
 	    
-	    List notice_CList = null;
+	    List<Notice_CDTO> notice_CList = null;
 	    if(count > 0) {
 	    	notice_CList = serviceNotice.getCommentList(notice_CDTO.getNum(), startRow, endRow);
 	    	

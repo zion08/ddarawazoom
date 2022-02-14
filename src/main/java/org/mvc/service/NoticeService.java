@@ -66,4 +66,10 @@ public interface NoticeService {
 	
 	// 관리자 관리 - 댓글 수
 	public int getcommentCount();
+	
+	// 공지사항 검색 기능
+	public List<NoticeDTO> searchNoticeList(String category, String input, int startRow, int endRow);
+	
+	// 검색 결과 수
+	public int searchCount(String category, String input);
 }

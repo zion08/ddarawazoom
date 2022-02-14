@@ -441,7 +441,7 @@ public class MyRoomController {
 		
 		count = service.reviewCount(id);
 		
-		List reviewList = null;
+		List<ReviewDTO> reviewList = null;
 		if(count > 0) {
 			reviewList = service.getReview(zoomDTO.getNum(), id);
 		}
