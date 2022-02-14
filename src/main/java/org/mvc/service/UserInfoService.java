@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.QnADTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.controller.MainController;
@@ -41,7 +42,7 @@ public interface UserInfoService {
 	public int insertUserInfo(UserInfoDTO dto); 
 	
 	//회원 로그인 데이터 가져오기
-	public int getUserInfo(UserInfoDTO dto);
+	public int getUserInfoCount(UserInfoDTO dto);
 	
 	// 카카오 로그인(카카오에서 가져온 정보 DB에 저장)
 	public int kakaoInsert(UserInfoDTO dto);
@@ -54,6 +55,12 @@ public interface UserInfoService {
 	
 	// 네이버로 로그인한 사용자의 정보가 DB에 저장돼있는지 확인
 	public int naverCheck(UserInfoDTO dto);
+	
+	// 회원 정보
+	public UserInfoDTO getUserInfo(String id);
+		
+	// 코치 정보
+	public CoachInfoDTO getCoachInfo(String c_id);
 	
 	// 코치 로그인
 	public int coachCheck(CoachInfoDTO coachDTO);
@@ -78,4 +85,31 @@ public interface UserInfoService {
 	
 	// 등록한 강의
 	public List<ZoomDTO> getCoachClass(String c_id);
+	
+	// Q&A 리스트
+	public List<QnADTO> getQnAList(int startRow, int endRow);
+		
+	// Q&A 갯수
+	public int getQnACount();
+	
+	// Q&A 검색 리스트
+	public List<QnADTO> getQnASearchList(String category, String input, int startRow, int endRow);
+	
+	// Q&A 검색 갯수
+	public int getQnASearchCount(String category, String input);
+	
+	// 작성된 글 갯수
+	public int getMaxNumber();
+	
+	// 작성된 Q&A 정보
+	public List<QnADTO> getContent(int q_num);
+	
+	// Q&A 작성
+	public int insertQnA(QnADTO dto);
+	
+	// 조회수 증가
+	public void readcountUp(int q_num);
+	
+	// Q&A 답변 완료
+	public int answerDone(int q_num);
 }

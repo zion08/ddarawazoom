@@ -10,8 +10,16 @@
 			values(#{id} , #{pw} , #{email}, #{nick})
 	</insert>
 	
-	<select id="getUserInfo" resultType="int">
+	<select id="getUserInfoCount" resultType="int">
 		select count(*) from tbl_user where id=#{id} and pw=#{pw} and status != '탈퇴'
+	</select>
+	
+	<select id="getUserInfo" resultType="org.mvc.bean.UserInfoDTO">
+		select * from tbl_user where id = #{id}
+	</select>
+	
+	<select id="getCoachInfo" resultType="org.mvc.bean.CoachInfoDTO">
+		select * from tbl_coach where c_id = #{c_id}
 	</select>
 	
 	<!-- 로그인 카운트 -->
@@ -144,6 +152,58 @@
 	<select id="getCoachClass" resultType="org.mvc.bean.ZoomDTO">
 		select * from tbl_coachClass where c_id = #{c_id}
 	</select>
+	
+	<!-- Q&A -->
+	<select id="getQnAList" resultType="org.mvc.bean.QnADTO">
+		<![CDATA[
+			select * from (
+				select q_num, writer, title, content, pin, ref, status, regdate, readcount, re_step, rownum r from(
+					select * from tbl_QnA order by ref asc, pin desc))
+			where r >= #{startRow} and r <= #{endRow} and status != '삭제' and re_step = 0
+		]]>
+	</select>
+	
+	<select id="getQnACount" resultType="Integer">
+		select count(*) from tbl_QnA where status != '삭제'
+	</select>
+	
+	<select id="getQnASearchList" resultType="org.mvc.bean.QnADTO">
+		<![CDATA[
+			select * from (
+				select q_num, writer, title, content, pin, ref, status, regdate, readcount, re_step, rownum r from(
+					select * from tbl_QnA where ${category} like '%'||#{input}||'%' order by ref asc, pin desc))
+			where r >= #{startRow} and r <= #{endRow} and status != '삭제' and re_step = 0
+		]]>
+	</select>
+	
+	<select id="getQnASearchCount" resultType="Integer">
+		select count(*) from tbl_QnA where ${category} like '%'||#{input}||'%' and status != '삭제'
+	</select>
+	
+	<select id="getMaxNumber" resultType="Integer">
+		select max(q_num) from tbl_QnA
+	</select>
+	
+	<select id="getContent" resultType="org.mvc.bean.QnADTO">
+		select * from tbl_QnA where ref = #{q_num}
+	</select>
+	
+	<insert id="insertQnA">
+		insert into tbl_QnA(q_num, writer, title, content, ref, re_step)
+			values(seq_QnA.nextVal, #{writer}, #{title}, #{content}, #{ref}, #{re_step})
+	</insert>
+	
+	<update id="readcountUp">
+		update tbl_QnA set
+			readcount = readcount + 1
+		where q_num = #{q_num}
+	</update>
+	
+	<update id="answerDone">
+		update tbl_QnA set
+			status = '답변 완료'
+		where q_num = #{q_num}
+	</update>
 	
 </mapper>
 
