@@ -136,4 +136,18 @@ public class ManagerServiceImpl implements ManagerService{
 		return mapper.searchCount(category, input);
 	}
 
+	public int zoomClassDelete(Long num) {
+		return mapper.zoomClassDelete(num);
+	}
+
+	@Override
+	public int zoomSearchCount(String sort, String search) {
+		return mapper.zoomSearchCount(sort, search); 
+	}
+
+	@Override
+	public List<ZoomDTO> zoomSearchList(int startRow, int endRow, String sort, String search) {
+		return mapper.zoomSearchList(startRow, endRow, sort, search);
+	}
+
 }

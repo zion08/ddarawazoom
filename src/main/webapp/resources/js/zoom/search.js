@@ -12,5 +12,4 @@ function valueCheck(){
 }
 
 function searchBtn(value){
-	
 }
