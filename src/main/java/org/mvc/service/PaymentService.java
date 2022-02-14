@@ -37,7 +37,8 @@ public interface PaymentService {
 	
 	
 	//결제 취소 내역 업데이트
-	public int paymentCancelUpdate(PaymentDTO dto);
+	public int paymentCancelUpdateTP(PaymentDTO dto);
+	public int paymentCancelUpdateTC(PaymentDTO dto);
 	
 	//결제 취소 내역 입력
 	public int paymentCancelInsert(PaymentDTO dto);

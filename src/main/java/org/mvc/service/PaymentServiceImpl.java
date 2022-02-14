@@ -26,9 +26,7 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public PaymentDTO getMerchantUidInfo(String merchant_uid) {
 		return mapper.getMerchantUidInfo(merchant_uid);
-	}
-	
-	
+	}		
 	
 	@Override
 	public List<PaymentDTO> getPaymentList() {
@@ -58,8 +56,13 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	
 	@Override
-	public int paymentCancelUpdate(PaymentDTO dto) {
-		return mapper.paymentCancelUpdate(dto);
+	public int paymentCancelUpdateTP(PaymentDTO dto) {
+		return mapper.paymentCancelUpdateTP(dto);
+	}
+	
+	@Override
+	public int paymentCancelUpdateTC(PaymentDTO dto) {
+		return mapper.paymentCancelUpdateTC(dto);
 	}
 
 	@Override
