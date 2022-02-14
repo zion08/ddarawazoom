@@ -44,9 +44,11 @@
 	<context:component-scan base-package="org.mvc.controller" />
 	<context:component-scan base-package="org.mvc.handler" />
 	<context:component-scan base-package="org.mvc.config" />
+	<context:component-scan base-package="org.mvc.Component" />
 	
 	<!-- 객체 생성, <jsp:useBean>과 같음 -->
 	<beans:bean id="paymentDTO" class="org.mvc.bean.PaymentDTO"></beans:bean>
+	<beans:bean id="youtubeDTO" class="org.mvc.bean.YoutubeDTO"></beans:bean>
 	
 	<!-- WebSocket handler -->
 	<beans:bean id="SocketHandler" class="org.mvc.handler.SocketHandler"></beans:bean>

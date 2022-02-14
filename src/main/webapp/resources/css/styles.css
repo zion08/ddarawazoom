@@ -246,8 +246,8 @@ sup {
 }
 
 a {
-  color: #2937f0;
-  text-decoration: underline;
+  color: #000000;
+  text-decoration: none;
 }
 a:hover {
   color: #212cc0;
@@ -649,6 +649,11 @@ progress {
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
+}
+
+.container-vod {
+  width: 87%;
+  margin:0 auto;
 }
 
 @media (min-width: 576px) {
