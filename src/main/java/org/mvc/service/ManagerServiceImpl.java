@@ -149,5 +149,4 @@ public class ManagerServiceImpl implements ManagerService{
 	public List<ZoomDTO> zoomSearchList(int startRow, int endRow, String sort, String search) {
 		return mapper.zoomSearchList(startRow, endRow, sort, search);
 	}
-
 }

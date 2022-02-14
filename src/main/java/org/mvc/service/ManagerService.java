@@ -33,7 +33,7 @@ public interface ManagerService {
 	
 	// 코치 상태 변경
 	public int changeStatus(CoachInfoDTO dto);
-
+	
 	// 전체 멤버 수
 	public int countAllUser();
 	
@@ -81,7 +81,7 @@ public interface ManagerService {
 		
 	// 검색 결과 수
 	public int searchCount(String category, String input);
-
+	
 	// 관리자 강의 삭제
 	public int zoomClassDelete(Long num);
 	

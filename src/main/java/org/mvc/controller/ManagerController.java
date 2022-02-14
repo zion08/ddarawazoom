@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.NoticeDTO;
+
 import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
@@ -46,7 +47,7 @@ public class ManagerController {
 	
 	@Autowired
 	private ZoomService serviceZoom;
-	
+
 //	=========== 관리자 수입 관련 코드 시작 ===========  //
 	@RequestMapping("/sales")
 	public String payment (Model model, HttpSession session) {
@@ -454,7 +455,6 @@ public class ManagerController {
 	}
 //	=========== 관리자 멤버 관련 코드 종료 ===========  //
 	
-	
 //	=========== 관리자 zoom강의 관련 코드 시작 ===========  //	
 	
 	@RequestMapping("/zoom")
@@ -547,5 +547,7 @@ public class ManagerController {
 		
 		return "/manager/zoom/zoomSearchClass";
 	}
+
 //	=========== 관리자 zoom강의 관련 코드 종료 ===========  //	
+
 }
