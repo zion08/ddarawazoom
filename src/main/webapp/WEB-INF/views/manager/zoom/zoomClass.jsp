@@ -59,7 +59,7 @@
 		<input type="submit" value="검색">
 	</form>
 	
-	<c:if test="${count > 1}">
+	<c:if test="${count > 1}"> 
 		<div id="page">페이지&nbsp;  
 			<c:if test="${startPage > 10}">
 				<a href="/manager/zoom?pageNum=${startPage - 10}"> [이전] </a>
