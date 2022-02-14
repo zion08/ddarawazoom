@@ -82,11 +82,13 @@ public interface ManagerService {
 	// 검색 결과 수
 	public int searchCount(String category, String input);
 	
-	// 관리자 강의 삭제
+	// 관리자페이지 강의삭제
 	public int zoomClassDelete(Long num);
+		
+	// 관리자페이지 검색된 게시물리스트
+	public List<ZoomDTO> zoomSearchList(@Param("startRow") int startRow, @Param("endRow")int endRow, @Param("sort")String sort, @Param("search")String search);
 	
-	// 관리자 강의 검색 관련
+	// 관리자페이지 검색된 게시물수
 	public int zoomSearchCount(@Param("sort")String sort, @Param("search")String search);
 	
-	public List<ZoomDTO> zoomSearchList(@Param("startRow") int startRow, @Param("endRow")int endRow, @Param("sort")String sort, @Param("search")String search); 
 }

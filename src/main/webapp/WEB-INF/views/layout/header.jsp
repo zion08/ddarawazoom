@@ -100,7 +100,6 @@
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="/ddarawazoom/notice">공지사항</a></li>
 					<li><a class="dropdown-item" href="/ddarawazoom/intro">DDarawaZoom소개</a></li>
-					<li><a class="dropdown-item" href="#">DDarawaZoom이용가이드</a></li>
 					<li><a class="dropdown-item" href="/ddarawazoom/coachIntro">DDarawaZoom코치소개</a></li>
 				</ul>
 			</li>
