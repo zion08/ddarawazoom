@@ -100,8 +100,6 @@ function imgUpdatePro(){
 		success : function(data){
 			var result = parseInt(data);
 			
-			
-			
 			if(resutl == 0){
 				alert('사진이 등록되지 않았습니다.');
 				return false;

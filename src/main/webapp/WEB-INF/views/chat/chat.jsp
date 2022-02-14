@@ -4,7 +4,7 @@
 
 <html>
 <head>
-	<title>Chating</title>
+	<title>파티룸</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="../../resources/js/chat/chat.js" type="text/javascript"></script>
 	
@@ -16,7 +16,7 @@
 		<input type="hidden" id="sessionId" value="">
 		<input type="hidden" id="roomNumber" value="${roomNumber}">
 		
-		<div id="chating" class="chating">
+		<div id="partyRoom" class="partyRoom">
 		</div>
 		
 		<div id="yourName">

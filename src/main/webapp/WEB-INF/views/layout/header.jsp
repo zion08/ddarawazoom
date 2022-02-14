@@ -47,7 +47,6 @@
 						<li class="dropdown-submenu">
 							<a class="dropdown-item dropdown-toggle" href="#" >관리자 전용공간<span class="caret"></span></a>
 	              			<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="/manager">관리자 룸</a>						
 								<li><a class="dropdown-item" href="/manager/user">멤버 관리</a>						
 								<li><a class="dropdown-item" href="/manager/coach">코치 관리</a>						
 								<li><a class="dropdown-item" href="/manager/visitor">방문자 관리</a>						

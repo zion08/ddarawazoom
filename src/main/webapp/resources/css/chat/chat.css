@@ -14,7 +14,7 @@
 	margin-bottom: 20px;
 }
 
-#chating{
+#partyRoom{
 	background-color: #F8F8FF;
 	border: 1px solid #7B68EE;
 	width: 1000px;
@@ -22,13 +22,13 @@
 	overflow: auto;
 }
 
-.chating .me{
+.partyRoom .me{
 	color: 	#000000;
 	text-align: right;
 	font-size:	24px;
 }
 
-.chating .others{
+.partyRoom .others{
 	color: #DC143C;
 	text-align: left;
 	font-size: 24px;

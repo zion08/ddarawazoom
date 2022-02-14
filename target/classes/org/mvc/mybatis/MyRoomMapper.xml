@@ -135,7 +135,7 @@
 	<update id="statusChange">
 		update tbl_user set
 			status = '탈퇴'
-				where id = #{id}
+		where id = #{id}
 	</update>
 
 	<!-- 일정 관련 코드 -->

@@ -17,7 +17,6 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 	
-	//HashMap<String, WebSocketSession> sessionMap = new HashMap<>(); //웹소켓 세션을 담아둘 맵
 	List<HashMap<String, Object>> rls = new ArrayList<>(); //웹소켓 세션을 담아둘 리스트 ---roomListSessions
 	
 	@Override
@@ -96,7 +95,7 @@ public class SocketHandler extends TextWebSocketHandler {
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		//소켓 종료
+		//소켓 종료 (클라이언트와 연결이 끊어짐)
 		if(rls.size() > 0) { //소켓이 종료되면 해당 세션값들을 찾아서 지운다.
 			for(int i=0; i<rls.size(); i++) {
 				rls.get(i).remove(session.getId());
