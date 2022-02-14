@@ -59,8 +59,8 @@ public class ManagerController {
 	@Autowired
 	private YoutubeService serviceYoutube;
   
-  @Autowired
-  private ZoomService serviceZoom;
+    @Autowired
+    private ZoomService serviceZoom;
 	
 	@Autowired
 	private Crawling crawling;
@@ -107,8 +107,8 @@ public class ManagerController {
 		return "/manager/vod/vodManage";
 	}
 	
-	@RequestMapping("/searchVod")
-	public @ResponseBody List<String> searchVod(String qurey, String maxResults) throws IOException, ParseException {
+	@RequestMapping("/searchVodCode")
+	public @ResponseBody List<String> searchVodCode(String qurey, String maxResults) throws IOException, ParseException {
 		List<String> videoIdList = crawling.getVideioId(qurey, maxResults);
 		return videoIdList;
 	}
@@ -139,12 +139,48 @@ public class ManagerController {
 		return result;
 	}
 	
-	@RequestMapping("/changeStatusVod")
-	public @ResponseBody int changeStatusVod(int vnum, String status) {
-		int result=0;		
-		result = serviceYoutube.changeStatusVod(vnum, status);
-		return result;
+	@RequestMapping("/vodSearchList")
+	public String vodSearchList(String input, Model model, HttpServletRequest request) {
+		
+		String pageNum= request.getParameter("pageNum");	
+		if (pageNum == null) {
+		    pageNum = "1";
+		}
+		
+		int pageSize = 5;	
+		int currentPage = Integer.parseInt(pageNum); 
+		int firstRownum = (currentPage-1)*pageSize + 1;	
+		int lastRownum = currentPage*pageSize;		
+		
+		int pageBlock = 5;	
+		int contentCount = serviceYoutube.vodSearchCount(input);
+		int totalPage;	
+		int startPage;	
+		int endPage;	
+		
+		totalPage = contentCount/pageSize + (contentCount%pageSize == 0 ? 0 : 1);
+		startPage = (currentPage/pageBlock)*pageBlock + 1;
+		endPage = startPage + pageBlock - 1;
+		if(endPage > totalPage) {
+			endPage = totalPage;
+		}
+		
+		if (contentCount > 0){
+			model.addAttribute("vodSearchCount", contentCount);
+			model.addAttribute("onCount", serviceYoutube.vodOnCount());
+			model.addAttribute("offCount", serviceYoutube.vodOffCount());
+			model.addAttribute("youtube", serviceYoutube.getSearchVideoList(input, firstRownum, lastRownum));
+			model.addAttribute("totalPage", totalPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+		} else {
+			model.addAttribute("vodSearchCount", 0);
+		}
+
+		return "/manager/vod/vodManageSearch";
 	}
+	
+
 //	=========== 관리자 Vod 관련 코드 종료 ===========  //
 
 
