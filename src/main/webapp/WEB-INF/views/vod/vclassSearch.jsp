@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 
-
 <div class="container-fluid bg-light">
 	</br>
 	<div class="album py-2 bg-light">
@@ -11,16 +10,15 @@
 	  	</br>
   	</div>
   	
-  	<c:if test="${contentCount == 0}">
+  	<c:if test="${vodOnSearchCount == 0}">
 		<div class="container-fluid">
 			<div align="center">
-		   		<h5>등록된 영상이 없습니다.</h5>
-		   		<h5>관리자에게 문의하세요.</h5>   
+		   		<h5>검색 결과가 없습니다.</h5>  
 		    </div>
 		</div>   
 	</c:if>
   	
-   	<c:if test="${contentCount > 1}">
+   	<c:if test="${vodOnSearchCount > 1}">
    		<div class="container-vod">
    			<form action="/ddarawazoom/searchVod" method="post">
 	   			<div style="width: 50%;">
@@ -52,18 +50,18 @@
 					    </div>
 			    </c:forEach>	  
 		  	</div>
-	
+		
 			<br/>
 			<div id="page">
 				<span>페이지</span>  
 				<c:if test="${startPage > pageBlock}">
-					<a href="/ddarawazoom/vod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
+					<a href="/ddarawazoom/searchVod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
 				</c:if>
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<a href="/ddarawazoom/vod?pageNum=${i}">${i}</a>
+					<a href="/ddarawazoom/searchVod?pageNum=${i}">${i}</a>
 				</c:forEach>
 				<c:if test="${endPage < totalPage}">
-					<a href="/ddarawazoom/vod?pageNum=${startPage}+${pageBlock}"> [다음] </a>
+					<a href="/ddarawazoom/searchVod?pageNum=${startPage}+${pageBlock}"> [다음] </a>
 				</c:if>
 			</div>
 			<br/>

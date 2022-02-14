@@ -53,7 +53,6 @@ public class Crawling {
 		}
 		
 		JSONObject resultAll = (JSONObject) new JSONParser().parse(sb.toString());			
-		System.out.println("---getJsonAll--> "+resultAll);
 		
 		// 3. 연결 끊기
 		conn.disconnect();
@@ -69,7 +68,6 @@ public class Crawling {
 		String urlBase = "https://www.googleapis.com/youtube/v3/search?part=snippet";
 		String urlGet = urlBase+"&q="+encodeQurey+"&maxResults="+encodemaxResults+"&key="+API_KEY;		
 		
-		System.out.println("---getURL--> "+urlGet);
 		JSONObject resultAll = getJson(urlGet);
 		
 		// 4. Json 파싱 --> 비디오 id만 가져옴
@@ -87,15 +85,11 @@ public class Crawling {
 	}
 	
 	
-	public YoutubeDTO getVideioInfo (String videoId) throws IOException, ParseException {
-		System.out.println("---getInfo Start-->: " +videoId);
-		
+	public YoutubeDTO getVideioInfo (String videoId) throws IOException, ParseException {	
 		String encodeVideoId = URLEncoder.encode(videoId, "UTF-8");
 		String urlBase="https://www.googleapis.com/youtube/v3/videos?part=snippet,player";
 		String urlGet = urlBase + "&id=" + encodeVideoId + "&key=" + API_KEY;
-
-		System.out.println("---getInfo urlGet-->: " +urlGet);
-		
+	
 		JSONObject resultAll = getJson(urlGet);
 
 		// 4. Json 파싱 --> {,}(Object) [,](Array) --> 필요한 데이터 추출
@@ -124,19 +118,12 @@ public class Crawling {
 			while (idx.size() < 3) { 
 				int num = random.nextInt(tagsArray.size()); 
 				idx.add(num); 
-			}
-			
+			}			
 			Iterator<Integer> iterSet = idx.iterator();
 			while(iterSet.hasNext()) {
 				tags.add((String) tagsArray.get(iterSet.next()));
 			}	
 		}
-		
-		
-		System.out.println("---getInfo tags-->: " +tags);
-		System.out.println("---getInfo tags.get(0)-->: " +tags.get(0));
-		System.out.println("---getInfo tags.get(1)-->: " +tags.get(1));
-		System.out.println("---getInfo tags.get(2)-->: " +tags.get(2));
 			
 		// 5. dto 세팅
 		youtubeDTO.setVideoid(videoid);
@@ -150,6 +137,5 @@ public class Crawling {
 		
 		return youtubeDTO;
 	}
-
 	
 }

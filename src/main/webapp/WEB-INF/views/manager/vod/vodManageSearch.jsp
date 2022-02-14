@@ -159,7 +159,15 @@ $(document).ready(function(){
 		</button>
 	</div>
 	
-	<c:if test="${contentCount > 1}">
+	<c:if test="${vodSearchCount == 0}">
+		<div class="container-fluid">
+			<div align="center">
+		   		<h5>검색 결과가 없습니다.</h5>  
+		    </div>
+		</div>   
+	</c:if>
+	
+	<c:if test="${vodSearchCount > 0}">
 		<table id="vodList" class="table table-striped table-sm table-hover">
 			<thead>
 	            <tr>
@@ -235,13 +243,13 @@ $(document).ready(function(){
 		<br/>
 		<div id="page">페이지  
 			<c:if test="${startPage > pageBlock}">
-				<a href="/manager/vodManager?pageNum=${startPage}-${pageBlock}"> [이전] </a>
+				<a href="/manager/vodManagerSearch?pageNum=${startPage}-${pageBlock}"> [이전] </a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/manager/vodManager?pageNum=${i}">${i}</a>
+				<a href="/manager/vodManagerSearch?pageNum=${i}">${i}</a>
 			</c:forEach>
 			<c:if test="${endPage < totalPage}">
-				<a href="/manager/vodManager?pageNum=${startPage}+${pageBlock}"> [다음] </a>
+				<a href="/manager/vodManagerSearch?pageNum=${startPage}+${pageBlock}"> [다음] </a>
 			</c:if>
 		</div>
 	</c:if>
