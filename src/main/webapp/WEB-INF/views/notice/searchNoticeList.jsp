@@ -4,7 +4,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+    
 <html>
 <head>
 	<title>공지사항 페이지</title>
@@ -115,7 +115,7 @@
 		                </div>
 		            </div>
  						<div style="width: 50%; text-align:center; margin: 0 auto;">
-		                  <form action="/ddarawazoom/searchNoticeList" method="post" name="searchForm" onsubmit="return valueCheck()">
+		                  <form action="/ddarawazoom/searchNoticeList" method="post" onsubmit="return valueCheck()">
 							  <div class="input-group mb-3">
 							    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
 							      <option selected value="">선 택</option>
@@ -131,20 +131,20 @@
 				</div>
 		    </div>
 		</div>
-	 <div id="page">
-		<c:if test="${pageCount > 0}">
-			페이지&nbsp;
-			<c:if test="${startPage > 10}">
-				<a href="/manager/notice?pageNum=${startPage - 10}"> [이전] </a>
-			</c:if>
-			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/manager/notice?pageNum=${i}">${i}</a>
-			</c:forEach>
-			<c:if test="${endPage < pageCount}">
-				<a href="/manager/notice?pageNum=${startPage + 10}"> [다음] </a>
-			</c:if>
-		</c:if>	
-	 </div>
+		<div id="page">
+			<c:if test="${pageCount > 0}">
+				페이지&nbsp;
+				<c:if test="${startPage > 10}">
+					<a href="/manager/searchNoticeList?category=${category}&input=${input}&pageNum=${startPage - 10}"> [이전] </a>
+				</c:if>
+				<c:forEach var="i" begin="${startPage}" end="${endPage}">
+					<a href="/manager/searchNoticeList?category=${category}&input=${input}&pageNum=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${endPage < pageCount}">
+					<a href="/manager/searchNoticeList?category=${category}&input=${input}&pageNum=${startPage + 10}"> [다음] </a>
+				</c:if>
+			</c:if>	
+		</div>
 </body>
 </html>
 

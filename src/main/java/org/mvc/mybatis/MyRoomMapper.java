@@ -74,7 +74,7 @@ public interface MyRoomMapper {
 			@Param("id") String id,
 			@Param("zoom_num") int num);
 	
-	// Zoom 관신 등록 갯수
+	// Zoom 관심 등록 갯수
 	public int zoomLikeCount(String id);
 	
 	// Vod 관심등록 데이터 가져오기

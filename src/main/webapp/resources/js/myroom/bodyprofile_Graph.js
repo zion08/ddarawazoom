@@ -240,7 +240,7 @@ $(document).ready(function(){
 						ticks:{
 							max:50,
 							min: 0,
-							stepSize:5,
+							stepSize: 0.5,
 							autoSkip: false,
 							fontColor : 'rgba(12, 13, 13, 1)',
 							fontSize : 14
@@ -381,7 +381,7 @@ $(document).ready(function(){
 							ticks:{
 								max:150,
 								min: 0,
-								stepSize:5,
+								stepSize:0.5,
 								autoSkip: false,
 								fontColor : 'rgba(12, 13, 13, 1)',
 								fontSize : 15,

@@ -1,5 +1,7 @@
 package org.mvc.controller;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 
 import java.util.List;
@@ -7,17 +9,25 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.parser.ParseException;
+import org.mvc.Component.Crawling;
 import org.mvc.bean.CoachInfoDTO;
+
+import org.mvc.bean.NoticeDTO;
+
 import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.VodDTO;
+import org.mvc.bean.YoutubeDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.service.ManagerService;
 import org.mvc.service.NoticeService;
 import org.mvc.service.PaymentService;
 import org.mvc.service.ReviewService;
+import org.mvc.service.YoutubeService;
 import org.mvc.service.ZoomService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -45,11 +56,101 @@ public class ManagerController {
 	private ReviewService serviceReview;
 	
 	@Autowired
-	private ZoomService serviceZoom;
+	private YoutubeService serviceYoutube;
+  
+  @Autowired
+  private ZoomService serviceZoom;
+	
+	@Autowired
+	private Crawling crawling;
+
+//	=========== 관리자 Vod 관련 코드 시작 ===========  //
+	@RequestMapping("/vod")
+	public String vodManage(Model model, HttpServletRequest request) {
+		
+		String pageNum= request.getParameter("pageNum");	
+		if (pageNum == null) {
+		    pageNum = "1";
+		}
+		
+		int pageSize = 5;	
+		int currentPage = Integer.parseInt(pageNum); 
+		int firstRownum = (currentPage-1)*pageSize + 1;	
+		int lastRownum = currentPage*pageSize;		
+		
+		int pageBlock = 5;	
+		int contentCount = serviceYoutube.vodCount();
+		int totalPage;	
+		int startPage;	
+		int endPage;	
+		
+		totalPage = contentCount/pageSize + (contentCount%pageSize == 0 ? 0 : 1);
+		startPage = (currentPage/pageBlock)*pageBlock + 1;
+		endPage = startPage + pageBlock - 1;
+		if(endPage > totalPage) {
+			endPage = totalPage;
+		}
+		
+		if (contentCount > 0){
+			model.addAttribute("contentCount", contentCount);
+			model.addAttribute("onCount", serviceYoutube.vodOnCount());
+			model.addAttribute("offCount", serviceYoutube.vodOffCount());
+			model.addAttribute("youtube", serviceYoutube.getManageVideoList(firstRownum, lastRownum));
+			model.addAttribute("totalPage", totalPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+		} else {
+			model.addAttribute("contentCount", 0);
+		}
+
+		return "/manager/vod/vodManage";
+	}
+	
+	@RequestMapping("/searchVod")
+	public @ResponseBody List<String> searchVod(String qurey, String maxResults) throws IOException, ParseException {
+		List<String> videoIdList = crawling.getVideioId(qurey, maxResults);
+		return videoIdList;
+	}
+	
+	@RequestMapping("/autoInsertVod")
+	public @ResponseBody int autoInsertVod(String qurey, String maxResults) throws IOException, ParseException {
+		int result=0;	
+		List<String> videoIdList = crawling.getVideioId(qurey, maxResults);		
+		for (int i=0; i<videoIdList.size(); i++) {
+			String videoId = videoIdList.get(i);
+			result = insertVod(videoId);
+		}
+		return result;
+	}
+	
+	@RequestMapping("/insertVod")
+	public @ResponseBody int insertVod(String videoId) throws IOException, ParseException {
+		int result=0;	
+		YoutubeDTO dto = crawling.getVideioInfo(videoId.trim());		
+		result = serviceYoutube.insertVideo(dto);		
+		return result;
+	}
+	
+	@RequestMapping("/deleteVod")
+	public @ResponseBody int deleteVod(int vnum) {
+		int result=0;
+		result = serviceYoutube.deleteVod(vnum);
+		return result;
+	}
+	
+	@RequestMapping("/changeStatusVod")
+	public @ResponseBody int changeStatusVod(int vnum, String status) {
+		int result=0;		
+		result = serviceYoutube.changeStatusVod(vnum, status);
+		return result;
+	}
+//	=========== 관리자 Vod 관련 코드 종료 ===========  //
+
+
 	
 //	=========== 관리자 수입 관련 코드 시작 ===========  //
 	@RequestMapping("/sales")
-	public String payment (Model model, HttpSession session) {
+	public String payment (Model model) {
 		log.info("	-----CT-----> manager sales");
 		
 		// 결제 내역 출력
@@ -74,7 +175,7 @@ public class ManagerController {
 	}
 	
 	@RequestMapping("/salesSearch")
-	public String salesSearch (Model model, HttpSession session, String category, String input) {
+	public String salesSearch (Model model, String category, String input) {
 		log.info("	-----CT-----> manager sales");
 		
 		// 결제 내역 출력
@@ -111,31 +212,40 @@ public class ManagerController {
 		int currentPage = Integer.parseInt(pageNum);
 		int startRow = (currentPage - 1) * pageSize + 1;
 	    int endRow = currentPage * pageSize;
-	    int count = 0;
+	    int noticeCount = 0;
+	    int commentCount = 0;
 	    
-	    count = serviceNotice.noticeCount();
+	    noticeCount = serviceNotice.noticeCount();
+	    commentCount = serviceNotice.getcommentCount();
 	    
-	    List noticeList = null;
-	    List commentList = null;
+	    List<NoticeDTO> noticeList = null;
+	    List<Notice_CDTO> commentList = null;
 	    
-	    if(count > 0) {
+	    if(noticeCount > 0 && commentCount > 0) {
 	    	noticeList = serviceNotice.noticeList(startRow, endRow);
 	    	commentList = serviceNotice.getAllComment(startRow, endRow);
 	    	
-	    	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+	    	int notice_pageCount =  noticeCount / pageSize + ( noticeCount % pageSize == 0 ? 0 : 1);
+	    	int comment_pageCount =  commentCount / pageSize + ( commentCount % pageSize == 0 ? 0 : 1);
 	    	
 	    	int startPage = (int)(currentPage/10)*10+1;
 	    	int pageBlock = 10;
-	    	int endPage = startPage + pageBlock - 1;
-	    	if (endPage > pageCount) {
-	    		endPage = pageCount;
+	    	int notice_endPage = startPage + pageBlock - 1;
+	    	int comment_endPage = startPage + pageBlock - 1;
+	    	if (notice_endPage > notice_pageCount && comment_endPage > comment_pageCount) {
+	    		notice_endPage = notice_pageCount;
+	    		comment_endPage = comment_pageCount;
+	    		
 	    	}
 	    	model.addAttribute("startPage", startPage);
-	    	model.addAttribute("endPage", endPage);
-	    	model.addAttribute("pageCount", pageCount);
+	    	model.addAttribute("notice_endPage", notice_endPage);
+	    	model.addAttribute("comment_endPage", comment_endPage);
+	    	model.addAttribute("notice_pageCount", notice_pageCount);
+	    	model.addAttribute("comment_pageCount", comment_pageCount);
 	    }
 	    model.addAttribute("pageNum", pageNum);
-	    model.addAttribute("count", count);
+	    model.addAttribute("notice_count", noticeCount);
+	    model.addAttribute("comment_count", commentCount);
 	    model.addAttribute("noticeList", noticeList);
 	    model.addAttribute("commentList", commentList);
 	    model.addAttribute("c_num", notice_CDTO.getC_num());
@@ -195,7 +305,7 @@ public class ManagerController {
 		   
 		    reviewCount = serviceReview.reviewCount();
 		    
-		    List reviewList = null;
+		    List<ReviewDTO> reviewList = null;
 		    
 		    if(reviewCount > 0) {
 		    	reviewList = serviceReview.reviewList(startRow, endRow);
@@ -308,7 +418,145 @@ public class ManagerController {
 	}
 	
 //	=========== 관리자 코치 관련 코드 종료 ===========  //
+
+//	=========== 관리자 멤버 관련 코드 시작 ===========  //
+	@RequestMapping("/user")
+	public String user(Model model) {
+		log.info("	-----CT-----> manager user");
+		
+		model.addAttribute("newUser", managerService.newUser());
+		model.addAttribute("newUserCount", managerService.newUserCount());
+		
+		model.addAttribute("deleteUser", managerService.getDeleteUser());
+		model.addAttribute("deleteUserCount", managerService.getDeleteUserCount());
+		
+		model.addAttribute("kakaoUser", managerService.getKakaoUser());
+		model.addAttribute("kakaoUserCount", managerService.kakaoUserCount());
+		
+		model.addAttribute("naverUser", managerService.getNaverUser());
+		model.addAttribute("naverUserCount", managerService.naverUserCount());
+		
+		model.addAttribute("userInfo", managerService.getUserInfo());
+		model.addAttribute("userCount", managerService.userCount());
+		
+		// 탈퇴 멤버 제외한 모든 멤버 수
+		model.addAttribute("count", managerService.countAllUser());
+
+		return "/manager/user/user";
+	}
 	
+	@RequestMapping("/searchUserList")
+	public String searchUserList(String category, String input, String pageNum, Model model) {
+		log.info("	-----CT-----> manager searchUserList");
+		log.info("category="+category+" input="+input);
+
+		int pageSize = 8;
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = currentPage * pageSize;
+		int searchCount = 0;
+		int number = 0;
+	
+		searchCount = managerService.searchCount(category, input);
+		
+		List<UserInfoDTO> userList = null;
+		
+		if(searchCount > 0) {
+			userList = managerService.searchUserList(category, input, startRow, endRow);
+		}else{
+			userList = managerService.searchUserList(category, input, startRow, endRow);
+		}
+		
+		if(searchCount > 0) {
+	    	int pageCount = searchCount / pageSize + (searchCount % pageSize == 0 ? 0 : 1);
+	    	
+	    	int startPage = (int)(currentPage/10)*10+1;
+	    	int pageBlock = 10;
+	    	int endPage = startPage + pageBlock - 1;
+	    	if (endPage > pageCount) {
+	    		endPage = pageCount;
+	    	}
+	    	model.addAttribute("startPage", startPage);
+	    	model.addAttribute("endPage", endPage);
+	    	model.addAttribute("pageCount", pageCount);
+	    } 
+		
+		number = searchCount - (currentPage - 1) * pageSize;
+		
+		model.addAttribute("pageNum", pageNum);
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("startRow", startRow);
+	    model.addAttribute("endRow", endRow);
+	    model.addAttribute("searchCount", searchCount);
+	    model.addAttribute("number", number);
+	    model.addAttribute("pageSize", pageSize);
+	    model.addAttribute("userList", userList);
+	    
+	    log.info("=======ddd"+userList);
+	    log.info("========================"+userList.size());
+	    
+	    model.addAttribute("category", category);
+	    model.addAttribute("input", input);
+	    
+		model.addAttribute("newUserCount", managerService.newUserCount());
+		model.addAttribute("deleteUserCount", managerService.getDeleteUserCount());
+		model.addAttribute("kakaoUserCount", managerService.kakaoUserCount());
+		model.addAttribute("naverUserCount", managerService.naverUserCount());
+		model.addAttribute("userCount", managerService.userCount());
+		model.addAttribute("count", managerService.countAllUser());
+	    
+		return "/manager/user/searchUserList";
+	}
+
+	@RequestMapping("/userInfo")
+	public String userInfo(String id, Model model) {
+		log.info("	-----CT-----> manager userInfo");
+		
+		model.addAttribute("number", 1);
+		model.addAttribute("userInfo", managerService.userInfo(id));
+		model.addAttribute("userPayment", servicePayment.getPaymentCoachList(id));
+		
+		return "/manager/user/userInfo";
+	}
+	
+	@RequestMapping("/userPw")
+	public String userPw(String id, Model model) {
+		log.info("	-----CT-----> manager userPw");
+
+		model.addAttribute("userInfo", managerService.userInfo(id));
+		
+		return "/manager/user/userPw";
+	}
+	
+	@RequestMapping("/updateUserPw")
+	public @ResponseBody int updateUserPw(@RequestBody UserInfoDTO userDTO) {
+		log.info("	-----CT-----> manager updateUserPw");
+
+		int result = 0;
+		
+		result = managerService.updateUserPw(userDTO);
+		
+		return result;
+	}
+	
+	@RequestMapping("/userDelete")
+	public @ResponseBody int userDelete(String id) {
+		log.info("	-----CT-----> manager updateUserPw");
+		
+		int result = 0;
+		
+		result = managerService.userDelete(id);
+		
+		return result; 
+	}
+//	=========== 관리자 멤버 관련 코드 종료 ===========  //
+	
+
+=======
 //	=========== 관리자 zoom강의 관련 코드 시작 ===========  //	
 	
 	@RequestMapping("/zoom")
@@ -401,6 +649,5 @@ public class ManagerController {
 		
 		return "/manager/zoom/zoomSearchClass";
 	}
-	
 	//	=========== 관리자 zoom강의 관련 코드 종료 ===========  //	
 }
