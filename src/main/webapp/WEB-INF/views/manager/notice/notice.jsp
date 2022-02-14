@@ -109,6 +109,20 @@
 						</c:if>	
 					</div>
 	            </div>
+	            	<div style="width: 50%; text-align:center; margin: 0 auto;">
+	                  <form action="/ddarawazoom/searchNoticeList" method="post" name="searchForm" onsubmit="return valueCheck()">
+						  <div class="input-group mb-3">
+						    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
+						      <option selected value="">선 택</option>
+						      <option value="title">제 목</option>
+						      <option value="content">내 용</option>
+						      <option value="target_id">대 상</option>
+						    </select>
+					    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
+					    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
+					  </div>
+					</form>
+				 </div>
 	        </div>
 	    </div>
 	</div>
@@ -161,11 +175,11 @@
 													</c:if>
 												</td>
 			                                    <td>
-			                                    	<c:if test="${commentList.deleted ne  'yes' && commentList.deleted ne  'all'}">
+			                                    	<c:if test="${commentList.deleted == 'no'}">
 				                                    	<input type="button" class="btn btn-outline-black" onclick="reComment(${commentList.c_num});" value="답글"/>
 				                                    	<input type="button" class="btn btn-outline-black" onclick="managerDeletedChange(${commentList.c_num});" value="경고하기"/>
 				                                    </c:if>	
-				                                    <c:if test="${commentList.deleted eq ' all' && commentList.deleted ne 'no' && commentList.deleted ne 'yes'}">
+				                                    <c:if test="${commentList.deleted == 'all'}">
 				                                        <input type="button" class="btn btn-outline-black" onclick="managerDeletedCancell(${commentList.c_num});" value="경고취소"/>
 				                                    </c:if>
 			                                    </td>
@@ -191,6 +205,20 @@
 						</c:if>	
 					</div>
 	            </div>
+	            <div style="width: 50%; text-align:center; margin: 0 auto;">
+	                  <form action="/ddarawazoom/searchNoticeList" method="post" name="searchForm" onsubmit="return valueCheck()">
+						  <div class="input-group mb-3">
+						    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
+						      <option selected value="">선 택</option>
+						      <option value="title">제 목</option>
+						      <option value="content">내 용</option>
+						      <option value="target_id">대 상</option>
+						    </select>
+					    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
+					    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
+					  </div>
+					</form>
+				 </div>
 	        </div>
 	    </div>
 	</div>

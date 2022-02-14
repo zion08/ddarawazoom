@@ -50,7 +50,7 @@
 			c_status = #{c_status}
 		where c_id = #{c_id}
 	</update>
-
+	
 	<!-- 전체 멤버 수 -->	
 	<select id="countAllUser" resultType="Integer">
 		select count(*) from tbl_user where status != '탈퇴'

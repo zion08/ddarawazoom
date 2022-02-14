@@ -1,17 +1,16 @@
 package org.mvc.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.parser.ParseException;
 import org.mvc.Component.Crawling;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.NoticeDTO;
-
 import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.ReviewDTO;
@@ -25,7 +24,6 @@ import org.mvc.service.PaymentService;
 import org.mvc.service.ReviewService;
 import org.mvc.service.YoutubeService;
 import org.mvc.service.ZoomService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -270,16 +268,7 @@ public class ManagerController {
 		return result;
 	}
 	
-	@RequestMapping("/managerCommentDelete")
-	public @ResponseBody int managerCommentDelete(@RequestBody Notice_CDTO notice_CDTO) {
-		log.info("	-----CT-----> manager managerCommentDelete");
-		
-		int result = 0;
-		
-		result = serviceNotice.managerCommentDelete(notice_CDTO.getC_num());
-		
-		return result;
-	}
+
 //	=========== 관리자 공지사항 관련 코드 종료 ===========  //
 
 

@@ -114,7 +114,7 @@
 	                        </div>
 		                </div>
 		            </div>
- 						<div style="width: 50%; text-align:center; margin: 0 auto;">
+ 					   <div style="width: 50%; text-align:center; margin: 0 auto;">
 		                  <form action="/ddarawazoom/searchNoticeList" method="post" name="searchForm" onsubmit="return valueCheck()">
 							  <div class="input-group mb-3">
 							    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
@@ -127,7 +127,7 @@
 						    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
 						  </div>
 						</form>
-					 </div>
+					</div>
 				</div>
 		    </div>
 		</div>
