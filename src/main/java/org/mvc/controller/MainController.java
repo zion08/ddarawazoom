@@ -63,6 +63,7 @@ public class MainController {
 				session.setAttribute("admin", userDTO.getId());
 				model.addAttribute("result", result);
 			} else {
+				service.loginCount(userDTO.getId());
 				result = 1;
 				session.setAttribute("id", userDTO.getId());
 				model.addAttribute("result", result);
@@ -72,6 +73,7 @@ public class MainController {
 			coachDTO.setC_id(userDTO.getId());
 			coachDTO.setC_pw(userDTO.getPw());
 			if(service.coachCheck(coachDTO) == 1) {
+				service.coachLoginCount(coachDTO.getC_id());
 				result = 1;
 				session.setAttribute("c_id", coachDTO.getC_id());
 				model.addAttribute("result", result);
@@ -246,9 +248,11 @@ public class MainController {
 		int result = 0;
 		
 		if(service.kakaoCheck(dto) == 1) {
+			service.loginCount(dto.getId());
 			session.setAttribute("id", dto.getId());
 			result = 1;
 		} else {
+			service.loginCount(dto.getId());
 			session.setAttribute("id", dto.getId());
 			result = service.kakaoInsert(dto);
 		}
@@ -269,9 +273,11 @@ public class MainController {
 		int result = 0;
 		
 		if(service.naverCheck(dto) == 1) {
+			service.loginCount(dto.getId());
 			session.setAttribute("id", dto.getId());
 			result = 1;
 		} else {
+			service.loginCount(dto.getId());
 			session.setAttribute("id", dto.getId());
 			result = service.naverInsert(dto);
 		}

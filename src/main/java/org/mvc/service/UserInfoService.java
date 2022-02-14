@@ -17,6 +17,11 @@ public interface UserInfoService {
 	
 	public int c_idCheck(String c_id);
 	
+	// 로그인 카운트
+	public int loginCount(String id);
+	
+	public int coachLoginCount(String id);
+	
 	// 닉네임 중복 확인
 	public int nickCheck(String nick);
 		

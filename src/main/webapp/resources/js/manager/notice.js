@@ -22,16 +22,11 @@ $.fn.serializeObject = function(){
 // 공지사항 댓글 작성
 function commentWrite(){
 
-	if(document.comment.pw.value==""){
-		alert('패스워드가 기입되지 않았습니다.\n패스워드를 기입해 주세요.');
-		document.comment.pw.focus();
-		return false;
-	}else if(document.comment.content.value==""){
+	if(document.comment.content.value==""){
 		alert('입력된 내용이 없습니다.\n댓글을 기입해 주세요.');
 		document.comment.content.focus();
 		return false;
 	}else{
-		alert('모든 정보가 기입되었습니다. 감사합니다.');
 		var commentWrite = JSON.stringify($('form#commentForm').serializeObject());
 	}
 	
@@ -62,16 +57,11 @@ function reComment(c_num){
 // 대댓글 작성
 function reCommentPro(){
 	
-	if(document.recomment.pw.value==""){
-		alert('패스워드가 기입되지 않았습니다.\n패스워드를 기입해 주세요.');
-		document.recomment.pw.focus();
-		return flase;
-	}else if(document.recomment.content.value==""){
+	if(document.recomment.content.value==""){
 		alert('작성된 내용이 없습니다.\n수정하실 댓글을 기입해 주세요.');
 		document.recomment.content.focus();
 		return false;
 	}else{
-		alert('모든 정보가 기입되었습니다.\n대댓글 작성을 진행하겠습니다.');
 		var data = JSON.stringify($('form#recomment_Form').serializeObject());
 	}
 	
@@ -100,45 +90,22 @@ function reCommentPro(){
 // 공지사항 댓글 삭제
 function commentDelete(c_num){
 	if(window.confirm('정말로 댓글을 삭제를 원하십니까?') == true){
-		
-		var url = "/ddarawazoom/commentDelete?c_num=" + c_num;
-		var name = "comment_delete";
-		var option = "width=500, height=300, left=100, top=50";
-		
-		window.open(url, name, option);
-	} 
-}
-
-// 댓글 삭제 후, 상태 변경
-function commentDeletePro(){
-	if(document.comment_delete.pw.value==""){
-		alert('패스워드가 기입되지 않았습니다.\n패스워드를 기입해 주세요.');
-		document.comment_delete.pw.focus();
-		return flase;
-	}else {
-		var data = JSON.stringify($('form#commentDelete').serializeObject());
-	}
 	
-	$.ajax({
-		data : data,
-		url : "/ddarawazoom/commentDeletePro",
-		type : "POST",
-		contentType : "application/json; charset=UTF-8", 
-		success : function(data){
-			var result = parseInt(data);
-			
-			if(result == 0){
-				alert('입력하셨던 패스워드와 일치하지 않습니다.\n다시 입력해주세요.');
-				return false;
-			}else{
-				if(window.confirm('입력하셨던 패스워드와 일치합니다.\n삭제 후, 복구가 되지 않습니다. 정말로 삭제 하시겠습니까?') == true){
-					opener.parent.location.reload();
+		$.ajax({
+			data : { c_num : c_num },
+			url : "/ddarawazoom/commentDeletePro",
+			type : "POST",
+			success : function(data){
+				var result = parseInt(data);
+				
+				if(result == 1){
+					alert('댓글이 삭제되었습니다.')
+					window.location.reload();
 					window.close();
-					$('#commentDelete').submit();
 				}
 			}
-		}
-	});
+		});
+	} 
 }	
 
 // 공지사항 댓글 수정 페이지
@@ -153,16 +120,11 @@ function commentUpdate(c_num){
 // 공지사항 댓글 수정
 function commentUpdatePro(){
 	
-	if(document.comment_update.pw.value==""){
-		alert('패스워드가 기입되지 않았습니다.\n패스워드를 기입해 주세요.');
-		document.comment_update.pw.focus();
-		return flase;
-	}else if(document.comment_update.content.value==""){
+	if(document.comment_update.content.value==""){
 		alert('작성된 내용이 없습니다.\n수정하실 댓글을 기입해 주세요.');
 		document.comment_update.content.focus();
 		return false;
 	}else{
-		alert('모든 정보가 기입되었습니다.\n수정을 진행하겠습니다.');
 		var data = JSON.stringify($('form#comment_UpdateForm').serializeObject());
 	}
 	
@@ -178,7 +140,7 @@ function commentUpdatePro(){
 				alert("정보가 잘못 입력되었습니다. 다시 입력해 주세요.");
 				return false;
 			}else{
-				alert("정보가 수정되었습니다. 비밀번호를 잘 기억해 두세요!");
+				alert("댓글이 수정되었습니다.");
 					opener.parent.location.reload();
 					window.close();
 					$('#comment_UpdateForm').submit();
@@ -289,28 +251,6 @@ function managerDeletedCancell(number){
 		});
 	}
 }
-
-
-// 관리자 댓글 삭제
-function managerCommentDelete(number){
-	if(window.confirm('본 댓글을 완전히 삭제하시겠습니까?') == true){
-	
-			$.ajax({
-			data : JSON.stringify({ c_num : number }),
-			url : "/manager/managerCommentDelete",
-			type : "POST",
-			contentType : "application/json; charset=UTF-8",
-			async : false,
-			success : function(data){
-				if(data == 1){
-					alert("댓글 삭제가 완료되었습니다.");
-					window.location.reload();
-				}
-			}
-		});
-	}
-}
-
 
 // 공지사항 리스트에서 관리자가 공지글 삭제
 function noticeDelete(number){

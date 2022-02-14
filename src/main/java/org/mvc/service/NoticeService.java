@@ -2,11 +2,18 @@ package org.mvc.service;
 
 import java.util.List;
 
+import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.NoticeDTO;
 import org.mvc.bean.Notice_CDTO;
+import org.mvc.bean.UserInfoDTO;
 
 public interface NoticeService {
 
+	// 유저, 코치 정보
+	public UserInfoDTO getUserInfo(String id);
+		
+	public CoachInfoDTO getCoachInfo(String c_id);
+	
 	// 공지 글 가져오기
 	public List<NoticeDTO> noticeList(int startRow, int endRow);
 
@@ -36,9 +43,6 @@ public interface NoticeService {
 	
 	// 공지 댓글 리스트
 	public List<Notice_CDTO> getCommentList(int num, int startRow, int endRow);
-	
-	// 공지 댓글 삭제 패스워드 체크
-	public String pwCheck(String writer_id, int c_num);
 		
 	// 공지 댓글 삭제
 	public int deletedChange(int c_num);
@@ -48,9 +52,6 @@ public interface NoticeService {
 	
 	// 관리자 댓글 경고 취소
 	public int managerDeletedCancell(int c_num);
-		
-	// 관리자 댓글 삭제
-	public int managerCommentDelete(int c_num);
 	
 	// 공지 댓글 가져오기
 	public Notice_CDTO getComment(int c_num);

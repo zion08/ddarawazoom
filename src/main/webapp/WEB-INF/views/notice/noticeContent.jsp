@@ -127,17 +127,16 @@
 								<i class="fa fa-clock-o">작성 날짜 : </i>
 								<fmt:formatDate var="notice_regdate" pattern="yyyy-MM-dd HH:mm" value="${notice_CList.regdate}" />
 									${notice_regdate}
-									&nbsp;
-									<c:if test="${sessionScope.id != null && notice_CList.deleted ne  'yes' && notice_CList.deleted ne 'all' && sessionScope.admin == null
-										|| sessionScope.c_id != null && notice_CList.deleted ne  'yes' && notice_CList.deleted ne 'all'}">
-										<input type="button" class="btn btn-outline-black" onclick="reComment(${notice_CList.c_num});" value="답글"/>
-									</c:if>	
-									<c:if test="${sessionScope.id.equals(notice_CList.writer_id) && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all' && sessionScope.admin == null 
-										|| sessionScope.c_id.equals(notice_CList.writer_id) && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all'}">
+									&nbsp;	
+									<c:if test="${notice_CList.writer_id == userInfo.nick && notice_CList.deleted eq 'no'}">
 										<input type="button" class="btn btn-outline-black" onclick="commentUpdate(${notice_CList.c_num});" value="수정"/>
 										<input type="button" class="btn btn-outline-black" onclick="commentDelete(${notice_CList.c_num});" value="삭제"/>
 									</c:if>
-									<c:if test ="${sessionScope.admin != null && notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all'}">
+									<c:if test="${notice_CList.writer_id == coachInfo.c_nick && notice_CList.deleted eq 'no'}">
+										<input type="button" class="btn btn-outline-black" onclick="commentUpdate(${notice_CList.c_num});" value="수정"/>
+										<input type="button" class="btn btn-outline-black" onclick="commentDelete(${notice_CList.c_num});" value="삭제"/>
+									</c:if>
+									<c:if test ="${sessionScope.admin != null && notice_CList.deleted eq 'no'}">
 										<input type="button" class="btn btn-outline-black" onclick="reComment(${notice_CList.c_num});" value="답글"/>
 										<input type="button" class="btn btn-outline-black" onclick="managerDeletedChange(${notice_CList.c_num});" value="삭제"/>
 									</c:if>
@@ -148,23 +147,26 @@
 					  </tbody>
 					</table>
 				</c:if>
-				<c:if test="${sessionScope.id == null || sessionScope.c_id == null }">
+				<c:if test="${sessionScope.id != null || sessionScope.c_id != null || sessionScope.admin != null}">
 					<form class="form-block" id="commentForm"  name="comment" action="/ddarawazoom/noticeContent" onsubmit="commentWrite(); return false;" method="post">
 						<input type="hidden" name="num" value="${noticeDTO.num}" />
 						<div class="row">
 							<div class="col-xs-12 col-sm-6">
 								<div class="form-group fl_icon">
-									<c:if test="${sessionScope.id != null && sessionScope.c_id == null}">
-										<input class="form-control" id="writer_id" name="writer_id" type="text" value="${sessionScope.id}">
+									<c:set var="writer_id" />
+									<c:if test="${sessionScope.id != null && userInfo != null}">
+										<c:set var="writer_id" value="${userInfo.nick}" />
+										${writer_id}
 									</c:if>
-									<c:if test="${sessionScope.id == null && sessionScope.c_id != null}">
-										<input class="form-control" id="writer_id" name="writer_id" type="text" value="${sessionScope.c_id}">
+									<c:if test="${sessionScope.c_id != null && coachInfo != null}">
+										<c:set var="writer_id" value="${coachInfo.c_nick}" />
+										${writer_id}
 									</c:if>
-								</div>
-							</div>
-							<div class="col-xs-12 col-sm-6 fl_icon">
-								<div class="form-group fl_icon">
-									<input class="form-control" type="password" id="pw" name="pw" placeholder="패스워드를 기입해 주세요." autofocus>
+									<c:if test="${sessionScope.admin != null}">
+										<c:set var="writer_id" value="${sessionScope.admin}" />
+										${writer_id}
+									</c:if>
+									<input type="hidden" value="${writer_id}" name="writer_id" />
 								</div>
 							</div>
 							<div class="col-xs-12">									

@@ -2,8 +2,10 @@ package org.mvc.service;
 
 import java.util.List;
 
+import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.NoticeDTO;
 import org.mvc.bean.Notice_CDTO;
+import org.mvc.bean.UserInfoDTO;
 import org.mvc.mybatis.NoticeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,11 +67,6 @@ public class NoticeServiceImpl implements NoticeService{
 	public List<Notice_CDTO> getCommentList(int num, int startRow, int endRow) {
 		return mapper.getCommentList(num, startRow, endRow);
 	}
-	
-	@Override
-	public String pwCheck(String writer_id, int c_num) {
-		return mapper.pwCheck(writer_id, c_num);
-	}
 
 	@Override
 	public int deletedChange(int c_num) {
@@ -84,11 +81,6 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public int managerDeletedCancell(int c_num) {
 		return mapper.managerDeletedCancell(c_num);
-	}
-	
-	@Override
-	public int managerCommentDelete(int c_num) {
-		return mapper.managerCommentDelete(c_num);
 	}
 	
 	@Override
@@ -124,6 +116,16 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public int searchCount(String category, String input) {
 		return mapper.searchCount(category, input);
+	}
+
+	@Override
+	public UserInfoDTO getUserInfo(String id) {
+		return mapper.getUserInfo(id);
+	}
+
+	@Override
+	public CoachInfoDTO getCoachInfo(String c_id) {
+		return mapper.getCoachInfo(c_id);
 	}
 
 }
