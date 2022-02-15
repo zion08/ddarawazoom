@@ -5,53 +5,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-$(document).ready(function(){
-	$('#btn').click(function(){
-		
-		$.ajax({
-			data : { visitDate : $('#visitDate').val()},
-			type : 'POST',
-			dataType : 'json',
-			url : '/manager/visitDate',
-			success : function(data){
-				$('#visitDateDiv').css('display', 'block')
-				
-				var element = document.getElementById('targetArea');
-				var number = 1;
-				
-				for(var key in data){
-					var id;
-					var userType;
-					var url;
-					
-					if(data[key].id == null){
-            			id = data[key].c_id;
-            			userType = '<font style="color:blue;">COACH</font>';
-            			url = "'/manager/coachInfo?c_id="+id+"'";
-            		} else if(data[key].c_id == null){
-            			id = data[key].id
-            			userType = '<font style="color:red;">MEMBER</font>';
-            			url = '"/manager/userInfo?id='+id+'"';
-            		}
-					
-					element.innerHTML += "<tr onclick='window.location="+url+"'> <td>"+ number + "</td> <td>"+ id + "</td> <td>"+ userType + "</td> <td>" + data[key].v_date + "</td> </tr>";
-					number++;
-					
-					console.log(element)
-				}
-			}
-		});
-		
-	});
-});
-</script>
 
 <html>
 <head>
 	<title>관리자 방문자 관리 페이지</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="../../resources/js/manager/visitor.js" type="text/javascript"></script>
+	
 	<link href="../../resources/css/manager/notice.css" rel="stylesheet">
 	<link href="../../resources/css/manager/visitor.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -279,7 +239,7 @@ $(document).ready(function(){
 	        </div>
 	    </div>
 	    <div class="md-3" style="width:100%; text-align:center; margin: 0 auto;">
-		    <form>
+		    <form name="visitorDate">
 		    	<input type="date" id="visitDate" name="visitDate" class="form-controller" style="margin:0 auto; text-align:center; width:50%"/>
 		    	<input type="button" id="btn" value="검색" class="btn btn-outline-secondary"  style="margin:0 auto; margin:0 auto; width:50%;"/>
 		    </form>
