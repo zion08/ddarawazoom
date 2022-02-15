@@ -48,16 +48,16 @@ public class ZoomController {
 	@Autowired
 	private FileInfo fileInfo;   
 	
-	// ===== zoom강의 메인(리스트) ===== //
+	// ======= zoom강의 메인페이지(리스트) ======= //
 	@RequestMapping("zoom")
 	public String main(String pageNum, Model model,  HttpSession session, HttpServletRequest request) {
 		log.info(" -----CT-----> Main "); 
 		
 		String id = (String)session.getAttribute("id");
-		log.info("id=" + id);
+		log.info("아이디=" + id);
 		
 		String c_id = (String)session.getAttribute("c_id"); 
-		log.info("c_id=" + c_id); 
+		log.info("코치아이디=" + c_id); 
 		
 		int pageSize = 9;
 		if (pageNum == null) {
@@ -85,7 +85,7 @@ public class ZoomController {
 	    	model.addAttribute("startPage", startPage);
 	    	model.addAttribute("endPage", endPage);
 	    	model.addAttribute("pageCount", pageCount);
-	    } 
+	    }  
 	    
 	    number = count - (currentPage-1) * pageSize;
 	    
@@ -96,139 +96,157 @@ public class ZoomController {
 	    model.addAttribute("count", count);
 	    model.addAttribute("number", number);
 	    model.addAttribute("pageSize", pageSize);
-	    model.addAttribute("zoomList", zoomList);	    
+	    model.addAttribute("zoomList", zoomList);	
+	    
 	    return "/zoom/class/zclass";	
 	}
 	
-	// ===== zoom 강의등록 ===== //
+	// ======= zoom강의 등록페이지 ======= //
 	@RequestMapping("/zwriteForm")
 	public String zwriteForm(HttpSession session, Model model) {
 		log.info(" -----CT-----> writeForm ");
 		
 		String c_id = (String)session.getAttribute("c_id");
+		log.info("코치아이디=" + c_id); 
 		model.addAttribute("coachInfo" , coachService.getCoachInfo(c_id));
-		log.info("c_id=" + c_id);
 		
 		return "/zoom/class/zwriteForm"; 
 	} 
 		
 	@RequestMapping("/zwritePro")
-	public String zwritePro(ZoomDTO dto , Model model) {
+	public String zwritePro(ZoomDTO dto, Model model) {
 		log.info(" -----CT-----> writePro ");
-		log.info("dto=" + dto);
 		
 		Date now = new Date();
 	    SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 	    String nowDate = format.format(now);
 
 		dto.setMerchant_uid("ddz" + nowDate); 
-		log.info("Merchant_uid" + dto.getMerchant_uid());
-		
-		model.addAttribute("result" , service.zoomInsert(dto)); 
+		model.addAttribute("result" , service.zoomInsert(dto));
+		log.info("dto=" + dto);
 		
 		return "/zoom/class/zwritePro"; 
 	}
 	
-	// ===== zoom강의 삭제 ===== //
+	// ======= zoom강의 삭제페이지 ======= //
 	@RequestMapping("/zdeleteForm")
 	public String zdeleteForm(@ModelAttribute("num") int num, HttpSession session, Model model) {
 		log.info(" -----CT-----> deleteForm ");
+		log.info("num=" + num);
+		
 		model.addAttribute("zoom" , service.zoomContent(num));
+	
 		return "/zoom/class/zdeleteForm";
 	}
 	
 	@RequestMapping("zdeletePro")
-	public String zdeletePro(int num , Model model) {
+	public String zdeletePro(int num, Model model) {
 		log.info(" -----CT-----> deletePro ");
+		log.info("num=" + num + "삭제");
+		
 		model.addAttribute("result" , service.zoomDelete(num));
+		
 		return "/zoom/class/zdeletePro";
 	}
 	
-	// ===== zoom강의 수정 ===== //
+	// ======= zoom강의 수정페이지 ======= //
 	@RequestMapping("zupdateForm")
-	public String zupdateForm(int num , ZoomDTO dto , Model model) {
+	public String zupdateForm(int num, ZoomDTO dto, Model model) {
 		log.info(" -----CT-----> UpdateForm ");
-		log.info("dto=" + dto);
+		log.info("num=" + num);
+		
 		model.addAttribute("ZoomDTO" , service.zoomContent(num));
+		
 		return "/zoom/class/zupdateForm"; 
 	}
 	
 	@RequestMapping("zupdatePro")
-    public String zupdatePro(ZoomDTO dto , Model model) {
+    public String zupdatePro(ZoomDTO dto, Model model) {
         log.info(" -----CT-----> updatePro "); 
-        log.info("dto=" + dto);
+        
         model.addAttribute("num" , dto.getNum());
     	model.addAttribute("result" , service.zoomUpdate(dto));
+    	log.info("dto=" + dto);
+    	
 		return "/zoom/class/zupdatePro"; 
 	}
 	
-	// ===== zoom 내 강의실 ===== //
-	// 1. 1에서 2로 이동
+	// ======= zoom강의실 입장페이지 ======= //
+	// 1. 
+	// 1 -> 2로 이동
 	@RequestMapping("/zclassroom")
 	public String zclassroom() {
+		log.info(" -----CT-----> zclassroom 1 "); 
+		
 		return "/zoom/class/zclassroom"; 	
 	}
 	
 	// 2.
 	@RequestMapping("/zclassroom2")
 	public String zclassroom2() {
+		log.info(" -----CT-----> zclassroom 2 "); 
+		
 		return "/zoom/class/zclassroom2"; 	 
 	}
 	
+	// ======= zoom 내 강의실 페이지 ======= //
 	@RequestMapping("/myclassroom")
-	public String myclassroom(Model model, HttpSession session) {		
+	public String myclassroom(Model model, HttpSession session) {
+		log.info(" -----CT-----> myclassroom "); 
+		
 		String id = (String)session.getAttribute("id"); 
-		List<PaymentDTO> PaymentMyList = servicePayment.getPaymentMyList(id);	
+		
+		List<PaymentDTO> PaymentMyList = servicePayment.getPaymentMyList(id);
 		model.addAttribute("payment", PaymentMyList); 
+		
 		return "/zoom/class/myclassroom";
 	}
 	
-	// ===== 조회수 더하기(redirect zclasscontent) ===== //
+	// ======= 조회수 더하기(redirect zclasscontent) ======= //
 	@RequestMapping("zoomReadcount")
-	public String zoomReadcount(int num , RedirectAttributes rttr) {
+	public String zoomReadcount(int num, RedirectAttributes rttr) {
 		log.info(" -----CT-----> Readcount ");
+		
 		service.zoomReadcount(num);
 		rttr.addAttribute("num" , num); 
+		
 		return "redirect:/ddarawazoom/zclasscontent";    
 	}
 	
-	// ===== 이미지 업데이트 ===== //
+	// ======= 이미지 업데이트 ======= //
 	@RequestMapping("/imgUpdate")
 	public String imgUpdate(int num, Model model) {
 		log.info(" -----CT-----> imgUpdate ");
+		
 		model.addAttribute("zoomContent" , service.zoomContent(num));
+		
 		return "/zoom/class/imgUpdate";
 	}
 	
 	@RequestMapping("/imgUpdatePro")
-	public String imgUpdatePro(ZoomDTO dto , MultipartFile save, Model model) {
+	public String imgUpdatePro(ZoomDTO dto, MultipartFile save, Model model) {
 		log.info(" -----CT-----> imgUpdatePro ");
 		
-		log.info("img=" + dto.getImg());
-		log.info("intro=" + dto.getIntro());
-		log.info("num=" + dto.getNum());
-		
 		String fileName = fileInfo.classImgUpload(save, dto.getNum()); 	
-		
-		log.info("fileName=" , fileName);
 		if(fileName != null) {
 			dto.setImg(fileName);
 			model.addAttribute("result" , service.imgUpdate(dto)); 
 		}
 		model.addAttribute("num" , dto.getNum());
+		
 		return "/zoom/class/imgUpdatePro";   
 	}
 	
-	// ===== zoom강의별 내용화면 ===== //
+	// ======= zoom강의 상세페이지 ======= //
 	@RequestMapping("/zclasscontent")
-	public String zclasscontent(String pageNum, ZoomDTO dto, int num, Model model , HttpSession session , HttpServletRequest request) { 
+	public String zclasscontent(String pageNum, ZoomDTO dto, int num, Model model, HttpSession session, HttpServletRequest request) { 
 		log.info(" -----CT-----> zoomClassContent "); 
 			
 		String id = (String)session.getAttribute("id");
-		log.info("id=" + id);
+		log.info("아이디=" + id);
 		
 		String c_id = (String)session.getAttribute("c_id"); 
-		log.info("c_id=" + c_id);
+		log.info("코치아이디=" + c_id);
 		
 		if(id != null && c_id == null) {
 			model.addAttribute("result" , myService.zoomLikeCheck(id , dto.getNum()));
@@ -246,6 +264,7 @@ public class ZoomController {
 	    int count = 0;
 	    
 	    count = service.reCount(num);
+	    log.info("reCount" , count);
 	    List reviewList = null;
 	    if (count > 0) {
 	    	reviewList = service.reviewList(num, startRow, endRow); 
@@ -272,27 +291,33 @@ public class ZoomController {
 	    model.addAttribute("zoomContent" , service.zoomContent(num));
 	    // 총 결제 갯수
 	    model.addAttribute("cnt", servicePayment.getOerderCount());
+	    
 		return "/zoom/class/zclasscontent";   
 	} 
 	
-	// ===== zoom 후기등록 ===== //
+	// ======= zoom강의 후기등록 ======= //
 	@RequestMapping("re_writeForm")
 	public String re_writeForm() {
+		log.info(" -----CT-----> re_writeForm "); 
+		
 		return "/zoom/class/zclasscontent"; 
 	}
 	
 	@RequestMapping("re_writePro")
-	public String re_writePro(ReviewDTO dto , Model model) {
+	public String re_writePro(ReviewDTO dto, Model model) {
+		log.info(" -----CT-----> re_writePro "); 
+		
 		model.addAttribute("num" , dto.getClass_num());  
 		model.addAttribute("result" , service.reInsert(dto)); 
+		
 		return "/zoom/class/re_writePro"; 
 	}
 	
-	// ===== zoom 강의 검색 ===== //
+	// ======= zoom강의 검색페이지 ======= //
 	@RequestMapping("/searchClass")
 	public String searchClass(String category, String input, String pageNum, Model model) {
 		log.info(" -----CT-----> searchClass ");
-		log.info("category="+category+" input="+input);
+		log.info("category="+category+"input="+input);
 
 		int pageSize = 9;
 		if (pageNum == null) {
@@ -306,11 +331,10 @@ public class ZoomController {
 	    int number= 0;
 
 	    count = service.searchCount(category, input);
-	    log.info("count=="+count);
+	    log.info("searchCount" , count);
 	    List zoomList = null;
 	    if (count > 0) {
 	    	zoomList = service.searchList(category, input, startRow, endRow);
-	    	log.info("list size == "+zoomList.size());
 	    }
 
 	    if(count > 0) {
@@ -338,13 +362,15 @@ public class ZoomController {
 	    model.addAttribute("zoomList", zoomList);
 	    model.addAttribute("category", category);
 	    model.addAttribute("input", input);
-	    model.addAttribute("category", category);
-	    model.addAttribute("input", input);
+	 	    
 		return "/zoom/class/searchClass";
 	}
 	
+	// ======= 메인 소개페이지 ======= //
 	@RequestMapping("intro")
 	public String intro() {
+		log.info(" -----CT-----> intro "); 
+		
 		return "/intro/intro"; 
 	}
 }	

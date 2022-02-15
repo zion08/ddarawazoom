@@ -89,17 +89,19 @@ public interface ManagerMapper {
 			@Param("category") String category,
 			@Param("input") String input);
 
-	// 관리자 강의 삭제
+	// 관리자페이지 강의삭제
 	public int zoomClassDelete(Long num);
 	
-	// 관리자 강의 검색 관련
+	// 관리자페이지 검색된 게시물리스트
+	public List<ZoomDTO> zoomSearchList(@Param("startRow") int startRow, @Param("endRow")int endRow, @Param("sort")String sort, @Param("search")String search);
+	
+	// 관리자페이지 검색된 게시물수
 	public int zoomSearchCount(@Param("sort")String sort, @Param("search")String search);
-	
-	public List<ZoomDTO> zoomSearchList(@Param("startRow") int startRow, @Param("endRow")int endRow, @Param("sort")String sort, @Param("search")String search); 
-	
+	 
 	// Q&A 질문 삭제
 	public int deleteQnA(int q_num);
 	
 	// Q&A 상단 고정 여부
 	public int pinUpdate(QnADTO dto);
+
 }

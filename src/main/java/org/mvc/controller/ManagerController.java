@@ -586,7 +586,7 @@ public class ManagerController {
 	
 	@RequestMapping("/zoom")
 	public String zoom(String pageNum, Model model) {
-		log.info("	-----CT-----> manager zoomclass");
+		log.info(" -----CT-----> manager zoomclass ");
 		
 		int pageSize = 10;
 		if(pageNum == null) {
@@ -627,6 +627,7 @@ public class ManagerController {
 	@RequestMapping("/zoomClassDelete")
 	public @ResponseBody int zoomClassDelete(@RequestBody ZoomDTO dto) {
 		log.info("	-----CT-----> manager zoomClassDelete");
+		
 		int result = 0;
 		result = managerService.zoomClassDelete(dto.getNum());
 		return result;
@@ -674,6 +675,7 @@ public class ManagerController {
 		
 		return "/manager/zoom/zoomSearchClass";
 	}
+	
 	//	=========== 관리자 zoom강의 관련 코드 종료 ===========  //	
 	
 	@RequestMapping("/deleteQnA")

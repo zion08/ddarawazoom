@@ -18,8 +18,8 @@
 	              	<th scope="col">상태</th>
 	            </tr>
 			</thead>
-			<tbody>
-			<c:forEach items="${payment}" var="paymentDTO">		
+			<tbody>	 
+			<c:forEach items="${payment}" var="paymentDTO">
             		<tr>		             		         
 		              	<td>
 		              		${paymentDTO.c_num}) ${paymentDTO.name}</br> 
