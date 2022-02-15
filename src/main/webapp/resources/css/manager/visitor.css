@@ -4,6 +4,17 @@
 	margin: 0 auto;
 }
 
+.mt-0{
+	margin: 40px;
+}
+
+.md-3 , #visitDate{
+	width:100%;
+	text-align:center;
+	margin: 0 auto;
+	margin: 30px;
+}
+
 .card {
     background-color: #fff;
     border-radius: 10px;

@@ -91,7 +91,7 @@
 							&nbsp;
 						<input type="reset" class="btn btn-outline-black"  value="다시작성하기" />
 							&nbsp;
-						<input type="button" class="btn btn-outline-black"  value="마이룸이동" onClick="javascript:window.location='/myroom/main'" />
+						<input type="button" class="btn btn-outline-black"  value="이전 페이지로 이동" onClick="javascript:window.location='/myroom/bodyprofile'" />
 					</div>
 				</form>
 			 </div>

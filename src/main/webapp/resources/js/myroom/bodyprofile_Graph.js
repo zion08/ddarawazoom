@@ -240,7 +240,7 @@ $(document).ready(function(){
 						ticks:{
 							max:50,
 							min: 0,
-							stepSize: 0.5,
+							stepSize: 5,
 							autoSkip: false,
 							fontColor : 'rgba(12, 13, 13, 1)',
 							fontSize : 14
@@ -379,9 +379,9 @@ $(document).ready(function(){
 						}],
 						yAxes: [{
 							ticks:{
-								max:150,
+								max:160,
 								min: 0,
-								stepSize:0.5,
+								stepSize:0.1,
 								autoSkip: false,
 								fontColor : 'rgba(12, 13, 13, 1)',
 								fontSize : 15,

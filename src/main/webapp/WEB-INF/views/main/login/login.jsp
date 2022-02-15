@@ -40,13 +40,12 @@
 		    	</label>
 		    </div>
 		    
-		    
-		   <div class="findidpw">
+		    <div class="findidpw">
 		   		<label>
 		   			<input type="button" class="w-100 btn btn-lg btn-Dark mb-3" value="아이디/비밀번호 찾기" onclick="window.location='/ddarawazoom/findIdPw'"/>
 		   		</label>
-		   </div>
-		    
+		    </div>
+		   
 		    <!-- 보라색 로그인 버튼 -->
 		    <input type="submit"
 		    class="w-100 btn btn-lg btn-secondary mb-3"

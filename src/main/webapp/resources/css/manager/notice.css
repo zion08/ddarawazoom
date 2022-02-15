@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.comment_content{
+	font-size:14px;
+}
+
 .card {
     border: none;
     -webkit-box-shadow: 1px 0 20px rgba(96,93,175,.05);
@@ -222,7 +226,7 @@ p.be-comment-text{
 
 .form-group.app-label{
 	font-size:15px;
-	margin:30px;
+	margin:5px;
 }
 
 h5{
