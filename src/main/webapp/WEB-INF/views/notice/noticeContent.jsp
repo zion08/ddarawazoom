@@ -138,7 +138,10 @@
 									</c:if>
 									<c:if test ="${sessionScope.admin != null && notice_CList.deleted eq 'no'}">
 										<input type="button" class="btn btn-outline-black" onclick="reComment(${notice_CList.c_num});" value="답글"/>
-										<input type="button" class="btn btn-outline-black" onclick="managerDeletedChange(${notice_CList.c_num});" value="삭제"/>
+										<input type="button" class="btn btn-outline-black" onclick="commentDeletedChange(${notice_CList.c_num});" value="삭제"/>
+									</c:if>
+									<c:if test ="${sessionScope.admin != null && notice_CList.deleted eq 'all'}">
+										<input type="button" class="btn btn-outline-black" onclick="commentDeletedCancell(${commentList.c_num});" value="경고취소"/>
 									</c:if>
 								</span>
 							</td>

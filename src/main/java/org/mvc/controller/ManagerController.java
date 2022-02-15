@@ -1,25 +1,21 @@
 package org.mvc.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.text.DecimalFormat;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.parser.ParseException;
 import org.mvc.Component.Crawling;
 import org.mvc.bean.CoachInfoDTO;
-
 import org.mvc.bean.NoticeDTO;
-
 import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.PaymentDTO;
 import org.mvc.bean.QnADTO;
 import org.mvc.bean.ReviewDTO;
 import org.mvc.bean.UserInfoDTO;
+import org.mvc.bean.VisitorDTO;
 import org.mvc.bean.VodDTO;
 import org.mvc.bean.YoutubeDTO;
 import org.mvc.bean.ZoomDTO;
@@ -29,13 +25,11 @@ import org.mvc.service.PaymentService;
 import org.mvc.service.ReviewService;
 import org.mvc.service.YoutubeService;
 import org.mvc.service.ZoomService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
@@ -239,9 +233,11 @@ public class ManagerController {
 //	=========== 관리자 수입 관련 코드 종료 ===========  //
 
 //	=========== 관리자 공지사항 관련 코드 시작 ===========  //
+	// 공지사항 관리 페이지
 	@RequestMapping("/notice")
-	public String notice(String pageNum, Model model, HttpSession session, Notice_CDTO notice_CDTO) {
+	public String notice(String pageNum, Model model, Notice_CDTO notice_CDTO) {
 		log.info("	-----CT-----> manager notice");
+		
 		int pageSize = 8;
 		if (pageNum == null) {
 		    pageNum = "1";
@@ -270,6 +266,7 @@ public class ManagerController {
 	    	int pageBlock = 10;
 	    	int notice_endPage = startPage + pageBlock - 1;
 	    	int comment_endPage = startPage + pageBlock - 1;
+	    	
 	    	if (notice_endPage > notice_pageCount && comment_endPage > comment_pageCount) {
 	    		notice_endPage = notice_pageCount;
 	    		comment_endPage = comment_pageCount;
@@ -287,27 +284,88 @@ public class ManagerController {
 	    model.addAttribute("noticeList", noticeList);
 	    model.addAttribute("commentList", commentList);
 	    model.addAttribute("c_num", notice_CDTO.getC_num());
+	    
 		return "/manager/notice/notice";
 	}
 	
-	@RequestMapping("/managerDeletedChange")
-	public @ResponseBody int commentDelete(@RequestBody Notice_CDTO notice_CDTO) {
-		log.info("	-----CT-----> manager managerDeletedChange");
+	// 공지사항 댓글 검색 페이지
+	@RequestMapping("/searchCommentList")
+	public String searchCommentList(String category, String input, String pageNum, Model model, Notice_CDTO notice_CDTO) {
+		log.info("	-----CT-----> manager searchCommentList");
+		log.info("category="+category+" input="+input);
+
+		int pageSize = 8;
+		if (pageNum == null) {
+		    pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+	    int endRow = currentPage * pageSize;
+	    int commentCount = 0;
+	    int number = 0;
+	    
+	    commentCount = serviceNotice.searchCommentCount(category, input);
+	    
+	    List<Notice_CDTO> commentList = null;
+	    
+	    if(commentCount > 0) {
+	    	commentList = serviceNotice.searchCommentList(category, input, startRow, endRow);
+	    	log.info("list size="+commentList.size());
+	    }
+	    
+	    if(commentCount > 0) {
+	    	int comment_pageCount =  commentCount / pageSize + ( commentCount % pageSize == 0 ? 0 : 1);
+	    	int startPage = (int)(currentPage/10)*10+1;
+	    	int pageBlock = 10;
+	    	int comment_endPage = startPage + pageBlock - 1;
+	    	if (comment_endPage > comment_pageCount) {
+	    		comment_endPage = comment_pageCount;
+	    	}
+	    	
+	    	model.addAttribute("startPage", startPage);
+	    	model.addAttribute("comment_endPage", comment_endPage);
+	    	model.addAttribute("comment_pageCount", comment_pageCount);
+	    }
+	    
+	    	number = commentCount - (currentPage - 1) * pageSize;
+	    	
+		    model.addAttribute("currentPage", currentPage);
+		    model.addAttribute("startRow", startRow);
+		    model.addAttribute("endRow", endRow);
+		    model.addAttribute("pageNum", pageNum);
+		    model.addAttribute("pageSize", pageSize);
+		    model.addAttribute("number", number);
+		    model.addAttribute("comment_count", commentCount);
+		    model.addAttribute("commentList", commentList);
+		    model.addAttribute("c_num", notice_CDTO.getC_num());
+		    
+		    model.addAttribute("category", category);
+		    model.addAttribute("input", input);
+		
+		return "/manager/notice/searchCommentList";
+	}
+	
+	// 댓글 경고
+	@RequestMapping("/commentDeletedChange")
+	public @ResponseBody int commentDeletedChange(@RequestBody Notice_CDTO notice_CDTO) {
+		log.info("	-----CT-----> manager commentDeletedChange");
 
 		int result = 0;
 		
-		result = serviceNotice.managerDeletedChange(notice_CDTO.getC_num());
+		result = serviceNotice.commentDeletedChange(notice_CDTO.getC_num());
 		
 		return result;
 	}
 	
-	@RequestMapping("/managerDeletedCancell")
-	public @ResponseBody int managerDeletedCancell(@RequestBody Notice_CDTO notice_CDTO) {
-		log.info("	-----CT-----> manager managerDeletedCancell");
+	// 댓글 경고 취소
+	@RequestMapping("/commentDeletedCancell")
+	public @ResponseBody int commentDeletedCancell(@RequestBody Notice_CDTO notice_CDTO) {
+		log.info("	-----CT-----> manager commentDeletedCancell");
 		
 		int result = 0;
 		
-		result = serviceNotice.managerDeletedChange(notice_CDTO.getC_num());
+		result = serviceNotice.commentDeletedCancell(notice_CDTO.getC_num());
 		
 		return result;
 	}
@@ -316,15 +374,15 @@ public class ManagerController {
 
 //	=========== 관리자 리뷰 관련 코드 시작 ===========  //
 	
-		@RequestMapping("/review")
-		public String review(String pageNum, ReviewDTO reviewDTO, ZoomDTO zoomDTO, VodDTO vodDTO, Model model) {
-			log.info("	-----CT-----> manager review");
+	// 리뷰 관리 페이지
+	@RequestMapping("/review")
+	public String review(String pageNum, ReviewDTO reviewDTO, ZoomDTO zoomDTO, VodDTO vodDTO, Model model) {
+		log.info("	-----CT-----> manager review");
 
-			int pageSize = 8;
-			if (pageNum == null) {
-			    pageNum = "1";
-			}
-			
+		int pageSize = 8;
+		if (pageNum == null) {
+		    pageNum = "1";
+		}
 			int currentPage = Integer.parseInt(pageNum);
 			int startRow = (currentPage - 1) * pageSize + 1;
 		    int endRow = currentPage * pageSize;
@@ -353,9 +411,10 @@ public class ManagerController {
 		    model.addAttribute("reviewCount", reviewCount);
 		    model.addAttribute("reviewList", reviewList);
 		
-		return "/manager/review/review";
-	}
+			return "/manager/review/review";
+		}
 		
+		// 리뷰 경고
 		@RequestMapping("/managerReviewChange")
 		public @ResponseBody int managerReviewChange(@RequestBody ReviewDTO reviewDTO) {
 			log.info("	-----CT-----> manager managerReviewChange");
@@ -367,6 +426,7 @@ public class ManagerController {
 			return result;
 		}
 		
+		// 리뷰 경고 취소
 		@RequestMapping("/managerChangeCancell")
 		public @ResponseBody int managerChangeCancell(@RequestBody ReviewDTO reviewDTO) {
 			log.info("	-----CT-----> manager managerChangeCancell");
@@ -378,6 +438,7 @@ public class ManagerController {
 			return result;
 		}
 		
+		// 리뷰 삭제
 		@RequestMapping("/managerReviewDelete")
 		public @ResponseBody int managerReviewDelete(@RequestBody ReviewDTO reviewDTO) {
 			log.info("	-----CT-----> manager managerReviewDelete");
@@ -388,9 +449,10 @@ public class ManagerController {
 			
 			return result;
 		}
-	
+		
 //	=========== 관리자 리뷰 관련 코드 종료 ===========  //
 
+		
 //	=========== 관리자 코치 관련 코드 시작 ===========  //
 	
 	@RequestMapping("/coach")
@@ -447,6 +509,7 @@ public class ManagerController {
 //	=========== 관리자 코치 관련 코드 종료 ===========  //
 
 //	=========== 관리자 멤버 관련 코드 시작 ===========  //
+	// 멤버 관리 페이지
 	@RequestMapping("/user")
 	public String user(Model model) {
 		log.info("	-----CT-----> manager user");
@@ -472,6 +535,7 @@ public class ManagerController {
 		return "/manager/user/user";
 	}
 	
+	// 멤버 관리 검색 페이지
 	@RequestMapping("/searchUserList")
 	public String searchUserList(String category, String input, String pageNum, Model model) {
 		log.info("	-----CT-----> manager searchUserList");
@@ -523,9 +587,6 @@ public class ManagerController {
 	    model.addAttribute("pageSize", pageSize);
 	    model.addAttribute("userList", userList);
 	    
-	    log.info("=======ddd"+userList);
-	    log.info("========================"+userList.size());
-	    
 	    model.addAttribute("category", category);
 	    model.addAttribute("input", input);
 	    
@@ -539,6 +600,7 @@ public class ManagerController {
 		return "/manager/user/searchUserList";
 	}
 
+	// 관련 멤버의 정보 페이지 
 	@RequestMapping("/userInfo")
 	public String userInfo(String id, Model model) {
 		log.info("	-----CT-----> manager userInfo");
@@ -550,6 +612,7 @@ public class ManagerController {
 		return "/manager/user/userInfo";
 	}
 	
+	// 멤버의 비밀번호 수정
 	@RequestMapping("/userPw")
 	public String userPw(String id, Model model) {
 		log.info("	-----CT-----> manager userPw");
@@ -559,6 +622,7 @@ public class ManagerController {
 		return "/manager/user/userPw";
 	}
 	
+	// 멤버의 비밀번호 수정 동작
 	@RequestMapping("/updateUserPw")
 	public @ResponseBody int updateUserPw(@RequestBody UserInfoDTO userDTO) {
 		log.info("	-----CT-----> manager updateUserPw");
@@ -570,6 +634,7 @@ public class ManagerController {
 		return result;
 	}
 	
+	// 멤버 탈퇴
 	@RequestMapping("/userDelete")
 	public @ResponseBody int userDelete(String id) {
 		log.info("	-----CT-----> manager updateUserPw");
@@ -695,5 +760,41 @@ public class ManagerController {
 		
 		return result;
 	}
+	
+//	=========== 관리자 방문자 관련 코드 종료 ===========  //	
+	
+	// 방문자 관리 페이지
+	@RequestMapping("/visitor")
+	public String visitor(Model model, String visitDate) {
+		log.info("	-----CT-----> manager visitor");
+		
+		model.addAttribute("todayVisitorCount", managerService.todayVisitorCount());
+		model.addAttribute("visitorCount", managerService.visitorCount());
+		model.addAttribute("naverVisitorCount", managerService.naverVisitorCount());
+		model.addAttribute("kakaoVisitorCount", managerService.kakaoVisitorCount());
+		model.addAttribute("memberVisitorCount", managerService.memberVisitorCount());
+		model.addAttribute("coachVisitorCount", managerService.coachVisitorCount());
+		model.addAttribute("totalVisitorCount", managerService.totalVisitorCount());
+		
+		model.addAttribute("number", 1);
+		
+		return "/manager/visitor/visitor";
+	}
+	
+	// 날짜 검색을 통한 회원 리스트
+	@RequestMapping("/visitDate")
+	public @ResponseBody List<VisitorDTO> getVisitDate(Model model, String visitDate){
+		int result = 0;
+		List<VisitorDTO> list = managerService.searchVisitorList(visitDate);
+		if(list != null) {
+			model.addAttribute("searchVisitorList", managerService.searchVisitorList(visitDate));
+			result = 1;
+		}
+		
+		return list;
+	}
+	
+//	=========== 관리자 방문자 관련 코드 종료 ===========  //	
+	
 	
 }
