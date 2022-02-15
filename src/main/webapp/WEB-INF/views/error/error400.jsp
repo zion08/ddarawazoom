@@ -3,12 +3,14 @@
 <script src="../../resources/js/error/error.js" ></script>
   
 <link href='../../resources/css/error/error.css' rel='stylesheet' />
-
+  
 <div class="cont_principal">
 	<div class="cont_error">
-		<h1>Oops! 500</h1>  
+		<h1>Oops! 400</h1>  
 	    <p>
-		  	서버에 오류가 발생하였습니다.
+	    	잘못된 요청입니다. <br/>
+		  	응답의 잘못된 문법으로 인하여 <br/>
+		  	서버가 요청 사항을 이해하지 못 하였습니다.
 	    </p>
 	    <p>	
 	    	<a href="/ddarawazoom">메인으로 돌아가기</a>

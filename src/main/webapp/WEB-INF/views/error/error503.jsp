@@ -3,12 +3,12 @@
 <script src="../../resources/js/error/error.js" ></script>
   
 <link href='../../resources/css/error/error.css' rel='stylesheet' />
-  
+
 <div class="cont_principal">
 	<div class="cont_error">
-		<h1>Oops! Error!!</h1>  
+		<h1>Oops! 503</h1>  
 	    <p>
-		  	에러가 발생했습니다. 페이지 이동이 어렵습니다. 
+		  	서비스를 사용할 수 없습니다.
 	    </p>
 	    <p>	
 	    	<a href="/ddarawazoom">메인으로 돌아가기</a>
