@@ -242,4 +242,24 @@
 		]]>
 	</select>
 	
+	<!-- 공지 글 가져오기 -->
+	<select id="noticeList" resultType="org.mvc.bean.NoticeDTO">
+		<![CDATA[
+			select * from tbl_notice order by pin desc , regdate desc
+		]]>
+	</select>
+	
+	<!-- 공지사항 댓글 리스트 -->
+	<select id="getCommentList" resultType="org.mvc.bean.Notice_CDTO">
+		<![CDATA[
+			select * from tbl_notice_c order by ref asc, re_step asc
+		]]>
+	</select>
+	
+	<select id="searchCommentList" resultType="org.mvc.bean.Notice_CDTO">
+		<![CDATA[
+			select * from tbl_notice_c where ${category} like '%'||#{input}||'%' order by ref asc, re_step asc
+		]]>
+	</select>
+	
 </mapper>

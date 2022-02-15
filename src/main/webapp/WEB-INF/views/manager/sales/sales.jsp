@@ -4,7 +4,16 @@
 <%@ include file="../../layout/header.jsp"%>
 <%@ include file="../../pay/cancel.jsp"%>
 
-<script src="/resources/coach/custom/js/coach-info.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+	function valueCheck(){
+		if($('#search-input').val() == ''){
+			alert('검색어를 입력해주세요.');
+			return false;
+		}
+	}	
+</script>
 
 <section class="masthead">
 
@@ -14,7 +23,7 @@
 		<p class="text-end m-sm-0">(=) 총 매출액: ${sales}</p>
 	</div>
 	<div class="table-responsive col-md-9 m-sm-auto col-lg-10 px-md-4" >
-		<form action="/manager/salesSearch" method="post">
+		<form action="/manager/salesSearch" method="post" onsubmit="return valueCheck()">
 	
 		  <div style="width: 50%; text-align: center; margin: auto 0;">
 			  <div class="input-group mb-3">

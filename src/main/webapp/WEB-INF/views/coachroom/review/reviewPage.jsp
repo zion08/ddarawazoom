@@ -64,6 +64,20 @@
 	  </div>
 	</c:forEach>
   </c:if>
+  
+  <c:if test="${pageCount > 1}">
+  	<c:if test="${startPage > 10}">
+		<a href="/coachroom/reviewContent?pageNum=${startPage - 10}&num=${classContent.num}">[이전]</a>	
+	</c:if>
+	
+	<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+		<a href="/coachroom/reviewContent?pageNum=${i}&num=${classContent.num}">[${i}]</a>
+	</c:forEach>
+	
+	<c:if test="${endPage < pageCount}">
+		<a href="/coachroom/reviewContent?pageNum=${startPage + 10}&num=${classContent.num}">[다음]</a>
+	</c:if>
+  </c:if>
   	     
 </div>
 

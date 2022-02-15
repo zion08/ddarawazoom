@@ -94,7 +94,7 @@
 		</div>  
 	</c:if> <br />
 	
-	<c:if test="${count > 1}">
+	<c:if test="${currentPage > 1}">
 		<div id="page">페이지&nbsp;  
 			<c:if test="${startPage > 10}">
 				<a href="/ddarawazoom/zoom?pageNum=${startPage - 10}"> [이전] </a>

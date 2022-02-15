@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.NoticeDTO;
+import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.QnADTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.VisitorDTO;
@@ -129,4 +131,13 @@ public interface ManagerMapper {
 	// 날짜로 로그인한 멤버 리스트
 	public List<VisitorDTO> searchVisitorList(String visitDate);
 
+	// 모든 공지글
+	public List<NoticeDTO> noticeList();
+	
+	// 공지의 모든 댓글
+	public List<Notice_CDTO> getCommentList();
+	
+	// 댓글 검색
+	public List<Notice_CDTO> searchCommentList(@Param("category") String category, @Param("input") String input);
+	
 }

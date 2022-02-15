@@ -53,9 +53,6 @@ public interface NoticeMapper {
 	// 공지 댓글 삭제
 	public int deletedChange(int c_num);
 	
-	// 관리자 댓글 경고
-	public int commentDeletedChange(int c_num);
-	
 	// 관리자 댓글 경고 취소
 	public int commentDeletedCancell(int c_num);
 	

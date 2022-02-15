@@ -110,6 +110,13 @@ $(document).ready(function(){
 		
 			
 });
+
+function valueCheck(){
+	if($('#input').val() == ''){
+		alert("검색어를 입력하세요.");
+		return false;
+	}
+}
 </script>      
 
 <div class="container marketing">	
@@ -224,7 +231,7 @@ $(document).ready(function(){
 	  	<form action="/manager/vodSearchList" method="post"  onsubmit="return valueCheck()">
    			<div style="width: 50%;">
 		   		<div class="input-group mb-3">
-					<input type="text" class="form-control" name="input" placeholder="검색어를 입력하세요" style="width: 60%;"/>
+					<input type="text" class="form-control" id="input" name="input" placeholder="검색어를 입력하세요" style="width: 60%;"/>
 					<button class="btn btn-outline-secondary" type="submit" style="width: 15%;">
 						검색
 					</button>
@@ -235,13 +242,13 @@ $(document).ready(function(){
 		<br/>
 		<div id="page">페이지  
 			<c:if test="${startPage > pageBlock}">
-				<a href="/manager/vodManager?pageNum=${startPage}-${pageBlock}"> [이전] </a>
+				<a href="/manager/vod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/manager/vodManager?pageNum=${i}">${i}</a>
+				<a href="/manager/vod?pageNum=${i}">${i}</a>
 			</c:forEach>
 			<c:if test="${endPage < totalPage}">
-				<a href="/manager/vodManager?pageNum=${startPage}+${pageBlock}"> [다음] </a>
+				<a href="/manager/vod?pageNum=${startPage}+${pageBlock}"> [다음] </a>
 			</c:if>
 		</div>
 	</c:if>

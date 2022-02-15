@@ -68,7 +68,7 @@ public interface CoachRoomService {
 	public ZoomDTO getClass(String c_id, Long num);
 	
 	// 수업에 작성된 리뷰
-	public List<ReviewDTO> getReview(Long num);
+	public List<ReviewDTO> getReview(Long num, int startRow, int endRow);
 	
 	// 해당 수업의 모든 리뷰 갯수
 	public int reviewCount(Long num);

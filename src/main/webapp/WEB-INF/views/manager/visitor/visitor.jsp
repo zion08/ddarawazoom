@@ -10,7 +10,7 @@
 <head>
 	<title>관리자 방문자 관리 페이지</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="../../resources/js/manager/visitor.js" type="text/javascript"></script>
+	<script src="../../resources/js/manager/visitor.js?ver=12" type="text/javascript"></script>
 	
 	<link href="../../resources/css/manager/notice.css" rel="stylesheet">
 	<link href="../../resources/css/manager/visitor.css" rel="stylesheet">
@@ -244,6 +244,9 @@
 		    	<input type="button" id="btn" value="검색" class="btn btn-outline-secondary"  style="margin:0 auto; margin:0 auto; width:50%;"/>
 		    </form>
 	    </div>
+	    
+	    <h5 id="visiterNull" class="header-title pb-3 mt-0" style="display:none;"> 해당 날짜에 로그인한 방문자 기록이 없습니다. </h5>
+	    
 	    <div id="visitDateDiv" style="display: none;">
 	    
 		    <div class="container">
