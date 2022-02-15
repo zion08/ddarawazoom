@@ -18,11 +18,11 @@
 		<div class="card shadow-sm">  
 			<img src="/resources/coach/img/${zoomContent.img}" class="card-img-top" width="100" height="625">
 			<c:if test="${sessionScope.c_id == zoomContent.c_id}">	
-				<input type="button" value="사진변경" class="btn btn-outline-danger" onclick="window.location='/ddarawazoom/imgUpdate?img=${zoomContent.img}&num=${zoomContent.num}'" />
+				<input type="button" value="사진변경" class="btn btn-outline-warning" onclick="window.location='/ddarawazoom/imgUpdate?img=${zoomContent.img}&num=${zoomContent.num}'" />
 			</c:if>	
 		<div class="btn-group">	
            	<c:if test="${sessionScope.c_id == zoomContent.c_id}">
-				<input type="button" class="btn btn-outline-danger" value="강의정보 수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${zoomContent.num}'">
+				<input type="button" class="btn btn-outline-primary" value="강의정보 수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${zoomContent.num}'">
 				<input type="button" class="btn btn-outline-danger" value="강의 삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${zoomContent.num}'"> 
 			</c:if>	 
 			<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
