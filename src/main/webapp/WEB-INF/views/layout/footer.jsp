@@ -26,8 +26,8 @@
     <div class="col">
       <h6 class="fw-bold">온라인 강의</h6>
       <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Zoom 강의</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Vod 강의</a></li>
+        <li class="nav-item mb-2"><a href="/ddarawazoom/zoom" class="nav-link p-0 text-muted">Zoom 강의</a></li>
+        <li class="nav-item mb-2"><a href="/ddarawazoom/vod" class="nav-link p-0 text-muted">Vod 강의</a></li>
       </ul>
     </div>
 
