@@ -110,6 +110,13 @@ $(document).ready(function(){
 		
 			
 });
+
+function valueCheck(){
+	if($('#input').val() == ''){
+		alert("검색어를 입력하세요.");
+		return false;
+	}
+}
 </script>      
 
 <div class="container marketing">	
@@ -243,13 +250,13 @@ $(document).ready(function(){
 		<br/>
 		<div id="page">페이지  
 			<c:if test="${startPage > pageBlock}">
-				<a href="/manager/vodManagerSearch?pageNum=${startPage}-${pageBlock}"> [이전] </a>
+				<a href="/manager/vodSearchList?pageNum=${startPage}-${pageBlock}&input=${input}"> [이전] </a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/manager/vodManagerSearch?pageNum=${i}">${i}</a>
+				<a href="/manager/vodSearchList?pageNum=${i}&input=${input}">${i}</a>
 			</c:forEach>
 			<c:if test="${endPage < totalPage}">
-				<a href="/manager/vodManagerSearch?pageNum=${startPage}+${pageBlock}"> [다음] </a>
+				<a href="/manager/vodSearchList?pageNum=${startPage}+${pageBlock}&input=${input}"> [다음] </a>
 			</c:if>
 		</div>
 	</c:if>

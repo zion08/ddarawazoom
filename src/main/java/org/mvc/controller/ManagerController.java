@@ -168,6 +168,7 @@ public class ManagerController {
 			model.addAttribute("totalPage", totalPage);
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
+			model.addAttribute("input", input);
 		} else {
 			model.addAttribute("vodSearchCount", 0);
 		}
@@ -235,113 +236,51 @@ public class ManagerController {
 //	=========== 관리자 공지사항 관련 코드 시작 ===========  //
 	// 공지사항 관리 페이지
 	@RequestMapping("/notice")
-	public String notice(String pageNum, Model model, Notice_CDTO notice_CDTO) {
+	public String notice(Model model, Notice_CDTO notice_CDTO) {
 		log.info("	-----CT-----> manager notice");
-		
-		int pageSize = 8;
-		if (pageNum == null) {
-		    pageNum = "1";
-		}
-		
-		int currentPage = Integer.parseInt(pageNum);
-		int startRow = (currentPage - 1) * pageSize + 1;
-	    int endRow = currentPage * pageSize;
-	    int noticeCount = 0;
-	    int commentCount = 0;
 	    
-	    noticeCount = serviceNotice.noticeCount();
-	    commentCount = serviceNotice.getcommentCount();
+	    int noticeCount = serviceNotice.noticeCount();
+	    int commentCount = serviceNotice.getcommentCount();
 	    
 	    List<NoticeDTO> noticeList = null;
 	    List<Notice_CDTO> commentList = null;
 	    
 	    if(noticeCount > 0 && commentCount > 0) {
-	    	noticeList = serviceNotice.noticeList(startRow, endRow);
-	    	commentList = serviceNotice.getAllComment(startRow, endRow);
-	    	
-	    	int notice_pageCount =  noticeCount / pageSize + ( noticeCount % pageSize == 0 ? 0 : 1);
-	    	int comment_pageCount =  commentCount / pageSize + ( commentCount % pageSize == 0 ? 0 : 1);
-	    	
-	    	int startPage = (int)(currentPage/10)*10+1;
-	    	int pageBlock = 10;
-	    	int notice_endPage = startPage + pageBlock - 1;
-	    	int comment_endPage = startPage + pageBlock - 1;
-	    	
-	    	if (notice_endPage > notice_pageCount && comment_endPage > comment_pageCount) {
-	    		notice_endPage = notice_pageCount;
-	    		comment_endPage = comment_pageCount;
-	    		
-	    	}
-	    	model.addAttribute("startPage", startPage);
-	    	model.addAttribute("notice_endPage", notice_endPage);
-	    	model.addAttribute("comment_endPage", comment_endPage);
-	    	model.addAttribute("notice_pageCount", notice_pageCount);
-	    	model.addAttribute("comment_pageCount", comment_pageCount);
+	    	noticeList = managerService.noticeList();
+	    	commentList = managerService.getCommentList();
 	    }
-	    model.addAttribute("pageNum", pageNum);
+	    
 	    model.addAttribute("notice_count", noticeCount);
 	    model.addAttribute("comment_count", commentCount);
 	    model.addAttribute("noticeList", noticeList);
 	    model.addAttribute("commentList", commentList);
-	    model.addAttribute("c_num", notice_CDTO.getC_num());
+	    model.addAttribute("noticeNum", 1);
+	    model.addAttribute("commentNum", 1);
 	    
 		return "/manager/notice/notice";
 	}
 	
 	// 공지사항 댓글 검색 페이지
 	@RequestMapping("/searchCommentList")
-	public String searchCommentList(String category, String input, String pageNum, Model model, Notice_CDTO notice_CDTO) {
+	public String searchCommentList(String category, String input, Model model, Notice_CDTO notice_CDTO) {
 		log.info("	-----CT-----> manager searchCommentList");
 		log.info("category="+category+" input="+input);
-
-		int pageSize = 8;
-		if (pageNum == null) {
-		    pageNum = "1";
-		}
-		
-		int currentPage = Integer.parseInt(pageNum);
-		int startRow = (currentPage - 1) * pageSize + 1;
-	    int endRow = currentPage * pageSize;
-	    int commentCount = 0;
-	    int number = 0;
 	    
-	    commentCount = serviceNotice.searchCommentCount(category, input);
+	    int commentCount = serviceNotice.searchCommentCount(category, input);
 	    
 	    List<Notice_CDTO> commentList = null;
 	    
 	    if(commentCount > 0) {
-	    	commentList = serviceNotice.searchCommentList(category, input, startRow, endRow);
+	    	commentList = managerService.searchCommentList(category, input);
 	    	log.info("list size="+commentList.size());
 	    }
 	    
-	    if(commentCount > 0) {
-	    	int comment_pageCount =  commentCount / pageSize + ( commentCount % pageSize == 0 ? 0 : 1);
-	    	int startPage = (int)(currentPage/10)*10+1;
-	    	int pageBlock = 10;
-	    	int comment_endPage = startPage + pageBlock - 1;
-	    	if (comment_endPage > comment_pageCount) {
-	    		comment_endPage = comment_pageCount;
-	    	}
-	    	
-	    	model.addAttribute("startPage", startPage);
-	    	model.addAttribute("comment_endPage", comment_endPage);
-	    	model.addAttribute("comment_pageCount", comment_pageCount);
-	    }
-	    
-	    	number = commentCount - (currentPage - 1) * pageSize;
-	    	
-		    model.addAttribute("currentPage", currentPage);
-		    model.addAttribute("startRow", startRow);
-		    model.addAttribute("endRow", endRow);
-		    model.addAttribute("pageNum", pageNum);
-		    model.addAttribute("pageSize", pageSize);
-		    model.addAttribute("number", number);
-		    model.addAttribute("comment_count", commentCount);
-		    model.addAttribute("commentList", commentList);
-		    model.addAttribute("c_num", notice_CDTO.getC_num());
+		model.addAttribute("comment_count", commentCount);
+		model.addAttribute("commentList", commentList);
+		model.addAttribute("c_num", notice_CDTO.getC_num());
 		    
-		    model.addAttribute("category", category);
-		    model.addAttribute("input", input);
+		model.addAttribute("category", category);
+		model.addAttribute("input", input);
 		
 		return "/manager/notice/searchCommentList";
 	}
@@ -353,7 +292,7 @@ public class ManagerController {
 
 		int result = 0;
 		
-		result = serviceNotice.commentDeletedChange(notice_CDTO.getC_num());
+		result = serviceNotice.deletedChange(notice_CDTO.getC_num());
 		
 		return result;
 	}

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.NoticeDTO;
+import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.QnADTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.VisitorDTO;
@@ -200,6 +202,21 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public List<VisitorDTO> searchVisitorList(String visitDate) {
 		return mapper.searchVisitorList(visitDate);
+	}
+
+	@Override
+	public List<NoticeDTO> noticeList() {
+		return mapper.noticeList();
+	}
+
+	@Override
+	public List<Notice_CDTO> getCommentList() {
+		return mapper.getCommentList();
+	}
+
+	@Override
+	public List<Notice_CDTO> searchCommentList(String category, String input) {
+		return mapper.searchCommentList(category, input);
 	}
   
 }

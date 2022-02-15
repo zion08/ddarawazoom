@@ -141,13 +141,13 @@
 				              <th scope="col" style="text-align: center;">강의 상태</th>
 				            </tr>
 				          </thead>
-				           <tbody>
-				           
-				     		 <c:forEach var="coachClass" items="${coachClass}">
-				     		 	 <c:set var="status" value="${coachClass.status}" />
-					             <tr>
+				          <tbody>
+				     	  	<c:forEach var="coachClass" items="${coachClass}">
+				     		  <c:set var="status" value="${coachClass.status}" />
+					             <tr onmouseover="this.style.background='#E6E6FA'" onmouseout="this.style.background='none'"
+					             		onclick="window.location='/ddarawazoom/zclasscontent?num=${coachClass.num}'">
 					               <th scope="row">
-					               	 ${classNumber}
+					              	 ${classNumber}
 					               	 <c:set var="classNumber" value="${classNumber + 1}"/>
 					               </th>
 					               <td>${coachClass.title}</td>
@@ -167,8 +167,7 @@
 						          	<c:if test="${status == '등록'}"><font color="green">${status}</font></c:if>
 						          </td>
 					             </tr>
-				      		 </c:forEach>
-				      		 
+				      	 	 </c:forEach>
 				           </tbody>
 				         </table>
 					 </div>

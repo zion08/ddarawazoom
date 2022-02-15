@@ -113,13 +113,6 @@
 		where c_num = #{c_num}
 	</update>
 	
-	<!-- 관리자 댓글 경고 -->
-	<update id="commentDeletedChange">
-		update tbl_notice_c set
-			deleted = 'all'
-		where c_num = #{c_num}
-	</update>
-	
 	<!-- 관리자 댓글 경고 취소 -->
 	<update id="commentDeletedCancell">
 		<![CDATA[

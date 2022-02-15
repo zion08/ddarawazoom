@@ -72,11 +72,6 @@ public class NoticeServiceImpl implements NoticeService{
 	public int deletedChange(int c_num) {
 		return mapper.deletedChange(c_num);
 	}
-
-	@Override
-	public int commentDeletedChange(int c_num) {
-		return mapper.commentDeletedChange(c_num);
-	}
 	
 	@Override
 	public int commentDeletedCancell(int c_num) {
