@@ -60,7 +60,7 @@
 			<option value="c_nick">닉네임</option>
 			<option value="title">강의명</option>
 		</select>
-		<input type="text" name="search" id="search-input"placeholder="검색어를 입력하세요">
+		<input type="text" name="search" id="search-input" placeholder="검색어를 입력하세요">
 		<input type="submit" value="검색" id="search-btn">
 	</form>
 	
@@ -73,7 +73,7 @@
 				<a href="/manager/zoom?pageNum=${i}">${i}</a>
 			</c:forEach>
 			<c:if test="${endPage < pageCount}">
-				<a href="/manager/zoom?pageNum=${startPage + 10}"> [다음] </a>
+				<a href="/manager/zoom?pageNum=${startPage + 10}"> [다음] </a> 
 			</c:if>
 		</div>
 	</c:if>	
