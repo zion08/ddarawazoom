@@ -362,9 +362,7 @@ public class ZoomController {
 	    model.addAttribute("zoomList", zoomList);
 	    model.addAttribute("category", category);
 	    model.addAttribute("input", input);
-	    model.addAttribute("category", category);
-	    model.addAttribute("input", input);
-	    
+	 	    
 		return "/zoom/class/searchClass";
 	}
 	
