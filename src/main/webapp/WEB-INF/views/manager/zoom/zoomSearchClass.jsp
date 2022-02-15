@@ -18,11 +18,12 @@
     <c:if test="${count > 0}">
       <table class="table">
 		  <thead align="center">
-		  	<tr><th colspan="6">total : ${count}</th></tr>
+		  	<tr><th colspan="7">total : ${count}</th></tr> 
 		    <tr>
 		      <th scope="col">글번호</th>
 		      <th scope="col">강의명</th>
 		      <th scope="col">강사명</th>
+		      <th scope="col">닉네임</th>
 		      <th scope="col">조회수</th>
 		      <th scope="col">인기강의</th>
 		      <th scope="col">관리</th>
@@ -36,6 +37,7 @@
 				      	<a href="/ddarawazoom/zclasscontent?num=${zoomList.num}">${zoomList.title}</a>
 				      </td>		      	     		   
 				      <td>${zoomList.c_id}</td>
+				      <td>${zoomList.c_nick}</td>
 				      <td>${zoomList.count}</td>
 				      <td>
 				      	<c:if test="${zoomList.count >= 50}">
@@ -55,6 +57,7 @@
 		<select id="search-category" name="sort">
 			<option selected value="">선택</option>
 			<option value="c_id">코치명</option>
+			<option value="c_nick">닉네임</option>
 			<option value="title">강의명</option>
 		</select>
 		<input type="text" name="search" id="search-input"placeholder="검색어를 입력하세요">
