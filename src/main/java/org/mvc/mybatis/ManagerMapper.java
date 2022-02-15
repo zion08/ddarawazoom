@@ -104,12 +104,9 @@ public interface ManagerMapper {
 	
 
 	public List<ZoomDTO> zoomSearchList(@Param("startRow") int startRow, @Param("endRow")int endRow, @Param("sort")String sort, @Param("search")String search); 
-<<<<<<< Updated upstream
 
 	// Q&A 상단 고정 여부
 	public int pinUpdate(QnADTO dto);
-
-=======
 	
 	// 오늘의 방문자 수
 	public int todayVisitorCount();
@@ -137,5 +134,5 @@ public interface ManagerMapper {
 	
 	// 날짜로 로그인한 멤버 수
 	public int searchVisitorCount(String visitDate);
->>>>>>> Stashed changes
+
 }
