@@ -175,8 +175,7 @@
 			where r >= #{startRow} and r <= #{endRow} and status = '등록'
 		]]>
 	</select>
-	
-<<<<<<< Updated upstream
+
 	<!-- 관리자페이지 검색된 게시물수 -->
 	<select id="zoomSearchCount" resultType="int">
 		select count(*) from tbl_coachclass where status = '등록' and ${sort} like '%'||#{search}||'%'
@@ -195,7 +194,7 @@
 			pin = #{pin}
 		where q_num = #{q_num}
 	</update>
-=======
+
 	<!-- 오늘의 방문자 수 -->
 	<select id="todayVisitorCount" resultType="int">
 		<![CDATA[
@@ -246,7 +245,5 @@
 	<!-- 날짜 검색을 통해 로그인한 모든 회원 수 -->
 	<select id="searchVisitorCount" resultType="int">
 		select count(*) from tbl_visitor where TO_DATE(v_date ,'yy-mm-dd') = #{visitDate}
-	</select>
->>>>>>> Stashed changes
-	
+	</select>	
 </mapper>
