@@ -8,7 +8,7 @@ function websdkready() {
   if (testTool.isMobileDevice()) {
     vConsole = new VConsole();
   }
-  console.log("checkSystemRequirements");
+  console.log("checkSystemRequirements"); 
   console.log(JSON.stringify(ZoomMtg.checkSystemRequirements()));
 
   // it's option if you want to change the WebSDK dependency link resources. setZoomJSLib must be run at first
@@ -21,7 +21,7 @@ function websdkready() {
   /**
    * NEVER PUT YOUR ACTUAL API SECRET IN CLIENT SIDE CODE, THIS IS JUST FOR QUICK PROTOTYPING
    * The below generateSignature should be done server side as not to expose your api secret in public
-   * You can find an eaxmple in here: https://marketplace.zoom.us/docs/sdk/native-sdks/web/essential/signature
+   * You can find an example in here: https://marketplace.zoom.us/docs/sdk/native-sdks/web/essential/signature
    */
   var API_SECRET = "aIoOnoAKfu1Nnt9c69tkuHIDwF1lLYHDAS3b";
 
@@ -41,7 +41,7 @@ function websdkready() {
   if (testTool.getCookie("meeting_lang"))
     document.getElementById("meeting_lang").value = testTool.getCookie(
       "meeting_lang"
-    );
+    ); 
 
   document
     .getElementById("meeting_lang")
@@ -96,7 +96,6 @@ function websdkready() {
         return false;
       }
 
-      
       testTool.setCookie("meeting_number", meetingConfig.mn);
       testTool.setCookie("meeting_pwd", meetingConfig.pwd);
 
@@ -143,7 +142,7 @@ function websdkready() {
         meetingConfig.apiKey = API_KEY;
         var joinUrl =
           testTool.getCurrentDomain() +
-          "/ddarawazoom/zclassroom2?" +
+          "/ddarawazoom/zclassroom2?" + 
           testTool.serialize(meetingConfig);
         document.getElementById('copy_link_value').setAttribute('link', joinUrl);
         copyToClipboard('copy_link_value');
