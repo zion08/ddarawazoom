@@ -111,8 +111,8 @@
 					      </td>
 					      <td>
 					        <c:if test="${notice_CList.deleted eq  'all'}">
-								<font style="color: red;">
-									<b>[<i class="fas fa-dizzy"></i> 경고!]</b> ${notice_CList.writer_id}님께서 작성하신 댓글은<b><br/><br/>
+								<font style="color: red; font-size:14px;">
+									<b>[<i class="fas fa-dizzy"></i> 경고!]</b> ${notice_CList.writer_id}님께서 작성하신 댓글은<b><br/>
 									"댓글 관리 기준"</b>을 위반하여 관리자에 의해 삭제되었습니다.
 								</font>
 							</c:if>
@@ -138,10 +138,12 @@
 									</c:if>
 									<c:if test ="${sessionScope.admin != null && notice_CList.deleted eq 'no'}">
 										<input type="button" class="btn btn-outline-black" onclick="reComment(${notice_CList.c_num});" value="답글"/>
-										<input type="button" class="btn btn-outline-black" onclick="commentDeletedChange(${notice_CList.c_num});" value="삭제"/>
+										<input type="button" class="btn btn-outline-black" onclick="commentDeletedChange(${notice_CList.c_num});" value="경고"/>
+										<input type="button" class="btn btn-outline-black" onclick="commentDelete(${notice_CList.c_num});" value="삭제"/>
 									</c:if>
 									<c:if test ="${sessionScope.admin != null && notice_CList.deleted eq 'all'}">
 										<input type="button" class="btn btn-outline-black" onclick="commentDeletedCancell(${commentList.c_num});" value="경고취소"/>
+										<input type="button" class="btn btn-outline-black" onclick="commentDelete(${notice_CList.c_num});" value="삭제"/>
 									</c:if>
 								</span>
 							</td>

@@ -69,7 +69,7 @@
 	                        <div class="row gx-3 mb-3">
 	                            <div class="col-md-6">
 	                                <label class="small mb-1" for="tel">* 연 락 처</label>
-	                                <input class="form-control" id="tel" type="tel" name="tel" placeholder="연락처를 기입해 주세요." value="${userInfo.tel}" />
+	                                <input class="form-control" id="tel" type="tel" name="tel" placeholder="'-'를 포함하여 입력해 주세요." value="${userInfo.tel}" />
 	                            </div>
 	                            <div class="col-md-6">
 	                                <label class="small mb-1" for="birth">* 생 년 월 일</label>

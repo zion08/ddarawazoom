@@ -56,7 +56,11 @@
 		                    						${reviewList.grade}
 		                    					</c:if>
 		                    				</td>
-			                    			<td>${reviewList.title}</td>
+			                    			<td>
+			                    				<a href="/ddarawazoom/zclasscontent?num=${reviewList.class_num}&pageNum=${pageNum}">
+			                    					${reviewList.title}
+				                    			</a>
+			                    			</td>
 			                    			<td>
 			                    				<c:if test="${reviewList.deleted ne 'yes'}">
 				                    				<a href="/ddarawazoom/zclasscontent?num=${reviewList.class_num}&pageNum=${pageNum}">

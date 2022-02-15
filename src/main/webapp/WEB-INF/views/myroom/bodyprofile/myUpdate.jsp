@@ -65,7 +65,7 @@
 		                <div class="form-row">
 		                    <div class="form-group">
 		                        <label for="inputCompany5">* 연 락 처 :</label>
-		                        <input type="text" class="form-control" id="inputCompany5" id="tel" name="tel" value="${userInfo.tel}" /><br/>
+		                        <input type="text" class="form-control" id="inputCompany5" id="tel" name="tel" value="${userInfo.tel}" placeholder="'-'를 포함하여 입력해 주세요." /><br/>
 		                    </div>
 		                    <div class="form-group">
 		                        <label for="inputState5">* 성 별 :</label> ${userInfo.gender}
