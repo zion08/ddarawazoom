@@ -37,7 +37,7 @@
 					</c:if>
 				</p>
 				<p class="card-text">
-					${zoomList.c_nick} 강사님
+					<a href="/ddarawazoom/coachInfo?c_id=${zoomList.c_id}">${zoomList.c_nick}</a> 강사님
 				</p>
 				<p class="card-text">
 					<a href="/ddarawazoom/zoomReadcount?num=${zoomList.num}">${zoomList.title}</a>

@@ -55,9 +55,9 @@
 			 	 </c:if> 
 				
 				</h2>
-				<h5>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">${zoomContent.c_id}</font> 강사님</h5><br />
+				<h5>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ddarawazoom/coachInfo?c_id=${zoomContent.c_id}"><font color="blue">${zoomContent.c_id}</font></a> 강사님</h5><br />
 				<h5>&nbsp;&nbsp;${zoomContent.intro}</h5>
-			</div>
+			</div> 
 		</div>	
 		</div>
 	</div>
