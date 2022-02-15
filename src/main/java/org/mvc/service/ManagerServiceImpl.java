@@ -161,9 +161,6 @@ public class ManagerServiceImpl implements ManagerService{
 	public int pinUpdate(QnADTO dto) {
 		return mapper.pinUpdate(dto);
 	}
-<<<<<<< Updated upstream
-  
-=======
 
 	@Override
 	public int todayVisitorCount() {
@@ -209,5 +206,4 @@ public class ManagerServiceImpl implements ManagerService{
 	public int searchVisitorCount(String visitDate) {
 		return mapper.searchVisitorCount(visitDate);
 	}
->>>>>>> Stashed changes
 }
