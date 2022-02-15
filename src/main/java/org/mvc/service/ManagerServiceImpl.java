@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.QnADTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.mybatis.ManagerMapper;
@@ -150,4 +151,14 @@ public class ManagerServiceImpl implements ManagerService{
 		return mapper.zoomSearchCount(sort, search); 
 	}
 
+	@Override
+	public int deleteQnA(int q_num) {
+		return mapper.deleteQnA(q_num);
+	}
+
+	@Override
+	public int pinUpdate(QnADTO dto) {
+		return mapper.pinUpdate(dto);
+	}
+  
 }

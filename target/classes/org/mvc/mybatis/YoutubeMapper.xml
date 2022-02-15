@@ -38,6 +38,40 @@
 		]]>		
 	</select>
 	
+	<select id="getSearchVideoList" resultType="org.mvc.bean.YoutubeDTO">
+		<![CDATA[
+		select * from (
+			select VNUM, TITLE, CHANNELTITLE, EMBEDHTML, REGDATE, 
+			TAG1, TAG2, TAG3, THUMBNAIL_URL, VIDEOID, STATUS, rownum r from 
+				(select * from tbl_youtube where 
+					TITLE like '%'||#{input}||'%' or
+					CHANNELTITLE like '%'||#{input}||'%' or
+					TAG1 like '%'||#{input}||'%' or
+					TAG2 like '%'||#{input}||'%' or
+					TAG3 like '%'||#{input}||'%'
+					order by VNUM asc)
+			)
+		 where STATUS='ON' and r >= #{firstRownum} and r <= #{lastRownum}	
+		]]>	
+	</select>
+	
+	<select id="getManageSearchVideoList" resultType="org.mvc.bean.YoutubeDTO">
+		<![CDATA[
+		select * from (
+			select VNUM, TITLE, CHANNELTITLE, EMBEDHTML, REGDATE, 
+			TAG1, TAG2, TAG3, THUMBNAIL_URL, VIDEOID, STATUS, rownum r from 
+				(select * from tbl_youtube where 
+					TITLE like '%'||#{input}||'%' or
+					CHANNELTITLE like '%'||#{input}||'%' or
+					TAG1 like '%'||#{input}||'%' or
+					TAG2 like '%'||#{input}||'%' or
+					TAG3 like '%'||#{input}||'%'
+					order by VNUM asc)
+			)
+		 where r >= #{firstRownum} and r <= #{lastRownum}	
+		]]>	
+	</select>
+	
 	
 	<!-- 동영상 삭제 -->
 	<delete id="deleteVod">
@@ -62,6 +96,39 @@
 	
 	<select id="vodOffCount" resultType="int">
 		select count(*) from tbl_youtube where STATUS='OFF'	
+	</select>
+	
+	<select id="vodSearchCount" resultType="int">
+		<![CDATA[
+		select count(*) from (
+			select VNUM, TITLE, CHANNELTITLE, EMBEDHTML, REGDATE, 
+			TAG1, TAG2, TAG3, THUMBNAIL_URL, VIDEOID, STATUS, rownum r from 
+				(select * from tbl_youtube where 
+					TITLE like '%'||#{input}||'%' or
+					CHANNELTITLE like '%'||#{input}||'%' or
+					TAG1 like '%'||#{input}||'%' or
+					TAG2 like '%'||#{input}||'%' or
+					TAG3 like '%'||#{input}||'%'
+					)
+			)
+		]]>		
+	</select>
+	
+	<select id="vodOnSearchCount" resultType="int">
+		<![CDATA[
+		select count(*) from (
+			select VNUM, TITLE, CHANNELTITLE, EMBEDHTML, REGDATE, 
+			TAG1, TAG2, TAG3, THUMBNAIL_URL, VIDEOID, STATUS, rownum r from 
+				(select * from tbl_youtube where 
+					TITLE like '%'||#{input}||'%' or
+					CHANNELTITLE like '%'||#{input}||'%' or
+					TAG1 like '%'||#{input}||'%' or
+					TAG2 like '%'||#{input}||'%' or
+					TAG3 like '%'||#{input}||'%'
+					)
+			)
+		 where STATUS='ON'
+		]]>		
 	</select>
 
 </mapper>

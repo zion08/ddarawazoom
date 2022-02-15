@@ -121,8 +121,6 @@ public class PayController {
 		// 결제 취소 요청
 		IamportResponse<Payment> cancel = api.cancelPaymentByImpUid(cancelData);
 		int cancelCode = cancel.getCode();	// 성공=0, 실패=1 or -1
-		log.info("	------>cancel code: " + cancel.getCode());
-		log.info("	------>cancel message: " + cancel.getMessage());
 		
 		// 결제 취소 성공 > 취소 내역 DB 저장
 		if(cancelCode == 0) {
@@ -197,69 +195,6 @@ public class PayController {
 		return cancelList;  
 	}
 	
-
 //================= 결제 취소 관련 종료 ==========================//
 	
-
-
-	
-	
-//================= 결제 관련 test용 코드 ====================//	
-	
-	@RequestMapping("/pay")
-	public String pay(Model model, HttpSession session) {
-		String id = (String)session.getAttribute("id");
-		log.info("id=" + id);
-		
-		String c_id = (String)session.getAttribute("c_id"); 
-		log.info("c_id=" + c_id);
-		
-		if(id != null && c_id == null) {
-			model.addAttribute("userInfo", serviceZoom.getUserInfo(id)); 
-		}
-		
-		int num_test = 2;
-		model.addAttribute("zoomContent" , serviceZoom.zoomContent(num_test));
-		
-		// 총 결제 갯수
-		model.addAttribute("cnt", servicePayment.getOerderCount());
-
-		// 결제 내역 출력
-		List<PaymentDTO> paymentList = servicePayment.getPaymentList();
-		model.addAttribute("payment", paymentList);
-		
-		
-		return "/zoom/pay/pay";  
-	}
-	
-	@RequestMapping("/payProtest")
-	public @ResponseBody String payProtest(@RequestBody PaymentDTO dto) throws IamportResponseException, IOException {
-		System.out.println(dto.getImpUid());
-		System.out.println(dto.getMerchantUid());
-		System.out.println(dto.getC_id());
-		System.out.println(dto.getC_num());
-//		IamportResponse<Payment> verify = api.paymentByImpUid("imp_472101305054");
-//		if(verify.getResponse().getAmount().compareTo(BigDecimal.valueOf(2000)) == 0) {
-//			log.info("	------>verify: " + "검증 성공");
-//			
-//			Payment payment = verify.getResponse();	// api로 결제 정보 조회 (iamport 서버)			 
-//			
-//			String impUid = payment.getImpUid();
-//			log.info("	------>impUid: " + impUid);
-//			
-//			Date paidAtDate = payment.getPaidAt();
-//			log.info("	------>paidAtDate: " + paidAtDate);
-//			
-//			String paidAt = dateFormat.dateTimeFull(paidAtDate);
-//			
-//			paymentDTO.setPaidAt(paidAt);
-//			log.info("	------>paidAt: " + paymentDTO.getPaidAt());
-//			
-//			
-//			String status = payment.getStatus();
-//			log.info("	------>status: " + status);
-//		}
-		return "ok";  
-	}
-
 }

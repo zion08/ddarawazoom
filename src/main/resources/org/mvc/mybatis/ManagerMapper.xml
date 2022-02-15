@@ -180,5 +180,19 @@
 	<select id="zoomSearchCount" resultType="int">
 		select count(*) from tbl_coachclass where status = '등록' and ${sort} like '%'||#{search}||'%'
 	</select>
+
+	<!-- Q&A 삭제 -->
+	<update id="deleteQnA">
+		update tbl_QnA set
+			status = '삭제'
+		where q_num = #{q_num}
+	</update>
+	
+	<!-- 상단 고정 여부 -->
+	<update id="pinUpdate">
+		update tbl_QnA set
+			pin = #{pin}
+		where q_num = #{q_num}
+	</update>
 	
 </mapper>
