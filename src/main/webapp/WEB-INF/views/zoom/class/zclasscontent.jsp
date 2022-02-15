@@ -4,8 +4,7 @@
 <%@ include file="../../pay/iamport.jsp"%>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-
-
+<link href="../../resources/css/manager/zoom.css" rel="stylesheet">
 <script src ="../../resources/js/myroom/like.js" type="text/javascript"></script>
 
 <div class="container-fluid"> 
@@ -19,11 +18,11 @@
 		<div class="card shadow-sm">  
 			<img src="/resources/coach/img/${zoomContent.img}" class="card-img-top" width="100" height="625">
 			<c:if test="${sessionScope.c_id == zoomContent.c_id}">	
-				<input type="button" value="사진변경" class="btn btn-outline-danger" onclick="window.location='/ddarawazoom/imgUpdate?img=${zoomContent.img}&num=${zoomContent.num}'" />
+				<input type="button" value="사진변경" class="btn btn-outline-warning" onclick="window.location='/ddarawazoom/imgUpdate?img=${zoomContent.img}&num=${zoomContent.num}'" />
 			</c:if>	
 		<div class="btn-group">	
            	<c:if test="${sessionScope.c_id == zoomContent.c_id}">
-				<input type="button" class="btn btn-outline-danger" value="강의정보 수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${zoomContent.num}'">
+				<input type="button" class="btn btn-outline-primary" value="강의정보 수정" onclick="document.location.href='/ddarawazoom/zupdateForm?num=${zoomContent.num}'">
 				<input type="button" class="btn btn-outline-danger" value="강의 삭제" onclick="document.location.href='/ddarawazoom/zdeleteForm?num=${zoomContent.num}'"> 
 			</c:if>	 
 			<input type="button" class="btn btn-outline-secondary" value="글목록" onclick="document.location.href='/ddarawazoom/zoom'">
@@ -41,8 +40,12 @@
 			<div class="card-body">
 				<h4 align="left">No.${zoomContent.num}</h4>
 				<h5 align="left">readcount 
-				<font color="red"> ${zoomContent.count} </font><img src="/resources/image/zoom/eye.png"></h5>
-				
+				<font color="red"> ${zoomContent.count} </font><img src="/resources/image/zoom/eye.png">
+					<c:if test="${zoomContent.count >= 50}">
+						<span class="hit">hit!!</span>  
+					</c:if>
+				</h5>
+					
 				<h2>${zoomContent.title}
 				
  				 <c:if test="${sessionScope.c_id == null}">   
@@ -55,7 +58,7 @@
 			 	 </c:if> 
 				
 				</h2>
-				<h5>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ddarawazoom/coachInfo?c_id=${zoomContent.c_id}"><font color="blue">${zoomContent.c_id}</font></a> 강사님</h5><br />
+				<h5>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ddarawazoom/coachInfo?c_id=${zoomContent.c_id}"><font color="blue">${zoomContent.c_nick}</font></a> 강사님</h5><br />
 				<h5>&nbsp;&nbsp;${zoomContent.intro}</h5>
 			</div> 
 		</div>	
