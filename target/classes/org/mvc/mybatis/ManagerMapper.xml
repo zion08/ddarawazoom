@@ -168,14 +168,15 @@
 	
 	<!-- 관리자페이지 검색된 게시물리스트 -->
 	<select id="zoomSearchList" resultType="org.mvc.bean.ZoomDTO">
-	<![CDATA[
-		select * from (
-			select num, c_id, title, intro, type, goal, tool, frequency, price, img, count, status, c_nick, rownum r from (
-				select * from tbl_coachclass where ${sort} like '%'||#{search}||'%' order by num desc))
-		where r >= #{startRow} and r <= #{endRow} and status = '등록'
-	]]>
+		<![CDATA[
+			select * from (
+				select num, c_id, title, intro, type, goal, tool, frequency, price, img, count, status, c_nick, rownum r from (
+					select * from tbl_coachclass where ${sort} like '%'||#{search}||'%' order by num desc))
+			where r >= #{startRow} and r <= #{endRow} and status = '등록'
+		]]>
 	</select>
 	
+<<<<<<< Updated upstream
 	<!-- 관리자페이지 검색된 게시물수 -->
 	<select id="zoomSearchCount" resultType="int">
 		select count(*) from tbl_coachclass where status = '등록' and ${sort} like '%'||#{search}||'%'
@@ -196,4 +197,58 @@
 	</update>
 	
 
+=======
+	<!-- 오늘의 방문자 수 -->
+	<select id="todayVisitorCount" resultType="int">
+		<![CDATA[
+			select count(*) from tbl_visitor where TO_DATE(v_date, 'yyyy/mm/dd') = TO_DATE(sysdate, 'yyyy/mm/dd')
+		]]>
+	</select>
+	
+	<!-- 일반 방문자 수 -->
+	<select id="visitorCount" resultType="int">
+		select count(*) from tbl_visitor
+				where id not like'%kakaoLogin%'  and id not like '%naverLogin%'
+	</select>
+	
+	<!-- 카카오톡 방문자 수 -->
+	<select id="kakaoVisitorCount" resultType="int">
+		select count(*) from tbl_visitor
+			where  id like '%kakaoLogin%'
+	</select>
+	
+	<!-- 네이버 방문자 수 -->
+	<select id="naverVisitorCount" resultType="int">
+		select count(*) from tbl_visitor
+			where  id like '%naverLogin%'
+	</select>
+	
+	<!-- 멤버 방문 수-->
+	<select id="memberVisitorCount" resultType="int">
+		select count(*) from tbl_visitor where id IS NOT NULL	
+	</select>
+	
+	<!-- 코치 방문 수 -->
+	<select id="coachVisitorCount" resultType="int">
+		select count(*) from tbl_visitor where c_id IS NOT NULL
+	</select>
+	
+	<!-- 총 누적 방문 수 -->
+	<select id="totalVisitorCount" resultType="int">
+		select count(*) from tbl_visitor
+	</select>
+	
+	<!-- 날짜 검색을 통해 로그인한 모든 회원 리스트 -->
+	<select id="searchVisitorList" resultType="org.mvc.bean.VisitorDTO">
+		<![CDATA[
+			select * from tbl_visitor where TO_DATE(v_date ,'yy-mm-dd') = #{visitDate}
+		]]>
+	</select>
+	
+	<!-- 날짜 검색을 통해 로그인한 모든 회원 수 -->
+	<select id="searchVisitorCount" resultType="int">
+		select count(*) from tbl_visitor where TO_DATE(v_date ,'yy-mm-dd') = #{visitDate}
+	</select>
+	
+>>>>>>> Stashed changes
 </mapper>

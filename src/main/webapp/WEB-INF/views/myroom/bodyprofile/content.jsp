@@ -5,17 +5,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-		<title>Profile Page</title>		
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-		<script src="../../resources/js/myroom/bodyprofile_Graph.js?ver=1" ></script>
-		<script src="../../resources/js/myroom/talk.js"></script>
-		<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>		
-		
-		<link href="../../resources/css/myroom/myprofile.css" rel="stylesheet">
-		<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet">
+	<title>Profile Page</title>		
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	
+	<!-- chart.js 스크립트 -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="../../resources/js/myroom/bodyprofile_Graph.js?ver=1" ></script>
+	
+	<script src="../../resources/js/myroom/talk.js"></script>
+	<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>		
+	
+	<link href="../../resources/css/myroom/myprofile.css" rel="stylesheet">
+	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet">
 
 	<c:if test="${userInfo == null}" >
 		<ul class="list-group list-group-flush">

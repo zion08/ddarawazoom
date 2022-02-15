@@ -113,14 +113,14 @@
 	                  <form action="/ddarawazoom/searchNoticeList" method="post" name="searchForm" onsubmit="return valueCheck()">
 						  <div class="input-group mb-3">
 						    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
-						      <option selected value="">선 택</option>
-						      <option value="title">제 목</option>
-						      <option value="content">내 용</option>
-						      <option value="target_id">대 상</option>
+							      <option value="">선 택</option>
+							      <option value="title">제 목</option>
+							      <option value="content">내 용</option>
+							      <option value="target_id">대 상</option>
 						    </select>
-					    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
-					    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
-					  </div>
+						    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
+						    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
+					    </div>
 					</form>
 				 </div>
 	        </div>
@@ -137,7 +137,7 @@
 	                    	<h6 class="header-title pb-3 mt-1">* COMMENT *</h6>
 	                    	<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/ddarawazoom/notice'" value="[공지사항 페이지 이동]">
 	                    	<c:if test="${comment_count == 0}">
-	                    		<h6>작성된 공지사항 글이 없습니다.</h6>
+	                    		<h6>작성된 공지사항 댓글이 없습니다.</h6>
 							</c:if>
 	                    	<c:if test="${comment_count != 0}">
 		                        <table class="table table-hover mb-0">
@@ -146,7 +146,6 @@
 		                                    <th>작 성 자</th>
 		                                    <th>작성 내용</th>
 		                                    <th>작 성 일</th>
-		                                    <th>상 태</th>
 		                                    <th>버 튼</th>
 		                                </tr>
 		                            </thead>
@@ -154,33 +153,36 @@
 		                            	<c:forEach var="commentList" items="${commentList}">
 			                                <tr>
 			                                    <td>${commentList.writer_id}</td>
-			                                    <td>
-		                                    		<a href="/ddarawazoom/noticeContent?num=${commentList.num}&c_num=${commentList.c_num}&pageNum=${pageNum}">
-		                                    			${commentList.content}
+			                                    <td>	
+			                                    	<c:if test="${commentList.deleted ==  'all'}">
+			                                    		<a href="/ddarawazoom/noticeContent?num=${commentList.num}&c_num=${commentList.c_num}&ref=${commentList.ref}&re_step=${commentList.re_step}&re_level=${commentList.re_level}&pageNum=${pageNum}">
+															<font style="color: red;">관리자에 의해 삭제된 댓글</font>
+														</a>
+													</c:if>
+													<c:if test="${commentList.deleted ==  'yes'}">
+														<a href="/ddarawazoom/noticeContent?num=${commentList.num}&c_num=${commentList.c_num}&ref=${commentList.ref}&re_step=${commentList.re_step}&re_level=${commentList.re_level}&pageNum=${pageNum}">
+															<font style="color: blue;">${commentList.writer_id}님이 직접 삭제한 댓글</font>
+														</a>
+													</c:if>
+													<c:if test="${commentList.deleted == 'no'}">
+														<a href="/ddarawazoom/noticeContent?num=${commentList.num}&c_num=${commentList.c_num}&ref=${commentList.ref}&re_step=${commentList.re_step}&re_level=${commentList.re_level}&pageNum=${pageNum}">
+															${commentList.content}
+		                                    			</a>		                                    			
+													</c:if>
+		                                    		<a href="/ddarawazoom/noticeContent?num=${commentList.num}&c_num=${commentList.c_num}&ref=${commentList.ref}&re_step=${commentList.re_step}&re_level=${commentList.re_level}&pageNum=${pageNum}">
 		                                    		</a>
 			                                    </td>
 			                                    <td>
-													<fmt:formatDate var="comment_regdate" pattern="yyyy-MM-dd HH:mm" value="${commentList.regdate}" />
-													 ${comment_regdate}
-												</td>
-												<td>
-													<c:if test="${commentList.deleted eq  'all'}">
-														<font style="color: red;">경고받은 댓글</font>
-													</c:if>
-													<c:if test="${commentList.deleted eq  'yes'}">
-														<font style="color: blue;">${commentList.writer_id}님이 직접 삭제한 댓글</font>
-													</c:if>
-													<c:if test="${commentList.deleted ne  'yes' && commentList.deleted ne  'all' }">
-														${commentList.content}
-													</c:if>
+													<fmt:formatDate var="comment_regdate" pattern="yy/MM/dd HH:mm" value="${commentList.regdate}" />
+													 	${comment_regdate}
 												</td>
 			                                    <td>
 			                                    	<c:if test="${commentList.deleted == 'no'}">
 				                                    	<input type="button" class="btn btn-outline-black" onclick="reComment(${commentList.c_num});" value="답글"/>
-				                                    	<input type="button" class="btn btn-outline-black" onclick="managerDeletedChange(${commentList.c_num});" value="경고하기"/>
+				                                    	<input type="button" class="btn btn-outline-black" onclick="commentDeletedChange(${commentList.c_num});" value="경고하기"/>
 				                                    </c:if>	
 				                                    <c:if test="${commentList.deleted == 'all'}">
-				                                        <input type="button" class="btn btn-outline-black" onclick="managerDeletedCancell(${commentList.c_num});" value="경고취소"/>
+				                                        <input type="button" class="btn btn-outline-black" onclick="commentDeletedCancell(${commentList.c_num});" value="경고취소"/>
 				                                    </c:if>
 			                                    </td>
 			                                </tr>
@@ -206,15 +208,14 @@
 					</div>
 	            </div>
 	            <div style="width: 50%; text-align:center; margin: 0 auto;">
-	                  <form action="/ddarawazoom/searchNoticeList" method="post" name="searchForm" onsubmit="return valueCheck()">
+	                  <form action="/manager/searchCommentList" method="post" name="searchCommentForm" onsubmit="return comment_valueCheck()">
 						  <div class="input-group mb-3">
-						    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
-						      <option selected value="">선 택</option>
-						      <option value="title">제 목</option>
-						      <option value="content">내 용</option>
-						      <option value="target_id">대 상</option>
+						    <select class="form-select form-select-sm" id="search-commentcategory" name="category" style="width: 25%;">
+						      <option value="">선 택</option>
+						      <option value="content">작성 내용</option>
+						      <option value="writer_id">작성자</option>
 						    </select>
-					    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
+					    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-commentInput" name="input">
 					    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
 					  </div>
 					</form>

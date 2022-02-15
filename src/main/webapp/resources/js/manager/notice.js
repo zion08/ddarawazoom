@@ -212,12 +212,12 @@ function notice_update(){
 
 
 // 관리자 댓글 경고
-function managerDeletedChange(number){
+function commentDeletedChange(number){
 	if(window.confirm('본 댓글이 해당 글과 관련이 없거나,\n좋지 않은 댓글이라고 판단되신다면,\n확인을 클릭하세요!') == true){
 	
 			$.ajax({
 			data : JSON.stringify({ c_num : number }),
-			url : "/manager/managerDeletedChange",
+			url : "/manager/commentDeletedChange",
 			type : "POST",
 			contentType : "application/json; charset=UTF-8",
 			async : false,
@@ -233,12 +233,12 @@ function managerDeletedChange(number){
 
 
 // 관리자 댓글 경고 취소
-function managerDeletedCancell(number){
+function commentDeletedCancell(number){
 	if(window.confirm('경고를 취소 하시겠습니까?') == true){
 	
 			$.ajax({
 			data : JSON.stringify({ c_num : number }),
-			url : "/manager/managerDeletedCancell",
+			url : "/manager/commentDeletedCancell",
 			type : "POST",
 			contentType : "application/json; charset=UTF-8",
 			async : false,
@@ -300,6 +300,23 @@ function managerNoticeDelete(number){
 	}
 }
 
+// 공지사항 댓글 검색
+function comment_valueCheck(){
+	if($('#search-commentcategory').val() == ''){
+		alert('카테고리를 선택해 주세요.');
+		document.searchCommentForm.category.focus();
+		return false;
+	}
+	
+	if($('#search-commentInput').val() == ''){
+		alert('검색어를 작성해 주세요.');
+		document.searchCommentForm.input.focus();
+		return false;
+	}
+}
+
+
+
 // 공지사항 검색
 function valueCheck(){
 	if($('#search-category').val() == ''){
@@ -314,3 +331,5 @@ function valueCheck(){
 		return false;
 	}
 }
+
+

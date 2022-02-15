@@ -26,10 +26,7 @@
 	                    	<c:if test="${sessionScope.admin != null}">
 	                    		<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/manager/notice'" value="[공지사항 관리자 페이지 이동]">
 	                    	</c:if>
-	                    	<c:if test="${noticeList == null}">
-	                    		
-	                    	</c:if>
-	                    	
+	                    	<c:if test="${noticeList == null}"></c:if>
 	                        <table class="table table-hover mb-0" id="boardtable">
 	                            <thead>
 	                                <tr class="align-self-center">

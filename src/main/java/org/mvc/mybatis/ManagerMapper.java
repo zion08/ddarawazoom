@@ -7,6 +7,7 @@ import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
 import org.mvc.bean.QnADTO;
 import org.mvc.bean.UserInfoDTO;
+import org.mvc.bean.VisitorDTO;
 import org.mvc.bean.ZoomDTO;
 
 public interface ManagerMapper {
@@ -103,8 +104,38 @@ public interface ManagerMapper {
 	
 
 	public List<ZoomDTO> zoomSearchList(@Param("startRow") int startRow, @Param("endRow")int endRow, @Param("sort")String sort, @Param("search")String search); 
+<<<<<<< Updated upstream
 
 	// Q&A 상단 고정 여부
 	public int pinUpdate(QnADTO dto);
 
+=======
+	
+	// 오늘의 방문자 수
+	public int todayVisitorCount();
+	
+	// 일반 방문자 수
+	public int visitorCount();
+	
+	// 카카오톡 방문자 수
+	public int kakaoVisitorCount();
+	
+	// 네이버 방문자 수
+	public int naverVisitorCount();
+	
+	// 멤버 방문 수
+	public int memberVisitorCount();
+	
+	// 코치 방문 수
+	public int coachVisitorCount();
+	
+	// 총 누적 방문 수
+	public int totalVisitorCount();
+	
+	// 날짜로 로그인한 멤버 리스트
+	public List<VisitorDTO> searchVisitorList(String visitDate);
+	
+	// 날짜로 로그인한 멤버 수
+	public int searchVisitorCount(String visitDate);
+>>>>>>> Stashed changes
 }

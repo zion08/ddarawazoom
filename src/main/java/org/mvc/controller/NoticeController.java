@@ -32,6 +32,8 @@ public class NoticeController {
 	private FileInfo fileInfo;
 	
 //=========== 공지사항 관련 코드 시작 ===========  //
+	
+	// 공지사항 페이지
 	@RequestMapping("/notice")
 	public String notis(String pageNum, Model model, HttpSession session) {
 		log.info("	-----CT-----> ddarawazoom notice");
@@ -72,6 +74,7 @@ public class NoticeController {
 		return "/notice/notice";
 	}
 	
+	// 공지사항 검색 페이지
 	@RequestMapping("/searchNoticeList")
 	public String searchNoticeList(String category, String input, String pageNum, Model model) {
 		log.info("	-----CT-----> ddarawazoom searchNoticeList");
@@ -127,6 +130,7 @@ public class NoticeController {
 		return "/notice/searchNoticeList";
 	}
 	
+	// 공지사항 작성
 	@RequestMapping("/noticeWrite")
 	public String notisWrite( NoticeDTO noticeDTO, Model model) {
 		log.info("	-----CT-----> ddarawazoom noticeWrite");
@@ -134,6 +138,7 @@ public class NoticeController {
 		return "/notice/noticeWrite";
 	}
 	
+	// 공지사항 작성 동작
 	@RequestMapping("/noticeWritePro")
 	public String noticeWritePro(HttpSession session, NoticeDTO noticeDTO, Model model, MultipartFile save) {
 		log.info("	-----CT-----> ddarawazoom noticeWritePro");
@@ -151,6 +156,7 @@ public class NoticeController {
 		return "/notice/noticeWritePro";
 	}
 	
+	// 공지사항 댓글
 	@RequestMapping("/noticeContent")
 	public String noticeContent(String pageNum, Model model, NoticeDTO noticeDTO, int num, Notice_CDTO notice_CDTO, HttpSession session) {
 		log.info("	-----CT-----> ddarawazoom noticeContent");
@@ -200,6 +206,7 @@ public class NoticeController {
 		return "/notice/noticeContent";
 	}
 	
+	// 공지사항 조회수 증가 동작
 	@RequestMapping("/noticeViewCount")
 	public String noticeViewCount(int num, RedirectAttributes ra) {
 		log.info("	-----CT-----> ddarawazoom noticeWiewCount");
@@ -210,6 +217,7 @@ public class NoticeController {
 		return "redirect:/ddarawazoom/noticeContent";
 	}
 	
+	// 공지사항 수정
 	@RequestMapping("/noticeUpdate")
 	public String noticeUpdate(Model model, NoticeDTO noticeDTO) {
 		log.info("	-----CT-----> ddarawazoom noticeUpdate");
@@ -219,6 +227,7 @@ public class NoticeController {
 		return "/notice/noticeUpdate";
 	}
 	
+	// 공지사항 수정 동작
 	@RequestMapping("/noticeUpdatePro")
 	public String noticeUpdatePro(HttpSession session, Model model, NoticeDTO noticeDTO,  MultipartFile save) {
 		log.info("	-----CT-----> ddarawazoom noticeUpdatePro");
@@ -237,6 +246,7 @@ public class NoticeController {
 		return "/notice/noticeUpdatePro";
 	}
 	
+	// 공지사항 삭제
 	@RequestMapping("/noticeDelete")
 	public @ResponseBody int noticeDelete(HttpSession session, @RequestBody NoticeDTO noticeDTO) {
 		log.info("	-----CT-----> ddarawazoom noticeDelete");
@@ -252,6 +262,7 @@ public class NoticeController {
 		return result;
 	}
 	
+	// 공지사항 댓글 등록
 	@RequestMapping("/commentWrite")
 	public @ResponseBody int commentWrite(HttpSession session, @RequestBody Notice_CDTO notice_CDTO) {
 		log.info("	-----CT-----> ddarawazoom notice_commentWrite");
@@ -262,6 +273,7 @@ public class NoticeController {
 		return result;
 	}
 	
+	// 공지사항 댓글 삭제
 	@RequestMapping("/commentDelete")
 	public String commentDelete(Notice_CDTO notice_CDTO, Model model) {
 		log.info("	-----CT-----> ddarawazoom notice_commentDelete");
@@ -271,6 +283,7 @@ public class NoticeController {
 		return "/notice/commentDelete";
 	}
 	
+	// 공지사항 댓글 삭제 동작
 	@RequestMapping("/commentDeletePro")
 	public @ResponseBody int commentDeletePro(int c_num) {
 		log.info("	-----CT-----> ddarawazoom notice_commentDeletePro");
@@ -282,6 +295,7 @@ public class NoticeController {
 		return result;
 	}
 	
+	// 공지사항 댓글 수정
 	@RequestMapping("/commentUpdate")
 	public String commentUpdate(Notice_CDTO notice_CDTO, Model model, HttpSession session) {
 		log.info("	-----CT-----> ddarawazoom notice_commentUpdate");
@@ -300,6 +314,7 @@ public class NoticeController {
 		return "/notice/commentUpdate";
 	}
 	
+	// 공지사항 댓글 수정 동작
 	@RequestMapping("/commentUpdatePro")
 	public @ResponseBody int commentUpdatePro(@RequestBody Notice_CDTO notice_CDTO) {
 		log.info("	-----CT-----> ddarawazoom notice_commentUpdatePro");
@@ -310,6 +325,7 @@ public class NoticeController {
 		return result;
 	}
 	
+	// 대 댓글 
 	@RequestMapping("/reComment")
 	public String reComment(Notice_CDTO notice_CDTO, Model model) {
 		log.info("	-----CT-----> ddarawazoom notice_reComment");
@@ -319,6 +335,7 @@ public class NoticeController {
 		return "/notice/reComment";
 	}
 	
+	// 대댓글 작성 동작
 	@RequestMapping("/reCommentPro")
 	public @ResponseBody int reCommentPro(@RequestBody Notice_CDTO notice_CDTO) {
 		log.info("	-----CT-----> ddarawazoom notice_reCommentPro");
