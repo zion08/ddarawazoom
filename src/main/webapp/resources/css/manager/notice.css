@@ -56,7 +56,7 @@
 }
 
 .job-detail {
-    border: 1px solid #cdcdcd;
+    border: 1px solid #ececec;
     border-radius: 6px;
     background-color:#fff;
 }
@@ -230,3 +230,4 @@ h5{
 	margin-bottom: 30px;
 	text-align: center;
 }
+

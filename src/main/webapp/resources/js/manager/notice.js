@@ -314,3 +314,19 @@ function valueCheck(){
 		return false;
 	}
 }
+
+
+// 공지사항 댓글 검색
+function comment_valueCheck(){
+	if($('#searchCommentForm').val() == ''){
+		alert('카테고리를 선택해 주세요.');
+		document.searchCommentForm.category.focus();
+		return false;
+	}
+	
+	if($('#search-commentInput').val() == ''){
+		alert('검색어를 작성해 주세요.');
+		document.searchCommentForm.input.focus();
+		return false;
+	}
+}
