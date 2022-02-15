@@ -238,7 +238,7 @@
 	            </div>
 	        </div>
 	    </div>
-	    <div class="md-3" style="width:100%; text-align:center; margin: 0 auto;">
+	    <div class="md-3" >
 		    <form name="visitorDate">
 		    	<input type="date" id="visitDate" name="visitDate" class="form-controller" style="margin:0 auto; text-align:center; width:50%"/>
 		    	<input type="button" id="btn" value="검색" class="btn btn-outline-secondary"  style="margin:0 auto; margin:0 auto; width:50%;"/>

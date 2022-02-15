@@ -6,12 +6,12 @@
 <head>
 	<title>멤버 Class 페이지</title>
 	
-	<link href='/resources/css/class/main.css' rel='stylesheet' />
-	<link href="/resources/css/class/class.css" rel="stylesheet" />
+	<link href='../../resources/css/class/main.css' rel='stylesheet' />
+	<link href="../../resources/css/class/class.css" rel="stylesheet" />
 	
-	<script src='/resources/js/class/main.js'></script>
-	<script src="/resources/js/class/class.js" type="text/javascript"></script>
-	<script src="/resources/js/class/class_zoom.js" type="text/javascript"></script>
+	<script src='../../resources/js/class/main.js'></script>
+	<script src="../../resources/js/class/class.js" type="text/javascript"></script>
+	<script src="../../resources/js/class/class_zoom.js" type="text/javascript"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		
 <style>

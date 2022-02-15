@@ -22,8 +22,8 @@
 			      <div class="circle-tile ">
 			        <a href="#"><div class="circle-tile-heading purple"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
 			        <div class="circle-tile-content purple">
-			          <div class="circle-tile-description text-faded">총 멤버 수<br/>[탈퇴멤버 제외]</div>
-			          <div class="circle-tile-number text-faded ">${count} 명</div>
+			          <div class="circle-tile-description text-faded">총 멤버</div>
+			          <div class="circle-tile-number text-faded ">총 ${count} 명</div>
 			        </div>
 			      </div>
 			    </div>
@@ -33,7 +33,6 @@
 			        <div class="circle-tile-content dark-blue">
 			          <div class="circle-tile-description text-faded"> 탈퇴 멤버 </div>
 			          <div class="circle-tile-number text-faded ">${deleteUserCount} 명</div>
-			          <a class="circle-tile-footer" href="#">탈퇴 멤버 확인<i class="fa fa-chevron-circle-right"></i></a>
 			        </div>
 			      </div>
 			    </div>
@@ -44,7 +43,6 @@
 			        <div class="circle-tile-content red">
 			          <div class="circle-tile-description text-faded"> 오늘 하루 신규 가입 멤버 </div>
 			          <div class="circle-tile-number text-faded ">${newUserCount} 명</div>
-			         	<a class="circle-tile-footer" href="#">신규 멤버 확인<i class="fa fa-chevron-circle-right"></i></a>
 			        </div>
 			      </div>
 			    </div> 
@@ -55,7 +53,6 @@
 			        <div class="circle-tile-content orange">
 			          <div class="circle-tile-description text-faded"> 일반 가입 멤버 </div>
 			          <div class="circle-tile-number text-faded ">${userCount}</div>
-			          <a class="circle-tile-footer" href="#">일반 멤버 확인<i class="fa fa-chevron-circle-right"></i></a>
 			        </div>
 			      </div>
 			    </div>
@@ -66,7 +63,6 @@
 			        <div class="circle-tile-content yellow">
 			          <div class="circle-tile-description text-faded"> 카카오톡 가입 멤버 </div>
 			          <div class="circle-tile-number text-faded ">${kakaoUserCount} 명</div>
-			          <a class="circle-tile-footer" href="#">카카오톡 멤버 확인<i class="fa fa-chevron-circle-right"></i></a>
 			        </div>
 			      </div>
 			    </div> 
@@ -77,7 +73,6 @@
 			        <div class="circle-tile-content green">
 			          <div class="circle-tile-description text-faded"> 네이버 가입 멤버 </div>
 			          <div class="circle-tile-number text-faded ">${naverUserCount} 명</div>
-			          <a class="circle-tile-footer" href="#">네이버 멤버 확인<i class="fa fa-chevron-circle-right"></i></a>
 			        </div>
 			      </div>
 			    </div> 

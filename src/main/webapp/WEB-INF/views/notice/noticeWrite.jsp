@@ -27,7 +27,7 @@
 	                                <div class="form-group app-label">
 	                                    <label for="writer_id" class="text-muted">작 성 자</label><br/>
 	                                    <input type="hidden" name="writer_id" value="${sessionScope.admin}" />
-	                                    ${sessionScope.admin} 님
+	                                     ${sessionScope.admin}
 	                                </div>
 	                            </div>
 	                            <div class="col-md-4">

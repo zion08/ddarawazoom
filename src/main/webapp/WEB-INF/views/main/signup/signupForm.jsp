@@ -53,7 +53,7 @@
 				
 	            <div class="col-12">
 	              <label for="email" class="form-label">* 이메일</label>
-	              <input type="email" class="form-control" id="email" name="email" placeholder="exapmle@email.com" required>
+	              <input type="email" class="form-control" id="email" name="email" placeholder="example@email.com " required>
 	              <div class="invalid-feedback">
 	                이메일은 필수항목입니다.
 	              </div>

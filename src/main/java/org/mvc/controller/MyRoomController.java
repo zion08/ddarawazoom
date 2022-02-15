@@ -69,7 +69,7 @@ public class MyRoomController {
 
 		model.addAttribute("userInfo", service.getUserInfo(id));
 		
-		return "/myroom/userinfo/userinfo";
+		return "/myroom/userinfo/userInfo";
 	}
 	
 	// 회원정보 수정
@@ -94,9 +94,6 @@ public class MyRoomController {
 		String id = (String)session.getAttribute("id");
 		
 		userDTO.setId(id);
-		
-		log.info("======="+service.updateInfo(userDTO));
-		log.info("======="+userDTO);
 		
 		result = service.updateInfo(userDTO);
 		

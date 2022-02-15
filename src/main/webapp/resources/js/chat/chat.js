@@ -24,7 +24,7 @@ function wsEvt() {
 					} 
 				}else if(d.type == "message"){
 					if(d.sessionId == $("#sessionId").val()){
-						$("#partyRoom").append("&nbsp;<p class='me'>" + d.userName + "(나) :" + d.msg + "</p>");	
+						$("#partyRoom").append("&nbsp;<p class='me'>" + d.userName + " :" + d.msg + "</p>");	
 					}else{
 						$("#partyRoom").append("&nbsp;<p class='others'>" + d.userName + " :" + d.msg + "</p>");
 					}
