@@ -4,8 +4,7 @@
 <%@ include file="../../pay/iamport.jsp"%>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-
-
+<link href="../../resources/css/manager/zoom.css" rel="stylesheet">
 <script src ="../../resources/js/myroom/like.js" type="text/javascript"></script>
 
 <div class="container-fluid"> 
@@ -41,8 +40,12 @@
 			<div class="card-body">
 				<h4 align="left">No.${zoomContent.num}</h4>
 				<h5 align="left">readcount 
-				<font color="red"> ${zoomContent.count} </font><img src="/resources/image/zoom/eye.png"></h5>
-				
+				<font color="red"> ${zoomContent.count} </font><img src="/resources/image/zoom/eye.png">
+					<c:if test="${zoomContent.count >= 50}">
+						<span class="hit">hit!!</span>  
+					</c:if>
+				</h5>
+					
 				<h2>${zoomContent.title}
 				
  				 <c:if test="${sessionScope.c_id == null}">   
