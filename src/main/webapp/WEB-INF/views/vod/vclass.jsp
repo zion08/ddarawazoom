@@ -52,7 +52,8 @@
 					    </div>
 			    </c:forEach>	  
 		  	</div>
-	
+		</c:if>	
+		
 			<br/>
 			<div id="page">
 				<span>페이지</span>  
@@ -67,9 +68,8 @@
 				</c:if>
 			</div>
 			<br/>
-			
-		</div>	
-	</c:if>	
-</div>
+	</div>			
+	
+	
 
 <%@ include file="../layout/footer.jsp"%>

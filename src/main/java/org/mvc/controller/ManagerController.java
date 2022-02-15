@@ -181,6 +181,14 @@ public class ManagerController {
 		return "/manager/vod/vodManageSearch";
 	}
 	
+	@RequestMapping("/changeStatusVod")
+	public @ResponseBody int changeStatusVod(int vnum, String status) {
+		int result=0;	
+		result = serviceYoutube.changeStatusVod(vnum, status);		
+		return result;
+	}
+	
+	
 
 //	=========== 관리자 Vod 관련 코드 종료 ===========  //
 

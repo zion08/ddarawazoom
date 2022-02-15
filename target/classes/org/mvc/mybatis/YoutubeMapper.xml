@@ -21,7 +21,7 @@
 		select * from (
 			select VNUM, TITLE, CHANNELTITLE, EMBEDHTML, REGDATE, 
 			TAG1, TAG2, TAG3, THUMBNAIL_URL, VIDEOID, STATUS, rownum r from 
-				(select * from tbl_youtube order by VNUM asc)
+				(select * from tbl_youtube order by VNUM desc)
 			)
 		 where STATUS='ON' and r >= #{firstRownum} and r <= #{lastRownum}	
 		]]>		
@@ -32,7 +32,7 @@
 		select * from (
 			select VNUM, TITLE, CHANNELTITLE, EMBEDHTML, REGDATE, 
 			TAG1, TAG2, TAG3, THUMBNAIL_URL, VIDEOID, STATUS, rownum r from (
-				select * from tbl_youtube order by VNUM asc)
+				select * from tbl_youtube order by VNUM desc)
 			)
 		where r >= #{firstRownum} and r <= #{lastRownum}		
 		]]>		

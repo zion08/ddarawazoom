@@ -235,13 +235,13 @@ $(document).ready(function(){
 		<br/>
 		<div id="page">페이지  
 			<c:if test="${startPage > pageBlock}">
-				<a href="/manager/vodManager?pageNum=${startPage}-${pageBlock}"> [이전] </a>
+				<a href="/manager/vod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/manager/vodManager?pageNum=${i}">${i}</a>
+				<a href="/manager/vod?pageNum=${i}">${i}</a>
 			</c:forEach>
 			<c:if test="${endPage < totalPage}">
-				<a href="/manager/vodManager?pageNum=${startPage}+${pageBlock}"> [다음] </a>
+				<a href="/manager/vod?pageNum=${startPage}+${pageBlock}"> [다음] </a>
 			</c:if>
 		</div>
 	</c:if>
