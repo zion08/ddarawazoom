@@ -106,7 +106,7 @@
 			]]>
 	</select>
 	
-	<!-- 공지사항 댓글 삭제 -->
+	<!-- 공지사항 직접 댓글 삭제 -->
 	<update id="deletedChange">
 		update tbl_notice_c set
 			deleted = 'yes'
@@ -114,17 +114,17 @@
 	</update>
 	
 	<!-- 관리자 댓글 경고 -->
-	<update id="managerDeletedChange">
+	<update id="commentDeletedChange">
 		update tbl_notice_c set
 			deleted = 'all'
 		where c_num = #{c_num}
 	</update>
 	
 	<!-- 관리자 댓글 경고 취소 -->
-	<update id="managerDeletedCancell">
+	<update id="commentDeletedCancell">
 		<![CDATA[
 			update tbl_notice_c set
-				deleted = 'cancell'
+				deleted = 'no'
 			where c_num = #{c_num}
 		]]>
 	</update>
@@ -178,9 +178,23 @@
 		]]>
 	</select>
 	
-	<!-- 검색 결과 수 -->
+	<!-- 공시사항 검색 결과 수 -->
 	<select id="searchCount" resultType="int">
 		select count(*) from tbl_notice where ${category} like '%'||#{input}||'%'
 	</select>
 	
+	<!-- 관리자 댓글 검색 -->
+	<select id="searchCommentList" resultType="org.mvc.bean.Notice_CDTO">
+		<![CDATA[
+			select * from (
+				select c_num, num, writer_id, content, ref, re_step, re_level, deleted, regdate, rownum r from(
+					select * from tbl_notice_c where ${category} like '%'||#{input}||'%' order by regdate desc, ref asc, re_step asc))
+			where r >= #{startRow} and r <= #{endRow}
+		]]>
+	</select>
+	
+	<!-- 관리자 댓글 결과 수 -->
+	<select id="searchCommentCount" resultType="int">
+		select count(*) from tbl_notice_c where ${category} like '%'||#{input}||'%'
+	</select>
 </mapper>

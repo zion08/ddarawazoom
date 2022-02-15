@@ -54,10 +54,10 @@ public interface NoticeMapper {
 	public int deletedChange(int c_num);
 	
 	// 관리자 댓글 경고
-	public int managerDeletedChange(int c_num);
+	public int commentDeletedChange(int c_num);
 	
 	// 관리자 댓글 경고 취소
-	public int managerDeletedCancell(int c_num);
+	public int commentDeletedCancell(int c_num);
 	
 	// 공지 댓글 가져오기
 	public Notice_CDTO getComment(int c_num);
@@ -76,7 +76,7 @@ public interface NoticeMapper {
 	// 관리자 관리 - 댓글 수
 	public int getcommentCount();
 	
-	// 공지사항 검색기능
+	// 공지사항 검색 기능
 	public List<NoticeDTO> searchNoticeList(
 			@Param("category") String category,
 			@Param("input") String input,
@@ -85,6 +85,18 @@ public interface NoticeMapper {
 	
 	// 검색 결과 수
 	public int searchCount(
+			@Param("category") String category,
+			@Param("input") String input);
+	
+	// 공지사항 댓글 검색 기능
+	public List<Notice_CDTO> searchCommentList(
+			@Param("category") String category,
+			@Param("input") String input,
+			@Param("startRow") int startRow,
+			@Param("endRow") int endRow);
+	
+	// 댓글 검색 결과 수
+	public int searchCommentCount(
 			@Param("category") String category,
 			@Param("input") String input);
 	
