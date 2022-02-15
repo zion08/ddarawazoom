@@ -371,10 +371,7 @@ public class ManagerController {
 		
 		return result;
 	}
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 //	=========== 관리자 공지사항 관련 코드 종료 ===========  //
 
 
@@ -393,68 +390,68 @@ public class ManagerController {
 			int startRow = (currentPage - 1) * pageSize + 1;
 		    int endRow = currentPage * pageSize;
 		    int reviewCount = 0;
-		   
+
 		    reviewCount = serviceReview.reviewCount();
-		    
+
 		    List<ReviewDTO> reviewList = null;
-		    
+
 		    if(reviewCount > 0) {
-		    	reviewList = serviceReview.reviewList(startRow, endRow);
-		    	
-		    	int reviewPageCount = reviewCount / pageSize + (reviewCount % pageSize == 0 ? 0 : 1);
-		    	
-		    	int startPage = (int)(currentPage/10)*10+1;
-		    	int pageBlock = 10;
-		    	int endPage = startPage + pageBlock - 1;
-		    	if (endPage > reviewPageCount) {
-		    		endPage = reviewPageCount;
-		    	}
-		    	model.addAttribute("startPage", startPage);
-		    	model.addAttribute("endPage", endPage);
-		    	model.addAttribute("reviewPageCount", reviewPageCount);
+			reviewList = serviceReview.reviewList(startRow, endRow);
+
+			int reviewPageCount = reviewCount / pageSize + (reviewCount % pageSize == 0 ? 0 : 1);
+
+			int startPage = (int)(currentPage/10)*10+1;
+			int pageBlock = 10;
+			int endPage = startPage + pageBlock - 1;
+			if (endPage > reviewPageCount) {
+				endPage = reviewPageCount;
+			}
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("reviewPageCount", reviewPageCount);
 		    }
 		    model.addAttribute("pageNum", pageNum);
 		    model.addAttribute("reviewCount", reviewCount);
 		    model.addAttribute("reviewList", reviewList);
-		
+
 			return "/manager/review/review";
 		}
 		
-		// 리뷰 경고
-		@RequestMapping("/managerReviewChange")
-		public @ResponseBody int managerReviewChange(@RequestBody ReviewDTO reviewDTO) {
-			log.info("	-----CT-----> manager managerReviewChange");
-			
-			int result = 0;
-			
-			result = serviceReview.managerReviewChange(reviewDTO.getReview_num());
-			
-			return result;
-		}
+	// 리뷰 경고
+	@RequestMapping("/managerReviewChange")
+	public @ResponseBody int managerReviewChange(@RequestBody ReviewDTO reviewDTO) {
+		log.info("	-----CT-----> manager managerReviewChange");
+
+		int result = 0;
+
+		result = serviceReview.managerReviewChange(reviewDTO.getReview_num());
+
+		return result;
+	}
 		
-		// 리뷰 경고 취소
-		@RequestMapping("/managerChangeCancell")
-		public @ResponseBody int managerChangeCancell(@RequestBody ReviewDTO reviewDTO) {
-			log.info("	-----CT-----> manager managerChangeCancell");
-			
-			int result = 0;
-			
-			result = serviceReview.managerChangeCancell(reviewDTO.getReview_num());
-			
-			return result;
-		}
-		
-		// 리뷰 삭제
-		@RequestMapping("/managerReviewDelete")
-		public @ResponseBody int managerReviewDelete(@RequestBody ReviewDTO reviewDTO) {
-			log.info("	-----CT-----> manager managerReviewDelete");
-			
-			int result = 0;
-			
-			result = serviceReview.managerReviewDelete(reviewDTO.getReview_num());
-			
-			return result;
-		}
+	// 리뷰 경고 취소
+	@RequestMapping("/managerChangeCancell")
+	public @ResponseBody int managerChangeCancell(@RequestBody ReviewDTO reviewDTO) {
+		log.info("	-----CT-----> manager managerChangeCancell");
+
+		int result = 0;
+
+		result = serviceReview.managerChangeCancell(reviewDTO.getReview_num());
+
+		return result;
+	}
+
+	// 리뷰 삭제
+	@RequestMapping("/managerReviewDelete")
+	public @ResponseBody int managerReviewDelete(@RequestBody ReviewDTO reviewDTO) {
+		log.info("	-----CT-----> manager managerReviewDelete");
+
+		int result = 0;
+
+		result = serviceReview.managerReviewDelete(reviewDTO.getReview_num());
+
+		return result;
+	}
 	
 //	=========== 관리자 리뷰 관련 코드 종료 ===========  //
 
@@ -747,9 +744,6 @@ public class ManagerController {
 		return "/manager/zoom/zoomSearchClass";
 	}
 //	=========== 관리자 zoom강의 관련 코드 종료 ===========  //	
-<<<<<<< Updated upstream
-	
-	//	=========== 관리자 zoom강의 관련 코드 종료 ===========  //	
 	
 	@RequestMapping("/deleteQnA")
 	public @ResponseBody int deleteQnA(int q_num) {
@@ -768,9 +762,7 @@ public class ManagerController {
 		
 		return result;
 	}
-=======
-
-//	=========== 관리자 방문자 관련 코드 종료 ===========  //	
+//  =========== 관리자 방문자 관련 코드 시작 ===========  //	
 	
 	// 방문자 관리 페이지
 	@RequestMapping("/visitor")
@@ -796,6 +788,4 @@ public class ManagerController {
 	
 //	=========== 관리자 방문자 관련 코드 종료 ===========  //	
 	
-	
->>>>>>> Stashed changes
 }
