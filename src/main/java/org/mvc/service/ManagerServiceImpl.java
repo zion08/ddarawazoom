@@ -142,13 +142,13 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 
 	@Override
-	public int zoomSearchCount(String sort, String search) {
-		return mapper.zoomSearchCount(sort, search); 
-	}
-
-	@Override
 	public List<ZoomDTO> zoomSearchList(int startRow, int endRow, String sort, String search) {
 		return mapper.zoomSearchList(startRow, endRow, sort, search);
+	}
+	
+	@Override
+	public int zoomSearchCount(String sort, String search) {
+		return mapper.zoomSearchCount(sort, search); 
 	}
 
 	@Override
@@ -160,4 +160,5 @@ public class ManagerServiceImpl implements ManagerService{
 	public int pinUpdate(QnADTO dto) {
 		return mapper.pinUpdate(dto);
 	}
+  
 }
