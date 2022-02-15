@@ -33,7 +33,7 @@ public class NoticeController {
 	
 //=========== 공지사항 관련 코드 시작 ===========  //
 	@RequestMapping("/notice")
-	public String notis(String pageNum, Model model, HttpSession session) {
+	public String notis(String pageNum, Model model) {
 		log.info("	-----CT-----> ddarawazoom notice");
 		
 		int pageSize = 8;
@@ -75,7 +75,6 @@ public class NoticeController {
 	@RequestMapping("/searchNoticeList")
 	public String searchNoticeList(String category, String input, String pageNum, Model model) {
 		log.info("	-----CT-----> ddarawazoom searchNoticeList");
-		log.info("category="+category+" input="+input);
 		
 		int pageSize = 8;
 		if(pageNum == null) {
@@ -128,7 +127,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/noticeWrite")
-	public String notisWrite( NoticeDTO noticeDTO, Model model) {
+	public String notisWrite() {
 		log.info("	-----CT-----> ddarawazoom noticeWrite");
 		
 		return "/notice/noticeWrite";
@@ -138,11 +137,11 @@ public class NoticeController {
 	public String noticeWritePro(HttpSession session, NoticeDTO noticeDTO, Model model, MultipartFile save) {
 		log.info("	-----CT-----> ddarawazoom noticeWritePro");
 
-		String id = (String)session.getAttribute("id");
+		String admin = (String)session.getAttribute("admin");
 		
-		noticeDTO.setWriter_id(id);
+		noticeDTO.setWriter_id(admin);
 		
-		String file = fileInfo.imgUpload(save, id);
+		String file = fileInfo.imgUpload(save, admin);
 		if(file != null) {
 			noticeDTO.setImg(file);
 			model.addAttribute("result", serviceNotice.noticeWrite(noticeDTO));

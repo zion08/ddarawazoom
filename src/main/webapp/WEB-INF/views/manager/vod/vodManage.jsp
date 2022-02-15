@@ -110,6 +110,13 @@ $(document).ready(function(){
 		
 			
 });
+
+function valueCheck(){
+	if($('#input').val() == ''){
+		alert("검색어를 입력하세요.");
+		return false;
+	}
+}
 </script>      
 
 <div class="container marketing">	
@@ -224,7 +231,7 @@ $(document).ready(function(){
 	  	<form action="/manager/vodSearchList" method="post"  onsubmit="return valueCheck()">
    			<div style="width: 50%;">
 		   		<div class="input-group mb-3">
-					<input type="text" class="form-control" name="input" placeholder="검색어를 입력하세요" style="width: 60%;"/>
+					<input type="text" class="form-control" id="input" name="input" placeholder="검색어를 입력하세요" style="width: 60%;"/>
 					<button class="btn btn-outline-secondary" type="submit" style="width: 15%;">
 						검색
 					</button>

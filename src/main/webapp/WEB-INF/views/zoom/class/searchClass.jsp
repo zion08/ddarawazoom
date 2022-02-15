@@ -15,12 +15,12 @@
 	<div class="row row-cols-2 row-cols-sm-1 row-cols-md-3 g-2"> 
 
 	<c:if test="${count == 0}" >
-	<div class="container-fluid">
-		<div align="center">
-	   		<h5>수업이 없습니다.</h5>
-	   		<h5>강의등록 버튼을 눌러 수업을 추가해주세요!</h5>  
-	    </div>
-	</div>   
+		<div class="container-fluid">
+			<div align="center">
+		   		<h5>수업이 없습니다.</h5>
+		   		<h5>강의등록 버튼을 눌러 수업을 추가해주세요!</h5>  
+		    </div>
+		</div>   
 	</c:if>
 
 	<c:if test="${count > 0}">	

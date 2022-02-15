@@ -344,21 +344,30 @@ public class CoachRoomController {
 		List classList = null;
 		if(count > 0) {
 			classList = service.getAllClass(c_id, startRow, endRow);
+			
+			int pageCount = count / pageSize + ( count % pageSize == 0 ? 0 : 1);
+			 
+	        int startPage = (int)(currentPage/10)*10+1;
+			int pageBlock=10;
+	        int endPage = startPage + pageBlock-1;
+	        if (endPage > pageCount) endPage = pageCount;
+	        
+	        model.addAttribute("startPage", startPage);
+	        model.addAttribute("endPage", endPage);
+	        model.addAttribute("pageCount", pageCount);
 		}
 		
 		model.addAttribute("classList", classList);
 		model.addAttribute("pageSize", pageSize);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("startRow", startRow);
-		model.addAttribute("endRow", endRow);
 		model.addAttribute("count", count);
 		
 		return "/coachroom/list";
 	}
 	
 	// 해당 수업의 리뷰 목록
-	@RequestMapping("/content")
+	@RequestMapping("/reviewContent")
 	public String content(ZoomDTO dto, String pageNum, Model model, HttpSession session) {
 		log.info("	-----CT-----> review/content");
 		
@@ -380,8 +389,20 @@ public class CoachRoomController {
 		count = service.reviewCount(dto.getNum());
 		List reviewList = null;
 		if(count > 0) {
-			reviewList = service.getReview(dto.getNum());
-		}
+			reviewList = service.getReview(dto.getNum(), startRow, endRow);
+			
+	        int pageCount = count / pageSize + ( count % pageSize == 0 ? 0 : 1);
+			 
+	        int startPage = (int)(currentPage/10)*10+1;
+			int pageBlock=10;
+	        int endPage = startPage + pageBlock-1;
+	        if (endPage > pageCount) endPage = pageCount;
+	        
+	        model.addAttribute("startPage", startPage);
+	        model.addAttribute("endPage", endPage);
+	        model.addAttribute("pageCount", pageCount);
+	        
+	    }
 		
 		model.addAttribute("classContent", service.getClass(c_id, dto.getNum()));
 		model.addAttribute("review", reviewList);
@@ -439,11 +460,11 @@ public class CoachRoomController {
 			
 			if(date.substring(4, 5).equals("0")) { // date문자열이(만약 날짜의 월)이 0으로 시작한다면
 				StringBuffer dateDelete = new StringBuffer(date);
-				date = dateDelete.deleteCharAt(4).toString(); // 문자열 0을 제거 (1번째 index부터 문자열을 잘라냄)
+				date = dateDelete.deleteCharAt(4).toString(); // 문자열 0을 제거 (4번째 index의 문자를 제거)
 				
 				if(date.substring(7, 8).equals("0")) { // 만약 날짜의 일이 0으로 시작한다면 (문자열의 3번째 index가 0이라면)
 					 // 문자열을 삭제하는 함수를 사용하기 위해 StringBuffer 클래스 생성
-					date = dateDelete.deleteCharAt(7).toString(); // 문자열 0을 제거 (3번째 index를 제거) 후 date 변수에 대입
+					date = dateDelete.deleteCharAt(7).toString(); // 문자열 0을 제거 (3번째 index의 문자를 제거)
 				}
 			}
 			dto.setParse_date(date); // 위에서 변환한 날짜를 dto안에 대입

@@ -110,7 +110,7 @@
 	
 	<!-- 코치 로그인 -->
 	<select id="coachCheck" resultType="Integer">
-		select count(*) from tbl_coach where c_id = #{c_id} and c_pw = #{c_pw}
+		select count(*) from tbl_coach where c_id = #{c_id} and c_pw = #{c_pw} and c_status = '코치'
 	</select>
 	
 	<!-- 코치 회원가입 -->

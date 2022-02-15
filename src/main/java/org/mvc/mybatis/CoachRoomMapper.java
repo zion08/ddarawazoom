@@ -71,7 +71,7 @@ public interface CoachRoomMapper {
 	public ZoomDTO getClass(@Param("c_id") String c_id, @Param("num") Long num);
 	
 	// 수업에 작성된 리뷰
-	public List<ReviewDTO> getReview(Long num);
+	public List<ReviewDTO> getReview(@Param("class_num") Long num, @Param("startRow") int stratRow, @Param("endRow") int endRow);
 	
 	// 해당 수업의 모든 리뷰 갯수
 	public int reviewCount(Long num);

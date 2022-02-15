@@ -47,11 +47,8 @@ public interface NoticeService {
 	// 공지 댓글 삭제
 	public int deletedChange(int c_num);
 	
-	// 관리자 댓글 경고
-	public int managerDeletedChange(int c_num);
-	
 	// 관리자 댓글 경고 취소
-	public int managerDeletedCancell(int c_num);
+	public int commentDeletedCancell(int c_num);
 	
 	// 공지 댓글 가져오기
 	public Notice_CDTO getComment(int c_num);
@@ -73,4 +70,10 @@ public interface NoticeService {
 	
 	// 검색 결과 수
 	public int searchCount(String category, String input);
+	
+	// 공지사항 댓글 검색 리스트
+	public List<Notice_CDTO> searchCommentList(String category, String input, int startRow, int endRow);	
+	
+	// 댓글 검색 결과 수
+	public int searchCommentCount(String category, String input);
 }

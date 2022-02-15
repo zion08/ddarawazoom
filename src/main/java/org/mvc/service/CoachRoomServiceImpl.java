@@ -112,8 +112,8 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	}
 
 	@Override
-	public List<ReviewDTO> getReview(Long num) {
-		return mapper.getReview(num);
+	public List<ReviewDTO> getReview(Long num, int startRow, int endRow) {
+		return mapper.getReview(num, startRow, endRow);
 	}
 
 	@Override

@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.NoticeDTO;
+import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.QnADTO;
 import org.mvc.bean.UserInfoDTO;
+import org.mvc.bean.VisitorDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.mybatis.ManagerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,13 +145,13 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 
 	@Override
-	public int zoomSearchCount(String sort, String search) {
-		return mapper.zoomSearchCount(sort, search); 
-	}
-
-	@Override
 	public List<ZoomDTO> zoomSearchList(int startRow, int endRow, String sort, String search) {
 		return mapper.zoomSearchList(startRow, endRow, sort, search);
+	}
+	
+	@Override
+	public int zoomSearchCount(String sort, String search) {
+		return mapper.zoomSearchCount(sort, search); 
 	}
 
 	@Override
@@ -160,4 +163,60 @@ public class ManagerServiceImpl implements ManagerService{
 	public int pinUpdate(QnADTO dto) {
 		return mapper.pinUpdate(dto);
 	}
+
+	@Override
+	public int todayVisitorCount() {
+		return mapper.todayVisitorCount();
+	}
+
+	@Override
+	public int visitorCount() {
+		return mapper.visitorCount();
+	}
+
+	@Override
+	public int kakaoVisitorCount() {
+		return mapper.kakaoVisitorCount();
+	}
+
+	@Override
+	public int naverVisitorCount() {
+		return mapper.naverVisitorCount();
+	}
+
+	@Override
+	public int memberVisitorCount() {
+		return mapper.memberVisitorCount();
+	}
+
+	@Override
+	public int coachVisitorCount() {
+		return mapper.coachVisitorCount();
+	}
+
+	@Override
+	public int totalVisitorCount() {
+		return mapper.totalVisitorCount();
+	}
+
+	@Override
+	public List<VisitorDTO> searchVisitorList(String visitDate) {
+		return mapper.searchVisitorList(visitDate);
+	}
+
+	@Override
+	public List<NoticeDTO> noticeList() {
+		return mapper.noticeList();
+	}
+
+	@Override
+	public List<Notice_CDTO> getCommentList() {
+		return mapper.getCommentList();
+	}
+
+	@Override
+	public List<Notice_CDTO> searchCommentList(String category, String input) {
+		return mapper.searchCommentList(category, input);
+	}
+  
 }

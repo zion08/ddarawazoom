@@ -5,8 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.NoticeDTO;
+import org.mvc.bean.Notice_CDTO;
 import org.mvc.bean.QnADTO;
 import org.mvc.bean.UserInfoDTO;
+import org.mvc.bean.VisitorDTO;
 import org.mvc.bean.ZoomDTO;
 
 public interface ManagerMapper {
@@ -89,17 +92,52 @@ public interface ManagerMapper {
 			@Param("category") String category,
 			@Param("input") String input);
 
-	// 관리자 강의 삭제
+	// 관리자페이지 강의삭제
 	public int zoomClassDelete(Long num);
 	
-	// 관리자 강의 검색 관련
+	// 관리자페이지 검색된 게시물리스트
+	public List<ZoomDTO> zoomSearchList(@Param("startRow") int startRow, @Param("endRow")int endRow, @Param("sort")String sort, @Param("search")String search);
+	
+	// 관리자페이지 검색된 게시물수
 	public int zoomSearchCount(@Param("sort")String sort, @Param("search")String search);
-	
-	public List<ZoomDTO> zoomSearchList(@Param("startRow") int startRow, @Param("endRow")int endRow, @Param("sort")String sort, @Param("search")String search); 
-	
+	 
 	// Q&A 질문 삭제
 	public int deleteQnA(int q_num);
 	
 	// Q&A 상단 고정 여부
 	public int pinUpdate(QnADTO dto);
+	
+	// 오늘의 방문자 수
+	public int todayVisitorCount();
+	
+	// 일반 방문자 수
+	public int visitorCount();
+	
+	// 카카오톡 방문자 수
+	public int kakaoVisitorCount();
+	
+	// 네이버 방문자 수
+	public int naverVisitorCount();
+	
+	// 멤버 방문 수
+	public int memberVisitorCount();
+	
+	// 코치 방문 수
+	public int coachVisitorCount();
+	
+	// 총 누적 방문 수
+	public int totalVisitorCount();
+	
+	// 날짜로 로그인한 멤버 리스트
+	public List<VisitorDTO> searchVisitorList(String visitDate);
+
+	// 모든 공지글
+	public List<NoticeDTO> noticeList();
+	
+	// 공지의 모든 댓글
+	public List<Notice_CDTO> getCommentList();
+	
+	// 댓글 검색
+	public List<Notice_CDTO> searchCommentList(@Param("category") String category, @Param("input") String input);
+	
 }

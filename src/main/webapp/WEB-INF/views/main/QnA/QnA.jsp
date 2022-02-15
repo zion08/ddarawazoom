@@ -23,9 +23,6 @@
 	                <div class="card-body">
 	                    <h5 class="header-title pb-3 mt-0">Q&A</h5>
 	                    <div class="table-responsive">
-	                    	<c:if test="${sessionScope.admin != null}">
-	                    		<input type="button" class="btn btn-outline-secondary" id="notice_button" onclick="window.location='/manager/QnA'" value="[Q&A 관리자 페이지 이동]">
-	                    	</c:if>
 	                    	<c:if test="${sessionScope.id != null || sessionScope.c_id != null}">
 	                    		<input type="button" class="btn btn-outline-secondary" id="notice_button" onclick="window.location='/ddarawazoom/QnAWrite?q_num=0'" value="[Q&A 질문하기]">
 	                    	</c:if>

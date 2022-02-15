@@ -72,15 +72,10 @@ public class NoticeServiceImpl implements NoticeService{
 	public int deletedChange(int c_num) {
 		return mapper.deletedChange(c_num);
 	}
-
-	@Override
-	public int managerDeletedChange(int c_num) {
-		return mapper.managerDeletedChange(c_num);
-	}
 	
 	@Override
-	public int managerDeletedCancell(int c_num) {
-		return mapper.managerDeletedCancell(c_num);
+	public int commentDeletedCancell(int c_num) {
+		return mapper.commentDeletedCancell(c_num);
 	}
 	
 	@Override
@@ -109,6 +104,16 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
+	public UserInfoDTO getUserInfo(String id) {
+		return mapper.getUserInfo(id);
+	}
+
+	@Override
+	public CoachInfoDTO getCoachInfo(String c_id) {
+		return mapper.getCoachInfo(c_id);
+	}
+	
+	@Override
 	public List<NoticeDTO> searchNoticeList(String category, String input, int startRow, int endRow) {
 		return mapper.searchNoticeList(category, input, startRow, endRow);
 	}
@@ -117,15 +122,15 @@ public class NoticeServiceImpl implements NoticeService{
 	public int searchCount(String category, String input) {
 		return mapper.searchCount(category, input);
 	}
-
+	
 	@Override
-	public UserInfoDTO getUserInfo(String id) {
-		return mapper.getUserInfo(id);
+	public List<Notice_CDTO> searchCommentList(String category, String input, int startRow, int endRow) {
+		return mapper.searchCommentList(category, input, startRow, endRow);
 	}
 
 	@Override
-	public CoachInfoDTO getCoachInfo(String c_id) {
-		return mapper.getCoachInfo(c_id);
+	public int searchCommentCount(String category, String input) {
+		return mapper.searchCommentCount(category, input);
 	}
 
 }

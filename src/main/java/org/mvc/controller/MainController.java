@@ -211,15 +211,18 @@ public class MainController {
 		log.info(""+dto);
 		log.info(save.getOriginalFilename());
 		
-		service.coachInsert(dto);
+		int result = 0;
+		result = service.coachInsert(dto);
 		
-		String file = fileInfo.imgUpload(save, dto.getC_id());
-		if(file != null) {
-			dto.setC_img(file);
-			service.coachImgUpload(dto);
+		if(result == 1) {
+			String file = fileInfo.imgUpload(save, dto.getC_id());
+			if(file != null) {
+				dto.setC_img(file);
+				service.coachImgUpload(dto);
+			}
+			model.addAttribute("result", result);
+			model.addAttribute("c_id", dto.getC_id());
 		}
-		
-		model.addAttribute("c_id", dto.getC_id());
 		return "/main/signup/coachsignupPro";
 	}
 	

@@ -7,35 +7,20 @@
 
 <html>
 <head>
-	<title>관리자 공지사항 관리 페이지</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<title>댓글 검색 결과</title>
 	<script src="../../resources/js/manager/notice.js" type="text/javascript" ></script>
 	
 	<script>
 		var listMore = 5;
-		var noticeCnt = ${notice_count};
 		var commentCnt = ${comment_count};
 		
-		$(document).ready(function(){			
-			if(noticeCnt > listMore){
-				$('#noticeBtn').css('display', 'block')
-			}
+		$(document).ready(function(){
 			if(commentCnt > listMore){
 				$('#commentBtn').css('display', 'block')
 			}
 		});
 		
 		$(function(){
-			$("tr.noticeCtn").slice(0, 5).show(); // 최초 5개 선택
-			$("#ntLoad").click(function(e){ // Load More를 위한 클릭 이벤트e
-				e.preventDefault();
-				$("tr.noticeCtn:hidden").slice(0, 5).show(); // 숨김 설정된 다음 10개를 선택하여 표시
-				if($("tr.noticeCtn:hidden").length == 0){ // 숨겨진 DIV가 있는지 체크
-					alert("더 이상 항목이 없습니다"); // 더 이상 로드할 항목이 없는 경우 경고
-					$('#noticeBtn').css('display', 'none')
-				}
-			});
-			
 			$("tr.commentCnt").slice(0, 5).show(); // 최초 5개 선택
 			$("#cmtLoad").click(function(e){ // Load More를 위한 클릭 이벤트e
 				e.preventDefault();
@@ -50,98 +35,8 @@
 	</script>
 	
 	<link href="../../resources/css/manager/notice.css" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 </head>
 <body>
-	<!-- 공지사항 글 리스트 -->
-	<div class="container">
-    	<div class="row">
-    		<h5 class="header-title pb-3 mt-0">- 공지사항 관리자 페이지- </h5>
-	        <div class="col-xl-12">
-	            <div class="card">
-	                <div class="card-body">
-	                    <div class="table-responsive">
-	                    	<h6 class="header-title  mt-1">* NOTICE *</h6>
-	                    	<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/ddarawazoom/notice'" value="[공지사항 페이지 이동]">
-	                    	<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/ddarawazoom/noticeWrite'" value="[공지사항 작성하기]">
-	                        <table class="table table-hover mb-0">
-	                            <thead>
-	                                <tr class="align-self-center">
-	                                    <th>글 번호</th>
-	                                    <th>제 목</th>
-	                                    <th>작 성 자</th>
-	                                    <th>대 상</th>
-	                                    <th>작 성 일</th>
-	                                    <th>조 회 수</th>
-	                                    <th>첨부 파일</th>
-	                                    <th>버 튼</th>
-	                                </tr>
-	                            </thead>
-		                        <tbody>
-		                        	<c:if test="${notice_count == 0}">
-			                            <h6>작성된 공지사항이 없습니다.</h6>
-			                        </c:if>
-			                        <c:if test="${notice_count != 0 }">
-		                            	<c:forEach var="noticeList" items="${noticeList}">
-			                                <tr class="noticeCtn" style="display: none;">
-			                                    <td>
-			                                    	<c:if test="${noticeList.pin eq 'yes' }">
-			                                    		<i class="fas fa-grin-stars" style="color:red;">★</i>
-			                                    	</c:if>
-			                                    	<c:if test="${noticeList.pin eq 'no' }">
-			                                    		${noticeNum}
-			                                    	</c:if>
-			                                    </td>
-			                                    <td>
-		                                    		<a href="/ddarawazoom/noticeViewCount?num=${noticeList.num}&pageNum=${pageNum}">
-		                                    			${noticeList.title}
-		                                    		</a>
-			                                    </td>
-			                                    <td>${noticeList.writer_id}</td>
-			                                    <td>
-		                                    		<c:if test="${noticeList.target_id eq 'All'}">
-		                                    			<i class="fa fa-users icon2"></i>&nbsp;${noticeList.target_id}
-		                                    		</c:if>
-		                                    		<c:if test="${noticeList.target_id eq 'Coach'}">
-		                                    			<i class="fa fa-user icon3" style="color: skyblue;"></i>&nbsp;${noticeList.target_id}
-		                                    		</c:if>
-		                                    		<c:if test="${noticeList.target_id eq 'Member'}">
-		                                    			<i class="fa fa-user icon3" style="color: pink;"></i>&nbsp;${noticeList.target_id}
-		                                    		</c:if>
-			                                    </td>
-			                                    <td>
-													<fmt:formatDate var="notice_regdate" pattern="yyyy-MM-dd HH:mm" value="${noticeList.regdate}" />
-													 ${notice_regdate}
-												</td>
-			                                    <td>${noticeList.viewcnt}</td>
-			                                    <td>
-			                                    	<c:if test="${noticeList.img != null}">	
-			                                    		<i class="fa fa-picture-o icon5"></i>
-			                                    	</c:if>
-			                                    </td>
-			                                    <td>
-			                                    	<input type="button" class="btn btn-outline-black" onclick="window.location='/ddarawazoom/noticeUpdate?num=${noticeList.num}'" value="수정"/>
-			                                    	<input type="button" class="btn btn-outline-black" onclick="managerNoticeDelete(${noticeList.num});" value="삭제"/>
-			                                    	
-			                                    </td>
-			                                </tr>
-			                                <c:set var="noticeNum" value="${noticeNum + 1}"/>
-			                             </c:forEach>
-			                        </c:if>
-		                        </tbody>
-	                        </table>
-	                    </div>
-	                </div>
-	            </div>
-	            <div id="noticeBtn" style="display: none; width: 100%; text-align:center; margin: 0 auto;">
-					<input type="button"  style="width: 100%;" class="btn btn-outline-secondary" id="ntLoad" value="더보기"/>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-		
-	<!-- 공지사항 댓글 리스트 -->
 	<div class="container">
     	<div class="row">
 	        <div class="col-xl-12">

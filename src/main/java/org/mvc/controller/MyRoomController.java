@@ -57,10 +57,10 @@ public class MyRoomController {
 		return "/myroom/main";
 	}
 
-	
 
 //================= 멤버 관련 코드 시작 =================//
 	
+	// 회원정보 페이지
 	@RequestMapping("/userInfo")
 	public String userInfo(HttpSession session, Model model) {
 		log.info("	-----CT----->userInfo");
@@ -69,9 +69,10 @@ public class MyRoomController {
 
 		model.addAttribute("userInfo", service.getUserInfo(id));
 		
-		return "/myroom/userinfo/userinfo";
+		return "/myroom/userinfo/userInfo";
 	}
 	
+	// 회원정보 수정
 	@RequestMapping("/infoUpdate")
 	public String userInfoUpdate(UserInfoDTO userDTO, HttpSession session, Model model) {
 		log.info("	-----CT----->infoUpdate");
@@ -83,6 +84,7 @@ public class MyRoomController {
 		return "/myroom/userinfo/infoUpdate";
 	}
 	
+	// 회원 정보 수정 동작
 	@RequestMapping("/infoUpdateData")
 	public @ResponseBody int infoUpdateData(@RequestBody UserInfoDTO userDTO, HttpSession session) {
 		log.info("	-----CT----->infoUpdateData");
@@ -93,14 +95,12 @@ public class MyRoomController {
 		
 		userDTO.setId(id);
 		
-		log.info("======="+service.updateInfo(userDTO));
-		log.info("======="+userDTO);
-		
 		result = service.updateInfo(userDTO);
 		
 		return result;
 	}
 	
+	// 프로필 이미지 수정
 	@RequestMapping("/imgUpdate")
 	public String imgUpdate(UserInfoDTO userDTO, HttpSession session, Model model) {
 		log.info("	-----CT----->imgUpdate");
@@ -112,6 +112,7 @@ public class MyRoomController {
 		return "/myroom/userinfo/imgUpdate";
 	}
 	
+	// 프로필 사진 등록 동작
 	@RequestMapping("/imgUpdatePro")
 	public @ResponseBody int imgUpdatePro(UserInfoDTO userDTO, MultipartFile save, HttpSession session) {
 		log.info("	-----CT----->imgUpdatePro");
@@ -130,6 +131,7 @@ public class MyRoomController {
 		return result;
 	}
 	
+	// 탈퇴 페이지
 	@RequestMapping("/userDelete")
 	public String userDelete() {
 		log.info("	-----CT----->userDelete");
@@ -137,6 +139,7 @@ public class MyRoomController {
 		return"/myroom/userinfo/userDelete";
 	}
 	
+	// 탈퇴 동작
 	@RequestMapping("/userDeletePro")
 	public @ResponseBody int userDelete(UserInfoDTO userDTO, HttpSession session) {
 		log.info("	-----CT----->userDeletePro");
@@ -160,6 +163,7 @@ public class MyRoomController {
 
 //================= 멤버 일정 코드 시작 =================//
 	
+	// 등록 수업 일정 페이지
 	@RequestMapping("/class")
 	public String memberClass() {
 		log.info("	-----CT----->class");
@@ -167,6 +171,7 @@ public class MyRoomController {
 		return "/myroom/class/class";
 	}
 	
+	// 수업 리스트
 	@RequestMapping("/getClass")
 	public @ResponseBody ArrayList<ScheduleDTO> getClass(HttpSession session, Model model){
 		log.info("	-----CT----->getClass");
@@ -181,6 +186,7 @@ public class MyRoomController {
 	
 //================= 바디 프로필 관련 코드 시작 =================//
 	
+	// 바디프로필 페이지
 	@RequestMapping("/bodyprofile")
 	public String bodyprofile(HttpSession session, Model model) { 
 		log.info("	-----CT----->/bodypfile/bodyprofile");
@@ -195,6 +201,7 @@ public class MyRoomController {
 		return "/myroom/bodyprofile/content";
 	}
 	
+	// 마이프로필 수정
 	@RequestMapping("/bodyprofile/myUpdate")
 	public String myUpdate(HttpSession session, Model model) {
 		log.info("	-----CT----->/bodypfile/myUpdate");
@@ -206,6 +213,7 @@ public class MyRoomController {
 		return "/myroom/bodyprofile/myUpdate";
 	}
 	
+	// 마이프로필 수정 동작
 	@RequestMapping("/bodyprofile/myUpdatePro")
 	public String myUpdatePro(HttpSession session, UserInfoDTO userDTO, MultipartFile save, Model model) {		
 		log.info("	-----CT----->/bodypfile/bodyUpdatePro");
@@ -224,6 +232,7 @@ public class MyRoomController {
 		return "/myroom/bodyprofile/myUpdatePro";
 	}
 	
+	// 바디프로필 작성
 	@RequestMapping("/bodyprofile/bodyWrite")
 	public String bodyWrite() {
 		log.info("	-----CT----->/bodypfile/bodyWrite");
@@ -231,6 +240,7 @@ public class MyRoomController {
 		return "/myroom/bodyprofile/bodyWrite";
 	}
 	
+	// 바디프로필 작성 동작
 	@RequestMapping("/bodyprofile/bodyWritePro")
 	public String bodyWritePro(BodyProfileDTO bodyDTO, MultipartFile save, HttpSession session, Model model) {
 		log.info("	-----CT----->/bodypfile/bodyWritePro");
@@ -249,6 +259,7 @@ public class MyRoomController {
 		return "/myroom/bodyprofile/bodyWritePro";
 	}
 	
+	// 바디프로필 수정
 	@RequestMapping("/bodyprofile/bodyUpdate")
 	public String bodyUpdate(BodyProfileDTO bodyDTO, HttpSession session, Model model) {
 		log.info("	-----CT----->/bodypfile/bodyUpdate");
@@ -262,6 +273,7 @@ public class MyRoomController {
 		return "/myroom/bodyprofile/bodyUpdate";
 	}
 	
+	// 바디프로필 수정 동작
 	@RequestMapping("/bodyprofile/bodyUpdatePro")
 	public String bodyUpdatePro(BodyProfileDTO bodyDTO,  MultipartFile save, HttpSession session, Model model) {
 		log.info("	-----CT----->/bodypfile/bodyUpdatePro");
@@ -281,6 +293,7 @@ public class MyRoomController {
 		return "/myroom/bodyprofile/bodyUpdatePro";
 	}
 	
+	// 바디프로필 삭제
 	@RequestMapping("/bodyprofile/bodyDelete")
 	public String bodyDelete(int b_num, Model model) {
 		log.info("	-----CT----->/bodypfile/bodyDelete");
@@ -290,6 +303,7 @@ public class MyRoomController {
 		return "/myroom/bodyprofile/bodyDelete";
 	}
 	
+	// 바디프로필 삭제 동작
 	@RequestMapping("/bodyprofile/bodyDeletePro")
 	public String bodyDeletePro(int b_num, Model model) {
 		log.info("	-----CT----->/bodypfile/bodyDeletePro");
@@ -300,6 +314,8 @@ public class MyRoomController {
 	}
 
 //================= 바디 프로필 그래프 출력 =================//
+	
+	// 바디프로필 그래프
 	@RequestMapping("/getBodyList")
 	public @ResponseBody List<BodyProfileDTO> getBodyList(Model model, HttpSession session){
 		log.info("	-----CT----->getBodyList");
@@ -337,6 +353,7 @@ public class MyRoomController {
 	
 //================= 관심 페이지 관련 코드 시작 =================//
 	
+	// 관심 등록 페이지
 	@RequestMapping("/locker")
 	public String locker() {
 		log.info("	-----CT----->locker");
@@ -344,6 +361,7 @@ public class MyRoomController {
 		return "/myroom/locker/locker";
 	}
 	
+	// 관심Zoom 페이지
 	@RequestMapping("/likeZoom")
 	public String likeZoom(String pageNum, HttpSession session, Model model) {
 		log.info("	-----CT----->likeZoom");
@@ -359,6 +377,7 @@ public class MyRoomController {
 		return "/myroom/locker/likeZoom";
 	}
 	
+	// Zoom 관심등록
 	@RequestMapping("/likeZoom_in")
 	public @ResponseBody int zoomLikeWrite(HttpSession session, @RequestBody LikeDTO likeDTO) {
 		log.info("	-----CT----->likeZoom_in");
@@ -373,6 +392,7 @@ public class MyRoomController {
 		return result;
 	}
 	
+	// Zoom 관심 제거
 	@RequestMapping("/likeZoom_out")
 	public @ResponseBody int zoomLikeDelete(HttpSession session, @RequestBody LikeDTO likeDTO) {
 		log.info("	-----CT----->likeZoom_out");
@@ -387,6 +407,7 @@ public class MyRoomController {
 		return result;
 	}
 	
+	// 관심 Vod 페이지
 	@RequestMapping("/likeVod")
 	public String likeVod(HttpSession session, Model model) {
 		log.info("	-----CT----->likeVod");
@@ -398,6 +419,7 @@ public class MyRoomController {
 		return "/myroom/locker/likeVod";
 	}
 	
+	// Vod 관심 등록
 	@RequestMapping("/likeVod_in")
 	public @ResponseBody int vodLikeWrite(HttpSession session, @RequestBody LikeDTO likeDTO) {
 		log.info("	-----CT----->likeVod_in");
@@ -412,6 +434,7 @@ public class MyRoomController {
 		return result;
 	}
 	
+	// Vod 관심 제거
 	@RequestMapping("/likeVod_out")
 	public @ResponseBody int vodLikeDelete(HttpSession session, @RequestBody LikeDTO likeDTO) {
 		log.info("	-----CT----->likeVod_out");
@@ -431,6 +454,7 @@ public class MyRoomController {
 	
 //================= 멤버 리뷰 관련 코드 시작 =================//
 	
+	// 리뷰 페이지
 	@RequestMapping("/review")
 	public String memberReview(ZoomDTO zoomDTO, HttpSession session, Model model, String pageNum) {
 		log.info("	-----CT----->review");
@@ -450,6 +474,7 @@ public class MyRoomController {
 		return "/myroom/review/review";
 	}
 	
+	// 리뷰 수정 페이지
 	@RequestMapping("/reviewUpdate")
 	public String reviewUpdate(HttpSession session, Model model, ReviewDTO reviewDTO) {
 		log.info("	-----CT----->coachInfoUpdate");
@@ -462,6 +487,7 @@ public class MyRoomController {
 		return "/myroom/review/reviewUpdate";
 	}
 	
+	// 리뷰 업데이트 동작
 	@RequestMapping("/reviewUpdateData")
 	public @ResponseBody int reviewUpdatePro(HttpSession session, @RequestBody ReviewDTO reviewDTO) {
 		log.info("	-----CT----->reviewUpdateData");
@@ -476,6 +502,7 @@ public class MyRoomController {
 		return result;
 	}
 	
+	// 리뷰 삭제
 	@RequestMapping("/reviewDelete")
 	public @ResponseBody int reviewDelete(HttpSession session, @RequestBody ReviewDTO reviewDTO) {
 		log.info("	-----CT----->reviewDelete");

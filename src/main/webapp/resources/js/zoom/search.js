@@ -10,6 +10,3 @@ function valueCheck(){
 		return false;
 	}
 }
-
-function searchBtn(value){
-}

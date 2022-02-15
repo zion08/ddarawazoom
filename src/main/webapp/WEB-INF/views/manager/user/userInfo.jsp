@@ -62,8 +62,10 @@
 		                    </div>
 		                </div>
 		                <div style="text-align:center; margin:0 auto;">
-                        	<input type="button" class="btn btn-outline-black" onclick="userPw('${userInfo.id}');" value="비밀번호 수정"/>
-                        	<input type="button" class="btn btn-outline-black" onclick="userDelete('${userInfo.id}')" value="탈퇴등록하기"/>
+		                	<c:if test="${userInfo.status != '탈퇴'}">
+	                        	<input type="button" class="btn btn-outline-black" onclick="userPw('${userInfo.id}');" value="비밀번호 수정"/>
+	                        	<input type="button" class="btn btn-outline-black" onclick="userDelete('${userInfo.id}')" value="탈퇴등록하기"/>
+                        	</c:if>
                         	<input type="button" class="btn btn-outline-black" onclick="window.location='/manager/user'" value="멤버관리 페이지 이동"/>
                         </div>
 					</div>

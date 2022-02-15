@@ -100,15 +100,10 @@ function imgUpdatePro(){
 		success : function(data){
 			var result = parseInt(data);
 			
-			if(resutl == 0){
-				alert('사진이 등록되지 않았습니다.');
-				return false;
-			}else{
-				if(window.confirm('등록한 프로필 사진으로 변경하시겠습니까?') == true){
-					alert("프로필 사진 업로드가 완료되었습니다.\n수정화면으로 돌아갑니다.");
-					opener.parent.location.reload();
-					window.close();
-				}
+			if(window.confirm('등록한 프로필 사진으로 변경하시겠습니까?') == true){
+				alert("프로필 사진 업로드가 완료되었습니다.\n수정화면으로 돌아갑니다.");
+				opener.document.location.reload();
+				window.close();
 			}
 		}
 	});
@@ -130,25 +125,24 @@ function userDelete(){
 // 멤버 탈퇴 후, 상태 변경
 function userDeletePro(){
 		
-		$.ajax({
-			data : $("#pw").serializeArray(),
-			url : "/myroom/userDeletePro",
-			type : "POST",
-			dataType : "json",
-			success : function(data){
-				var result = parseInt(data);
-				
-				if(result == 0){
-					alert("패스워드가 일치하지 않습니다.\n다시 입력 부탁드립니다.");
-					return false;
-				}else{
-					if(window.confirm('패스워드가 일치합니다!!\n멤버 탈퇴를 정말로 하시겠습니까?')){
-						$('#userDelete').submit();
-						opener.parent.location.reload();
-						window.close();
-					}
+	$.ajax({
+		data : $("#pw").serializeArray(),
+		url : "/myroom/userDeletePro",
+		type : "POST",
+		dataType : "json",
+		success : function(data){
+			var result = parseInt(data);
+			
+			if(result == 0){
+				alert("패스워드가 일치하지 않습니다.\n다시 입력 부탁드립니다.");
+				return false;
+			}else{
+				if(window.confirm('패스워드가 일치합니다!!\n멤버 탈퇴를 정말로 하시겠습니까?')){
+					opener.document.location.reload();
+					window.close();
 				}
 			}
-		});
-	}
+		}
+	});
+}
 

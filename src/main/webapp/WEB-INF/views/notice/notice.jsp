@@ -58,22 +58,22 @@
 		                                    	</c:if>
 		                                    </td>
 		                                    <td>
-		                                    	<c:if test="${sessionScope.id eq 'admin'}">
+		                                    	<c:if test="${sessionScope.admin != null}">
 		                                    		<a href="/ddarawazoom/noticeViewCount?num=${noticeList.num}&pageNum=${pageNum}">
 		                                    			${noticeList.title}
 		                                    		</a>
 		                                    	</c:if>
-		                  						<c:if test="${sessionScope.id ne 'admin' && noticeList.target_id eq 'All'}">
+		                  						<c:if test="${noticeList.target_id eq 'All' && sessionScope.admin == null}">
 		                                    		<a href="/ddarawazoom/noticeViewCount?num=${noticeList.num}&pageNum=${pageNum}">
 		                                    			${noticeList.title}
 		                                    		</a>
 	                                    		</c:if>
-	                                    		<c:if test="${not empty sessionScope.c_id && noticeList.target_id eq 'Coach' && sessionScope.id ne 'admin'}">
+	                                    		<c:if test="${not empty sessionScope.c_id && noticeList.target_id eq 'Coach'}">
 		                                    		<a href="/ddarawazoom/noticeViewCount?num=${noticeList.num}&pageNum=${pageNum}">
 		                                    			${noticeList.title}
 		                                    		</a>
 	                                    		</c:if>
-	                                    		<c:if test="${not empty sessionScope.id && noticeList.target_id eq 'Member' && sessionScope.id ne 'admin'}">
+	                                    		<c:if test="${not empty sessionScope.id && noticeList.target_id eq 'Member'}">
 		                                    		<a href="/ddarawazoom/noticeViewCount?num=${noticeList.num}&pageNum=${pageNum}">
 		                                    			${noticeList.title}
 		                                    		</a>
@@ -135,13 +135,13 @@
 		<c:if test="${pageCount > 0}">
 			페이지&nbsp;
 			<c:if test="${startPage > 10}">
-				<a href="/manager/notice?pageNum=${startPage - 10}"> [이전] </a>
+				<a href="/ddarawazoom/notice?pageNum=${startPage - 10}"> [이전] </a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/manager/notice?pageNum=${i}">${i}</a>
+				<a href="/ddarawazoom/notice?pageNum=${i}">${i}</a>
 			</c:forEach>
 			<c:if test="${endPage < pageCount}">
-				<a href="/manager/notice?pageNum=${startPage + 10}"> [다음] </a>
+				<a href="/ddarawazoom/notice?pageNum=${startPage + 10}"> [다음] </a>
 			</c:if>
 		</c:if>	
 	 </div>

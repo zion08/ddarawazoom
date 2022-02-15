@@ -56,15 +56,17 @@
 		
 			<br/>
 			<div id="page">
-				<span>페이지</span>  
-				<c:if test="${startPage > pageBlock}">
-					<a href="/ddarawazoom/vod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
-				</c:if>
-				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<a href="/ddarawazoom/vod?pageNum=${i}">${i}</a>
-				</c:forEach>
-				<c:if test="${endPage < totalPage}">
-					<a href="/ddarawazoom/vod?pageNum=${startPage}+${pageBlock}"> [다음] </a>
+				<c:if test="${totalPage > 1}"> 
+					<span>페이지</span> 
+					<c:if test="${startPage > pageBlock}">
+						<a href="/ddarawazoom/vod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
+					</c:if>
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+						<a href="/ddarawazoom/vod?pageNum=${i}">${i}</a>
+					</c:forEach>
+					<c:if test="${endPage < totalPage}">
+						<a href="/ddarawazoom/vod?pageNum=${startPage}+${pageBlock}"> [다음] </a>
+					</c:if>
 				</c:if>
 			</div>
 			<br/>

@@ -40,7 +40,7 @@
 	            <div class="d-flex justify-content-between align-items-center">
 	              <div class="btn-group">
 	                <button type="button" class="btn btn-sm btn-outline-secondary"
-	                	onclick="window.location='/coachroom/content?num=${list.num}'">리뷰 보기</button>
+	                	onclick="window.location='/coachroom/reviewContent?num=${list.num}'">리뷰 보기</button>
 	                <button type="button" class="btn btn-sm btn-outline-secondary"
 	                	onclick="window.location='/coachroom/member?num=${list.num}'">등록한 회원 보기</button>	
 	              </div>
@@ -57,6 +57,20 @@
       
     </div>
   </div>
+  
+  <c:if test="${pageCount > 1}">
+  	<c:if test="${startPage > 10}">
+		<a href="/coachroom/class?pageNum=${startPage - 10}">[이전]</a>	
+	</c:if>
+	
+	<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+		<a href="/coachroom/class?pageNum=${i}">[${i}]</a>
+	</c:forEach>
+	
+	<c:if test="${endPage < pageCount}">
+		<a href="/coachroom/class?pageNum=${startPage + 10}">[다음]</a>
+	</c:if>
+  </c:if>
     
 </div>
 
