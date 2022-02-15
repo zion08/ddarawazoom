@@ -69,7 +69,7 @@ public class MyRoomController {
 
 		model.addAttribute("userInfo", service.getUserInfo(id));
 		
-		return "/myroom/userInfo/userInfo";
+		return "/myroom/userinfo/userInfo";
 	}
 	
 	// 회원정보 수정

@@ -22,10 +22,10 @@
 	<link href="../../resources/css/myroom/dday.css" rel="stylesheet" />
 	
 	<style>
-		  #calendar {
-		    max-width: 900px;
-		    margin: 0 auto;
-		  }
+	  #calendar {
+	    max-width: 900px;
+	    margin: 0 auto;
+	  }
 	</style>
 </head>
 <body>
@@ -175,9 +175,6 @@
 												<td>
 													<c:if test="${myPayment.status == 'paid'}">		              				 	 
 							               				<button class="btn btn-sm btn-success" disabled>결제완료</button></br>
-								              			<button class="refundReqBtn btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#refundModal">
-							              					취소 요청
-							              				</button> 
 						              				</c:if>
 						              				<c:if test="${myPayment.status == 'creq'}">		              				 	 
 							               				<button class="refundReqInfo btn btn-sm btn-secondary" >취소요청중</button>
@@ -304,7 +301,6 @@
 		       </div>
 		  </div>
 	</c:if>	
-	
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src='/resources/js/class/main.js'></script>

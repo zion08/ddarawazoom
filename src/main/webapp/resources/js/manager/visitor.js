@@ -55,7 +55,6 @@ $(document).ready(function(){
             		}
 					
 					element.innerHTML += "<tr onclick='window.location="+url+"'> <td>"+ number + "</td> <td>"+ id + "</td> <td>"+ userType + "</td> <td>" + data[key].v_date + "</td> </tr>";
-					number++;
 					
 					console.log(element)
 				}
