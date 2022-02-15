@@ -13,6 +13,8 @@ public interface YoutubeService {
 	// 동영상 전체 리스트
 	public List<YoutubeDTO> getVideoList(int firstRownum, int lastRownum);
 	public List<YoutubeDTO> getManageVideoList(int firstRownum, int lastRownum);
+	public List<YoutubeDTO> getSearchVideoList (String input, int firstRownum, int lastRownum);
+	public List<YoutubeDTO> getManageSearchVideoList(String input, int firstRownum, int lastRownum);
 	
 	// 동영상 삭제
 	public int deleteVod (int vnum);
@@ -24,5 +26,6 @@ public interface YoutubeService {
 	public int vodCount ();
 	public int vodOnCount ();
 	public int vodOffCount ();
-	
+	public int vodSearchCount (String input);
+	public int vodOnSearchCount (String input);
 }

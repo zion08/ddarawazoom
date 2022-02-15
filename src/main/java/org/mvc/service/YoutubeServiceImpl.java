@@ -31,6 +31,16 @@ public class YoutubeServiceImpl implements YoutubeService {
 	public List<YoutubeDTO> getManageVideoList(int firstRownum, int lastRownum) {
 		return mapper.getManageVideoList(firstRownum, lastRownum);
 	}
+	
+	@Override
+	public List<YoutubeDTO> getSearchVideoList(String input, int firstRownum, int lastRownum) {
+		return mapper.getSearchVideoList(input, firstRownum, lastRownum);
+	}
+	
+	@Override
+	public List<YoutubeDTO> getManageSearchVideoList(String input, int firstRownum, int lastRownum) {
+		return mapper.getSearchVideoList(input, firstRownum, lastRownum);
+	}
 
 	//===== 동영상 삭제 =====//
 	@Override
@@ -58,6 +68,18 @@ public class YoutubeServiceImpl implements YoutubeService {
 	public int vodOffCount() {
 		return mapper.vodOffCount();
 	}
+
+	@Override
+	public int vodSearchCount(String input) {
+		return mapper.vodSearchCount(input);
+	}
+
+	@Override
+	public int vodOnSearchCount(String input) {
+		return mapper.vodOnSearchCount(input);
+	}
+
+	
 
 	
 }

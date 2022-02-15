@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mvc.bean.CoachCareerDTO;
 import org.mvc.bean.CoachInfoDTO;
+import org.mvc.bean.QnADTO;
 import org.mvc.bean.UserInfoDTO;
 import org.mvc.bean.ZoomDTO;
 import org.mvc.mybatis.ManagerMapper;
@@ -141,12 +142,23 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 
 	@Override
+	public List<ZoomDTO> zoomSearchList(int startRow, int endRow, String sort, String search) {
+		return mapper.zoomSearchList(startRow, endRow, sort, search);
+	}
+	
+	@Override
 	public int zoomSearchCount(String sort, String search) {
 		return mapper.zoomSearchCount(sort, search); 
 	}
 
 	@Override
-	public List<ZoomDTO> zoomSearchList(int startRow, int endRow, String sort, String search) {
-		return mapper.zoomSearchList(startRow, endRow, sort, search);
+	public int deleteQnA(int q_num) {
+		return mapper.deleteQnA(q_num);
 	}
+
+	@Override
+	public int pinUpdate(QnADTO dto) {
+		return mapper.pinUpdate(dto);
+	}
+  
 }
