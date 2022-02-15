@@ -126,7 +126,10 @@
 	<!-- 해당 코치가 등록한 수업 정보 -->
 	<select id="getAllClass" resultType="org.mvc.bean.ZoomDTO">
 		<![CDATA[
-			select * from tbl_coachClass where c_id = #{c_id} order by num desc
+			select * from (
+				select num, c_id, title, intro, type, goal, tool, frequency, price, img, count, merchant_uid, status, c_nick, rownum r from (
+					select * from tbl_coachClass where c_id = #{c_id} order by num desc))
+			where r >= #{startRow} and r <= #{endRow}	
 		]]>
 	</select>
 	
@@ -142,7 +145,12 @@
 	
 	<!-- 해당 수업에 작성된 리뷰 목록 -->
 	<select id="getReview" resultType="org.mvc.bean.ReviewDTO">
-		select * from tbl_review where class_num = #{class_num} order by review_num desc
+		<![CDATA[
+			select * from (
+				select review_num, class_num, id, nick, title, content, grade, deleted, rownum r from (
+					select * from tbl_review where class_num = #{class_num} order by review_num desc))
+			where r >= #{startRow} and r <= #{endRow}	
+		]]>		
 	</select>
 	
 	<!-- 해당 수업의 모든 리뷰의 갯수 -->

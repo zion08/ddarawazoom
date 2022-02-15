@@ -1,12 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../layout/header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/resources/user/custom/js/coachSignUp.js?ver=123" type="text/javascript"></script>
 
 <link href="/resources/coach/custom/css/form-validation.css" rel="stylesheet">
 <link href="/resources/user/custom/css/user.css" rel="stylesheet">
+
+<c:if test="${result == 0}">
+	<script>
+		alert('잘못된 입력이 있습니다. 다시 작성해주세요.')
+		history.go(-1);
+	</script>
+</c:if>
+
+<c:if test="${result == 1}">
 
 <div class="container-fluid">
     
@@ -57,6 +67,8 @@
 	</div>
     
 </div>
+
+</c:if>
 
 <script src="/resources/coach/custom/js/form-validation.js"></script>
 
