@@ -31,6 +31,21 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+
+	<!-- error Page -->
+	<error-page>
+		<location>/ddarawazoom/defaultError</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/ddarawazoom/error404</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/ddarawazoom/error500</location>
+	</error-page>
+
+
 	<!-- post Encoding -->
 	<filter>
       <filter-name>encoding</filter-name>
