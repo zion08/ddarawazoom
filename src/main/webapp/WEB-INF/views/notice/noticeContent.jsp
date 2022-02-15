@@ -109,15 +109,15 @@
 					      	</c:if>
 					      	${notice_CList.writer_id}
 					      </td>
-					      <td>
+					      <td class="comment_content">
 					        <c:if test="${notice_CList.deleted eq  'all'}">
-								<font style="color: red; font-size:14px;">
+								<font style="color: red;">
 									<b>[<i class="fas fa-dizzy"></i> 경고!]</b> ${notice_CList.writer_id}님께서 작성하신 댓글은<b><br/>
 									"댓글 관리 기준"</b>을 위반하여 관리자에 의해 삭제되었습니다.
 								</font>
 							</c:if>
 							<c:if test="${notice_CList.deleted eq  'yes'}">
-								<font style="color: blue;">${notice_CList.writer_id}님께서 직접 삭제한 댓글 입니다.</font>
+								<font style="color: blue; ">${notice_CList.writer_id}님께서 직접 삭제한 댓글 입니다.</font>
 							</c:if>
 							<c:if test="${notice_CList.deleted ne  'yes' && notice_CList.deleted ne  'all' }">
 								${notice_CList.content}
