@@ -124,26 +124,6 @@ public class MyRoomServiceImpl implements MyRoomService {
 		return mapper.zoomLikeCount(id);
 	}
 	
-	@Override
-	public ArrayList<VodDTO> likeVodList(String id){
-		return mapper.likeVodList(id);
-	}
-	
-	@Override
-	public int vodLikeCheck(String id, int num) {
-		return mapper.vodLikeCheck(id, num);
-	}
-
-	@Override
-	public int vodLikeWrite(String id, int num) {
-		return mapper.vodLikeWrite(id, num);
-	}
-
-	@Override
-	public int vodLikeDelete(String id, int num) {
-		return mapper.vodLikeDelete(id, num);
-	}
-	
 // 리뷰 관련
 	@Override
 	public List<ReviewDTO> getReview(Long num, String id) {

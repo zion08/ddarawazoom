@@ -20,7 +20,7 @@
 		            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
 		                <li class="nav-item">
 		                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">
-		                    	${sessionScope.id} 님의 마이 프로필 수정 페이지
+		                    	${userInfo.nick} 님의 마이 프로필 수정 페이지
 		                    </a>
 		                </li>
 		            </ul>
@@ -34,9 +34,9 @@
 		                    <div class="col">
 		                        <div class="row align-items-center">
 		                            <div class="col-md-7">
-		                                <h4 class="mb-1">${sessionScope.id} 님</h4>
+		                                <h4 class="mb-1">${userInfo.nick} 님</h4>
 		                                <p class="text-muted">
-			                                 ${sessionScope.id} 님의 소중한 정보를 수정 할 수 있는<br/>마이 프로필 페이지 입니다.
+			                                 ${userInfo.nick} 님의 소중한 정보를 수정 할 수 있는<br/>마이 프로필 페이지 입니다.
 			                             </p>
 		                            </div>
 		                        </div>
@@ -45,8 +45,8 @@
 		                <hr class="my-4" />
 		                <div class="form-row">
 	                   		<div class="form-group">
-		                        <label for="nick">* 닉 네 임 : </label>
-		                        <input type="text" class="form-control" id="nick" name="nick" value="${userInfo.nick}" /><br/>
+		                        <label for="nick">* 닉 네 임 : </label><br/>
+		                        	${userInfo.nick}<br/>
 		                    </div>
 		                </div>
 		                <div class="form-group">
@@ -70,7 +70,7 @@
 		                    <div class="form-group">
 		                        <label for="inputState5">* 성 별 :</label> ${userInfo.gender}
 		                        <select id="inputState5" class="form-control" id="gender" name="gender">
-									<option value="">성별 선택</option>
+									<option value="">${userInfo.gender}</option>
 									<option value="남성">남성</option>
 									<option value="여성">여성</option>
 								</select><br/>

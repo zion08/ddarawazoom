@@ -14,6 +14,92 @@
 	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet" />
 </head>
 <body>
+	<!-- 최근 바디 프로필 출력 -->
+	<table class="table" style="height: 130px ; vertical-align: middle;">
+		<thead>
+			<tr class="table-light">
+				<th scope="col">
+					바디 사진
+				</th>
+				<th scope="col">
+					측정 날짜
+				</th>
+				<th scope="col">
+					키
+				</th>
+				<th scope="col">
+					몸무게
+				</th>
+				<th scope="col">
+					근육량
+				</th>
+				<th scope="col">
+					체지방량
+				</th>
+				<th scope="col">
+					체 형
+				</th>
+				<th scope="col">
+					가슴 둘레
+				</th>
+				<th scope="col">
+					허리 둘레
+				</th>
+				<th scope="col">
+					팔뚝 둘레
+				</th>
+				<th scope="col">
+					허벅지 둘레
+				</th>
+				<th scope="col">
+					엉덩이 둘레
+				</th>
+			</tr>
+		</thead>
+		<tbody id="number${number}">
+			<c:forEach var="bodyProfileDTO" items="${bodyProfileDTO}" >	
+				<tr>
+					<td>
+						<img src="../../resources/image/upload/${bodyProfileDTO.b_img}" name="b_img" width="150px" height="150px"/>
+					</td>
+					<td>
+						<fmt:formatDate value="${bodyProfileDTO.b_date}" type="date" dateStyle="medium"/>
+					</td>
+					<td>
+						${bodyProfileDTO.b_height} cm
+					</td>
+					<td>
+						${bodyProfileDTO.b_weight} kg
+					</td>
+					<td>
+						${bodyProfileDTO.b_muscle} kg
+					</td>
+					<td>
+						${bodyProfileDTO.b_bodyfat} kg
+					</td>
+					<td>
+						${bodyProfileDTO.b_shape}
+					</td>
+					<td>
+						${bodyProfileDTO.b_chest} cm
+					</td>
+					<td>
+						${bodyProfileDTO.b_waist} cm
+					</td>
+					<td>
+						${bodyProfileDTO.b_arm} cm
+					</td>
+					<td>
+						${bodyProfileDTO.b_thigh} cm
+					</td>
+					<td>
+						${bodyProfileDTO.b_hip} cm
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+
 	<div class="container">
 	  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 	    <div class="row g-5">

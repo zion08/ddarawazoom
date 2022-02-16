@@ -3,7 +3,6 @@
 <%@ include file="../../layout/header.jsp"%>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
 <html>
 <head>
 	<title>멤버 정보 수정 페이지</title>
@@ -36,12 +35,13 @@
 	                        <div class="row gx-3 mb-3">
 	                            <div class="col-md-6">
 	                                <label class="small mb-1" for="id">* 아 이 디</label><br/>
-	                                <input type="hidden" name="id" value="${sessionScope.id}"/>
 	                                	${userInfo.id} 님
 	                            </div>
+															
 	                            <div class="col-md-3">
 	                                <label class="small mb-1" for="nick">* 닉 네 임</label>
 	                                <input class="form-control" id="nick" type="text" name="nick" placeholder="닉네임을 기입해 주세요." value="${userInfo.nick}"/>
+
 	                            </div>
 	                           <div class="col-md-3" style="float: right;">
 								    <input type="button" style="margin-top: 25px;"

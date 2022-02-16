@@ -145,11 +145,8 @@ function myroom_update(){
 	var mW = document.myroom_form;
 	var fileCheck = document.getElementById("save").value;
 	
-	if(mW.nick.value==''){
-		alert('닉네임이 없습니다.\n닉네임을 기입해 주세요.');
-		mW.nick.focus();
-		return false;
-	}else if(mW.name.value==''){
+	
+	if(mW.name.value==''){
 		alert('이름이 없습니다.\n멤버님의 이름을 기입해 주세요.');
 		mW.name.focus();
 		return false;

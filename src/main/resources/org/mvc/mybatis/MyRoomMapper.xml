@@ -33,7 +33,6 @@
 	<update id="myUpdate" parameterType="org.mvc.bean.UserInfoDTO">
 		<![CDATA[
 			update tbl_user set
-					nick = #{nick},
 					name = #{name},
 					gender = #{gender},
 					birth = #{birth},
@@ -196,42 +195,6 @@
 		select count(zoom_num) from tbl_like where id = #{id}
 	</select>
 	
-	<!-- Vod 관심등록 데이터 가져오기 -->
-	<select id="likeVodList" resultType="org.mvc.bean.VodDTO">
-		<![CDATA[
-			select * from (
-	    		select
-	    			tbl_like.vod_num,
-	    			tbl_like.id,
-	    			tbl_vod.num,
-	    			tbl_vod.url,
-	    			tbl_vod.category,
-	    			tbl_vod.title,
-	    			tbl_vod.time,
-	    			tbl_vod.difficulty,
-	    			tbl_vod.info,
-	    			tbl_vod.count
-	    		from tbl_vod, tbl_like
-			where tbl_vod.num = tbl_like.vod_num) where id = #{id}
-		]]>
-	</select>
-	
-	<!-- Vod 관심 체크 여부 확인 -->
-	<select id="vodLikeCheck" resultType="Integer">
-		select count(*) from tbl_like where id = #{id} and vod_num = #{vod_num} 
-	</select>
-	
-	<!-- Vod 관심 등록 -->
-	<insert id="vodLikeWrite" parameterType="org.mvc.bean.LikeDTO">
-		insert into tbl_like(id,vodm_num)
-			values(#{id},#{vodm_num})
-	</insert> 
-	
-	<!-- Vod 관심 등록 해제 -->
-	<delete id="vodLikeDelete">
-		delete from tbl_like where id = #{id} and vod_num = #{vod_num}
-	</delete>
-
 	<!-- 작성한 리뷰 가져오기 -->
 	<select id="getReview" resultType="org.mvc.bean.ReviewDTO">
 		<![CDATA[
