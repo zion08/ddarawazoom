@@ -108,6 +108,14 @@ public class ManagerController {
 		return videoIdList;
 	}
 	
+	@RequestMapping("/insertVod")
+	public @ResponseBody int insertVod(String videoId) throws IOException, ParseException {
+		int result=0;	
+		YoutubeDTO dto = crawling.getVideioInfo(videoId.trim());		
+		result = serviceYoutube.insertVideo(dto);		
+		return result;
+	}
+	
 	@RequestMapping("/autoInsertVod")
 	public @ResponseBody int autoInsertVod(String qurey, String maxResults) throws IOException, ParseException {
 		int result=0;	
@@ -116,14 +124,6 @@ public class ManagerController {
 			String videoId = videoIdList.get(i);
 			result = insertVod(videoId);
 		}
-		return result;
-	}
-	
-	@RequestMapping("/insertVod")
-	public @ResponseBody int insertVod(String videoId) throws IOException, ParseException {
-		int result=0;	
-		YoutubeDTO dto = crawling.getVideioInfo(videoId.trim());		
-		result = serviceYoutube.insertVideo(dto);		
 		return result;
 	}
 	
@@ -194,30 +194,51 @@ public class ManagerController {
 	public String payment (Model model) {
 		log.info("	-----CT-----> manager sales");
 		
+		// 거래 건수
+		int orderCount = servicePayment.getOerderCount();
+		model.addAttribute("orderCount", orderCount);
+		model.addAttribute("orderPaidCount", servicePayment.getOerderCountByStatus("paid"));
+		model.addAttribute("orderCreqCount", servicePayment.getOerderCountByStatus("creq"));
+		model.addAttribute("orderCanclledCount", servicePayment.getOerderCountByStatus("cancelled"));
+		
 		// 결제 내역 출력
 		List<PaymentDTO> paymentList = servicePayment.getPaymentList();
 		model.addAttribute("payment", paymentList);
 		
 		// 총 거래액, 환불액, 매출액
 		DecimalFormat fmt = new DecimalFormat("###,###");
-		int amount = servicePayment.getAmountTotal();
-		String amountFmt = fmt.format(amount);
-		model.addAttribute("amount", amountFmt);
+		int amount = 0;
+		int cancelAmount = 0;
 		
-		int cancelAmount = servicePayment.getCancelAmountTotal();
-		String cancelAmoutFmt = fmt.format(cancelAmount);
-		model.addAttribute("cancelAmount", cancelAmoutFmt);
-		
+		if (orderCount > 0) {
+			amount = servicePayment.getAmountTotal();
+			cancelAmount = servicePayment.getCancelAmountTotal();
+			String amountFmt = fmt.format(amount);
+			String cancelAmoutFmt = fmt.format(cancelAmount);			
+			model.addAttribute("amount", amountFmt);
+			model.addAttribute("cancelAmount", cancelAmoutFmt);
+		} else {
+			model.addAttribute("amount", amount);
+			model.addAttribute("cancelAmount", cancelAmount);
+		}
+
 		int sales = amount - cancelAmount;
 		String salseFmt = fmt.format(sales);
 		model.addAttribute("sales", salseFmt);
 		
 		return "/manager/sales/sales";
 	}
-	
+
 	@RequestMapping("/salesSearch")
 	public String salesSearch (Model model, String category, String input) {
-		log.info("	-----CT-----> manager sales");
+		log.info("	-----CT-----> manager Search sales");
+		
+		// 거래 건수
+		int orderCount = servicePayment.getSearchOerderCount(category, input);
+		model.addAttribute("orderCount", orderCount);
+		model.addAttribute("orderPaidCount", servicePayment.getSearchOerderCountByStatus("paid", category, input));
+		model.addAttribute("orderCreqCount", servicePayment.getSearchOerderCountByStatus("creq", category, input));
+		model.addAttribute("orderCanclledCount", servicePayment.getSearchOerderCountByStatus("cancelled", category, input));
 		
 		// 결제 내역 출력
 		List<PaymentDTO> paymentList = servicePayment.getSearchPaymentList(category, input);
@@ -225,13 +246,20 @@ public class ManagerController {
 		
 		// 총 거래액, 환불액, 매출액
 		DecimalFormat fmt = new DecimalFormat("###,###");
-		int amount = servicePayment.getSearchAmountTotal(category, input);
-		String amountFmt = fmt.format(amount);
-		model.addAttribute("amount", amountFmt);
+		int amount = 0;
+		int cancelAmount = 0;
 		
-		int cancelAmount = servicePayment.getSearchCancelAmountTotal(category, input);
-		String cancelAmoutFmt = fmt.format(cancelAmount);
-		model.addAttribute("cancelAmount", cancelAmoutFmt);
+		if (orderCount > 0) {
+			amount = servicePayment.getSearchAmountTotal(category, input);
+			cancelAmount = servicePayment.getSearchCancelAmountTotal(category, input);
+			String amountFmt = fmt.format(amount);
+			String cancelAmoutFmt = fmt.format(cancelAmount);			
+			model.addAttribute("amount", amountFmt);
+			model.addAttribute("cancelAmount", cancelAmoutFmt);
+		} else {
+			model.addAttribute("amount", amount);
+			model.addAttribute("cancelAmount", cancelAmount);
+		}
 		
 		int sales = amount - cancelAmount;
 		String salseFmt = fmt.format(sales);

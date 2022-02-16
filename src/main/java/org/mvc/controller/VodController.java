@@ -37,7 +37,7 @@ public class VodController {
 		int totalPage;	
 		int startPage;	
 		int endPage;	
-		
+
 		totalPage = contentCount/pageSize + (contentCount%pageSize == 0 ? 0 : 1);
 		startPage = (currentPage/pageBlock)*pageBlock + 1;
 		endPage = startPage + pageBlock - 1;

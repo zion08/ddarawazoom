@@ -120,14 +120,13 @@ function valueCheck(){
 </script>      
 
 <div class="container marketing">	
-
 	<h2 style="text-align: center;"> Vod 관리	
 		<button class="btn btn-lg btn-outline-dark">
 			Total: ${contentCount}개
 		</button>
 	</h2>
-	
 	<hr class="featurette-divider">
+	
 	<div class="container">
   		<div class="row">
 			<div class="form-floating col">
@@ -156,25 +155,25 @@ function valueCheck(){
 	
 	<div class="container" id="code">
 	</div>
-	
-	<div class="text-end">
-		<button class="btn btn-lg btn-secondary">
-			OnAir: ${onCount}개
-		</button>
-		<button class="btn btn-lg btn-outline-primary">
-			Disabled: ${offCount}개
-		</button>
-	</div>
-	
-	<c:if test="${vodSearchCount == 0}">
+		
+	<c:if test="${contentCount == 0}">
 		<div class="container-fluid">
 			<div align="center">
-		   		<h5>검색 결과가 없습니다.</h5>  
+		   		<h5>등록된 영상이 없습니다.</h5>
 		    </div>
 		</div>   
 	</c:if>
 	
-	<c:if test="${vodSearchCount > 0}">
+	<c:if test="${contentCount > 1}">
+		<div class="text-end">
+			<button class="btn btn-lg btn-secondary">
+				OnAir: ${onCount}개
+			</button>
+			<button class="btn btn-lg btn-outline-primary">
+				Disabled: ${offCount}개
+			</button>
+		</div>
+		
 		<table id="vodList" class="table table-striped table-sm table-hover">
 			<thead>
 	            <tr>
@@ -239,7 +238,7 @@ function valueCheck(){
 	  	<form action="/manager/vodSearchList" method="post"  onsubmit="return valueCheck()">
    			<div style="width: 50%;">
 		   		<div class="input-group mb-3">
-					<input type="text" class="form-control" name="input" placeholder="검색어를 입력하세요" style="width: 60%;"/>
+					<input type="text" class="form-control" id="input" name="input" placeholder="검색어를 입력하세요" style="width: 60%;"/>
 					<button class="btn btn-outline-secondary" type="submit" style="width: 15%;">
 						검색
 					</button>
@@ -250,13 +249,13 @@ function valueCheck(){
 		<br/>
 		<div id="page">페이지  
 			<c:if test="${startPage > pageBlock}">
-				<a href="/manager/vodSearchList?pageNum=${startPage}-${pageBlock}&input=${input}"> [이전] </a>
+				<a href="/manager/vod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/manager/vodSearchList?pageNum=${i}&input=${input}">${i}</a>
+				<a href="/manager/vod?pageNum=${i}">${i}</a>
 			</c:forEach>
 			<c:if test="${endPage < totalPage}">
-				<a href="/manager/vodSearchList?pageNum=${startPage}+${pageBlock}&input=${input}"> [다음] </a>
+				<a href="/manager/vod?pageNum=${startPage}+${pageBlock}"> [다음] </a>
 			</c:if>
 		</div>
 	</c:if>
