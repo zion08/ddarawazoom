@@ -41,7 +41,7 @@
 				<h4 align="left">No.${zoomContent.num}</h4>
 				<h5 align="left">readcount 
 				<font color="red"> ${zoomContent.count} </font><img src="/resources/image/zoom/eye.png">
-					<c:if test="${zoomContent.count >= 50}">
+					<c:if test="${zoomContent.count >= 20}">
 						<span class="hit">hit!!</span>  
 					</c:if>
 				</h5>

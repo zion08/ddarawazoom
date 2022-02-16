@@ -176,4 +176,9 @@ public class MyRoomServiceImpl implements MyRoomService {
 	public List<PaymentDTO> getPayment(String id){
 		return mapper.getPayment(id);
 	}
+
+	@Override
+	public int getClassNum(String title) {
+		return mapper.getClassNum(title);
+	}
 }

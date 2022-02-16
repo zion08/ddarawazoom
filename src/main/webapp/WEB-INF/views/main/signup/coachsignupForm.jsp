@@ -93,11 +93,11 @@
 	              <label for="c_birth" class="form-label">* 성별</label>
 	              <div class="form-check form-check-inline">
 					 <input class="form-check-input" type="radio" name="c_gender" id="male" value="남성" required>
-					 <label class="form-check-label" for="c_gender">남성</label>
+					 <label class="form-check-label" for="male">남성</label>
 				  </div>
 				  <div class="form-check form-check-inline">
 					 <input class="form-check-input" type="radio" name="c_gender" id="female" value="여성" required>
-					 <label class="form-check-label" for="c_gender">여성</label>
+					 <label class="form-check-label" for="female">여성</label>
 				  </div>
 				  <div class="invalid-feedback">
 	                성별은 필수항목입니다.

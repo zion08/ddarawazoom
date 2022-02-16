@@ -32,7 +32,7 @@
 				<p class="card-text">No.${number} /
 					<c:set var="number" value="${number - 1}"/>
 					readcount <font color="red">${zoomList.count}</font> <img src="/resources/image/zoom/eye.png"> 
-					<c:if test="${zoomList.count >= 50}">
+					<c:if test="${zoomList.count >= 20}">
 					  <span class="hit">hit!!</span> 
 					</c:if>
 				</p>
@@ -94,7 +94,7 @@
 		</div>  
 	</c:if> <br />
 	
-	<c:if test="${currentPage > 1}">
+	<c:if test="${pageCount > 1}">
 		<div id="page">페이지&nbsp;  
 			<c:if test="${startPage > 10}">
 				<a href="/ddarawazoom/zoom?pageNum=${startPage - 10}"> [이전] </a>

@@ -40,7 +40,7 @@
 				      <td>${zoomList.c_nick}</td>
 				      <td>${zoomList.count}</td>
 				      <td>
-				      	<c:if test="${zoomList.count >= 50}">
+				      	<c:if test="${zoomList.count >= 20}">
 					      <span class="hit">hit!!</span>
 					    </c:if>
 				      </td>
