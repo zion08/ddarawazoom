@@ -16,14 +16,13 @@
 
 <section class="masthead">
 	<div class="table-responsive col-md-9 m-sm-auto col-lg-10 px-md-4" >
-		<form action="/manager/salesSearch" method="post" onsubmit="return valueCheck()">
+		<form action="/myroom/paymentSearch" method="post" onsubmit="return valueCheck()">
 		  <div style="width: 50%; text-align: center; margin: auto 0;">
 			  <div class="input-group mb-3">
 			    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
 			      <option selected value="">선택하세요</option>
 			      <option value="c_id">코치명</option>
-			      <option value="name">강의 제목</option>
-			      <option value="buyername">구매자</option>
+			      <option value="name">강의제목</option>
 			    </select>			  
 			    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
 			    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
@@ -43,7 +42,9 @@
 	            </tr>
          		<c:if test="${orderCount == 0}">
 					<tr>
-					 	결제한 강의가 없어요.
+						<td colspan='7' style="text-align: center;">
+					 		결제한 강의가 없어요.
+				 		</td>
 					</tr>
 				</c:if>
 			</thead>
@@ -74,7 +75,12 @@
 		              		<c:if test="${paymentDTO.status == 'cancelled'}">
 		              			<button class="refundDone btn btn-sm btn btn-danger" id="">취소완료</button></br>		              				              			
 		              			<div id="c-detail" style="display: none;"></div>
-		              		</c:if>								              			              		
+		              		</c:if>
+		              		<c:if test="${paymentDTO.status == 'cancelled' && paymentDTO.amount - paymentDTO.cancelAmount > 0}">		              			
+		              			<button class="refundReqBtn btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#refundModal">
+	              					취소 요청하기
+	              				</button>               			
+		              		</c:if>										              			              		
 		              	</td>
             		</tr>
 				</c:forEach>        
