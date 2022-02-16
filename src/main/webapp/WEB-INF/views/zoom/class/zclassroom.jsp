@@ -5,6 +5,7 @@
 <head>
     <title>Zoom WebSDK</title>
     <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.2.0/css/bootstrap.css" />
     <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.2.0/css/react-select.css" />
     <meta name="format-detection" content="telephone=no">
@@ -63,7 +64,7 @@
             <div id="navbar" class="websdktest">
                 <form class="navbar-form navbar-right" id="meeting_form">
                     <div class="form-group">
-                        <input type="hidden" name="display_name" id="display_name" value="2.2.0#CDN" maxLength="100"
+                        <input type="text" name="display_name" value="${userInfo.nick}" id="display_name" maxLength="100"
                             placeholder="display name" class="form-control" required>  
                     </div>
                     <div class="form-group">
@@ -131,7 +132,7 @@
     <script src="https://source.zoom.us/zoom-meeting-2.2.0.min.js"></script>
     <script src="/resources/js/zoom/tool.js"></script>
     <script src="/resources/js/zoom/vconsole.min.js"></script>
-    <script src="/resources/js/zoom/index.js"></script> 
+    <script src="/resources/js/zoom/index.js?ver=12"></script> 
 </body>
 
 </html>

@@ -11,7 +11,7 @@
 	
 	<script src='../../resources/js/class/main.js'></script>
 	<script src="../../resources/js/class/class.js" type="text/javascript"></script>
-	<script src="../../resources/js/class/class_zoom.js" type="text/javascript"></script>
+	<script src="../../resources/js/class/class_zoom.js?ver=12" type="text/javascript"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		
 <style>

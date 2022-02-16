@@ -180,6 +180,15 @@ public class MyRoomController {
 		
 		return service.getAllClass(id);
 	}
+	
+	@RequestMapping("/getClassNum")
+	public @ResponseBody int getClassNum(String title) {
+		int result = 0;
+		System.out.println(title);
+		result = service.getClassNum(title);
+		System.out.println(result);
+		return result;
+	}
 //================= 멤버 일정 코드 끝 =================//
 		
 		
