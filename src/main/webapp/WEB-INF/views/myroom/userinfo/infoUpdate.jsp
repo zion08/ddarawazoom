@@ -8,9 +8,11 @@
 <head>
 	<title>멤버 정보 수정 페이지</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="../../resources/js/myroom/user.js" type="text/javascript"></script>
+	<script src="../../resources/js/myroom/user.js?ver=12" type="text/javascript"></script>
 	
 	<link href="../../resources/css/myroom/myRoom.css" rel="stylesheet">
+	<link href="/resources/coach/custom/css/form-validation.css" rel="stylesheet">
+	<link href="/resources/user/custom/css/user.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container-xl px-4 mt-4">
@@ -37,10 +39,19 @@
 	                                <input type="hidden" name="id" value="${sessionScope.id}"/>
 	                                	${userInfo.id} 님
 	                            </div>
-	                            <div class="col-md-6">
+	                            <div class="col-md-3">
 	                                <label class="small mb-1" for="nick">* 닉 네 임</label>
 	                                <input class="form-control" id="nick" type="text" name="nick" placeholder="닉네임을 기입해 주세요." value="${userInfo.nick}"/>
 	                            </div>
+	                           <div class="col-md-3" style="float: right;">
+								    <input type="button" style="margin-top: 25px;"
+								    	class="btn btn-primary mb-3 form-control" id="nickCheck" onclick="nicknameCheck('${userInfo.nick}');" value="중복확인"/>
+							   </div>
+							   <div class="col-md-6" style="float: right;">	
+							   </div>
+							   <div class="col-md-6" style="float: right;">
+								    <label id="nickResult" class="font" style="margin-top: 0px;"></label>	
+							   </div>
 	                        </div>
 	                        <div class="row gx-3 mb-3">
 	                            <div class="col-md-6">
