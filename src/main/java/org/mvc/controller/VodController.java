@@ -27,7 +27,7 @@ public class VodController {
 		    pageNum = "1";
 		}
 		
-		int pageSize = 9;	
+		int pageSize = 10;	
 		int currentPage = Integer.parseInt(pageNum); 
 		int firstRownum = (currentPage-1)*pageSize + 1;	
 		int lastRownum = currentPage*pageSize;		
