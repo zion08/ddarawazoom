@@ -98,13 +98,18 @@
 	<select id="getCancelList" resultType="org.mvc.bean.PaymentDTO">
 		select * from tbl_cancel where impuid = #{imp_Uid}
 	</select>
-
+	
+	<select id="getCancelReqInfo" resultType="org.mvc.bean.PaymentDTO">
+		select * from tbl_cancel where impuid = #{imp_Uid} and status = 'creq'
+	</select>
+	
 	
 <!-- 결제 취소 관련 -->	
 	<update id="paymentCancelUpdateTP">
 		update tbl_payment set
 			status = #{status},
-			cancelAmount = #{cancelAmount}
+			cancelAmount = #{cancelAmount},
+			cancelReason = #{cancelReason}
 		where impUid = #{impUid}
 	</update>
 	
@@ -112,7 +117,8 @@
 		update tbl_cancel set
 			cancelledAt = #{cancelledAt,jdbcType=VARCHAR},
 			status = #{status},
-			cancelAmount = #{cancelAmount}
+			cancelAmount = #{cancelAmount},
+			cancelReason = #{cancelReason}
 		where impUid = #{impUid}
 	</update>
 	
@@ -148,6 +154,14 @@
 		select sum(CANCELAMOUNT) from tbl_payment where c_id=#{c_id}
 	</select>
 	
+	<select id="getSearchAmountCoachTotal" resultType="int">
+		select sum(AMOUNT) from tbl_payment where c_id=#{c_id} and ${category} like '%'||#{input}||'%'
+	</select>
+	
+	<select id="getSearchCancelAmountCoachTotal" resultType="int">
+		select sum(CANCELAMOUNT) from tbl_payment where c_id=#{c_id} and ${category} like '%'||#{input}||'%'
+	</select>
+
 	<select id="getAmountMy" resultType="int">
 		select sum(AMOUNT) from tbl_payment where BUYERNAME=#{id}
 	</select>

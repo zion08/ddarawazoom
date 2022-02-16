@@ -51,7 +51,7 @@ public class MyRoomController {
 		String id = (String)session.getAttribute("id");
 
 		// 거래 건수
-		int orderCount = servicePayment.getMyOerderCount("id");
+		int orderCount = servicePayment.getMyOerderCount(id);
 		
 		// 내 결제 내역 출력
 		if (orderCount > 0) {
@@ -61,22 +61,30 @@ public class MyRoomController {
 		} else {
 			model.addAttribute("orderCount", orderCount);
 		}
-		
-//		// 총 거래액, 환불액, 결제액
-//		DecimalFormat fmt = new DecimalFormat("###,###");
-//		int amount = servicePayment.getAmountMy(id);
-//		String amountFmt = fmt.format(amount);
-//		model.addAttribute("amount", amountFmt);
-//		
-//		int cancelAmount = servicePayment.getCancelAmountMy(id);
-//		String cancelAmoutFmt = fmt.format(cancelAmount);
-//		model.addAttribute("cancelAmount", cancelAmoutFmt);
-//		
-//		int sales = amount - cancelAmount;
-//		String salseFmt = fmt.format(sales);
-//		model.addAttribute("sales", salseFmt);
-		
+				
 		return "/myroom/payment/myPayment";
+	}
+  
+	@RequestMapping("/paymentSearch")
+	public String paymentSearch (Model model, String category, String input, HttpSession session) {
+		log.info("	-----CT-----> my payment");
+		
+		// id 확인
+		String id = (String)session.getAttribute("id");
+
+		// 거래 건수
+		int orderCount = servicePayment.getSearchMyOerderCount(id, category, input);
+		
+		// 내 결제 내역 출력
+		if (orderCount > 0) {
+			List<PaymentDTO> paymentList = servicePayment.getSearchPaymentMyList(id, category, input);
+			model.addAttribute("payment", paymentList);
+			model.addAttribute("orderCount", orderCount);
+		} else {
+			model.addAttribute("orderCount", orderCount);
+		}
+				
+		return "/myroom/payment/myPaymentSearch";
 	}
   
 //================= 마이룸 메인 화면 =================//

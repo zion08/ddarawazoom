@@ -60,6 +60,8 @@ public interface PaymentMapper {
 			@Param("input")String input);	
 	public List<PaymentDTO> getPaymentClassList(String c_num);	
 	public List<PaymentDTO> getCancelList(String imp_Uid);
+	public List<PaymentDTO> getCancelReqInfo(String imp_Uid);
+
 
 	public int paymentCancelUpdateTP(PaymentDTO dto);	
 	public int paymentCancelUpdateTC(PaymentDTO dto);
@@ -71,7 +73,9 @@ public interface PaymentMapper {
 	public int getSearchCancelAmountTotal(@Param("category")String category, @Param("input")String input);	
 
 	public int getAmountCoach(String c_id);	
-	public int getCancelAmountCoach(String c_id);	
+	public int getCancelAmountCoach(String c_id);
+	public int getSearchAmountCoachTotal(@Param("c_id")String c_id, String category, String input);
+	public int getSearchCancelAmountCoachTotal(@Param("c_id")String c_id, @Param("category")String category, @Param("input")String input);
 
 	public int getAmountMy(String id);	
 	public int getCancelAmountMy(String id);

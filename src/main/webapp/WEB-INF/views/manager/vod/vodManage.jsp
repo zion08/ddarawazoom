@@ -71,7 +71,6 @@ $(document).ready(function(){
             success: function(result){	// data 전송 성공 했을때                		                    	
             	console.log(result);
             	location.reload();
-				/* $("#vodList").load("/manager/vod #vodList"); */
             	if (result == 0) {
             		alert("다시 시도해주세요.");
             	}	
