@@ -120,14 +120,13 @@ function valueCheck(){
 </script>      
 
 <div class="container marketing">	
-
 	<h2 style="text-align: center;"> Vod 관리	
 		<button class="btn btn-lg btn-outline-dark">
 			Total: ${contentCount}개
 		</button>
 	</h2>
-	
 	<hr class="featurette-divider">
+	
 	<div class="container">
   		<div class="row">
 			<div class="form-floating col">
@@ -156,17 +155,25 @@ function valueCheck(){
 	
 	<div class="container" id="code">
 	</div>
-	
-	<div class="text-end">
-		<button class="btn btn-lg btn-secondary">
-			OnAir: ${onCount}개
-		</button>
-		<button class="btn btn-lg btn-outline-primary">
-			Disabled: ${offCount}개
-		</button>
-	</div>
+		
+	<c:if test="${contentCount == 0}">
+		<div class="container-fluid">
+			<div align="center">
+		   		<h5>등록된 영상이 없습니다.</h5>
+		    </div>
+		</div>   
+	</c:if>
 	
 	<c:if test="${contentCount > 1}">
+		<div class="text-end">
+			<button class="btn btn-lg btn-secondary">
+				OnAir: ${onCount}개
+			</button>
+			<button class="btn btn-lg btn-outline-primary">
+				Disabled: ${offCount}개
+			</button>
+		</div>
+		
 		<table id="vodList" class="table table-striped table-sm table-hover">
 			<thead>
 	            <tr>

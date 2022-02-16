@@ -13,14 +13,58 @@
 			#{buyerName}, #{buyerTel}, #{buyerEmail}, #{paidAt}, #{status}, #{c_id}, #{c_num})
 	</insert>
 	
+	<select id="getMerchantUidInfo" resultType="org.mvc.bean.PaymentDTO">		
+		select * from tbl_payment where merchantuid = #{merchant_uid}		
+	</select>
+	
+<!-- 거래 건수 관련 -->	
 	<select id="getOerderCount" resultType="int">
 		select count(*) from tbl_payment
 	</select>
 	
-	<select id="getMerchantUidInfo" resultType="org.mvc.bean.PaymentDTO">		
-		select * from tbl_payment where merchantuid = #{merchant_uid}		
+	<select id="getSearchOerderCount" resultType="int">
+		select count(*) from tbl_payment where ${category} like '%'||#{input}||'%'
 	</select>
-
+	
+	<select id="getOerderCountByStatus" resultType="int">
+		select count(*) from tbl_payment where status = #{status}
+	</select>
+	
+	<select id="getSearchOerderCountByStatus" resultType="int">
+		select count(*) from tbl_payment where status = #{status} and ${category} like '%'||#{input}||'%'
+	</select>
+	
+	<select id="getMyOerderCount" resultType="int">
+		select count(*) from tbl_payment where buyerName = #{id}
+	</select>
+	
+	<select id="getSearchMyOerderCount" resultType="int">
+		select count(*) from tbl_payment where buyerName = #{id} and ${category} like '%'||#{input}||'%'
+	</select>
+	
+	<select id="getMyOerderCountByStatus" resultType="int">
+		select count(*) from tbl_payment where buyerName = #{id} and status = #{status}
+	</select>
+	
+	<select id="getSearchMyOerderCountByStatus" resultType="int">
+		select count(*) from tbl_payment where buyerName = #{id} and status = #{status} and ${category} like '%'||#{input}||'%'
+	</select>
+	
+	<select id="getCoachOerderCount" resultType="int">
+		select count(*) from tbl_payment where c_id = #{c_id}
+	</select>
+	
+	<select id="getSearchCoachOerderCount" resultType="int">
+		select count(*) from tbl_payment where c_id = #{c_id} and ${category} like '%'||#{input}||'%'
+	</select>
+	
+	<select id="getCoachOerderCountByStatus" resultType="int">
+		select count(*) from tbl_payment where c_id = #{c_id} and status = #{status}
+	</select>
+	
+	<select id="getSearchCoachOerderCountByStatus" resultType="int">
+		select count(*) from tbl_payment where c_id = #{c_id} and status = #{status} and ${category} like '%'||#{input}||'%'
+	</select>
 	
 <!-- 결제 내역 출력 관련 -->
 	<select id="getPaymentList" resultType="org.mvc.bean.PaymentDTO">
@@ -35,8 +79,16 @@
 		select * from tbl_payment where buyerName = #{id} order by paidat desc 
 	</select>
 	
+	<select id="getSearchPaymentMyList" resultType="org.mvc.bean.PaymentDTO">
+		select * from tbl_payment where buyerName = #{id} and ${category} like '%'||#{input}||'%' order by paidat desc 
+	</select>
+	
 	<select id="getPaymentCoachList" resultType="org.mvc.bean.PaymentDTO">
 		select * from tbl_payment where c_id = #{c_id} order by paidat desc 
+	</select>
+	
+	<select id="getSearchPaymentCoachList" resultType="org.mvc.bean.PaymentDTO">
+		select * from tbl_payment where c_id = #{c_id} and ${category} like '%'||#{input}||'%' order by paidat desc 
 	</select>
 	
 	<select id="getPaymentClassList" resultType="org.mvc.bean.PaymentDTO">

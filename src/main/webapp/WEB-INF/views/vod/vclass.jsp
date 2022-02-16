@@ -20,7 +20,7 @@
 		</div>   
 	</c:if>
   	
-   	<c:if test="${contentCount > 1}">
+   	<c:if test="${contentCount > 0}">
    		<div class="container-vod">
    			<form action="/ddarawazoom/searchVod" method="post">
 	   			<div style="width: 50%;">
@@ -32,6 +32,7 @@
 					</div>
 				</div>
 			</form>	
+		
 			<div class="row row-cols-2 row-cols-sm-1 row-cols-md-3 g-2">
 			    <c:forEach items="${youtube}" var="youtubeDTO">
 				    <div class="col">
@@ -55,23 +56,21 @@
 	
 			<br/>
 			<div id="page">
-				<c:if test="${totalPage > 1}"> 
-					<span>페이지</span> 
-					<c:if test="${startPage > pageBlock}">
-						<a href="/ddarawazoom/vod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
-					</c:if>
-					<c:forEach var="i" begin="${startPage}" end="${endPage}">
-						<a href="/ddarawazoom/vod?pageNum=${i}">${i}</a>
-					</c:forEach>
-					<c:if test="${endPage < totalPage}">
-						<a href="/ddarawazoom/vod?pageNum=${startPage}+${pageBlock}"> [다음] </a>
-					</c:if>
+				<span>페이지</span> 
+				<c:if test="${startPage > pageBlock}">
+					<a href="/ddarawazoom/vod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
+				</c:if>
+				<c:forEach var="i" begin="${startPage}" end="${endPage}">
+					<a href="/ddarawazoom/vod?pageNum=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${endPage < totalPage}">
+					<a href="/ddarawazoom/vod?pageNum=${startPage}+${pageBlock}"> [다음] </a>
 				</c:if>
 			</div>
 			<br/>
-			
-		</div>	
+	  	</div>
 	</c:if>	
 </div>
+
 
 <%@ include file="../layout/footer.jsp"%>

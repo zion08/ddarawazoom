@@ -155,7 +155,7 @@ $(document).ready(function(){
             	$.each(cancelList, function(index, item) {            		
             		detail += "[환불요청:"
             		detail += item.cancelReqAmount + "원]</br>";
-            		detail += "이유: " + item.cancelReason;
+            		detail += "이유: " + item.cancelReason + "</br>";
             	});
 
             	$("tr:eq("+trIndex+") #c-req-detail").toggle();

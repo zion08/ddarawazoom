@@ -19,18 +19,81 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	@Override
+	public PaymentDTO getMerchantUidInfo(String merchant_uid) {
+		return mapper.getMerchantUidInfo(merchant_uid);
+	}
+	
+	@Override
 	public int getOerderCount() {
 		return mapper.getOerderCount();
 	}
 	
 	@Override
-	public PaymentDTO getMerchantUidInfo(String merchant_uid) {
-		return mapper.getMerchantUidInfo(merchant_uid);
-	}		
+	public int getOerderCountByStatus(String status) {
+		return mapper.getOerderCountByStatus(status);
+	};
+	
+
+	@Override
+	public int getSearchOerderCount(String category, String input) {
+		return mapper.getSearchOerderCount(category, input);
+	}	
+
+	@Override
+	public int getSearchOerderCountByStatus(String status, String category, String input) {
+		return mapper.getSearchOerderCountByStatus(status, category, input);
+
+	}
+	
+	@Override
+	public int getMyOerderCount(String id) {
+		return mapper.getMyOerderCount(id);
+	}
+	
+	@Override
+	public int getMyOerderCountByStatus(String id, String status) {
+		return mapper.getMyOerderCountByStatus(id, status);
+	};
+
+	@Override
+	public int getSearchMyOerderCount(String id, String category, String input) {
+		return mapper.getSearchMyOerderCount(id, category, input);
+	}
+
+	@Override
+	public int getSearchMyOerderCountByStatus(String id, String status, String category, String input) {
+		return mapper.getSearchMyOerderCountByStatus(id, status, category, input);
+	}
+	
+	@Override
+	public int getCoachOerderCount(String c_id) {
+		return mapper.getCoachOerderCount(c_id);
+	}
+	
+	@Override
+	public int getCoachOerderCountByStatus(String c_id, String status) {
+		return mapper.getCoachOerderCountByStatus(c_id, status);
+	};	
+
+	@Override
+	public int getSearchCoachOerderCount(String c_id, String category, String input) {
+		return mapper.getSearchCoachOerderCount(c_id, category, input);
+	}
+
+	@Override
+	public int getSearchCoachOerderCountByStatus(String c_id, String status, String category, String input) {
+		return mapper.getSearchCoachOerderCountByStatus(c_id, status, category, input);
+	}
+
 	
 	@Override
 	public List<PaymentDTO> getPaymentList() {
 		return mapper.getPaymentList();
+	}
+
+	@Override
+	public List<PaymentDTO> getSearchPaymentList(String category, String input) {
+		return mapper.getSearchPaymentList(category, input);
 	}
 
 	@Override
@@ -39,8 +102,18 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
+	public List<PaymentDTO> getSearchPaymentMyList(String id, String category, String input) {
+		return mapper.getSearchPaymentMyList(id, category, input);
+	}
+
+	@Override
 	public List<PaymentDTO> getPaymentCoachList(String c_id) {
 		return mapper.getPaymentCoachList(c_id);
+	}
+
+	@Override
+	public List<PaymentDTO> getSearchPaymentCoachList(String c_id, String category, String input) {
+		return mapper.getSearchPaymentMyList(c_id, category, input);
 	}
 	
 	@Override
@@ -102,10 +175,6 @@ public class PaymentServiceImpl implements PaymentService {
 		return mapper.getCancelAmountMy(id);
 	}
 
-	@Override
-	public List<PaymentDTO> getSearchPaymentList(String category, String input) {
-		return mapper.getSearchPaymentList(category, input);
-	}
 
 	@Override
 	public int getSearchAmountTotal(String category, String input) {
@@ -116,7 +185,5 @@ public class PaymentServiceImpl implements PaymentService {
 	public int getSearchCancelAmountTotal(String category, String input) {
 		return mapper.getSearchCancelAmountTotal(category, input);
 	}
-
-
 	
 }
