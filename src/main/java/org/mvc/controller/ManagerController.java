@@ -281,7 +281,7 @@ public class ManagerController {
 	    List<NoticeDTO> noticeList = null;
 	    List<Notice_CDTO> commentList = null;
 	    
-	    if(noticeCount > 0 && commentCount > 0) {
+	    if(noticeCount > 0 || commentCount > 0) {
 	    	noticeList = managerService.noticeList();
 	    	commentList = managerService.getCommentList();
 	    }

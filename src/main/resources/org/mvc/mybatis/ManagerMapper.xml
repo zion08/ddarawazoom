@@ -121,7 +121,7 @@
 	<!-- 카카오톡 회원가입 멤버 리스트 -->
 	<select id="getKakaoUser" resultType="org.mvc.bean.UserInfoDTO">
 		<![CDATA[
-			select id from tbl_user where id like '%kakaoLogin%' and status != '탈퇴'
+			select * from tbl_user where id like '%kakaoLogin%' and status != '탈퇴'
 		]]>
 	</select>
 	
@@ -135,7 +135,7 @@
 	<!-- 네이버 회원가입 멤버 리스트 -->
 	<select id="getNaverUser" resultType="org.mvc.bean.UserInfoDTO">
 		<![CDATA[
-			select id from tbl_user where id like '%naverLogin%' and status != '탈퇴'
+			select * from tbl_user where id like '%naverLogin%' and status != '탈퇴'
 		]]>
 	</select>
 	

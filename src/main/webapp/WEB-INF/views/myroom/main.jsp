@@ -92,7 +92,7 @@
                 </div>
 	                  	<!--디데이-->
 	                   <div class="rgy-dday">
-	                   	<h3>${sessionScope.id} 님의 특별한 날</h3>
+	                   	<h3>${userInfo.nick} 님의 특별한 날</h3>
 	                   	<ul id="dDay">
 	                   		<li class="dday1">
 	                   			<button onclick="ddarawazoom_dday();" id="dday_button" class="btn btn-warning">
@@ -138,7 +138,7 @@
 		    					<input type="text" class="form-control" id="inputDate" placeholder="'일'을 입력하세요.">
 		  					</div>
 		  					<div class="col-sm-10">
-	      						<input type="button" class="form-control" value="${sessionScope.id} 님의 바디프로필 촬영 날까지 남은 날은?"
+	      						<input type="button" class="form-control" value="${userInfo.nick} 님의 바디프로필 촬영 날까지 남은 날은?"
 	      							onclick="countdown();" class="btn btn-secondary">
 	    					</div>
 		  				</form>

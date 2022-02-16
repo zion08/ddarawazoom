@@ -3,6 +3,7 @@
 <%@ include file="../../layout/header.jsp"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -109,13 +110,24 @@
 				    <div class="col-lg-3 col-md-6">
 				        <div class="card">
 				            <div class="el-card-item">
-				                <div class="el-card-avatar el-overlay-1"> <img src="../../resources/image/upload/${newUser.img}" alt="user">
-				                    <div class="el-overlay">
-				                        <ul class="list-style-none el-info">
-				                            <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href="/manager/userInfo?id=${newUser.id}"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-				                        </ul>
-				                    </div>
-				                </div>
+				            	<c:if test="${fn:contains(newUser.id, 'kakaoLogin') || fn:contains(newUser.id, 'naverLogin')}">
+					                <div class="el-card-avatar el-overlay-1"> <img src="${newUser.img}" alt="user">
+					                    <div class="el-overlay">
+					                        <ul class="list-style-none el-info">
+					                            <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href="/manager/userInfo?id=${newUser.id}"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+					                        </ul>
+					                    </div>
+					                </div>
+					            </c:if>
+					            <c:if test="${not fn:contains(newUser.id, 'kakaoLogin') && not fn:contains(newUser.id, 'naverLogin')}">
+					                <div class="el-card-avatar el-overlay-1"> <img src="/resources/image/upload/${newUser.img}" alt="user">
+					                    <div class="el-overlay">
+					                        <ul class="list-style-none el-info">
+					                            <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href="/manager/userInfo?id=${newUser.id}"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+					                        </ul>
+					                    </div>
+					                </div>
+					            </c:if>    
 				                <div class="el-card-content">
 				                    <h4 class="m-b-0">${newUser.id}</h4> <span class="text-muted">${newUser.email}</span>
 				                </div>
@@ -163,7 +175,7 @@
 				    <div class="col-lg-3 col-md-6">
 				        <div class="card">
 				            <div class="el-card-item">
-				                <div class="el-card-avatar el-overlay-1"> <img src="../../resources/image/upload/${kakaoUser.img}" alt="user">
+				                <div class="el-card-avatar el-overlay-1"> <img src="${kakaoUser.img}" alt="user">
 				                    <div class="el-overlay">
 				                        <ul class="list-style-none el-info">
 				                            <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href="/manager/userInfo?id=${kakaoUser.id}"><i class="fa fa-search" aria-hidden="true"></i></a></li>
@@ -190,7 +202,7 @@
 				    <div class="col-lg-3 col-md-6">
 				        <div class="card">
 				            <div class="el-card-item">
-				                <div class="el-card-avatar el-overlay-1"> <img src="../../resources/image/upload/${naverUser.img}" alt="user">
+				                <div class="el-card-avatar el-overlay-1"> <img src="${naverUser.img}" alt="user">
 				                    <div class="el-overlay">
 				                        <ul class="list-style-none el-info">
 				                            <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href="/manager/userInfo?id=${naverUser.id}"><i class="fa fa-search" aria-hidden="true"></i></a></li>

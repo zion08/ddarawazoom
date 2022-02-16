@@ -15,6 +15,7 @@ import org.mvc.bean.ZoomDTO;
 import org.mvc.service.CoachRoomService;
 import org.mvc.service.MyRoomService;
 import org.mvc.service.PaymentService;
+import org.mvc.service.UserInfoService;
 import org.mvc.service.ZoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -175,9 +176,10 @@ public class ZoomController {
 	// 1. 
 	// 1 -> 2로 이동
 	@RequestMapping("/zclassroom")
-	public String zclassroom() {
+	public String zclassroom(Model model, HttpSession session) {
 		log.info(" -----CT-----> zclassroom 1 "); 
-		
+		String id = (String)session.getAttribute("id");
+		model.addAttribute("userInfo", myService.getUserInfo(id));
 		return "/zoom/class/zclassroom"; 	
 	}
 	

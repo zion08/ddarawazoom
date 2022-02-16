@@ -9,7 +9,6 @@
       		<a href="/ddarawazoom" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
         		<img class="bi me-2" width="40" height="32" src="../../resources/image/Exercise.svg"/>
       		</a>
-    		 <p class="text-muted">&copy; 2022</p>
     	</div>
 
 

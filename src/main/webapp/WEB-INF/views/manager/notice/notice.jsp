@@ -63,6 +63,9 @@
 	                <div class="card-body">
 	                    <div class="table-responsive">
 	                    	<h6 class="header-title  mt-1">* NOTICE *</h6>
+	                    	<c:if test="${notice_count == 0}">
+			                	<h6 style="text-align: center;">작성된 공지사항이 없습니다.</h6>
+			                </c:if>
 	                    	<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/ddarawazoom/notice'" value="[공지사항 페이지 이동]">
 	                    	<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/ddarawazoom/noticeWrite'" value="[공지사항 작성하기]">
 	                        <table class="table table-hover mb-0">
@@ -79,9 +82,6 @@
 	                                </tr>
 	                            </thead>
 		                        <tbody>
-		                        	<c:if test="${notice_count == 0}">
-			                            <h6>작성된 공지사항이 없습니다.</h6>
-			                        </c:if>
 			                        <c:if test="${notice_count != 0 }">
 		                            	<c:forEach var="noticeList" items="${noticeList}">
 			                                <tr class="noticeCtn" style="display: none;">
@@ -149,10 +149,12 @@
 	                <div class="card-body">
 	                    <div class="table-responsive">
 	                    	<h6 class="header-title pb-3 mt-1">* COMMENT *</h6>
-	                    	<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/ddarawazoom/notice'" value="[공지사항 페이지 이동]">
 	                    	<c:if test="${comment_count == 0}">
-	                    		<h6>작성된 공지사항 댓글이 없습니다.</h6>
+	                    		<div style="text-align: center;">
+	                    			<h6>작성된 공지사항 댓글이 없습니다.</h6>
+	                    		</div>
 							</c:if>
+	                    	<input type="button" class="btn btn-default" id="notice_button" onclick="window.location='/ddarawazoom/notice'" value="[공지사항 페이지 이동]">
 	                    	<c:if test="${comment_count != 0}">
 		                        <table class="table table-hover mb-0">
 		                            <thead>

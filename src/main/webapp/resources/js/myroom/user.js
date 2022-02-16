@@ -50,8 +50,11 @@ function infoUpdate_submit(){
 		alert('작성된 생년월일이 없습니다.\n생년월일을 기입해 주세요.');
 		document.userinfo_update.birth.focus();
 		return false;
+	}else if($('#nickResult').text() == '이미 사용중인 닉네임입니다. 다른 닉네임을 사용해주세요.' ||
+			 $('#nickResult').text() == '닉네임을 입력해주세요.') {
+		document.userinfo_update.nick.focus();
+		return false;
 	}else{
-		alert('모든 정보가 기입되었습니다.\n수정 작업을 진행하겠습니다.');
 		var updateInfo = JSON.stringify($('form#updateForm').serializeObject());
 	}
 	
@@ -137,12 +140,42 @@ function userDeletePro(){
 				alert("패스워드가 일치하지 않습니다.\n다시 입력 부탁드립니다.");
 				return false;
 			}else{
-				if(window.confirm('패스워드가 일치합니다!!\n멤버 탈퇴를 정말로 하시겠습니까?')){
-					opener.document.location.reload();
-					window.close();
-				}
+				opener.document.location.reload();
+				window.close();
 			}
 		}
 	});
 }
 
+function nicknameCheck(nick){
+	console.log($('#nick').val())
+	console.log(nick)
+	if($('#nick').val() != nick) {
+		// ajax 호출
+		$.ajax({
+			// 값을 보내는 방식
+			type : "post",
+			// 호출할 링크(컨트롤과 연결)
+			url : "/ddarawazoom/nickCheck",
+			// 보낼 파라미터
+			data : { nick : $("#nick").val() } ,
+			// 값을 성공적으로 가져왔을 때 data에 값을 대입
+			success : function(data){
+				console.log(data);
+				a = parseInt(data);
+				if(a == 1){
+					$("#nickResult").html("<font color='red'>이미 사용중인 닉네임입니다. 다른 닉네임을 사용해주세요.</font>");
+					$("#nick").attr('class', 'custom-form-control custom-is-invalid');
+				} else if(a == 0) {
+					$("#nickResult").html("<font color='green'>사용가능한 닉네임입니다.</font>");
+				} else if(a == -1){
+					$("#nickResult").html("<font color='red'>닉네임을 입력해주세요.</font>");
+					$("#nick").attr('class', 'custom-form-control custom-is-invalid');
+				}
+			}
+		});
+	} else {
+		$("#nickResult").html("");
+		$("#nick").attr('class', 'custom-form-control');
+	}
+}
