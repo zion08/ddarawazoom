@@ -41,6 +41,43 @@ public class MyRoomController {
 	
 	@Autowired
 	private FileInfo fileInfo;
+	
+//================= 멤버 결재 내역 출력 =================//
+	@RequestMapping("/payment")
+	public String payment (Model model, HttpSession session) {
+		log.info("	-----CT-----> my payment");
+		
+		// id 확인
+		String id = (String)session.getAttribute("id");
+
+		// 거래 건수
+		int orderCount = servicePayment.getMyOerderCount("id");
+		
+		// 내 결제 내역 출력
+		if (orderCount > 0) {
+			List<PaymentDTO> paymentList = servicePayment.getPaymentMyList(id);
+			model.addAttribute("payment", paymentList);
+			model.addAttribute("orderCount", orderCount);
+		} else {
+			model.addAttribute("orderCount", orderCount);
+		}
+		
+//		// 총 거래액, 환불액, 결제액
+//		DecimalFormat fmt = new DecimalFormat("###,###");
+//		int amount = servicePayment.getAmountMy(id);
+//		String amountFmt = fmt.format(amount);
+//		model.addAttribute("amount", amountFmt);
+//		
+//		int cancelAmount = servicePayment.getCancelAmountMy(id);
+//		String cancelAmoutFmt = fmt.format(cancelAmount);
+//		model.addAttribute("cancelAmount", cancelAmoutFmt);
+//		
+//		int sales = amount - cancelAmount;
+//		String salseFmt = fmt.format(sales);
+//		model.addAttribute("sales", salseFmt);
+		
+		return "/myroom/payment/myPayment";
+	}
   
 //================= 마이룸 메인 화면 =================//
 	@RequestMapping()
@@ -527,34 +564,6 @@ public class MyRoomController {
 	}
 //================= 멤버 리뷰 관련 코드 종료 =================//
 	
-	
-//================= 멤버 결재 내역 출력 =================//
-	
-	@RequestMapping("/payment")
-	public String payment (Model model, HttpSession session) {
-		log.info("	-----CT-----> my payment");
-		
-		// 내 결제 내역 출력
-		String id = (String)session.getAttribute("id");
-		List<PaymentDTO> paymentList = servicePayment.getPaymentMyList(id);
-		model.addAttribute("payment", paymentList);
-		
-		// 총 거래액, 환불액, 결제액
-		DecimalFormat fmt = new DecimalFormat("###,###");
-		int amount = servicePayment.getAmountMy(id);
-		String amountFmt = fmt.format(amount);
-		model.addAttribute("amount", amountFmt);
-		
-		int cancelAmount = servicePayment.getCancelAmountMy(id);
-		String cancelAmoutFmt = fmt.format(cancelAmount);
-		model.addAttribute("cancelAmount", cancelAmoutFmt);
-		
-		int sales = amount - cancelAmount;
-		String salseFmt = fmt.format(sales);
-		model.addAttribute("sales", salseFmt);
-		
-		return "/myroom/payment/myPayment";
-	}
 
 }
 	

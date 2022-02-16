@@ -27,7 +27,7 @@ public class VodController {
 		    pageNum = "1";
 		}
 		
-		int pageSize = 10;	
+		int pageSize = 9;	
 		int currentPage = Integer.parseInt(pageNum); 
 		int firstRownum = (currentPage-1)*pageSize + 1;	
 		int lastRownum = currentPage*pageSize;		
@@ -37,7 +37,7 @@ public class VodController {
 		int totalPage;	
 		int startPage;	
 		int endPage;	
-		
+
 		totalPage = contentCount/pageSize + (contentCount%pageSize == 0 ? 0 : 1);
 		startPage = (currentPage/pageBlock)*pageBlock + 1;
 		endPage = startPage + pageBlock - 1;
@@ -45,8 +45,6 @@ public class VodController {
 			endPage = totalPage;
 		}
 		
-		log.info("	-----CT----->vod Page"+startPage);
-		log.info("	-----CT----->vod Page"+endPage);
 		if (contentCount > 0){
 			model.addAttribute("contentCount", contentCount);
 			model.addAttribute("youtube", serviceYoutube.getVideoList(firstRownum, lastRownum));
