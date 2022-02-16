@@ -117,6 +117,7 @@ public class PayController {
 		CancelData cancelData = new CancelData(imp_uid, true, BigDecimal.valueOf(dto.getCancelReqAmount()));
 		cancelData.setChecksum(BigDecimal.valueOf(cancelAbleAmount));
 		cancelData.setReason(dto.getCancelReason());
+		log.info("	------>cancelData: getCancelReason" + dto.getCancelReason());
 	
 		// 결제 취소 요청
 		IamportResponse<Payment> cancel = api.cancelPaymentByImpUid(cancelData);
@@ -133,6 +134,8 @@ public class PayController {
 			String cancelReason = paymentApi.getCancelReason();
 			Date cancelledAt = paymentApi.getCancelledAt();
 			String cancelledAtStr = dateFormat.dateTimeFull(cancelledAt);
+			
+			log.info("	------>paymentApi: cancelReason" + cancelReason);
 									 
 			paymentDTO.setStatus(status);					//취소 관련 DTO 변수 업데이트
 			paymentDTO.setCancelAmount(cancelAmountInt);				
@@ -193,6 +196,15 @@ public class PayController {
 		List<PaymentDTO> cancelList = servicePayment.getCancelList(imp_Uid);
 
 		return cancelList;  
+	}
+	
+	@RequestMapping("/cancelReqInfo")
+	public @ResponseBody List<PaymentDTO> cancelReqInfo(String imp_Uid) {
+		
+		// 취소 요청 상세 내역 출력
+		List<PaymentDTO> cancelReqList = servicePayment.getCancelReqInfo(imp_Uid);
+
+		return cancelReqList;  
 	}
 	
 //================= 결제 취소 관련 종료 ==========================//

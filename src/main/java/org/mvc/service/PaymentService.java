@@ -72,6 +72,7 @@ public interface PaymentService {
 
 	//결제 취소 상세 내역 출력
 	public List<PaymentDTO> getCancelList(String imp_Uid);
+	public List<PaymentDTO> getCancelReqInfo(String imp_Uid);
 	
 	
 	//결제 취소 내역 업데이트
@@ -85,20 +86,28 @@ public interface PaymentService {
 	// 총 거래 금액
 	public int getAmountTotal();
 	
-	// 검색된 거래금액
-	public int getSearchAmountTotal(String category, String input);
-	
 	// 총 환불 금액
 	public int getCancelAmountTotal();
 	
+	// 검색된 거래금액
+	public int getSearchAmountTotal(String category, String input);
+	
 	// 검색된 환불 금액
 	public int getSearchCancelAmountTotal(String category, String input);
+	
 	
 	//코치별 총 거래 금액
 	public int getAmountCoach(String c_id);
 	
 	//코치별 총 환불 금액
 	public int getCancelAmountCoach(String c_id);
+	
+	//코치별 검색된 거래금액
+	public int getSearchAmountCoachTotal(String c_id, String category, String input);
+	
+	//코치별 검색된 환불 금액
+	public int getSearchCancelAmountCoachTotal(String c_id, String category, String input);
+	
 	
 	//나의 총 거래 금액
 	public int getAmountMy(String id);

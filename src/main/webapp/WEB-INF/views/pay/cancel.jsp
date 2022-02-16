@@ -61,6 +61,7 @@ $(document).ready(function(){
                 	}
                 	alert(msg);
                 	$('#refundModal').modal('hide');
+                	location.reload();
                 }
             });
 		});
@@ -81,7 +82,7 @@ $(document).ready(function(){
 		cancelReqData.cancelReqAmount = td.eq(3).text();
 
 		$('#refundCheckBtn').click(function () {
-			cancelReqData.cancelReason = $("#refundReason").val();
+			cancelReqData.cancelReason = $("#refundReason").val(); 
 			cancelReqData.cancelpAmount = $("#partialAmount").val();
 			
 			var refund_type = $("input[name=refundType]:checked").val();
@@ -104,6 +105,7 @@ $(document).ready(function(){
                 	}
                 	alert(msg);
                 	$('#refundModal').modal('hide');
+                	location.reload();
                 }
             });
 		});
@@ -148,11 +150,11 @@ $(document).ready(function(){
 		$.ajax({
             type: "post",
     		data: {"imp_Uid":imp_Uid},
-            url: "/ddarawazoom/cancelDetail", // data 보낼 주소		                    	                    	
-            success: function(cancelList){	// data 전송 성공 했을때                		                    	
-            	console.log(cancelList);
+            url: "/ddarawazoom/cancelReqInfo", // data 보낼 주소		                    	                    	
+            success: function(cancelReqList){	// data 전송 성공 했을때                		                    	
+            	console.log(cancelReqList);
             	var detail="";
-            	$.each(cancelList, function(index, item) {            		
+            	$.each(cancelReqList, function(index, item) {            		
             		detail += "[환불요청:"
             		detail += item.cancelReqAmount + "원]</br>";
             		detail += "이유: " + item.cancelReason + "</br>";

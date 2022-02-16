@@ -16,7 +16,7 @@
 </script>
 
 <section class="masthead">
-	<h2 style="text-align: center;"> 수입 관리	
+	<h2 style="text-align: center;"> 관리자 수입 관리	
 		<button class="btn btn-lg btn-outline-dark">
 			총: ${orderCount}건 거래
 		</button>
@@ -45,7 +45,7 @@
 			    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
 			      <option selected value="">선택하세요</option>
 			      <option value="c_id">코치명</option>
-			      <option value="name">강의 제목</option>
+			      <option value="name">강의제목</option>
 			      <option value="buyername">구매자</option>
 			    </select>			  
 			    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
