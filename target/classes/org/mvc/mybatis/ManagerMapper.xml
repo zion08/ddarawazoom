@@ -79,7 +79,7 @@
 	<!-- 일반 가입 멤버 리스트 -->
 	<select id="getUserInfo" resultType="org.mvc.bean.UserInfoDTO">
 		<![CDATA[
-			select id from tbl_user
+			select * from tbl_user
 				where id not like'%kakaoLogin%'  and id not like '%naverLogin%' and status != '탈퇴'
 		]]>
 	</select>

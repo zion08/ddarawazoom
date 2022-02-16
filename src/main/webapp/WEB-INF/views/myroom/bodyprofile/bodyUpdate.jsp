@@ -18,7 +18,7 @@
 	  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 	    <div class="row g-5">
 	      <div class="col-md-7 col-lg-8">
-			<h4 class="bodyprofile_title">${sessionScope.id} 님의 바디 프로필 수정</h4>
+			<h4 class="bodyprofile_title">${bodyProfileDTO.nick} 님의 바디 프로필 수정</h4>
 				 <form action="/myroom/bodyprofile/bodyUpdatePro" id="body_update" name="body_update" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="b_num" value="${bodyProfileDTO.b_num}" />
 						<div class="row g-3">

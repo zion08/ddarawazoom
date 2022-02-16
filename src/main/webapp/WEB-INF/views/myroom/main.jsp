@@ -41,7 +41,7 @@
 	        <div class="row">
 	            <div class="col-xl-4">
 	                <div class="card-box">
-	                    <h4 class="header-title mt-0">${sessionScope.id} 님의 마이룸 페이지</h4>
+	                    <h4 class="header-title mt-0">${userInfo.nick} 님의 마이룸 페이지</h4>
 	                    <div class="panel-body">
 	                        <hr>
 	                        <div class="text-left">
@@ -96,7 +96,7 @@
 	                   	<ul id="dDay">
 	                   		<li class="dday1">
 	                   			<button onclick="ddarawazoom_dday();" id="dday_button" class="btn btn-warning">
-	                  		 			${sessionScope.id} 님과 DDarawaZoom이 함께 한지는?
+	                  		 			${userInfo.nick} 님과 DDarawaZoom이 함께 한지는?
 	                  		 		</button>
 	                   			<span class="ddayWord" id="dday_start"></span>
 	                   			<span class="ddayColor" id="dday_result"></span>
@@ -225,7 +225,7 @@
 	              
 	               <c:if test="${bodyProfileDTO != null}" >
 		                <div class="card-box">
-		                    <h4 class="header-title mb-3">현재 ${sessionScope.id} 님의 바디 프로필</h4>
+		                    <h4 class="header-title mb-3">현재 ${userInfo.nick} 님의 바디 프로필</h4>
 		                    <button onclick="window.location='/myroom/bodyprofile'" class="btn btn-light" >
 		                    	바디프로필 페이지로 이동하기
 		                    </button>
