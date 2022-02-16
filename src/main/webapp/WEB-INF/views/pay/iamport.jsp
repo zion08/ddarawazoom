@@ -23,7 +23,7 @@ $(document).ready(function(){
 	$('#payBtn').click(function() {	// 결제하기 버튼 클릭      
 
 		var paymentData = new Object();	// json 데이터 생성
-		paymentData.merchantUid = "${zoomContent.merchant_uid}"+"-ORD"+"${cnt}";
+		paymentData.merchantUid = "${zoomContent.merchant_uid}"+"-ORD"+"0";
 		paymentData.c_id = "${zoomContent.c_id}";
 		paymentData.c_num = ${zoomContent.num};
 		paymentData.name = "${zoomContent.title}";

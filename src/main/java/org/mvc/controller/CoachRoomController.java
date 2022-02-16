@@ -482,27 +482,85 @@ public class CoachRoomController {
 	public String payment (Model model, HttpSession session) {
 		log.info("	-----CT-----> coach payment");
 		
-		// 코치별 결제 내역 출력
+		// 코치 확인
 		String c_id = (String)session.getAttribute("c_id");
+		
+		// 거래 건수
+		int orderCount = servicePayment.getCoachOerderCount(c_id);
+		model.addAttribute("orderCount", orderCount);
+		model.addAttribute("orderPaidCount", servicePayment.getCoachOerderCountByStatus(c_id, "paid"));
+		model.addAttribute("orderCreqCount", servicePayment.getCoachOerderCountByStatus(c_id, "creq"));
+		model.addAttribute("orderCanclledCount", servicePayment.getCoachOerderCountByStatus(c_id, "cancelled"));
+		
+		// 코치별 결제 내역 출력
 		List<PaymentDTO> paymentList = servicePayment.getPaymentCoachList(c_id);
 		model.addAttribute("payment", paymentList);
 		
 		// 코치별 총 거래액, 환불액, 매출액
 		DecimalFormat fmt = new DecimalFormat("###,###");
-		int amount = servicePayment.getAmountCoach(c_id);
-		String amountFmt = fmt.format(amount);
-		model.addAttribute("amount", amountFmt);
+		int amount = 0;
+		int cancelAmount = 0;
 		
-		int cancelAmount = servicePayment.getCancelAmountCoach(c_id);
-		String cancelAmoutFmt = fmt.format(cancelAmount);
-		model.addAttribute("cancelAmount", cancelAmoutFmt);
+		if (orderCount > 0) {
+			amount = servicePayment.getAmountCoach(c_id);
+			cancelAmount = servicePayment.getCancelAmountCoach(c_id);
+			String amountFmt = fmt.format(amount);
+			String cancelAmoutFmt = fmt.format(cancelAmount);			
+			model.addAttribute("amount", amountFmt);
+			model.addAttribute("cancelAmount", cancelAmoutFmt);
+		} else {
+			model.addAttribute("amount", amount);
+			model.addAttribute("cancelAmount", cancelAmount);
+		}
 		
 		int sales = amount - cancelAmount;
 		String salseFmt = fmt.format(sales);
 		model.addAttribute("sales", salseFmt);
 		
 		return "/coachroom/payment/coachPayment";
-	}		
+	}
+	
+	@RequestMapping("/paymentSearch")
+	public String paymentSearch (Model model, String category, String input, HttpSession session) {
+		log.info("	-----CT-----> coach Search payment");
+		
+		// 코치 확인
+		String c_id = (String)session.getAttribute("c_id");
+		
+		// 거래 건수
+		int orderCount = servicePayment.getSearchCoachOerderCount(c_id, category, input);
+		model.addAttribute("orderCount", orderCount);
+		model.addAttribute("orderPaidCount", servicePayment.getSearchCoachOerderCountByStatus(c_id, "paid", category, input));
+		model.addAttribute("orderCreqCount", servicePayment.getSearchCoachOerderCountByStatus(c_id, "creq", category, input));
+		model.addAttribute("orderCanclledCount", servicePayment.getSearchCoachOerderCountByStatus(c_id, "cancelled", category, input));
+		
+		// 코치별 결제 내역 출력
+		List<PaymentDTO> paymentList = servicePayment.getSearchPaymentCoachList(c_id, category, input);
+		model.addAttribute("payment", paymentList);
+		
+		// 코치별 총 거래액, 환불액, 매출액
+		DecimalFormat fmt = new DecimalFormat("###,###");
+		int amount = 0;
+		int cancelAmount = 0;
+		
+		if (orderCount > 0) {
+			amount = servicePayment.getSearchAmountCoachTotal(c_id, category, input);
+			cancelAmount = servicePayment.getSearchCancelAmountCoachTotal(c_id, category, input);
+			String amountFmt = fmt.format(amount);
+			String cancelAmoutFmt = fmt.format(cancelAmount);			
+			model.addAttribute("amount", amountFmt);
+			model.addAttribute("cancelAmount", cancelAmoutFmt);
+		} else {
+			model.addAttribute("amount", amount);
+			model.addAttribute("cancelAmount", cancelAmount);
+		}
+		
+		int sales = amount - cancelAmount;
+		String salseFmt = fmt.format(sales);
+		model.addAttribute("sales", salseFmt);
+		
+		return "/coachroom/payment/coachPaymentSearch";
+	}
 
 	// 월별 매출 이력
 	@RequestMapping("/getPayment")

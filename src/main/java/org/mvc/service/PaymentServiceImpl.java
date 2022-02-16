@@ -126,7 +126,10 @@ public class PaymentServiceImpl implements PaymentService {
 		return mapper.getCancelList(imp_Uid);
 	}
 	
-	
+	@Override
+	public List<PaymentDTO> getCancelReqInfo(String imp_Uid){
+		return mapper.getCancelReqInfo(imp_Uid);
+	}
 	
 	@Override
 	public int paymentCancelUpdateTP(PaymentDTO dto) {
@@ -156,6 +159,18 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
+	public int getSearchAmountTotal(String category, String input) {
+		return mapper.getSearchAmountTotal(category, input);
+	}
+
+	@Override
+	public int getSearchCancelAmountTotal(String category, String input) {
+		return mapper.getSearchCancelAmountTotal(category, input);
+	}
+
+	
+	
+	@Override
 	public int getAmountCoach(String c_id) {
 		return mapper.getAmountCoach(c_id);
 	}
@@ -165,6 +180,20 @@ public class PaymentServiceImpl implements PaymentService {
 		return mapper.getCancelAmountCoach(c_id);
 	}
 
+	@Override
+	public int getSearchAmountCoachTotal(String c_id, String category, String input) {
+		return mapper.getSearchAmountCoachTotal(c_id, category, input);
+
+	}
+
+	@Override
+	public int getSearchCancelAmountCoachTotal(String c_id, String category, String input) {
+		return mapper.getSearchCancelAmountCoachTotal(c_id, category, input);
+
+	}
+	
+	
+	
 	@Override
 	public int getAmountMy(String id) {
 		return mapper.getAmountMy(id);
@@ -176,14 +205,5 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 
-	@Override
-	public int getSearchAmountTotal(String category, String input) {
-		return mapper.getSearchAmountTotal(category, input);
-	}
-
-	@Override
-	public int getSearchCancelAmountTotal(String category, String input) {
-		return mapper.getSearchCancelAmountTotal(category, input);
-	}
 	
 }
