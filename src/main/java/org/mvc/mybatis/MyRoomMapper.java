@@ -79,24 +79,6 @@ public interface MyRoomMapper {
 	// Zoom 관심 등록 갯수
 	public int zoomLikeCount(String id);
 	
-	// Vod 관심등록 데이터 가져오기
-	public ArrayList<VodDTO> likeVodList(String id);
-	
-	// Vod 관심 체크 여부 확인
-	public int vodLikeCheck(
-			@Param("id") String id,
-			@Param("vod_num") int num);
-	
-	// Vod 관심 등록
-	public int vodLikeWrite(
-			@Param("id") String id,
-			@Param("vod_num") int num);
-	
-	// Vod 관심 등록 해제
-	public int vodLikeDelete(
-			@Param("id") String id,
-			@Param("vod_num") int num);
-	
 	// 작성한 리뷰 가져오기
 	public List<ReviewDTO> getReview(
 			@Param("class_num") Long num,

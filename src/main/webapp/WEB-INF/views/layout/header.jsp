@@ -69,10 +69,9 @@
 								<li><a class="dropdown-item" href="/myroom/userInfo">회원 정보</a></li>					
 								<li><a class="dropdown-item" href="/myroom/class">강의관리</a></li>
 								<li class="dropdown-submenu">
-									<a  class="dropdown-item dropdown-toggle" href="/myroom/locker">락커룸</a>
+									<a  class="dropdown-item dropdown-toggle">락커룸</a>
 										<ul class="dropdown-menu">
 										<li><a class="dropdown-item" href="/myroom/likeZoom">관심Zoom</a>
-										<li><a class="dropdown-item" href="/myroom/likeVod">관심Vod</a>
 									</ul>
 								</li>
 								<li><a class="dropdown-item" href="/myroom/payment">결재내역</a></li>

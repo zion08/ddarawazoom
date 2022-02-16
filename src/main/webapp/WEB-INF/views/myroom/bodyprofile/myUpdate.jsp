@@ -70,7 +70,7 @@
 		                    <div class="form-group">
 		                        <label for="inputState5">* 성 별 :</label> ${userInfo.gender}
 		                        <select id="inputState5" class="form-control" id="gender" name="gender">
-									<option value="">성별 선택</option>
+									<option value="">${userInfo.gender}</option>
 									<option value="남성">남성</option>
 									<option value="여성">여성</option>
 								</select><br/>

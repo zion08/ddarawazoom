@@ -465,47 +465,6 @@ public class MyRoomController {
 		return result;
 	}
 	
-	// 관심 Vod 페이지
-	@RequestMapping("/likeVod")
-	public String likeVod(HttpSession session, Model model) {
-		log.info("	-----CT----->likeVod");
-		
-		String id = (String)session.getAttribute("id");
-		
-		model.addAttribute("VodDTO", service.likeVodList(id));
-		
-		return "/myroom/locker/likeVod";
-	}
-	
-	// Vod 관심 등록
-	@RequestMapping("/likeVod_in")
-	public @ResponseBody int vodLikeWrite(HttpSession session, @RequestBody LikeDTO likeDTO) {
-		log.info("	-----CT----->likeVod_in");
-		
-		int result = 0;
-		
-		String id = (String)session.getAttribute("id");
-		
-		likeDTO.setId(id);
-		result = service.vodLikeWrite(id, likeDTO.getVod_num());
-		
-		return result;
-	}
-	
-	// Vod 관심 제거
-	@RequestMapping("/likeVod_out")
-	public @ResponseBody int vodLikeDelete(HttpSession session, @RequestBody LikeDTO likeDTO) {
-		log.info("	-----CT----->likeVod_out");
-		
-		int result = 0;
-		
-		String id = (String)session.getAttribute("id");
-		
-		likeDTO.setId(id);
-		result = service.vodLikeDelete(id, likeDTO.getVod_num());
-		
-		return result;
-	}
 //================= 관심 관련 코드 종료 =================//
 
 	
