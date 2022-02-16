@@ -14,8 +14,7 @@
   	<c:if test="${vodOnSearchCount == 0}">
 		<div class="container-fluid">
 			<div align="center">
-		   		<h5>등록된 영상이 없습니다.</h5>
-		   		<h5>관리자에게 문의하세요.</h5>   
+		   		<h5>검색 결과가 없습니다.</h5>
 		    </div>
 		</div>   
 	</c:if>
@@ -32,45 +31,44 @@
 					</div>
 				</div>
 			</form>	
-		</div>
-		<div class="row row-cols-2 row-cols-sm-1 row-cols-md-3 g-2">
-		    <c:forEach items="${youtube}" var="youtubeDTO">
-			    <div class="col">
-				    <div class="card" style="width: 480;">
-				     	<div class="text-center">${youtubeDTO.embedhtml}</div> 		    		
-					    	<div class="card-body"> 	
-								<p class="card-text">
-									${youtubeDTO.title}
-								</p>
-								<p class="card-text">
-									${youtubeDTO.channeltitle}
-								</p>
-								<p class="card-text">
-									#${youtubeDTO.tag1} #${youtubeDTO.tag2} #${youtubeDTO.tag3}
-								</p>	
-				            </div>
-			            </div>	    
-				    </div>
-		    </c:forEach>	  
-	  	</div>
-	</c:if>
+		
+			<div class="row row-cols-2 row-cols-sm-1 row-cols-md-3 g-2">
+			    <c:forEach items="${youtube}" var="youtubeDTO">
+				    <div class="col">
+					    <div class="card" style="width: 480;">
+					     	<div class="text-center">${youtubeDTO.embedhtml}</div> 		    		
+						    	<div class="card-body"> 	
+									<p class="card-text">
+										${youtubeDTO.title}
+									</p>
+									<p class="card-text">
+										${youtubeDTO.channeltitle}
+									</p>
+									<p class="card-text">
+										#${youtubeDTO.tag1} #${youtubeDTO.tag2} #${youtubeDTO.tag3}
+									</p>	
+					            </div>
+				            </div>	    
+					    </div>
+			    </c:forEach>	  
+		  	</div>
 	
-	<br/>
-	<div id="page">
-		<c:if test="${totalPage > 1}"> 
-			<span>페이지</span> 
-			<c:if test="${startPage > pageBlock}">
-				<a href="/ddarawazoom/vod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
-			</c:if>
-			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/ddarawazoom/vod?pageNum=${i}">${i}</a>
-			</c:forEach>
-			<c:if test="${endPage < totalPage}">
-				<a href="/ddarawazoom/vod?pageNum=${startPage}+${pageBlock}"> [다음] </a>
-			</c:if>
-		</c:if>
-	</div>
-	<br/>	
+			<br/>
+			<div id="page">
+				<span>페이지</span> 
+				<c:if test="${startPage > pageBlock}">
+					<a href="/ddarawazoom/vod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
+				</c:if>
+				<c:forEach var="i" begin="${startPage}" end="${endPage}">
+					<a href="/ddarawazoom/searchVod?pageNum=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${endPage < totalPage}">
+					<a href="/ddarawazoom/searchVod?pageNum=${startPage}+${pageBlock}"> [다음] </a>
+				</c:if>
+			</div>
+			<br/>
+	  	</div>
+	</c:if>	
 </div>
 
 
