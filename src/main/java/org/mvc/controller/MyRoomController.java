@@ -234,9 +234,13 @@ public class MyRoomController {
 	
 	// 바디프로필 작성
 	@RequestMapping("/bodyprofile/bodyWrite")
-	public String bodyWrite() {
+	public String bodyWrite(HttpSession session, Model model) {
 		log.info("	-----CT----->/bodypfile/bodyWrite");
 		
+		String id = (String)session.getAttribute("id");
+		
+		model.addAttribute("bodyProfileDTO", service.getBodyProfile(id));
+
 		return "/myroom/bodyprofile/bodyWrite";
 	}
 	

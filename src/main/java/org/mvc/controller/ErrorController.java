@@ -27,6 +27,11 @@ public class ErrorController {
 		return "/error/error405";
 	}
 	
+	@RequestMapping("/error415")
+	public String error415() {
+		return "/error/error415";
+	}
+	
 	@RequestMapping("/error500")
 	public String error500() {
 		return "/error/error500";

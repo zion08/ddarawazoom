@@ -50,6 +50,10 @@
 		<location>/ddarawazoom/error405/</location>
 	</error-page>
 	<error-page>
+		<error-code>415</error-code>
+		<location>/ddarawazoom/error415/</location>
+	</error-page>
+	<error-page>
 		<error-code>500</error-code>
 		<location>/ddarawazoom/error500/</location>
 	</error-page>
