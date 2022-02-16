@@ -10,24 +10,62 @@ public interface PaymentService {
 	//결제 정보 입력
 	public int paymentInsert(PaymentDTO dto);
 	
-	//전체 주문 건수 조회
-	public int getOerderCount();
-	
 	//주문번호에 대한 결제 정보 조회
 	public PaymentDTO getMerchantUidInfo(String merchant_uid);
 	
+	//전체 주문 건수 조회
+	public int getOerderCount();
+	public int getOerderCountByStatus(String status);
+	public int getSearchOerderCount(
+			@Param("category")String category, 
+			@Param("input")String input);
+	public int getSearchOerderCountByStatus(
+			@Param("status")String status, 
+			@Param("category")String category, 
+			@Param("input")String input);
 	
-	//결제 내역 전체 조회
+	public int getMyOerderCount(String id);
+	public int getMyOerderCountByStatus(String id, String status);
+	public int getSearchMyOerderCount(
+			@Param("id")String id, 
+			@Param("category")String category, 
+			@Param("input")String input);
+	public int getSearchMyOerderCountByStatus(
+			@Param("id")String id, 
+			@Param("status")String status, 
+			@Param("category")String category, 
+			@Param("input")String input);
+	
+	public int getCoachOerderCount(String c_id);
+	public int getCoachOerderCountByStatus(String c_id, String status);
+	public int getSearchCoachOerderCount(
+			@Param("c_id")String c_id, 
+			@Param("category")String category, 
+			@Param("input")String input);
+	public int getSearchCoachOerderCountByStatus(
+			@Param("c_id")String c_id, 
+			@Param("status")String status, 
+			@Param("category")String category, 
+			@Param("input")String input);
+	
+	
+	//결제 내역 전체 조회, 결제 내역 검색
 	public List<PaymentDTO> getPaymentList();
-	
-	//결제 내역 검색
 	public List<PaymentDTO> getSearchPaymentList(String category, String input);
 	
 	//내 결제 내역
 	public List<PaymentDTO> getPaymentMyList(String id);
+	public List<PaymentDTO> getSearchPaymentMyList(
+			@Param("id")String id, 
+			@Param("category")String category, 
+			@Param("input")String input);
 	
 	//코치별 결제 내역
 	public List<PaymentDTO> getPaymentCoachList(String c_id);
+	public List<PaymentDTO> getSearchPaymentCoachList(
+			@Param("c_id")String c_id, 
+			@Param("category")String category,
+			@Param("input")String input);	
 	
 	//강의별 결제 내역
 	public List<PaymentDTO> getPaymentClassList(String c_num);

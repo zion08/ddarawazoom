@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 
+
 <div class="container-fluid bg-light">
 	</br>
 	<div class="album py-2 bg-light">
@@ -13,12 +14,12 @@
   	<c:if test="${vodOnSearchCount == 0}">
 		<div class="container-fluid">
 			<div align="center">
-		   		<h5>검색 결과가 없습니다.</h5>  
+		   		<h5>검색 결과가 없습니다.</h5>
 		    </div>
 		</div>   
 	</c:if>
   	
-   	<c:if test="${vodOnSearchCount > 1}">
+   	<c:if test="${vodOnSearchCount > 0}">
    		<div class="container-vod">
    			<form action="/ddarawazoom/searchVod" method="post">
 	   			<div style="width: 50%;">
@@ -30,6 +31,7 @@
 					</div>
 				</div>
 			</form>	
+		
 			<div class="row row-cols-2 row-cols-sm-1 row-cols-md-3 g-2">
 			    <c:forEach items="${youtube}" var="youtubeDTO">
 				    <div class="col">
@@ -50,12 +52,12 @@
 					    </div>
 			    </c:forEach>	  
 		  	</div>
-		
+	
 			<br/>
 			<div id="page">
-				<span>페이지</span>  
+				<span>페이지</span> 
 				<c:if test="${startPage > pageBlock}">
-					<a href="/ddarawazoom/searchVod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
+					<a href="/ddarawazoom/vod?pageNum=${startPage}-${pageBlock}"> [이전] </a>
 				</c:if>
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
 					<a href="/ddarawazoom/searchVod?pageNum=${i}">${i}</a>
@@ -65,9 +67,9 @@
 				</c:if>
 			</div>
 			<br/>
-			
-		</div>	
+	  	</div>
 	</c:if>	
 </div>
+
 
 <%@ include file="../layout/footer.jsp"%>

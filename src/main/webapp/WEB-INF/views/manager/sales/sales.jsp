@@ -16,15 +16,30 @@
 </script>
 
 <section class="masthead">
-
+	<h2 style="text-align: center;"> 수입 관리	
+		<button class="btn btn-lg btn-outline-dark">
+			총: ${orderCount}건 거래
+		</button>
+		<button class="btn btn-lg btn-success">
+			결제완료: ${orderPaidCount}건
+		</button>
+		<button class="btn btn-lg btn-secondary">
+			취요청중: ${orderCreqCount}건
+		</button>
+		<button class="btn btn-lg btn-outline-danger">
+			취소완료: ${orderCanclledCount}건
+		</button>
+	</h2>
+	<hr class="featurette-divider">
+	
 	<div class="col-md-9 m-sm-auto col-lg-10 px-md-4 fs-7">
 		<p class="text-end m-sm-0">(+) 총 거래액: ${amount}</p>
 		<p class="text-end m-sm-0">(-) 총 환불액: ${cancelAmount}</p>
 		<p class="text-end m-sm-0">(=) 총 매출액: ${sales}</p>
 	</div>
+	
 	<div class="table-responsive col-md-9 m-sm-auto col-lg-10 px-md-4" >
 		<form action="/manager/salesSearch" method="post" onsubmit="return valueCheck()">
-	
 		  <div style="width: 50%; text-align: center; margin: auto 0;">
 			  <div class="input-group mb-3">
 			    <select class="form-select form-select-sm" id="search-category" name="category" style="width: 25%;">
@@ -32,13 +47,11 @@
 			      <option value="c_id">코치명</option>
 			      <option value="name">강의 제목</option>
 			      <option value="buyername">구매자</option>
-			    </select>
-			  
+			    </select>			  
 			    <input type="text" class="form-control" placeholder="검색어를 입력하세요" style="width: 60%;" id="search-input" name="input">
 			    <button class="btn btn-outline-secondary" type="submit" id="search-btn" style="width: 15%;">검색</button>
 			  </div>
-		  </div>
-		  
+		  </div>		  
 		</form>
 		<table id="paymentList" class="table table-striped table-sm table-hover">
 			<thead>
@@ -85,7 +98,7 @@
 	              				</button> 
               				</c:if>		              				
 		              		<c:if test="${paymentDTO.status == 'cancelled'}">
-		              			<button class="refundDone btn btn-sm btn btn-danger" id="">취소완료</button></br>		              				              			
+		              			<button class="refundDone btn btn-sm btn-danger" id="">취소완료</button></br>		              				              			
 		              			<div id="c-detail" style="display: none;"></div>
 		              		</c:if>							
 		              		<c:if test="${paymentDTO.status == 'cancelled' && paymentDTO.amount - paymentDTO.cancelAmount > 0}">		              			
