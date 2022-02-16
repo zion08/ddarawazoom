@@ -31,6 +31,34 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+
+	<!-- error Page -->
+	<error-page>
+		<error-code>400</error-code>
+		<location>/common/error400/</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/common/error403/</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/common/error404/</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/common/error405/</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/common/error500/</location>
+	</error-page>
+	<error-page>
+		<error-code>503</error-code>
+		<location>/common/error503/</location>
+	</error-page>
+
+
 	<!-- post Encoding -->
 	<filter>
       <filter-name>encoding</filter-name>
