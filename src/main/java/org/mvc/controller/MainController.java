@@ -76,7 +76,7 @@ public class MainController {
 			coachDTO.setC_pw(userDTO.getPw());
 			if(service.coachCheck(coachDTO) == 1) {
 				result = 1;
-				service.loginCount(userDTO.getId());
+				service.coachLoginCount(userDTO.getId());
 				session.setAttribute("c_id", coachDTO.getC_id());
 				model.addAttribute("result", result);
 			}
