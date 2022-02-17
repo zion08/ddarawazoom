@@ -35,7 +35,13 @@
 		              		<c:if test="${paymentDTO.status == 'paid'}">		              				 	 
 	               				<button class="btn btn-sm btn-success" disabled>결제완료</button></br>	
 	               				<button class="btn btn-sm btn-primary" onclick="document.location.href='/ddarawazoom/zclassroom'">강의실입장</button></br>			              		
-              				</c:if>             								            	              			              		
+              				</c:if>
+              				<c:if test="${paymentDTO.status == 'creq'}">		              				 	 
+	               				<button class="refundReqInfo btn btn-sm btn-secondary" disabled>취소요청중</button></br>
+              				</c:if>		
+              				<c:if test="${paymentDTO.status == 'cancelled'}">
+		              			<button class="refundDone btn btn-sm btn btn-danger" disabled>취소완료</button></br>		              				              			
+		              		</c:if>	              				             								            	              			              		
 		              	</td>		              
             		</tr>
             </c:forEach>				      
