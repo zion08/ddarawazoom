@@ -66,6 +66,7 @@ public class MainController {
 				model.addAttribute("result", result);
 			} else {
 				result = 1;
+				service.loginCount(userDTO.getId());
 				session.setAttribute("id", userDTO.getId());
 				model.addAttribute("result", result);
 			}
@@ -75,6 +76,7 @@ public class MainController {
 			coachDTO.setC_pw(userDTO.getPw());
 			if(service.coachCheck(coachDTO) == 1) {
 				result = 1;
+				service.loginCount(userDTO.getId());
 				session.setAttribute("c_id", coachDTO.getC_id());
 				model.addAttribute("result", result);
 			}
