@@ -148,6 +148,10 @@
 		select * from tbl_calendar where m_id = #{m_id}
 	</select>
 
+	<select id="countClassNum" resultType="Integer">
+		select count(*) from tbl_coachClass where title = #{title}
+	</select>
+
 	<select id="getClassNum" resultType="Integer">
 		select num from tbl_coachClass where title = #{title}
 	</select>

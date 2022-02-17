@@ -77,10 +77,10 @@ public interface CoachRoomMapper {
 	public int reviewCount(Long num);
 	
 	// 해당 수업에 신청한 모든회원 목록
-	public List<ClassApplyDTO> getApplyMember(ClassApplyDTO dto);
+	public List<PaymentDTO> getApplyMember(PaymentDTO dto);
 	
 	// 해당 수업에 신청한 회원 수
-	public int applyMemberCount(int num);
+	public int applyMemberCount(int c_num);
 	
 	// 최신 리뷰목록
 	public List<ReviewDTO> getAllReview(String id);

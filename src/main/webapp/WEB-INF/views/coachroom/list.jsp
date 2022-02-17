@@ -42,7 +42,7 @@
 	                <button type="button" class="btn btn-sm btn-outline-secondary"
 	                	onclick="window.location='/coachroom/reviewContent?num=${list.num}'">리뷰 보기</button>
 	                <button type="button" class="btn btn-sm btn-outline-secondary"
-	                	onclick="window.location='/coachroom/member?num=${list.num}'">등록한 회원 보기</button>	
+	                	onclick="window.location='/coachroom/member?c_num=${list.num}'">등록한 회원 보기</button>	
 	              </div>
 	              <small class="text-muted">9 mins</small>
 	            </div>

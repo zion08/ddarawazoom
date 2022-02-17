@@ -51,10 +51,10 @@
 		      <c:forEach var="member" items="${member}">
 		        <tr>
 		          <th scope="row">회원 ID</th>
-		          <td>${member.id}</td>
+		          <td>${member.buyerName}</td>
 		          <td style="text-align: center;">
 		          	 <button type="button" class="btn btn-sm btn-outline-secondary"
-	                	onclick="window.location='/coachroom/bodyprofile?id=${member.id}'">회원 정보</button>
+	                	onclick="window.location='/coachroom/bodyprofile?id=${member.buyerName}'">회원 정보</button>
 		          </td>
 		        </tr>
 		      </c:forEach>

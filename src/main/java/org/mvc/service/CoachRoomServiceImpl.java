@@ -122,7 +122,7 @@ public class CoachRoomServiceImpl implements CoachRoomService{
 	}
 
 	@Override
-	public List<ClassApplyDTO> getApplyMember(ClassApplyDTO dto) {
+	public List<PaymentDTO> getApplyMember(PaymentDTO dto) {
 		return mapper.getApplyMember(dto);
 	}
 
