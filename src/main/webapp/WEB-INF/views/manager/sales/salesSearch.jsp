@@ -85,10 +85,7 @@
 		              	<td>${paymentDTO.paidAt}</td>
 		              	<td>		              		
 		              		<c:if test="${paymentDTO.status == 'paid'}">		              				 	 
-	               				<button class="btn btn-sm btn-success" disabled>결제완료</button></br>
-		              			<button class="refundBtn btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#refundModal">
-	              					취소하기
-	              				</button> 
+	               				<button class="btn btn-sm btn-success" disabled>결제완료</button>
               				</c:if>
               				<c:if test="${paymentDTO.status == 'creq'}">		              				 	 
 	               				<button class="refundReqInfo btn btn-sm btn-secondary" >취소요청중</button></br>

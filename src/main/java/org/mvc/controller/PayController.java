@@ -183,6 +183,7 @@ public class PayController {
 		if(result_u == 1 && result_i == 1) {
 			log.info("	-----CT-----> 성공");
 			result = 1;
+			return result;
 		}
 		
 		return result;
