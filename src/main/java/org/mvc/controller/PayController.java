@@ -117,7 +117,6 @@ public class PayController {
 		CancelData cancelData = new CancelData(imp_uid, true, BigDecimal.valueOf(dto.getCancelReqAmount()));
 		cancelData.setChecksum(BigDecimal.valueOf(cancelAbleAmount));
 		cancelData.setReason(dto.getCancelReason());
-		log.info("	------>cancelData: getCancelReason" + dto.getCancelReason());
 	
 		// 결제 취소 요청
 		IamportResponse<Payment> cancel = api.cancelPaymentByImpUid(cancelData);
@@ -149,6 +148,7 @@ public class PayController {
 			if(result_tp == 1 && result_tc == 1) {
 				result = 1;
 				log.info("	------>cancel save: " + "저장 성공");
+				return result;
 			} else {
 				log.info("	------>cancel save: " + "저장 실패");
 			}
