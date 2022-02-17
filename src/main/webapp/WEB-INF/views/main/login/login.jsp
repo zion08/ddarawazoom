@@ -69,7 +69,7 @@
   	var naverLogin = new naver.LoginWithNaverId(
   		{
   			clientId: 'BR6xUTS1rtRM8T8xgE0D', // 개발자센터에 등록한 ClientId
-  			callbackUrl: 'http://localhost:8080/ddarawazoom/naverLogin', // 개발자센터에 등록한 callback Url
+  			callbackUrl: 'http://192.168.0.13:8080/ddarawazoom/naverLogin', // 개발자센터에 등록한 callback Url 
   			isPopup: false,
   			loginButton: { color: 'green', type: 3, height: 70 }
   		}
