@@ -114,7 +114,7 @@ public class MyRoomController {
 
 		model.addAttribute("userInfo", service.getUserInfo(id));
 		
-		return "/myroom/userinfo/userInfo";
+		return "/myroom/userinfo/info";
 	}
 	
 	// 회원정보 수정
@@ -229,9 +229,13 @@ public class MyRoomController {
 	@RequestMapping("/getClassNum")
 	public @ResponseBody int getClassNum(String title) {
 		int result = 0;
-		System.out.println(title);
-		result = service.getClassNum(title);
-		System.out.println(result);
+		
+		if(service.countClassNum(title) == 0) {
+			result = 0;
+		} else {
+			result = service.getClassNum(title);
+		}
+		
 		return result;
 	}
 //================= 멤버 일정 코드 끝 =================//

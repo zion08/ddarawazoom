@@ -161,4 +161,9 @@ public class MyRoomServiceImpl implements MyRoomService {
 	public int getClassNum(String title) {
 		return mapper.getClassNum(title);
 	}
+
+	@Override
+	public int countClassNum(String title) {
+		return mapper.countClassNum(title);
+	}
 }

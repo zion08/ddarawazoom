@@ -418,16 +418,16 @@ public class CoachRoomController {
 	
 //	=========== 회원관리 관련 코드 시작 ===========  //	
 	@RequestMapping("/member")
-	public String member(ClassApplyDTO dto, Model model, HttpSession session) {
+	public String member(PaymentDTO dto, Model model, HttpSession session) {
 		log.info("	-----CT-----> member/content");
 		
 		String c_id = (String)session.getAttribute("c_id");
 		
-		Long num = Long.valueOf(dto.getNum());
+		int num = Integer.parseInt(dto.getC_num());
 		
-		model.addAttribute("classContent", service.getClass(c_id, num));
+		model.addAttribute("classContent", service.getClass(c_id, Long.valueOf(num)));
 		model.addAttribute("member", service.getApplyMember(dto));
-		model.addAttribute("count", service.applyMemberCount(dto.getNum()));
+		model.addAttribute("count", service.applyMemberCount(num));
 		
 		return "/coachroom/member/memberPage";
 	}

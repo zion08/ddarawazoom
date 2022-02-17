@@ -170,13 +170,13 @@
 	
 	<!-- 회원관리 관련 코드 시작 -->
 	<!-- 해당 수업에 신청한 모든회원 목록 -->
-	<select id="getApplyMember" resultType="org.mvc.bean.ClassApplyDTO">
-		select * from tbl_classApply where num = #{num}
+	<select id="getApplyMember" resultType="org.mvc.bean.PaymentDTO">
+		select * from tbl_payment where c_num = #{c_num} and status = 'paid'
 	</select>
 	
 	<!-- 해당 수업에 신청한 회원 수 -->
 	<select id="applyMemberCount" resultType="Integer">
-		select count(*) from tbl_classApply where num = #{num}
+		select count(*) from tbl_payment where c_num = #{c_num} and status = 'paid'
 	</select>
 	
 	<!-- 바디 프로필 리스트 데이터 가져오기 -->

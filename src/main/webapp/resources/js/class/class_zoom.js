@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', function calendarEvent(eventData) 
 	    		  data : { title : title },
 	    		  success : function(data){
 	    			  console.log(data)
-	    			  if(data == '') {
-	    				  alert('해당 강의는 종료되었습니다.')
-	    			  } else {
-	    				  window.location='/ddarawazoom/zclasscontent?num='+data;
-	    			  }
+	    			  if(data == 0){
+					      alert('해당 강의는 종료되었습니다.');
+					  } else {
+						  window.location='/ddarawazoom/zclasscontent?num='+data;
+					}
 	    		  }
 	    	  });
 	      },	

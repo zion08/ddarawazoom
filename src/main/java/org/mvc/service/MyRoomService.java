@@ -57,6 +57,8 @@ public interface MyRoomService {
 	
 	public int getClassNum(String title);
 	
+	public int countClassNum(String title);
+	
 	// Zoom 관심등록 데이터 가져오기
 	public ArrayList<ZoomDTO> likeZoomList(String id);
 
