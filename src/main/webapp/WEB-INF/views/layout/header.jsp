@@ -168,8 +168,6 @@
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 				            <li><a class="dropdown-item" href="#" onclick="window.location='/ddarawazoom/signup'">멤버 가입</a></li>
 				            <li><a class="dropdown-item" href="#" onclick="window.location='/ddarawazoom/coachsignup'">코치 가입</a></li>
-				            <li><hr class="dropdown-divider"></li>
-				            <li><a class="dropdown-item" href="#">Something else here</a></li>
 			          	</ul>
 			        </li>
 		        </c:if>     
