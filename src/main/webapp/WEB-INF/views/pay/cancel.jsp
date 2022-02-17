@@ -104,10 +104,10 @@ $(document).ready(function(){
                 		var msg = '다시 한번 시도해주세요';
                 	}
                 	alert(msg);
-                	$('#refundModal').modal('hide');
-                	location.reload();
+                	$('#refundModal').modal('hide');           
                 }
             });
+			location.reload();
 		});
 	});
 	
